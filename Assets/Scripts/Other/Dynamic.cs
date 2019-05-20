@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*public static class Global {
+    public static Transform enemiesParent;
+    public static Transform explosionsParent;
+}*/
+
 public class Dynamic : MonoBehaviour
 {
     [Header("Setup")]
@@ -12,6 +17,9 @@ public class Dynamic : MonoBehaviour
 
     [Header("Don't Touch")] // By this way, no one can touch it
     private static Dynamic _instance;
+    /// <summary>
+    /// Instance to get access of global variables.
+    /// </summary>
     public static Dynamic Instance {
         get {
             return _instance;
@@ -27,5 +35,12 @@ public class Dynamic : MonoBehaviour
             return;
         }
         _instance = this;
+        //StoreGlobal();
     }
+
+    /*private void StoreGlobal()
+    {
+        Global.enemiesParent = enemiesParent;
+        Global.explosionsParent = explosionsParent;
+    }*/
 }

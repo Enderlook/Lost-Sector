@@ -34,7 +34,7 @@ public class HealthBar : MonoBehaviour {
     private float maxHealth;
     private float health;
 
-    public void Awake()
+    private void Awake()
     {
         healthImage = healthBar.GetComponent<Image>();
         healthTransform = healthBar.GetComponent<RectTransform>();

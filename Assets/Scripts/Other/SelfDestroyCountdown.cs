@@ -13,7 +13,7 @@ public class SelfDestroyCountdown : MonoBehaviour
         StartCoroutine(Countdown());
     }
 
-    IEnumerator Countdown()
+    private IEnumerator Countdown()
     {
         yield return new WaitForSeconds(countdown);
         Destroy(gameObject);
