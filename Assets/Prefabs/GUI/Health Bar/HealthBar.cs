@@ -46,7 +46,15 @@ public class HealthBar : MonoBehaviour {
             maxHealthColor = healthImage.color;
     }
 
-    public void ManualStart(float health, float maxHealth)
+    /// <summary>
+    /// Modify the health bar values without producing any animation effects (sliding the bar or changing the numbers).
+    /// The health bar fill will be instataneously set without producing animation. Health numbers will also change inmediately.
+    /// Both damage bar and healing bar fill will be set to 0, halting any current animation on them.
+    /// Designed to intialize the health bar by first time.
+    /// </summary>
+    /// <param name="health"></param>
+    /// <param name="maxHealth"></param>
+    public void ManualUpdate(float health, float maxHealth)
     {
         this.health = health;
         this.maxHealth = maxHealth;
@@ -56,7 +64,20 @@ public class HealthBar : MonoBehaviour {
         healingImage.fillAmount = 0;
     }
 
-    void Update()
+    /// <summary>
+    /// Modify the health bar values without producing any animation effects (sliding the bar or changing the numbers).
+    /// The health bar fill will be instataneously set without producing animation. Health numbers will also change inmediately.
+    /// Both damage bar and healing bar fill will be set to 0, halting any current animation on them.
+    /// Both current health and maximum health will be asigned by maxHealth.
+    /// Designed to intialize the health bar by first time.
+    /// </summary>
+    /// <param name="maxHealth"></param>
+    public void ManualUpdate(float maxHealth)
+    {
+        ManualUpdate(maxHealth, maxHealth);
+    }
+
+    private void Update()
     {
         // Unfill the damage and healing bar per frame
         if (damageBar != null && damageBar.fillAmount > 0)
@@ -79,19 +100,32 @@ public class HealthBar : MonoBehaviour {
             {
                 float dynamicPercent = healthImage.fillAmount + damageBar.fillAmount - healingImage.fillAmount,
                       dynamicHealth = health * dynamicPercent;
-                textNumber.text = string.Format(textShowed, System.Math.Round(dynamicHealth), maxHealth, System.Math.Round(dynamicHealth / maxHealth * 100));
+                textNumber.text = string.Format(textShowed, Mathf.Round(dynamicHealth), Mathf.Round(maxHealth), Mathf.Round(dynamicHealth / maxHealth * 100));
             }
             else
             {
-                textNumber.text = string.Format(textShowed, health, maxHealth, System.Math.Round(health / maxHealth * 100));
+                textNumber.text = string.Format(textShowed, Mathf.Round(health), Mathf.Round(maxHealth), Mathf.Round(health / maxHealth * 100));
             }
         }
     }
+
+    /// <summary>
+    /// Modify the current health and maximum health.
+    /// This method will automatically calculate, show and animate the health bar, damage bar, healing bar and health number.
+    /// </summary>
+    /// <param name="health"></param>
+    /// <param name="maxhealth"></param>
     public void UpdateValues(float health, float maxhealth)
     {
         this.maxHealth = maxhealth;
         Set(health);
     }
+
+    /// <summary>
+    /// Modify the current health.
+    /// This method will automatically calculate, show and animate the health bar, damage bar, healing bar and health number.
+    /// </summary>
+    /// <param name="health"></param>
     public void UpdateValues(float health)
     {
         Set(health);
@@ -99,9 +133,9 @@ public class HealthBar : MonoBehaviour {
 
     /*void Heal(float amount) { Change(amount); }
     void Damage(float amount) { Change(-amount); }*/
-    void Set(float value) { Change(value - health); }
+    private void Set(float value) { Change(value - health); }
 
-    void Change(float amount)
+    private void Change(float amount)
     {
         if (amount == 0)
             return;
