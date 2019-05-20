@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// How to combine headers?
+
 public class EnemyBase : LivingObject
 {
     [Header("Configurable")]
@@ -23,12 +26,12 @@ public class EnemyBase : LivingObject
         Destroy(gameObject);
     }*/
 
-    // How to combine headers?
 
     protected override void Die()
     {
         GameObject explosion = Instantiate(onDeathExplosionPrefab, Dynamic.Instance.explosionsParent);
         explosion.transform.position = rigidbodyHelper.Position;
+        explosion.transform.localScale = Vector3.one * onDeathExplosionPrefabScale;
         base.Die();
     }
 }

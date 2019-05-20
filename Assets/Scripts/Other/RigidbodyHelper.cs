@@ -12,6 +12,9 @@ public class RigidbodyHelper : MonoBehaviour
 
     private Rigidbody2D thisRigidbody2D;
 
+    /// <summary>
+    /// Current position.
+    /// </summary>
     public Vector3 Position
     {
         get
