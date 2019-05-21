@@ -156,7 +156,7 @@ public class LivingObject : MonoBehaviour {
         else if (variable + amount > maximum)
         {
             rest = variable + amount - maximum;
-            variable = MaxHealth;
+            variable = maximum;
         }
         else
             variable += amount;
