@@ -2,15 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface IDamageTaker {
+    void TakeDamage(float amount);
+}
+
+public interface IImpactDamage {
+    float ImpactDamage { get; }
+}
+
+public interface IImpactSound {
+    Sound ImpactSound { get; }
+}
+
+public interface IRigibodyHelperHandler : IDamageTaker, IImpactDamage, IImpactSound { }
+
 public class RigidbodyHelper : MonoBehaviour
 {
     [Header("Setup")]
-    [Tooltip("Living Object script.")]
-    public LivingObject livingObject;
+    /*[Tooltip("Living Object script.")]
+    public LivingObject livingObject;*/
     [Tooltip("Audio Source component.")]
     public AudioSource audioSource;
 
-    private Rigidbody2D thisRigidbody2D;
+    /*public IDamageTaker damageTaker;
+    public IImpactDamage impactDamage;
+    public IImpactSound impactSound;*/
+
+    private /* public RigibodyHelperHandler*/ IRigibodyHelperHandler handler;
+
+    public void SetHandler(IRigibodyHelperHandler handler)
+    {
+        this.handler = handler;
+    }
+
     /// <summary>
     /// Return Rigidbody2D of the gameobject which has this script.
     /// </summary>
@@ -19,6 +43,8 @@ public class RigidbodyHelper : MonoBehaviour
     {
         return gameObject.GetComponent<Rigidbody2D>();
     }
+
+    //private Rigidbody2D thisRigidbody2D;
 
     /// <summary>
     /// Current position.
@@ -31,16 +57,16 @@ public class RigidbodyHelper : MonoBehaviour
         }
     }
 
-    private void Start()
+    /*private void Start()
     {
         thisRigidbody2D = gameObject.GetComponent<Rigidbody2D>();
-    }
+    }*/
 
-    private void OnValidate()
+    /*private void OnValidate()
     {
         if (gameObject.GetComponent<Rigidbody2D>() == null)
             Debug.LogWarning($"Gameobject {gameObject.name} lacks of Rigibody2D component");
-    }
+    }*/
 
     /* TODO:
      * https://forum.unity.com/threads/exposing-fields-with-interface-type-c-solved.49524/
@@ -62,15 +88,59 @@ public class RigidbodyHelper : MonoBehaviour
         RigidbodyHelper target = collision.gameObject.GetComponent<RigidbodyHelper>();
         if (target != null)
         {
-            target.livingObject.TakeDamage(livingObject.relativeImpactDamage * impulse);
+            target.TakeDamage(/*livingObject.relativeImpactDamage*/ /*impactDamage*/handler.ImpactDamage * impulse);
+            //target.livingObject.TakeDamage(livingObject.relativeImpactDamage * impulse);
         }
 
-        if (audioSource != null && livingObject.impactSound != null)
+        if (audioSource != null && /*livingObject.impactSound*/ /*impactSound*/handler.ImpactSound != null)
         {
-            livingObject.impactSound.Play(audioSource, collision.relativeVelocity.magnitude);
+            /*livingObject.impactSound*/ /*impactSound*/handler.ImpactSound.Play(audioSource, collision.relativeVelocity.magnitude);
         }
     }
+
+    public void TakeDamage(float amount)
+    {
+        /*livingObject*/ /*damageTaker*/handler.TakeDamage(amount);
+    }
 }
+
+//[System.Serializable]
+/*public class RigibodyHelperHandler : IImpactDamage, IImpactSound, IDamageTaker {
+    //[Tooltip("Living Object script.")]
+    public LivingObject livingObject;
+
+
+    public void TakeDamage(float amount)
+    {
+        ((IDamageTaker)livingObject).TakeDamage(amount);
+    }
+
+    public Sound ImpactSound {
+        get {
+            return ((IImpactSound)livingObject).ImpactSound;
+        }
+    }
+
+    public float ImpactDamage {
+        get {
+            return ((IImpactDamage)livingObject).ImpactDamage;
+        }
+    }
+}*/
+
+/*public class RigibodyHelperHandler2 {
+    public IImpactDamage ImpactDamage;
+    public IImpactSound ImpactSound;
+    public IDamageTaker DamageTaker;
+
+    public RigibodyHelperHandler2(IImpactDamage impactDamage, IImpactSound impactSound, IDamageTaker damageTaker)
+    {
+        ImpactDamage = impactDamage;
+        ImpactSound = impactSound;
+        DamageTaker = damageTaker;
+    }
+}*/
+
 
 [System.Serializable]
 public class Sound {
