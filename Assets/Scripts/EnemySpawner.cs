@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     //public Vector2[] spawningPositions = new Vector2[2];
     
     public GameObject enemyPrefab;
-
+    
     public Enemies test;
 
     public TransformRange[] spawnPoints;
