@@ -26,7 +26,7 @@ public class Projectile : MonoBehaviour, IRigibodyHelperHandler {
     }
 
     // Should I remove public and add IInterface.etc?
-    // Wouldn't this raise error since SET shouldn't exist?
+    // Wouldnt't this raise error since SET shouldn't exist?
     //public float ImpactDamage => damage;
     public float ImpactDamage {
         get {
@@ -53,8 +53,6 @@ public class Projectile : MonoBehaviour, IRigibodyHelperHandler {
         damage = configuration.Damage;
         Rigidbody2D rigidbody2D = rigidbodyHelper.GetRigidbody2D();
         rigidbody2D.AddForce(new Vector2(0, configuration.Speed * rigidbody2D.mass));
-        // Just to be sure
-        //rigidbody2D.AddRelativeForce(transform.forward * configuration.Speed * rigidbody2D.mass);
     }
 }
 
