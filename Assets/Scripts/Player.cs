@@ -135,6 +135,8 @@ public class Player : LivingObject
     {
         weapon.ResetCooldown();
         GameObject projectile = Instantiate(weapon.projectilePrefab, Dynamic.Instance.projectilesParent);
+        // Just to be sure
+        projectile.transform.rotation = transform.rotation;
         //projectile.GetComponent<Projectile>().SetBulletProperties(weapon.shootingPosition.position, weapon.damageOnHit, weapon.movementMomentum);
         projectile.GetComponent<Projectile>().SetProjectilProperties(weapon);
     }
