@@ -11,6 +11,8 @@ public class EnemySpawner : MonoBehaviour
 
     public Enemies test;
 
+    public TransformRange[] spawnPoints;
+
     [Tooltip("Difficulty.")]
     public float difficulty = 1;
 
@@ -36,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void SinglePatterSetup()
+    private void SinglePatternSetup()
     {
         // Kind of basic singlenton Pattern https://en.wikipedia.org/wiki/Singleton_pattern
         if (_instance != null)
@@ -66,7 +68,8 @@ public class EnemySpawner : MonoBehaviour
         {
             for (int i = 0; i < 5 + (Mathf.Log(difficulty, 2) * 2); i++)
             {
-                Vector3 position = new Vector3(Random.Range(-worldDimensions.x, worldDimensions.x), worldDimensions.y);
+                TransformRange spawnRange = spawnPoints[Random.Range(0, spawnPoints.Length - 1)];
+                Vector3 position = spawnRange.getVector(); //new Vector3(Random.Range(-worldDimensions.x, worldDimensions.x), worldDimensions.y);
                 Vector3 impulse = new Vector2(Random.Range(0, 15), Random.Range(50, 300));
 
                 GameObject enemy = Instantiate(enemyPrefab, Dynamic.Instance.enemiesParent);
@@ -119,7 +122,7 @@ public class SpawnSide {
      * https://answers.unity.com/questions/54010/is-it-possible-to-dynamically-disable-or-validate.html
      */
     [Tooltip("Custom spawning random position (only use if spawnSides is CUSTOM). Made in pairs of random spawning lines.")]
-    public Vector2RangeTwo[] customSpawnPositions;
+    public TransformRange[] customSpawnPositions;
 
     // TODO
     [Tooltip("If wait until the before thing is done, and then wait Seconds Before Start in order to do something. If false, it won't wait until the thing before is done.")]
@@ -143,8 +146,8 @@ public class SpawnSide {
             case SPAWN_SIDES.RIGHT:
                 return new Vector3(-worldDimensions.x, Random.Range(-worldDimensions.y, worldDimensions.y));
             case SPAWN_SIDES.CUSTOM:
-                Vector2RangeTwo spawnPositionRange = customSpawnPositions[Random.Range(0, customSpawnPositions.Length) - 1];
-                return new Vector3(Random.Range(spawnPositionRange.startVector.x, spawnPositionRange.endVector.x), Random.Range(spawnPositionRange.endVector.x, spawnPositionRange.endVector.y));
+                TransformRange spawnPositionRange = customSpawnPositions[Random.Range(0, customSpawnPositions.Length) - 1];
+                return new Vector3(Random.Range(spawnPositionRange.startVector.x, spawnPositionRange.endVector.x), Random.Range(spawnPositionRange.startVector.x, spawnPositionRange.endVector.y));
             default:
                 // https://stackoverflow.com/questions/105372/how-do-i-enumerate-an-enum-in-c
                 Debug.LogError(new System.Exception($"The side {side} isn't none of the possible values of SPAWN_SIDES = {System.Enum.GetValues(typeof(SPAWN_SIDES)).Cast<SPAWN_SIDES>().Select(e => $"{e} = {System.Convert.ToInt32(e)}")})"));
@@ -172,8 +175,8 @@ public class Enemies {
     [Tooltip("Enemy prefabs to spawn.")]
     public EnemyPrefab[] enemyPrefabs;
 
+    // ------------------------
     public System.Tuple<EnemyPrefab, float>[] a;
-
 
     public GameObject GetEnemyPrefab()
     {
@@ -193,15 +196,54 @@ public class Enemies {
     }
 }
 
+
+
 [System.Serializable]
+public class TransformRange {
+    [Tooltip("Start transform.")]
+    public Transform startTransform;
+    [Tooltip("End transform.")]
+    public Transform endTransform;
+    [Tooltip("If not random will use only the start transform.")]
+    public bool notRandom = false;
+
+    public Vector3 startVector {
+        get {
+            return startTransform.position;
+        }
+    }
+    public Vector3 endVector {
+        get {
+            return endTransform.position;
+        }
+    }
+
+    /// <summary>
+    /// Return a Vector3 position. If notRandom is true it will return the position of the startTransfom. On false, it will return a random Vector3 between the startTransform and the endTransform.
+    /// </summary>
+    /// <returns></returns>
+    public Vector3 getVector()
+    {
+        if (notRandom)
+            return startTransform.position;
+        else
+            return new Vector3(Random.Range(startTransform.position.x, endTransform.position.x), Random.Range(startTransform.position.y, endTransform.position.y), Random.Range(startTransform.position.z, endTransform.position.z));
+    }
+}
+
+/*[System.Serializable]
 public class Vector2RangeTwo {
     [Tooltip("Start vector.")]
     public Vector2 startVector;
     [Tooltip("End vector.")]
-    public Vector2 endVector;
-    [Tooltip("If not random will use only the start vector")]
+    public //Vector2 endVector;
+    [Tooltip("If not random will use only the start vector.")]
     public bool notRandom = false;
 
+    /// <summary>
+    /// Return a Vector3 position. If notRandom is true it will return the position of the startVector. On false, it will return a random Vector3 between the startVector and the endVector.
+    /// </summary>
+    /// <returns></returns>
     public Vector2 getVector()
     {
         if (notRandom)
@@ -209,4 +251,4 @@ public class Vector2RangeTwo {
         else
             return new Vector2(Random.Range(startVector.x, endVector.x), Random.Range(startVector.y, endVector.y));
     }
-}
+}*/
