@@ -42,6 +42,9 @@ public class Player : LivingObject
     private bool isRechargingShield = false;
     //private Coroutine shieldRechargeCoroutine;
 
+    [Tooltip("Weapon configuration.")]
+    public Weapon weapon;
+
     [Header("Build")]
     [Tooltip("Shield bar script.")]
     public HealthBar shieldBar;
@@ -78,6 +81,12 @@ public class Player : LivingObject
             Shield += shieldRechargeRate * Time.deltaTime;
         else
             Shield = MaxShield;*/
+
+
+        // Is fine to implicitly exectue code on an if statement?
+        // Recharge weapon and check if 
+        if (weapon.Recharge(Time.deltaTime) && Input.GetMouseButton(0))
+            Shoot(weapon);
     }
 
     public override void TakeDamage(float amount)
@@ -121,4 +130,13 @@ public class Player : LivingObject
         yield return new WaitForSeconds(shieldRechargeDelay);
         isRechargingShield = true;
     }
+
+    private void Shoot(Weapon weapon)
+    {
+        weapon.ResetCooldown();
+        GameObject projectile = Instantiate(weapon.projectilePrefab, Dynamic.Instance.projectilesParent);
+        //projectile.GetComponent<Projectile>().SetBulletProperties(weapon.shootingPosition.position, weapon.damageOnHit, weapon.movementMomentum);
+        projectile.GetComponent<Projectile>().SetProjectilProperties(weapon);
+    }
 }
+
