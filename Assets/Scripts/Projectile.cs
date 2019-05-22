@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour, IRigibodyHelperHandler {
 
     [Header("Configuration")]
     [Tooltip("Damage on impact.")]
-    public float damage;
+    public float damage = 1;
 
     [Header("Setup")]
     [Tooltip("Impact sound.")]
@@ -19,6 +19,11 @@ public class Projectile : MonoBehaviour, IRigibodyHelperHandler {
 
     [Tooltip("RigibodyHelper script.")]
     public RigidbodyHelper rigidbodyHelper;
+
+    private void Start()
+    {
+        rigidbodyHelper.SetHandler(this);
+    }
 
     // Should I remove public and add IInterface.etc?
     // Wouldnt't this raise error since SET shouldn't exist?
@@ -35,8 +40,75 @@ public class Projectile : MonoBehaviour, IRigibodyHelperHandler {
         Destroy(gameObject);
     }
 
-    private void Start()
+    /*public void SetProjectilProperties(Vector3 spawnPoint, float damage, float speed)
     {
-        rigidbodyHelper.SetHandler(this);
+        transform.position = spawnPoint;
+        this.damage = damage;
+        rigidbodyHelper.GetRigidbody2D().AddForce(new Vector2(0, speed));
+    }*/
+
+    public void SetProjectilProperties(IProjectileConfiguration configuration)
+    {
+        transform.position = configuration.SpawnPosition;
+        damage = configuration.Damage;
+        Rigidbody2D rigidbody2D = rigidbodyHelper.GetRigidbody2D();
+        rigidbody2D.AddForce(new Vector2(0, configuration.Speed * rigidbody2D.mass));
+    }
+}
+
+public interface IProjectileConfiguration {
+    Vector3 SpawnPosition { get; }
+    float Damage { get; }
+    float Speed { get; }
+}
+
+[System.Serializable]
+public class Weapon : IProjectileConfiguration {
+    [Header("Configuration")]
+    [Tooltip("Damage on hit.")]
+    public float damageOnHit = 1;
+    [Tooltip("Firerate (shoots per second).")]
+    public float firerate = 1;
+    [Tooltip("Speed.")]
+    public float speed = 1;
+
+    [Header("Setup")]
+    [Tooltip("Transform point where projectiles will be spawn.")]
+    public Transform shootingPosition;
+    [Tooltip("Projectile prefab.")]
+    public GameObject projectilePrefab;
+    [Tooltip("Shooting sound.")]
+    public Sound shootingSound;
+
+    Vector3 IProjectileConfiguration.SpawnPosition => shootingPosition.position;
+    float IProjectileConfiguration.Damage => damageOnHit;
+    float IProjectileConfiguration.Speed => speed;
+
+    private float cooldownTime = 0f;
+
+    public bool Recharge(float deltaTime)
+    {
+        if (cooldownTime <= 0f)
+            return true;
+        else
+        {
+            cooldownTime -= deltaTime;
+            return false;
+        }
+    }
+
+    public void ResetCooldown()
+    {
+        cooldownTime = 1 / firerate;
+    }
+
+    public void PlayShootingSound(AudioSource audioSource, float volumeMultiplier)
+    {
+        shootingSound.Play(audioSource, volumeMultiplier);
+    }
+
+    public float GetCooldown()
+    {
+        return cooldownTime;
     }
 }
