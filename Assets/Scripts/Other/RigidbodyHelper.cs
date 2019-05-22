@@ -11,6 +11,14 @@ public class RigidbodyHelper : MonoBehaviour
     public AudioSource audioSource;
 
     private Rigidbody2D thisRigidbody2D;
+    /// <summary>
+    /// Return Rigidbody2D of the gameobject which has this script.
+    /// </summary>
+    /// <returns></returns>
+    public Rigidbody2D GetRigidbody2D()
+    {
+        return gameObject.GetComponent<Rigidbody2D>();
+    }
 
     /// <summary>
     /// Current position.
