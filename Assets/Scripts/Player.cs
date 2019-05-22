@@ -46,12 +46,17 @@ public class Player : LivingObject
     [Tooltip("Shield bar script.")]
     public HealthBar shieldBar;
 
+    [Tooltip("Shield handler.")]
+    public ShieldHandler shieldHandler;
+
     protected override void Start()
     {        
         /*float shield = startingShield == -1 ? startingMaxShield : startingShield;
         shieldBar.ManualUpdate(startingMaxHealth, shield);*/
         Shield = InitializeBar(shieldBar, startingMaxShield, startingShield); ;
         MaxShield = startingMaxShield;
+
+        shieldHandler.Initialize(Shield, MaxShield);
 
         base.Start();
     }
@@ -78,6 +83,8 @@ public class Player : LivingObject
             Shield += shieldRechargeRate * Time.deltaTime;
         else
             Shield = MaxShield;*/
+
+        shieldHandler.UpdateColor(Shield, MaxShield);
     }
 
     public override void TakeDamage(float amount)

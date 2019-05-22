@@ -68,7 +68,7 @@ public class LivingObject : MonoBehaviour, IRigibodyHelperHandler {
 
     [Tooltip("RigibodyHelper script.")]
     public RigidbodyHelper rigidbodyHelper;
-
+    
     /// <summary>
     /// Initializes the bar's values, setting the fill of the main bar and returning the current value.
     /// If startingValue is -1, startingMaximumValue will be used instead to fill the bar.
