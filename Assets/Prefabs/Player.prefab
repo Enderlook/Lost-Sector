@@ -67,6 +67,7 @@ MonoBehaviour:
     type: 3}
   onDeathExplosionPrefabScale: 5
   healthBar: {fileID: 0}
+  rigidbodyHelper: {fileID: 4797325517442178793}
   moveSpeed: 10
   startingMaxShield: 30
   startingShield: -1

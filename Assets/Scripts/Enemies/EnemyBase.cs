@@ -11,9 +11,9 @@ public class EnemyBase : LivingObject
     [Tooltip("Initial impulse.")]
     public Vector2 impulse;
 
-    [Header("Setup")]
+    /*[Header("Setup")]
     [Tooltip("Rigidbody Helper")]
-    public RigidbodyHelper rigidbodyHelper;
+    public RigidbodyHelper rigidbodyHelper;*/
 
     protected override void Start()
     {

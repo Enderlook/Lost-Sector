@@ -7,7 +7,9 @@ using UnityEngine;
  * https://docs.unity3d.com/Manual/class-ParentConstraint.html
  */
 
-public class LivingObject : MonoBehaviour {
+public class LivingObject : MonoBehaviour, IRigibodyHelperHandler {
+    // TODO: https://forum.unity.com/threads/exposing-fields-with-interface-type-c-solved.49524/
+
     [Header("Configurable")]
     [Tooltip("Maximum health.")]
     public float startingMaxHealth = 100;
@@ -35,13 +37,24 @@ public class LivingObject : MonoBehaviour {
             if (Health <= 0) Die();
         }
     }
+
     [Tooltip("Relative damage on impact based on focer.")]
     public float relativeImpactDamage;
-
+    float IImpactDamage.ImpactDamage {
+        get {
+            return relativeImpactDamage;
+        }
+    }
 
     [Header("Setup")]
     [Tooltip("Impact sound.")]
     public Sound impactSound;
+    Sound IImpactSound.ImpactSound {
+        get {
+            return impactSound;
+        }
+    }
+
     [Tooltip("Die sound.")]
     public Sound dieSound;
     [Tooltip("Instanciate this explosion prefab on death.")]
@@ -52,6 +65,9 @@ public class LivingObject : MonoBehaviour {
 
     [Tooltip("Health bar script.")]
     public HealthBar healthBar;
+
+    [Tooltip("RigibodyHelper script.")]
+    public RigidbodyHelper rigidbodyHelper;
 
     /// <summary>
     /// Initializes the bar's values, setting the fill of the main bar and returning the current value.
@@ -75,6 +91,11 @@ public class LivingObject : MonoBehaviour {
         healthBar.ManualUpdate(startingMaxHealth, health);*/
         Health = InitializeBar(healthBar, startingMaxHealth, startingHealth);
         MaxHealth = startingMaxHealth;
+
+        /*rigidbodyHelper.impactDamage = this;
+        rigidbodyHelper.impactSound = this;
+        rigidbodyHelper.damageTaker = this;*/
+        rigidbodyHelper.SetHandler(this);
     }
 
     /// <summary>
