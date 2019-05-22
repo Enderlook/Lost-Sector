@@ -17,7 +17,7 @@ public class EnemyBase : LivingObject
 
     protected override void Start()
     {
-        rigidbodyHelper.gameObject.GetComponent<Rigidbody2D>().AddRelativeForce(impulse);
+        rigidbodyHelper./*.gameObject.GetComponent<Rigidbody2D>()*/GetRigidbody2D().AddRelativeForce(impulse);
         base.Start();
     }
 
