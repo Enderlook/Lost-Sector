@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class HealthBar : MonoBehaviour {
 
     [Header("Configuration")]
@@ -30,6 +31,9 @@ public class HealthBar : MonoBehaviour {
     public GameObject healingBar = null;
     private Image healingImage;
     private RectTransform healingTransform;
+
+    [Tooltip("Check to ceil health values (round up), useful if health is float, to avoid show 0 HP on bar while you still have 0.44 or below HP. On false, normal round will be performed.")]
+    public bool ceilValues = true;
 
     private float maxHealth;
     private float health;
@@ -100,13 +104,21 @@ public class HealthBar : MonoBehaviour {
             {
                 float dynamicPercent = healthImage.fillAmount + damageBar.fillAmount - healingImage.fillAmount,
                       dynamicHealth = health * dynamicPercent;
-                textNumber.text = string.Format(textShowed, Mathf.Round(dynamicHealth), Mathf.Round(maxHealth), Mathf.Round(dynamicHealth / maxHealth * 100));
+                textNumber.text = string.Format(textShowed, Rounding(dynamicHealth), Rounding(maxHealth), Rounding(dynamicHealth / maxHealth * 100));
             }
             else
             {
-                textNumber.text = string.Format(textShowed, Mathf.Round(health), Mathf.Round(maxHealth), Mathf.Round(health / maxHealth * 100));
+                textNumber.text = string.Format(textShowed, Rounding(health), Rounding(maxHealth), Rounding(health / maxHealth * 100));
             }
         }
+    }
+
+    private float Rounding(float value)
+    {
+        if (ceilValues)
+            return Mathf.Ceil(value);
+        else
+            return Mathf.Round(value);
     }
 
     /// <summary>
@@ -195,5 +207,4 @@ public class HealthBar : MonoBehaviour {
             healingImage.fillAmount -= ((healingTransform.rect.width * healingImage.fillAmount - healingBar.transform.localPosition.x) - healingTransform.rect.width) / healingTransform.rect.width;
         }
     }
-
 }
