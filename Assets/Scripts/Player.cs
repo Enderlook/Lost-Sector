@@ -78,8 +78,6 @@ public class Player : LivingObject
             Shield += shieldRechargeRate * Time.deltaTime;
         else
             Shield = MaxShield;*/
-
-        Debug.Log(Shield);
     }
 
     public override void TakeDamage(float amount)
