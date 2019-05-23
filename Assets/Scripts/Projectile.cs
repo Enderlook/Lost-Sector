@@ -24,29 +24,15 @@ public class Projectile : MonoBehaviour, IRigibodyHelperHandler {
     {
         rigidbodyHelper.SetHandler(this);
     }
-
-    // Should I remove public and add IInterface.etc?
-    // Wouldn't this raise error since SET shouldn't exist?
-    //public float ImpactDamage => damage;
     public float ImpactDamage {
         get {
             return damage;
         }
     }
-    
-    // Is this against the Interface Segregation Principle?
     public void TakeDamage(float amount) {
         /* We are a bullet, we don't have HP... yet */
         Destroy(gameObject);
     }
-
-    /*public void SetProjectilProperties(Vector3 spawnPoint, float damage, float speed)
-    {
-        transform.position = spawnPoint;
-        this.damage = damage;
-        rigidbodyHelper.GetRigidbody2D().AddForce(new Vector2(0, speed));
-    }*/
-
     public void SetProjectilProperties(IProjectileConfiguration configuration)
     {
         transform.position = configuration.SpawnPosition;
