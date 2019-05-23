@@ -71,8 +71,8 @@ MonoBehaviour:
   moveSpeed: 10
   startingMaxShield: 30
   startingShield: -1
-  shieldRechargeRate: 15
-  shieldRechargeDelay: 5
+  shieldRechargeRate: 8
+  shieldRechargeDelay: 4
   weapon:
     damageOnHit: 25
     firerate: 2

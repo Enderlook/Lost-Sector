@@ -94,7 +94,7 @@ public class Player : LivingObject
         if (rest != 0)
             Health = ChangeValue(rest, Health, MaxHealth, false, "health");
 
-        /*
+        /* TODO:
         // Damage reduction on low health
         if (Health - amount < MaxHealth * 0.35f)
             amount = (Health - amount) + (amount - Health) * (10 + Mathf.Exp(1) / Mathf.Exp(-amount / 10));
