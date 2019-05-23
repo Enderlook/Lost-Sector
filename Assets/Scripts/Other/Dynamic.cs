@@ -5,6 +5,7 @@ using UnityEngine;
 /*public static class Global {
     public static Transform enemiesParent;
     public static Transform explosionsParent;
+    public static Transform projectilesParent;
 }*/
 
 public class Dynamic : MonoBehaviour
@@ -14,6 +15,8 @@ public class Dynamic : MonoBehaviour
     public Transform enemiesParent;
     [Tooltip("Explosion parent transform.")]
     public Transform explosionsParent;
+    [Tooltip("Projectiles parent transform.")]
+    public Transform projectilesParent;
 
     [Header("Don't Touch")] // By this way, no one can touch it
     private static Dynamic _instance;
@@ -42,5 +45,6 @@ public class Dynamic : MonoBehaviour
     {
         Global.enemiesParent = enemiesParent;
         Global.explosionsParent = explosionsParent;
+        Global.projectilesParent = projectilesParent;
     }*/
 }
