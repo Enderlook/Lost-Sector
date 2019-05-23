@@ -10,7 +10,7 @@ public class EnemyAsteroid : EnemyBase
 
     protected override void Start()
     {
-        rigidbodyHelper/*.gameObject.GetComponent<Rigidbody2D>()*/.GetRigidbody2D().angularVelocity = rotation;
+        rigidbodyHelper.GetRigidbody2D().angularVelocity = rotation;
         base.Start();
     }
 

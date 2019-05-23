@@ -19,16 +19,10 @@ public interface IRigibodyHelperHandler : IDamageTaker, IImpactDamage, IImpactSo
 public class RigidbodyHelper : MonoBehaviour
 {
     [Header("Setup")]
-    /*[Tooltip("Living Object script.")]
-    public LivingObject livingObject;*/
     [Tooltip("Audio Source component.")]
     public AudioSource audioSource;
-
-    /*public IDamageTaker damageTaker;
-    public IImpactDamage impactDamage;
-    public IImpactSound impactSound;*/
-
-    private /* public RigibodyHelperHandler*/ IRigibodyHelperHandler handler;
+    
+    private IRigibodyHelperHandler handler;
 
     public void SetHandler(IRigibodyHelperHandler handler)
     {
@@ -43,9 +37,7 @@ public class RigidbodyHelper : MonoBehaviour
     {
         return gameObject.GetComponent<Rigidbody2D>();
     }
-
-    //private Rigidbody2D thisRigidbody2D;
-
+    
     /// <summary>
     /// Current position.
     /// </summary>
@@ -56,17 +48,12 @@ public class RigidbodyHelper : MonoBehaviour
             return transform.position;
         }
     }
-
-    /*private void Start()
-    {
-        thisRigidbody2D = gameObject.GetComponent<Rigidbody2D>();
-    }*/
-
-    /*private void OnValidate()
+    
+    private void OnValidate()
     {
         if (gameObject.GetComponent<Rigidbody2D>() == null)
             Debug.LogWarning($"Gameobject {gameObject.name} lacks of Rigibody2D component");
-    }*/
+    }
 
     /* TODO:
      * https://forum.unity.com/threads/exposing-fields-with-interface-type-c-solved.49524/
@@ -88,59 +75,20 @@ public class RigidbodyHelper : MonoBehaviour
         RigidbodyHelper target = collision.gameObject.GetComponent<RigidbodyHelper>();
         if (target != null)
         {
-            target.TakeDamage(/*livingObject.relativeImpactDamage*/ /*impactDamage*/handler.ImpactDamage * impulse);
-            //target.livingObject.TakeDamage(livingObject.relativeImpactDamage * impulse);
+            target.TakeDamage(handler.ImpactDamage * impulse);
         }
 
-        if (audioSource != null && /*livingObject.impactSound*/ /*impactSound*/handler.ImpactSound != null)
+        if (audioSource != null && handler.ImpactSound != null)
         {
-            /*livingObject.impactSound*/ /*impactSound*/handler.ImpactSound.Play(audioSource, collision.relativeVelocity.magnitude);
+            handler.ImpactSound.Play(audioSource, collision.relativeVelocity.magnitude);
         }
     }
 
     public void TakeDamage(float amount)
     {
-        /*livingObject*/ /*damageTaker*/handler.TakeDamage(amount);
+        handler.TakeDamage(amount);
     }
 }
-
-//[System.Serializable]
-/*public class RigibodyHelperHandler : IImpactDamage, IImpactSound, IDamageTaker {
-    //[Tooltip("Living Object script.")]
-    public LivingObject livingObject;
-
-
-    public void TakeDamage(float amount)
-    {
-        ((IDamageTaker)livingObject).TakeDamage(amount);
-    }
-
-    public Sound ImpactSound {
-        get {
-            return ((IImpactSound)livingObject).ImpactSound;
-        }
-    }
-
-    public float ImpactDamage {
-        get {
-            return ((IImpactDamage)livingObject).ImpactDamage;
-        }
-    }
-}*/
-
-/*public class RigibodyHelperHandler2 {
-    public IImpactDamage ImpactDamage;
-    public IImpactSound ImpactSound;
-    public IDamageTaker DamageTaker;
-
-    public RigibodyHelperHandler2(IImpactDamage impactDamage, IImpactSound impactSound, IDamageTaker damageTaker)
-    {
-        ImpactDamage = impactDamage;
-        ImpactSound = impactSound;
-        DamageTaker = damageTaker;
-    }
-}*/
-
 
 [System.Serializable]
 public class Sound {
@@ -169,6 +117,11 @@ public class Sound {
             return pitch[0];
     }
 
+    /// <summary>
+    /// Play the sound on the specified AudioSource
+    /// </summary>
+    /// <param name="audioSource">AudioSource where the sound will be played.</param>
+    /// <param name="volumeMultiplier">Volume of the sound, from 0 to 1.</param>
     public void Play(AudioSource audioSource, float volumeMultiplier)
     {
         audioSource.pitch = GetPitch();
