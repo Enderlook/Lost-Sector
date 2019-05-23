@@ -2,24 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IRigidbodyHelperHandler {
-    void TakeDamage(float amount);
-    float ImpactDamage { get; }
-    Sound ImpactSound { get; }
-    bool IsImpactDamageRelativeToImpulse { get; }
-}
-
 public class RigidbodyHelper : MonoBehaviour
 {
     [Header("Setup")]
     [Tooltip("Audio Source component.")]
     public AudioSource audioSource;
     
-    private IRigidbodyHelperHandler handler;
+    private IRigidbodyHelperConfiguration entity;
 
-    public void SetHandler(IRigidbodyHelperHandler handler)
+    /// <summary>
+    /// Set the configuration on the RigidbodyHelper in order to use it. Mandatory.
+    /// </summary>
+    /// <param name="handler">Configuration of the RigidbodyHelper</param>
+    public void SetProperties(IRigidbodyHelperConfiguration configuration)
     {
-        this.handler = handler;
+        entity = configuration;
     }
         
     /// <summary>
@@ -66,9 +63,9 @@ public class RigidbodyHelper : MonoBehaviour
             target.TakeDamage(CalculateDamage(impulse));
         }
 
-        if (audioSource != null && handler.ImpactSound != null)
+        if (audioSource != null && entity.ImpactSound != null)
         {
-            handler.ImpactSound.Play(audioSource, collision.relativeVelocity.magnitude);
+            entity.ImpactSound.Play(audioSource, collision.relativeVelocity.magnitude);
         }
     }
 
@@ -78,15 +75,15 @@ public class RigidbodyHelper : MonoBehaviour
     /// <param name="amount">Amount (positive) of damage received</param>
     public void TakeDamage(float amount)
     {
-        handler.TakeDamage(amount);
+        entity.TakeDamage(amount);
     }
 
     private float CalculateDamage(float impulse)
     {
-        if (handler.IsImpactDamageRelativeToImpulse)
-            return handler.ImpactDamage * impulse;
+        if (entity.IsImpactDamageRelativeToImpulse)
+            return entity.ImpactDamage * impulse;
         else
-            return handler.ImpactDamage;
+            return entity.ImpactDamage;
     }
 
     private void OnValidate()
@@ -94,6 +91,13 @@ public class RigidbodyHelper : MonoBehaviour
         if (gameObject.GetComponent<Rigidbody2D>() == null)
             Debug.LogWarning($"Gameobject {gameObject.name} lacks of rigidbody2D component.");
     }
+}
+
+public interface IRigidbodyHelperConfiguration {
+    void TakeDamage(float amount);
+    float ImpactDamage { get; }
+    Sound ImpactSound { get; }
+    bool IsImpactDamageRelativeToImpulse { get; }
 }
 
 [System.Serializable]
