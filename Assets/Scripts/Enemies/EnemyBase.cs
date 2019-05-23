@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-// How to combine headers?
 public class EnemyBase : LivingObject
 {
     [Header("Configurable")]
