@@ -21,9 +21,7 @@ public class RigidbodyHelper : MonoBehaviour
     {
         this.handler = handler;
     }
-
-    private IRigidbodyHelperHandler handler;
-    
+        
     /// <summary>
     /// Return Rigidbody2D of the gameObject which has this script.
     /// </summary>
@@ -31,11 +29,6 @@ public class RigidbodyHelper : MonoBehaviour
     public Rigidbody2D GetRigidbody2D()
     {
         return gameObject.GetComponent<Rigidbody2D>();
-    }
-
-    public void SetHandler(IRigidbodyHelperHandler handler)
-    {
-        this.handler = handler;
     }
 
     /// <summary>
