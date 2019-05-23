@@ -41,6 +41,9 @@ public class Player : LivingObject
     public float shieldRechargeDelay = 3f;
     private bool isRechargingShield = false;
 
+    [Tooltip("Weapon configuration.")]
+    public Weapon weapon;
+
     [Header("Build")]
     [Tooltip("Shield bar script.")]
     public HealthBar shieldBar;
@@ -77,6 +80,9 @@ public class Player : LivingObject
             Shield = ChangeValue(shieldRechargeRate * Time.deltaTime, Shield, MaxShield, true, "shield");
 
         shieldHandler.UpdateColor(Shield, MaxShield);
+
+        if (Input.GetMouseButton(0) && weapon.Recharge(Time.deltaTime))
+            Shoot(weapon);
     }
 
     public override void TakeDamage(float amount)
@@ -108,4 +114,14 @@ public class Player : LivingObject
         yield return new WaitForSeconds(shieldRechargeDelay);
         isRechargingShield = true;
     }
+
+    private void Shoot(Weapon weapon)
+    {
+        weapon.ResetCooldown();
+        GameObject projectile = Instantiate(weapon.projectilePrefab, Dynamic.Instance.projectilesParent);
+        // Just to be sure
+        projectile.transform.rotation = transform.rotation;
+        projectile.GetComponent<Projectile>().SetProjectileProperties(weapon);
+    }
 }
+
