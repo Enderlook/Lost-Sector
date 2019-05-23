@@ -2,19 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDamageTaker {
+public interface IRigidbodyHelperHandler {
     void TakeDamage(float amount);
-}
-
-public interface IImpactDamage {
     float ImpactDamage { get; }
-}
-
-public interface IImpactSound {
     Sound ImpactSound { get; }
+    bool IsImpactDamageRelativeToImpulse { get; }
 }
-
-public interface IRigibodyHelperHandler : IDamageTaker, IImpactDamage, IImpactSound { }
 
 public class RigidbodyHelper : MonoBehaviour
 {
@@ -22,22 +15,29 @@ public class RigidbodyHelper : MonoBehaviour
     [Tooltip("Audio Source component.")]
     public AudioSource audioSource;
     
-    private IRigibodyHelperHandler handler;
+    private IRigidbodyHelperHandler handler;
 
-    public void SetHandler(IRigibodyHelperHandler handler)
+    public void SetHandler(IRigidbodyHelperHandler handler)
     {
         this.handler = handler;
     }
 
+    private IRigidbodyHelperHandler handler;
+    
     /// <summary>
-    /// Return Rigidbody2D of the gameobject which has this script.
+    /// Return Rigidbody2D of the gameObject which has this script.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Rigidbody2D of the RigidbodyHelper's gameObject.</returns>
     public Rigidbody2D GetRigidbody2D()
     {
         return gameObject.GetComponent<Rigidbody2D>();
     }
-    
+
+    public void SetHandler(IRigidbodyHelperHandler handler)
+    {
+        this.handler = handler;
+    }
+
     /// <summary>
     /// Current position.
     /// </summary>
@@ -47,12 +47,6 @@ public class RigidbodyHelper : MonoBehaviour
         {
             return transform.position;
         }
-    }
-    
-    private void OnValidate()
-    {
-        if (gameObject.GetComponent<Rigidbody2D>() == null)
-            Debug.LogWarning($"Gameobject {gameObject.name} lacks of Rigibody2D component");
     }
 
     /* TODO:
@@ -64,6 +58,7 @@ public class RigidbodyHelper : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // https://forum.unity.com/threads/getting-impact-force-not-just-velocity.23746/
+        // Calculate impact force of the collision
         float impulse = 0f;
         foreach (ContactPoint2D contactPoint in collision.contacts)
         {
@@ -75,7 +70,7 @@ public class RigidbodyHelper : MonoBehaviour
         RigidbodyHelper target = collision.gameObject.GetComponent<RigidbodyHelper>();
         if (target != null)
         {
-            target.TakeDamage(handler.ImpactDamage * impulse);
+            target.TakeDamage(CalculateDamage(impulse));
         }
 
         if (audioSource != null && handler.ImpactSound != null)
@@ -84,9 +79,27 @@ public class RigidbodyHelper : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Take damage reducing health or shield.
+    /// </summary>
+    /// <param name="amount">Amount (positive) of damage received</param>
     public void TakeDamage(float amount)
     {
         handler.TakeDamage(amount);
+    }
+
+    private float CalculateDamage(float impulse)
+    {
+        if (handler.IsImpactDamageRelativeToImpulse)
+            return handler.ImpactDamage * impulse;
+        else
+            return handler.ImpactDamage;
+    }
+
+    private void OnValidate()
+    {
+        if (gameObject.GetComponent<Rigidbody2D>() == null)
+            Debug.LogWarning($"Gameobject {gameObject.name} lacks of rigidbody2D component.");
     }
 }
 
