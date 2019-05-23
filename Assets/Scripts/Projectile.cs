@@ -2,45 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour, IRigibodyHelperHandler {
+public class Projectile : MonoBehaviour, IRigidbodyHelperHandler {
 
     [Header("Configuration")]
     [Tooltip("Damage on impact.")]
     public float damage = 1;
+    float IRigidbodyHelperHandler.ImpactDamage {
+        get {
+            return damage;
+        }
+    }
 
     [Header("Setup")]
     [Tooltip("Impact sound.")]
     public Sound impactSound;
-    Sound IImpactSound.ImpactSound {
+    Sound IRigidbodyHelperHandler.ImpactSound {
         get {
             return impactSound;
         }
     }
 
-    [Tooltip("RigibodyHelper script.")]
+    [Tooltip("RigidbodyHelper script.")]
     public RigidbodyHelper rigidbodyHelper;
 
     private void Start()
     {
         rigidbodyHelper.SetHandler(this);
     }
-    public float ImpactDamage {
+    
+    bool IRigidbodyHelperHandler.IsImpactDamageRelativeToImpulse {
         get {
-            return damage;
+            return false;
         }
     }
-    public void TakeDamage(float amount) {
-        /* We are a bullet, we don't have HP... yet */
+
+    void IRigidbodyHelperHandler.TakeDamage(float amount) {
+        // We are a bullet, we don't have HP... yet
         Destroy(gameObject);
     }
-    public void SetProjectilProperties(IProjectileConfiguration configuration)
+    
+    /// <summary>
+    /// Configure the projectile properties. Mandatory for usage of the projectile class.
+    /// </summary>
+    /// <param name="configuration">Configuration of the projectile.</param>
+    public void SetProjectileProperties(IProjectileConfiguration configuration)
     {
         transform.position = configuration.SpawnPosition;
         damage = configuration.Damage;
         Rigidbody2D rigidbody2D = rigidbodyHelper.GetRigidbody2D();
-        rigidbody2D.AddForce(new Vector2(0, configuration.Speed * rigidbody2D.mass));
-        // Just to be sure
-        //rigidbody2D.AddRelativeForce(transform.forward * configuration.Speed * rigidbody2D.mass);
+        // You never know when you might need to rotate the parent, that is why we use AddRelativeForce() and transform.up instead of just AddForce()
+        rigidbody2D.AddRelativeForce(transform.up * configuration.Speed * rigidbody2D.mass);
     }
 }
 
@@ -74,6 +85,11 @@ public class Weapon : IProjectileConfiguration {
 
     private float cooldownTime = 0f;
 
+    /// <summary>
+    /// Reduce cooldown time by deltaTime and checks if the weapon's cooldown is over. Returns true if the weapon is ready to shoot.
+    /// </summary>
+    /// <param name="deltaTime">Time from last frame (Time.deltaTime).</param>
+    /// <returns>true if the weapon is ready to shoot, false if it's on cooldown.</returns>
     public bool Recharge(float deltaTime)
     {
         if (cooldownTime <= 0f)
@@ -85,18 +101,21 @@ public class Weapon : IProjectileConfiguration {
         }
     }
 
+    /// <summary>
+    /// Reset cooldown time to maximum.
+    /// </summary>
     public void ResetCooldown()
     {
         cooldownTime = 1 / firerate;
     }
 
+    /// <summary>
+    /// Play the fire sound.
+    /// </summary>
+    /// <param name="audioSource">AudioSource where the sound will be played.</param>
+    /// <param name="volumeMultiplier">Volume of the sound, from 0 to 1.</param>
     public void PlayShootingSound(AudioSource audioSource, float volumeMultiplier)
     {
         shootingSound.Play(audioSource, volumeMultiplier);
-    }
-
-    public float GetCooldown()
-    {
-        return cooldownTime;
     }
 }

@@ -83,9 +83,7 @@ public class Player : LivingObject
             Shield = MaxShield;*/
 
 
-        // Is fine to implicitly exectue code on an if statement?
-        // Recharge weapon and check if 
-        if (weapon.Recharge(Time.deltaTime) && Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && weapon.Recharge(Time.deltaTime))
             Shoot(weapon);
     }
 
@@ -97,8 +95,6 @@ public class Player : LivingObject
         Shield = value;
         if (rest != 0)
             Health = ChangeValue(rest, Health, MaxHealth, false, "health");
-
-
 
         /*if (Shield - amount < 0)
         {
@@ -137,8 +133,7 @@ public class Player : LivingObject
         GameObject projectile = Instantiate(weapon.projectilePrefab, Dynamic.Instance.projectilesParent);
         // Just to be sure
         projectile.transform.rotation = transform.rotation;
-        //projectile.GetComponent<Projectile>().SetBulletProperties(weapon.shootingPosition.position, weapon.damageOnHit, weapon.movementMomentum);
-        projectile.GetComponent<Projectile>().SetProjectilProperties(weapon);
+        projectile.GetComponent<Projectile>().SetProjectileProperties(weapon);
     }
 }
 
