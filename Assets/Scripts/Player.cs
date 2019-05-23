@@ -40,7 +40,6 @@ public class Player : LivingObject
     [Tooltip("Amount of time in seconds after receive damage in order to start recharging shield.")]
     public float shieldRechargeDelay = 3f;
     private bool isRechargingShield = false;
-    //private Coroutine shieldRechargeCoroutine;
 
     [Header("Build")]
     [Tooltip("Shield bar script.")]
@@ -51,8 +50,6 @@ public class Player : LivingObject
 
     protected override void Start()
     {        
-        /*float shield = startingShield == -1 ? startingMaxShield : startingShield;
-        shieldBar.ManualUpdate(startingMaxHealth, shield);*/
         Shield = InitializeBar(shieldBar, startingMaxShield, startingShield); ;
         MaxShield = startingMaxShield;
 
@@ -78,11 +75,6 @@ public class Player : LivingObject
         // Recharge shield
         if (isRechargingShield && Shield < MaxShield)
             Shield = ChangeValue(shieldRechargeRate * Time.deltaTime, Shield, MaxShield, true, "shield");
-        /*// To avoid over-shield
-        if (Shield + shieldRechargeRate * Time.deltaTime < MaxShield)
-            Shield += shieldRechargeRate * Time.deltaTime;
-        else
-            Shield = MaxShield;*/
 
         shieldHandler.UpdateColor(Shield, MaxShield);
     }
@@ -95,18 +87,6 @@ public class Player : LivingObject
         Shield = value;
         if (rest != 0)
             Health = ChangeValue(rest, Health, MaxHealth, false, "health");
-
-
-
-        /*if (Shield - amount < 0)
-        {
-            Shield = 0;
-            float remainingDamage = amount - Shield;
-            base.TakeDamage(remainingDamage);
-        } else
-        {
-            Shield -= amount;
-        }*/
 
         /*
         // Damage reduction on low health

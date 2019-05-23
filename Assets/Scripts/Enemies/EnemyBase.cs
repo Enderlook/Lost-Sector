@@ -4,20 +4,15 @@ using UnityEngine;
 
 
 // How to combine headers?
-
 public class EnemyBase : LivingObject
 {
     [Header("Configurable")]
     [Tooltip("Initial impulse.")]
     public Vector2 impulse;
-
-    /*[Header("Setup")]
-    [Tooltip("Rigidbody Helper")]
-    public RigidbodyHelper rigidbodyHelper;*/
-
+    
     protected override void Start()
     {
-        rigidbodyHelper./*.gameObject.GetComponent<Rigidbody2D>()*/GetRigidbody2D().AddRelativeForce(impulse);
+        rigidbodyHelper.GetRigidbody2D().AddRelativeForce(impulse);
         base.Start();
     }
 

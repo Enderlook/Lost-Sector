@@ -87,14 +87,9 @@ public class LivingObject : MonoBehaviour, IRigibodyHelperHandler {
 
     protected virtual void Start()
     {
-        /*float health = startingHealth == -1 ? startingMaxHealth : startingHealth;
-        healthBar.ManualUpdate(startingMaxHealth, health);*/
         Health = InitializeBar(healthBar, startingMaxHealth, startingHealth);
         MaxHealth = startingMaxHealth;
 
-        /*rigidbodyHelper.impactDamage = this;
-        rigidbodyHelper.impactSound = this;
-        rigidbodyHelper.damageTaker = this;*/
         rigidbodyHelper.SetHandler(this);
     }
 
@@ -104,17 +99,7 @@ public class LivingObject : MonoBehaviour, IRigibodyHelperHandler {
     /// <param name="amount"></param>
     public void TakeHealing(float amount)
     {
-        Health = ChangeValue(amount, Health, MaxHealth, true, "health");
-        /*if (amount < 0)
-        {
-            Debug.LogError("Healing amount was negative. The creature lose health.");
-
-        }
-        if (Health + amount > MaxHealth)
-            Health = MaxHealth;
-        else
-            Health += amount;*/
-        //ChangeValue(amount);
+        Health = ChangeValue(amount, Health, MaxHealth, true, "health");       
     }
 
     /// <summary>
@@ -124,26 +109,7 @@ public class LivingObject : MonoBehaviour, IRigibodyHelperHandler {
     public virtual void TakeDamage(float amount)
     {
         Health = ChangeValue(amount, Health, MaxHealth, false, "health");
-        /*if (amount < 0)
-        {
-            Debug.LogWarning("Damage amount was negative. The creature recover health.");
-        }
-        if (Health - amount < 0)
-            Health = 0;
-        else
-            Health -= amount;*/
-        //ChangeValue(-amount);
     }
-
-    /*private void ChangeValue(float amount)
-    {
-        if (Health + amount < 0)
-            Health = 0;
-        else if (Health + amount > MaxHealth)
-            Health = MaxHealth;
-        else
-            Health = amount;
-    }*/
 
     // Can I use this? https://stackoverflow.com/questions/1402803/passing-properties-by-reference-in-c-sharp
     /// <summary>
