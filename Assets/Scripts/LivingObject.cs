@@ -38,18 +38,24 @@ public class LivingObject : MonoBehaviour, IRigibodyHelperHandler {
         }
     }
 
-    [Tooltip("Relative damage on impact based on focer.")]
+    [Tooltip("Relative damage on impact based on force.")]
     public float relativeImpactDamage;
-    float IImpactDamage.ImpactDamage {
+    float IRigibodyHelperHandler.ImpactDamage {
         get {
             return relativeImpactDamage;
+        }
+    }
+
+    bool IRigibodyHelperHandler.IsImpactDamageRelativeToImpulse {
+        get {
+            return true;
         }
     }
 
     [Header("Setup")]
     [Tooltip("Impact sound.")]
     public Sound impactSound;
-    Sound IImpactSound.ImpactSound {
+    Sound IRigibodyHelperHandler.ImpactSound {
         get {
             return impactSound;
         }
