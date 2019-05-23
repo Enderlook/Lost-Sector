@@ -5,12 +5,9 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    //public Vector2[] spawningPositions = new Vector2[2];
-    
-    public GameObject enemyPrefab;
-    
-    public Enemies test;
-
+    // TODO: COMPLETE REWORK!!!
+    public GameObject enemyPrefab;    
+    //public Enemies test;
     public TransformRange[] spawnPoints;
 
     [Tooltip("Difficulty.")]
@@ -109,8 +106,7 @@ public class EnemySpawner : MonoBehaviour
 
 }
 
-
-[System.Serializable]
+/*[System.Serializable]
 public class SpawnSide {
     public enum SPAWN_SIDES { TOP, BOTTOM, LEFT, RIGHT, CUSTOM };
 
@@ -121,7 +117,7 @@ public class SpawnSide {
      * https://forum.unity.com/threads/draw-a-field-only-if-a-condition-is-met.448855/#post-3435603
      * https://answers.unity.com/questions/54010/is-it-possible-to-dynamically-disable-or-validate.html
      */
-    [Tooltip("Custom spawning random position (only use if spawnSides is CUSTOM). Made in pairs of random spawning lines.")]
+    /*[Tooltip("Custom spawning random position (only use if spawnSides is CUSTOM). Made in pairs of random spawning lines.")]
     public TransformRange[] customSpawnPositions;
 
     // TODO
@@ -131,8 +127,7 @@ public class SpawnSide {
     public float secondsBeforeStart;
     [Tooltip("Amount of seconds waited between each done thing.")]
     public float intervalSeconds;
-
-
+    
     private Vector3 GetSpawnLocation(Vector3 worldDimensions, SPAWN_SIDES side)
     {
         switch (side)
@@ -160,9 +155,9 @@ public class SpawnSide {
     {
         return GetSpawnLocation(worldDimensions, spawnSides[Random.Range(0, spawnSides.Length) - 1]);
     }
-}
+}*/
 
-[System.Serializable]
+/*[System.Serializable]
 public class EnemyPrefab {
     [Tooltip("Enemy prefab to spawn.")]
     public GameObject prefab;
@@ -174,9 +169,6 @@ public class EnemyPrefab {
 public class Enemies {
     [Tooltip("Enemy prefabs to spawn.")]
     public EnemyPrefab[] enemyPrefabs;
-
-    // ------------------------
-    public System.Tuple<EnemyPrefab, float>[] a;
 
     public GameObject GetEnemyPrefab()
     {
@@ -194,7 +186,7 @@ public class Enemies {
         }
         throw new System.Exception("This shouldn't be happening!!!");
     }
-}
+}*/
 
 
 
