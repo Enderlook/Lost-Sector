@@ -7,7 +7,7 @@ using UnityEngine;
  * https://docs.unity3d.com/Manual/class-ParentConstraint.html
  */
 
-public class LivingObject : MonoBehaviour, IRigidbodyHelperHandler {
+public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
     // TODO: https://forum.unity.com/threads/exposing-fields-with-interface-type-c-solved.49524/
 
     [Header("Configurable")]
@@ -40,13 +40,13 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperHandler {
 
     [Tooltip("Relative damage on impact based on force.")]
     public float relativeImpactDamage;
-    float IRigidbodyHelperHandler.ImpactDamage {
+    float IRigidbodyHelperConfiguration.ImpactDamage {
         get {
             return relativeImpactDamage;
         }
     }
 
-    bool IRigidbodyHelperHandler.IsImpactDamageRelativeToImpulse {
+    bool IRigidbodyHelperConfiguration.IsImpactDamageRelativeToImpulse {
         get {
             return true;
         }
@@ -55,7 +55,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperHandler {
     [Header("Setup")]
     [Tooltip("Impact sound.")]
     public Sound impactSound;
-    Sound IRigidbodyHelperHandler.ImpactSound {
+    Sound IRigidbodyHelperConfiguration.ImpactSound {
         get {
             return impactSound;
         }
@@ -96,7 +96,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperHandler {
         Health = InitializeBar(healthBar, startingMaxHealth, startingHealth);
         MaxHealth = startingMaxHealth;
 
-        rigidbodyHelper.SetHandler(this);
+        rigidbodyHelper.SetProperties(this);
     }
 
     /// <summary>
