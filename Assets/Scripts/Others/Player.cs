@@ -39,7 +39,7 @@ public class Player : LivingObject
     public float shieldRechargeRate = 10;
     [Tooltip("Amount of time in seconds after receive damage in order to start recharging shield.")]
     public float shieldRechargeDelay = 3f;
-    private bool isRechargingShield = false;
+    private float currentShieldRechargeDelay = 0f;
 
     [Tooltip("Weapon configuration.")]
     public Weapon weapon;
@@ -76,8 +76,10 @@ public class Player : LivingObject
         transform.position = Vector3.MoveTowards(transform.position, mousePosition, moveSpeed * Time.deltaTime);
 
         // Recharge shield
-        if (isRechargingShield && Shield < MaxShield)
+        if (currentShieldRechargeDelay >= shieldRechargeDelay && Shield < MaxShield)
             Shield = ChangeValue(shieldRechargeRate * Time.deltaTime, Shield, MaxShield, true, "shield");
+        else
+            currentShieldRechargeDelay += Time.deltaTime;
 
         shieldHandler.UpdateColor(Shield, MaxShield);
 
@@ -87,8 +89,7 @@ public class Player : LivingObject
 
     public override void TakeDamage(float amount)
     {
-        StopCoroutine(InitializeRechargeShieldDelay());
-        /*shieldRechargeCoroutine = */StartCoroutine(InitializeRechargeShieldDelay());
+        currentShieldRechargeDelay = 0;
         (float value, float rest) = ChangeValueWithRemain(amount, Shield, MaxShield, false, "shield");
         Shield = value;
         if (rest != 0)
@@ -106,13 +107,6 @@ public class Player : LivingObject
         GameObject explosion = Instantiate(onDeathExplosionPrefab, Dynamic.Instance.explosionsParent);
         explosion.transform.position = transform.position;
         base.Die();
-    }
-
-    private IEnumerator InitializeRechargeShieldDelay()
-    {
-        isRechargingShield = false;
-        yield return new WaitForSeconds(shieldRechargeDelay);
-        isRechargingShield = true;
     }
 
     private void Shoot(Weapon weapon)
