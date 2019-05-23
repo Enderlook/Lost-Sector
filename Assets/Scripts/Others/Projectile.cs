@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour, IRigidbodyHelperHandler {
+public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration {
 
     [Header("Configuration")]
     [Tooltip("Damage on impact.")]
     public float damage = 1;
-    float IRigidbodyHelperHandler.ImpactDamage {
+    float IRigidbodyHelperConfiguration.ImpactDamage {
         get {
             return damage;
         }
@@ -16,7 +16,7 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperHandler {
     [Header("Setup")]
     [Tooltip("Impact sound.")]
     public Sound impactSound;
-    Sound IRigidbodyHelperHandler.ImpactSound {
+    Sound IRigidbodyHelperConfiguration.ImpactSound {
         get {
             return impactSound;
         }
@@ -27,16 +27,16 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperHandler {
 
     private void Start()
     {
-        rigidbodyHelper.SetHandler(this);
+        rigidbodyHelper.SetProperties(this);
     }
     
-    bool IRigidbodyHelperHandler.IsImpactDamageRelativeToImpulse {
+    bool IRigidbodyHelperConfiguration.IsImpactDamageRelativeToImpulse {
         get {
             return false;
         }
     }
 
-    void IRigidbodyHelperHandler.TakeDamage(float amount) {
+    void IRigidbodyHelperConfiguration.TakeDamage(float amount) {
         // We are a bullet, we don't have HP... yet
         Destroy(gameObject);
     }
