@@ -91,8 +91,9 @@ public class Player : LivingObject
     {
 
         currentShieldRechargeDelay = 0;
-        (float valueDamage, float restDamage) = ChangeValueWithRemain(amount, Shield, MaxShield, false, "shield");
-        Shield = valueDamage;
+        System.Tuple<float, float> change = ChangeValueWithRemain(amount, Shield, MaxShield, false, "shield");
+        Shield = change.Item1;
+        float restDamage = change.Item2;
         if (restDamage != 0)
         {
             // Dynamic damage reduction which increases according to player's current health.
