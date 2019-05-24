@@ -800,6 +800,21 @@ PrefabInstance:
       propertyPath: shieldBar
       value: 
       objectReference: {fileID: 191320658}
+    - target: {fileID: 1042733514730051092, guid: a74a88beaaf73cb4581de7b2050fd45c,
+        type: 3}
+      propertyPath: shieldHandler.maxShieldColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1042733514730051092, guid: a74a88beaaf73cb4581de7b2050fd45c,
+        type: 3}
+      propertyPath: shieldHandler.maxShieldColor.g
+      value: 0.43460894
+      objectReference: {fileID: 0}
+    - target: {fileID: 1042733514730051092, guid: a74a88beaaf73cb4581de7b2050fd45c,
+        type: 3}
+      propertyPath: shieldHandler.minShieldColor.r
+      value: 0.48595762
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a74a88beaaf73cb4581de7b2050fd45c, type: 3}
 --- !u!1001 &1657053168
