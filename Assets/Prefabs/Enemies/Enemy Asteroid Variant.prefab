@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingMaxHealth: 100
   startingHealth: -1
-  relativeImpactDamage: 20
+  relativeImpactDamage: 10
   impactSound:
     audioClip: {fileID: 0}
     volume:
@@ -35,8 +35,8 @@ MonoBehaviour:
     type: 3}
   onDeathExplosionPrefabScale: 2.75
   healthBar: {fileID: 4977233900857453675}
-  impulse: {x: 0, y: 0}
   rigidbodyHelper: {fileID: 3171107084848344103}
+  impulse: {x: 0, y: 0}
   rotation: 100
 --- !u!1001 &4687144031695792750
 PrefabInstance:
