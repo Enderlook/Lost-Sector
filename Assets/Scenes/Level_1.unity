@@ -386,6 +386,13 @@ MonoBehaviour:
   - startTransform: {fileID: 1112329302}
     endTransform: {fileID: 1023573337}
     notRandom: 0
+  enemies:
+    enemyPrefabs:
+    - prefab: {fileID: 3171107085224686566, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      weight: 5
+      minimalThreat: 0
+      threatFactorFormula: 1 / log(x + 1.1)
   difficulty: 100
   difficultyLinearIncrease: 1
   difficultyGeometricalIncrease: 1.1

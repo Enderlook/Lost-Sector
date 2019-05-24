@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemyPrefab;    
     //public Enemies test;
     public TransformRange[] spawnPoints;
+
+    public Enemies enemies;
 
     [Tooltip("Difficulty.")]
     public float difficulty = 1;
@@ -85,63 +88,48 @@ public class EnemySpawner : MonoBehaviour
 
 }
 
-/*[System.Serializable]
-public class SpawnSide {
-    public enum SPAWN_SIDES { TOP, BOTTOM, LEFT, RIGHT, CUSTOM };
 
-    [Tooltip("Spawn position mode. If there are more than one, randomly will be chosen one")]
-    public SPAWN_SIDES[] spawnSides = new SPAWN_SIDES[] { SPAWN_SIDES.TOP };
-
-    /* TODO:
-     * https://forum.unity.com/threads/draw-a-field-only-if-a-condition-is-met.448855/#post-3435603
-     * https://answers.unity.com/questions/54010/is-it-possible-to-dynamically-disable-or-validate.html
-     */
-    /*[Tooltip("Custom spawning random position (only use if spawnSides is CUSTOM). Made in pairs of random spawning lines.")]
-    public TransformRange[] customSpawnPositions;
-
-    // TODO
-    [Tooltip("If wait until the before thing is done, and then wait Seconds Before Start in order to do something. If false, it won't wait until the thing before is done.")]
-    public bool waitUntilFinishBefore;
-    [Tooltip("Amount of seconds waited before start doing something.")]
-    public float secondsBeforeStart;
-    [Tooltip("Amount of seconds waited between each done thing.")]
-    public float intervalSeconds;
-    
-    private Vector3 GetSpawnLocation(Vector3 worldDimensions, SPAWN_SIDES side)
-    {
-        switch (side)
-        { // Not use break statement due to return usage
-            case SPAWN_SIDES.TOP:
-                return new Vector3(Random.Range(-worldDimensions.x, worldDimensions.x), worldDimensions.y);
-            case SPAWN_SIDES.BOTTOM:
-                return new Vector3(Random.Range(-worldDimensions.x, worldDimensions.x), -worldDimensions.y);
-            case SPAWN_SIDES.LEFT:
-                return new Vector3(-worldDimensions.x, Random.Range(-worldDimensions.y, worldDimensions.y));
-            case SPAWN_SIDES.RIGHT:
-                return new Vector3(-worldDimensions.x, Random.Range(-worldDimensions.y, worldDimensions.y));
-            case SPAWN_SIDES.CUSTOM:
-                TransformRange spawnPositionRange = customSpawnPositions[Random.Range(0, customSpawnPositions.Length) - 1];
-                return new Vector3(Random.Range(spawnPositionRange.startVector.x, spawnPositionRange.endVector.x), Random.Range(spawnPositionRange.startVector.x, spawnPositionRange.endVector.y));
-            default:
-                // https://stackoverflow.com/questions/105372/how-do-i-enumerate-an-enum-in-c
-                Debug.LogError(new System.Exception($"The side {side} isn't none of the possible values of SPAWN_SIDES = {System.Enum.GetValues(typeof(SPAWN_SIDES)).Cast<SPAWN_SIDES>().Select(e => $"{e} = {System.Convert.ToInt32(e)}")})"));
-                // If I don't add this, IDE says that not all the possible paths return a value
-                throw new System.Exception($"The side {side} isn't none of the possible values of SPAWN_SIDES = {System.Enum.GetValues(typeof(SPAWN_SIDES)).Cast<SPAWN_SIDES>().Select(e => $"{e} = {System.Convert.ToInt32(e)}")})");
-        }
-    }
-
-    private Vector3 GetSpawnLocation(Vector3 worldDimensions)
-    {
-        return GetSpawnLocation(worldDimensions, spawnSides[Random.Range(0, spawnSides.Length) - 1]);
-    }
-}*/
-
-/*[System.Serializable]
+[System.Serializable]
 public class EnemyPrefab {
     [Tooltip("Enemy prefab to spawn.")]
     public GameObject prefab;
     [Tooltip("Weighted rarity.")]
-    public float weight;
+    public float weight = 1;
+
+    [Tooltip("Minimal difficulty in order to allow the spawn of this enemy.")]
+    public float minimalThreat;
+
+    [Tooltip("Multiplies the weight rarity based on difficulty above the Minimal Threat. The letter x will be replaced by the difference between difficulty and Minimal Threat.")]
+    public string threatFactorFormula = "1";
+
+    /// <summary>
+    /// Return the weigthed rarity of the enemy to spawn. The weight changes according to the current difficulty.
+    /// </summary>
+    /// <param name="difficulty">Difficulty used to calculate weight.</param>
+    /// <returns>Weighted rarity.</returns>
+    public float GetWeight(float difficulty)
+    {
+        if (difficulty < minimalThreat)
+            return 0;
+        else
+        {
+            // TODO: This could be done safer using a custom math class...
+            // https://stackoverflow.com/questions/333737/evaluating-string-342-yield-int-18
+            DataTable dataTable = new DataTable();
+            float multiplier = (float)dataTable.Compute(threatFactorFormula.Replace("x", difficulty.ToString()), "");
+
+            return weight * multiplier;
+        }
+    }
+
+    private void OnValidate()
+    {
+        if (weight <= 0)
+            Debug.LogWarning($"The field {nameof(weight)} can't be lower or equal than 0.");
+        if (prefab == null)
+            Debug.LogWarning($"The field {nameof(weight)} can't be null.");
+        // How to check minimalThreat?
+    }
 }
 
 [System.Serializable] 
@@ -149,9 +137,14 @@ public class Enemies {
     [Tooltip("Enemy prefabs to spawn.")]
     public EnemyPrefab[] enemyPrefabs;
 
-    public GameObject GetEnemyPrefab()
+    /// <summary>
+    /// Get an enemy prefab to spawn.
+    /// </summary>
+    /// <param name="difficulty">Current difficulty used to base the type of enemy.</param>
+    /// <returns>Enemy prefab to spawn</returns>
+    public GameObject GetEnemyPrefab(float difficulty)
     {
-        float totalWeight = enemyPrefabs.Sum((enemy) => enemy.weight);
+        float totalWeight = enemyPrefabs.Sum((enemy) => enemy.GetWeight(difficulty));
         float chosenWeight = Random.value * totalWeight;
 
         float currentWeight = 0;
@@ -165,7 +158,7 @@ public class Enemies {
         }
         throw new System.Exception("This shouldn't be happening!!!");
     }
-}*/
+}
 
 
 
@@ -229,4 +222,55 @@ public class Vector2RangeTwo {
         else
             return new Vector2(Random.Range(startVector.x, endVector.x), Random.Range(startVector.y, endVector.y));
     }
+}*/
+
+/*[System.Serializable]
+public class SpawnSide {
+public enum SPAWN_SIDES { TOP, BOTTOM, LEFT, RIGHT, CUSTOM };
+
+[Tooltip("Spawn position mode. If there are more than one, randomly will be chosen one")]
+public SPAWN_SIDES[] spawnSides = new SPAWN_SIDES[] { SPAWN_SIDES.TOP };
+
+/* TODO:
+ * https://forum.unity.com/threads/draw-a-field-only-if-a-condition-is-met.448855/#post-3435603
+ * https://answers.unity.com/questions/54010/is-it-possible-to-dynamically-disable-or-validate.html
+ */
+/*[Tooltip("Custom spawning random position (only use if spawnSides is CUSTOM). Made in pairs of random spawning lines.")]
+public TransformRange[] customSpawnPositions;
+
+// TODO
+[Tooltip("If wait until the before thing is done, and then wait Seconds Before Start in order to do something. If false, it won't wait until the thing before is done.")]
+public bool waitUntilFinishBefore;
+[Tooltip("Amount of seconds waited before start doing something.")]
+public float secondsBeforeStart;
+[Tooltip("Amount of seconds waited between each done thing.")]
+public float intervalSeconds;
+
+private Vector3 GetSpawnLocation(Vector3 worldDimensions, SPAWN_SIDES side)
+{
+    switch (side)
+    { // Not use break statement due to return usage
+        case SPAWN_SIDES.TOP:
+            return new Vector3(Random.Range(-worldDimensions.x, worldDimensions.x), worldDimensions.y);
+        case SPAWN_SIDES.BOTTOM:
+            return new Vector3(Random.Range(-worldDimensions.x, worldDimensions.x), -worldDimensions.y);
+        case SPAWN_SIDES.LEFT:
+            return new Vector3(-worldDimensions.x, Random.Range(-worldDimensions.y, worldDimensions.y));
+        case SPAWN_SIDES.RIGHT:
+            return new Vector3(-worldDimensions.x, Random.Range(-worldDimensions.y, worldDimensions.y));
+        case SPAWN_SIDES.CUSTOM:
+            TransformRange spawnPositionRange = customSpawnPositions[Random.Range(0, customSpawnPositions.Length) - 1];
+            return new Vector3(Random.Range(spawnPositionRange.startVector.x, spawnPositionRange.endVector.x), Random.Range(spawnPositionRange.startVector.x, spawnPositionRange.endVector.y));
+        default:
+            // https://stackoverflow.com/questions/105372/how-do-i-enumerate-an-enum-in-c
+            Debug.LogError(new System.Exception($"The side {side} isn't none of the possible values of SPAWN_SIDES = {System.Enum.GetValues(typeof(SPAWN_SIDES)).Cast<SPAWN_SIDES>().Select(e => $"{e} = {System.Convert.ToInt32(e)}")})"));
+            // If I don't add this, IDE says that not all the possible paths return a value
+            throw new System.Exception($"The side {side} isn't none of the possible values of SPAWN_SIDES = {System.Enum.GetValues(typeof(SPAWN_SIDES)).Cast<SPAWN_SIDES>().Select(e => $"{e} = {System.Convert.ToInt32(e)}")})");
+    }
+}
+
+private Vector3 GetSpawnLocation(Vector3 worldDimensions)
+{
+    return GetSpawnLocation(worldDimensions, spawnSides[Random.Range(0, spawnSides.Length) - 1]);
+}
 }*/
