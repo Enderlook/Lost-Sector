@@ -130,7 +130,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
     /// <param name="isAdding"></param>
     /// <param name="keyword"></param>
     /// <returns></returns>
-    protected /*System.Tuple<float, float>*/ (float value, float remain) ChangeValueWithRemain(float amount, float variable, float maximum, bool isAdding, string keyword)
+    protected System.Tuple<float, float> ChangeValueWithRemain(float amount, float variable, float maximum, bool isAdding, string keyword)
     {
         //if ((shouldBePossitive && amount < 0) || (!shouldBePossitive && amount > 0))
         if (amount < 0)
@@ -154,7 +154,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
         else
             variable += amount;
 
-        return /* new System.Tuple<float, float>(variable, rest)*/ (value: variable, remain: rest);
+        return new System.Tuple<float, float>(variable, rest);
     }
 
     /// <summary>
@@ -171,7 +171,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
     /// <returns></returns>
     protected float ChangeValue(float amount, float variable, float maximum, bool isAdding, string keyword)
     {
-        return ChangeValueWithRemain(amount, variable, maximum, isAdding, keyword).value; //.Item1;
+        return ChangeValueWithRemain(amount, variable, maximum, isAdding, keyword).Item1;
     }
 
     protected virtual void Die()
