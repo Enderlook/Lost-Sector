@@ -103,7 +103,7 @@ public class HealthBar : MonoBehaviour {
             if (dynamicNumbers)
             {
                 float dynamicPercent = healthImage.fillAmount + damageBar.fillAmount - healingImage.fillAmount,
-                      dynamicHealth = health * dynamicPercent;
+                      dynamicHealth = maxHealth * dynamicPercent;
                 textNumber.text = string.Format(textShowed, Rounding(dynamicHealth), Rounding(maxHealth), Rounding(dynamicHealth / maxHealth * 100));
             }
             else
