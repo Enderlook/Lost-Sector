@@ -165,7 +165,7 @@ public class Player : LivingObject
     {
         weapon.ResetCooldown();
         GameObject projectile = Instantiate(weapon.projectilePrefab, Dynamic.Instance.projectilesParent);
-        // Just to be sure
+        // Just to be sure. We don't really need to set rotation for our game
         projectile.transform.rotation = transform.rotation;
         projectile.GetComponent<Projectile>().SetProjectileProperties(weapon);
     }

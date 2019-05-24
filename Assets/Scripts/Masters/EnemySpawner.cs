@@ -27,28 +27,8 @@ public class EnemySpawner : MonoBehaviour
 
     private Vector3 worldDimensions;
 
-    /*[Header("Don't Touch")] // By this way, no one can touch it
-    private static EnemySpawner _instance;
-    public static EnemySpawner Instance {
-        get {
-            return _instance;
-        }
-    }
-
-    private void SinglePatternSetup()
-    {
-        // Kind of basic singlenton Pattern https://en.wikipedia.org/wiki/Singleton_pattern
-        if (_instance != null)
-        {
-            Debug.LogError("More than one Dynamic class in scene!");
-            return;
-        }
-        _instance = this;
-    }*/
-
     private void Awake()
     {
-        //SinglePatterSetup();
         // https://answers.unity.com/questions/1527535/spawning-enemies-randomly-within-the-screen.html
         worldDimensions = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, -10));
     }
@@ -83,10 +63,9 @@ public class EnemySpawner : MonoBehaviour
     {
         difficulty *= difficultyGeometricalIncrease;
         difficulty += difficultyLinearIncrease;
-        //Debug.Log($"Difficulty {difficulty}");
     }
 
-    /*private void OnValidate()
+    private void OnValidate()
     {
         if (difficultyGeometricalIncrease < 1)
             Debug.LogWarning($"The field {nameof(difficultyGeometricalIncrease)} can't be lower than 1.");
@@ -102,7 +81,7 @@ public class EnemySpawner : MonoBehaviour
                 Debug.LogWarning($"The field {nameof(field)} can't be lower than 0.");
             }
         }
-    }*/
+    }
 
 }
 
