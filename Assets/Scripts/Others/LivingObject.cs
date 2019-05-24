@@ -74,7 +74,15 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
 
     [Tooltip("RigidbodyHelper script.")]
     public RigidbodyHelper rigidbodyHelper;
-    
+
+    protected virtual void Start()
+    {
+        Health = InitializeBar(healthBar, startingMaxHealth, startingHealth);
+        MaxHealth = startingMaxHealth;
+
+        rigidbodyHelper.SetProperties(this);
+    }
+
     /// <summary>
     /// Initializes the bar's values, setting the fill of the main bar and returning the current value.
     /// If startingValue is -1, startingMaximumValue will be used instead to fill the bar.
@@ -89,14 +97,6 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
         float value = startingValue == -1 ? startingMaximumValue : startingValue;
         bar.ManualUpdate(startingMaximumValue, value);
         return value;
-    }
-
-    protected virtual void Start()
-    {
-        Health = InitializeBar(healthBar, startingMaxHealth, startingHealth);
-        MaxHealth = startingMaxHealth;
-
-        rigidbodyHelper.SetProperties(this);
     }
 
     /// <summary>
@@ -134,7 +134,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
     {
         //if ((shouldBePossitive && amount < 0) || (!shouldBePossitive && amount > 0))
         if (amount < 0)
-            Debug.LogWarning($"{(isAdding ? "healing" : "damage")} amount was negative. The creature {(isAdding ? "decreasing" : "increasing")} {keyword}.");
+            Debug.LogWarning($"{(isAdding ? "healing" : "damage")} amount was negative. The creature is {(isAdding ? "decreasing" : "increasing")} {keyword}.");
 
         if (!isAdding)
             amount = -amount;
