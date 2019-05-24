@@ -382,10 +382,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 3171107085224686566, guid: 926a52539d738a7439a32750206b316e,
     type: 3}
-  test:
-    enemyPrefabs:
-    - prefab: {fileID: 0}
-      weight: 0
   spawnPoints:
   - startTransform: {fileID: 1112329302}
     endTransform: {fileID: 1023573337}
@@ -742,12 +738,12 @@ PrefabInstance:
     - target: {fileID: 1042733514730051095, guid: a74a88beaaf73cb4581de7b2050fd45c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.7328385
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1042733514730051095, guid: a74a88beaaf73cb4581de7b2050fd45c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.97
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 1042733514730051095, guid: a74a88beaaf73cb4581de7b2050fd45c,
         type: 3}

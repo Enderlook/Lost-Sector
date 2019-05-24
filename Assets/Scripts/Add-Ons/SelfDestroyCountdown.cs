@@ -5,7 +5,7 @@ using UnityEngine;
 public class SelfDestroyCountdown : MonoBehaviour
 {
     [Header("Config")]
-    [Tooltip("Countdown for self destruction in seconds")]
+    [Tooltip("Countdown for self destruction in seconds.")]
     public float countdown;
 
     private void Start()
