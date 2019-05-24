@@ -90,8 +90,8 @@ MonoBehaviour:
       - 1
   shieldBar: {fileID: 0}
   shieldHandler:
-    maxShieldColor: {r: 0, g: 0, b: 1, a: 1}
-    minShieldColor: {r: 1, g: 0, b: 1, a: 1}
+    maxShieldColor: {r: 0, g: 0.43460894, b: 1, a: 1}
+    minShieldColor: {r: 0.48595762, g: 0, b: 1, a: 1}
     shieldGameObject: {fileID: 1355656866895550794}
 --- !u!82 &2054337060550579542
 AudioSource:
