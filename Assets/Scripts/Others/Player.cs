@@ -89,17 +89,68 @@ public class Player : LivingObject
 
     public override void TakeDamage(float amount)
     {
-        currentShieldRechargeDelay = 0;
-        (float value, float rest) = ChangeValueWithRemain(amount, Shield, MaxShield, false, "shield");
-        Shield = value;
-        if (rest != 0)
-            Health = ChangeValue(rest, Health, MaxHealth, false, "health");
 
-        /* TODO:
-        // Damage reduction on low health
-        if (Health - amount < MaxHealth * 0.35f)
-            amount = (Health - amount) + (amount - Health) * (10 + Mathf.Exp(1) / Mathf.Exp(-amount / 10));
-        base.TakeDamage(amount);*/
+        currentShieldRechargeDelay = 0;
+        (float valueDamage, float restDamage) = ChangeValueWithRemain(amount, Shield, MaxShield, false, "shield");
+        Shield = valueDamage;
+        if (restDamage != 0)
+        {
+            // Dynamic damage reduction which increases according to player's current health.
+            // TODO: This should be a constant or something like that. Maybe a serializable field for Unity inspector?
+            float health_threshold = 0.35f;
+            if (Health - restDamage < MaxHealth * health_threshold)
+            {
+                float damage = restDamage * DamageReductionCalculator(restDamage, Health, MaxHealth, MaxHealth * health_threshold);
+                // Damage can't be lower than 1 or the decimal part of restDamage, whatever is lower, regardless of the damage reduction.
+                damage = Mathf.Min(damage, 1, restDamage % 1 != 0 ? restDamage % 1 : Mathf.Infinity);
+                Health = ChangeValue(damage, Health, MaxHealth, false, "health");
+            }
+            else
+                Health = ChangeValue(restDamage, Health, MaxHealth, false, "health");
+        }
+
+            base.TakeDamage(amount);
+    }
+
+    /// <summary>
+    /// Return reduced damage taking into account the special damage reduction by current health percent.
+    /// This method takes current health and health_threshold as parameters. Using them this can be used to not only reduce damage on Health, but also on Shield.
+    /// </summary>
+    /// <param name="damage">Amount of damage received (positive).</param>
+    /// <param name="health">Current amount of health.</param>
+    /// <param name="maxHealth">Maximum amount of health.</param>
+    /// <param name="health_threshold">Health threshold for damage reduction (from 0 to 1).</param>
+    /// <param name="precitionInterval">Interval of damage used in the fake integral. Small numbers increases precition at expenses of perfomance</param>
+    /// <returns>Damage reduction percent (from 0 to 1).</returns>
+    private float DamageReductionCalculator(float damage, float health, float maxHealth, float health_threshold, float precitionInterval = 1)
+    {
+
+        System.Func<float, float> DamageReduction = (HP) => (10 + Mathf.Exp(1) / Mathf.Exp(-HP / maxHealth * 10)) / 100;
+
+        float currentHealth = health;
+        float remainingDamage;
+        // Reduce health above threshold
+        if (currentHealth > health_threshold)
+        {
+            remainingDamage = damage - currentHealth;
+            currentHealth -= health_threshold;
+        }
+        else
+            remainingDamage = damage;
+
+        // Fake integral
+        // TODO: Apply a real integral
+        int currentRemainingDamage = Mathf.FloorToInt(remainingDamage);
+        float calculatedDamage = precitionInterval;
+        for (; calculatedDamage <= currentRemainingDamage; calculatedDamage += precitionInterval)
+        {
+            // Damage * Damage reduction
+            currentHealth -= 1 * DamageReduction(currentHealth);
+        }
+        // Remove last decimals
+        currentHealth -= (remainingDamage - calculatedDamage) * DamageReduction(currentHealth);
+
+        return health - currentHealth;
     }
 
     protected override void Die()
