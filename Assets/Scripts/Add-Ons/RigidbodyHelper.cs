@@ -54,9 +54,13 @@ public class RigidbodyHelper : MonoBehaviour
         {
             impulse += contactPoint.normalImpulse;
         }
+        // Kinetic energy? https://www.reddit.com/r/Unity2D/comments/2kil7j/how_to_determine_force_of_impact_when_two_things/
+        //float impulse = Mathf.Abs(0.5f * collision.relativeVelocity.sqrMagnitude * (collision.collider.attachedRigidbody.mass + collision.otherCollider.attachedRigidbody.mass));
+        //float impulse = Mathf.Abs(0.5f * collision.rigidbody.mass * collision.rigidbody.velocity.sqrMagnitude - 0.5f * collision.otherRigidbody.mass * collision.otherRigidbody.velocity.sqrMagnitude);
+        // TODO: READ https://forum.unity.com/threads/how-to-calculate-a-rigidbodys-mass-normalized-energy-for-sleepthreshold.311941/
+        // TODO: Add fake mass to player kinematic Rigidbody
 
         // Downwards damage doesn't work. Why?
-        
         RigidbodyHelper target = collision.gameObject.GetComponent<RigidbodyHelper>();
         if (target != null)
         {
