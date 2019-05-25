@@ -93,6 +93,11 @@ MonoBehaviour:
     maxShieldColor: {r: 0, g: 0.43460894, b: 1, a: 1}
     minShieldColor: {r: 0.48595762, g: 0, b: 1, a: 1}
     shieldGameObject: {fileID: 1355656866895550794}
+  boundary:
+    xMin: 0
+    xMax: 0
+    yMin: 0
+    yMax: 0
 --- !u!82 &2054337060550579542
 AudioSource:
   m_ObjectHideFlags: 0
