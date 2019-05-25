@@ -3,8 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class Global {
+    /// <summary>
+    /// Enemies parent transform. Used to store all the enemies.
+    /// </summary>
     public static Transform enemiesParent;
+    /// <summary>
+    /// Explosions parent transform. Used to store all the explosions.
+    /// </summary>
     public static Transform explosionsParent;
+    /// <summary>
+    /// Projectiles parent transform. Used to store all the projectiles.
+    /// </summary>
     public static Transform projectilesParent;
 }
 
