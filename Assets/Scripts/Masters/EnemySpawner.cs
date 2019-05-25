@@ -86,6 +86,8 @@ public class EnemyPrefab {
     public GameObject prefab;
     [Tooltip("Weighted rarity.")]
     public float weight = 1;
+    [Tooltip("Threat level of the enemy. Used to not spawn a few weak enemies nor a lot o strong enemies.")]
+    public float threat;
 
     [Tooltip("Minimal difficulty in order to allow the spawn of this enemy.")]
     public float minimalDifficulty;
@@ -132,7 +134,7 @@ public class Enemies {
     /// </summary>
     /// <param name="difficulty">Current difficulty used to base the type of enemy.</param>
     /// <returns>Enemy prefab to spawn</returns>
-    public GameObject GetEnemyPrefab(float difficulty)
+    /*public GameObject GetEnemyPrefab(float difficulty)
     {
         float totalWeight = enemyPrefabs.Sum((enemy) => enemy.GetWeight(difficulty));
         float chosenWeight = Random.value * totalWeight;
@@ -147,6 +149,63 @@ public class Enemies {
             }
         }
         throw new System.Exception("This shouldn't be happening!!!");
+    }*/
+
+    public System.Tuple<GameObject, float> GetEnemy(float difficulty)
+    {
+        float totalWeight = enemyPrefabs.Sum((enemy) => enemy.GetWeight(difficulty));
+        float chosenWeight = Random.value * totalWeight;
+
+        float currentWeight = 0;
+        foreach (EnemyPrefab enemy in enemyPrefabs)
+        {
+            currentWeight += enemy.weight;
+            if (currentWeight >= chosenWeight)
+            {
+                return new System.Tuple<GameObject, float>(enemy.prefab, enemy.threat);
+            }
+        }
+        throw new System.Exception("This shouldn't be happening!!!");
+    }
+
+    public GameObject[] GetEnemies(float difficulty)
+    {
+        float threat = 0;
+        // Maybe this could be a List<GameObject> so they become already random. Like:
+        //List<GameObject> enemies = new List<GameObject>();
+        Dictionary<GameObject, int> enemies = new Dictionary<GameObject, int>();        
+        while (threat < 5 + (Mathf.Log(difficulty, 2) * 2))
+        {
+            System.Tuple<GameObject, float> enemy = GetEnemy(difficulty);
+            threat += enemy.Item2;
+            if (enemies.ContainsKey(enemy.Item1))
+                enemies[enemy.Item1] += 1;
+            else
+                enemies.Add(enemy.Item1, 1);
+            //enemies.Add(enemy.Item1);
+        }
+        
+        GameObject[] enemiesArray = new GameObject[enemies.Sum(e => e.Value)];
+
+        int index = 0;
+        foreach (KeyValuePair<GameObject, int> keyValuePair in enemies)
+        {
+            for (int i = 0; i < keyValuePair.Value; i++)
+                enemiesArray[index++] = keyValuePair.Key;
+            
+        }
+
+        index = 0;
+        foreach (KeyValuePair<GameObject, int> keyValuePair in enemies)
+        {
+            var _ = from i in Enumerable.Range(0, keyValuePair.Value) select enemiesArray[index++] = keyValuePair.Key;
+        }
+
+        var _ = from keyValuePair in enemies select (from i in Enumerable.Range(0, keyValuePair.Value) select enemiesArray[index++] = keyValuePair.Key);
+
+
+
+        //return enemies.ToArray();
     }
 }
 
