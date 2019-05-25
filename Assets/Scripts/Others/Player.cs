@@ -51,6 +51,9 @@ public class Player : LivingObject
     [Tooltip("Shield handler.")]
     public ShieldHandler shieldHandler;
 
+    [Tooltip("Boundaries of movement. Player can't cross them.")]
+    public Boundary boundary;
+
     protected override void Start()
     {        
         Shield = InitializeBar(shieldBar, startingMaxShield, startingShield); ;
@@ -65,7 +68,6 @@ public class Player : LivingObject
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = transform.position.z;
-
         /*// Rotate https://answers.unity.com/questions/798707/2d-look-at-mouse-position-z-rotation-c.html
         Vector3 direction = mousePosition - transform.position;
         float angleTarget = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + rotationOffset;       
@@ -74,6 +76,9 @@ public class Player : LivingObject
 
         // Move
         transform.position = Vector3.MoveTowards(transform.position, mousePosition, moveSpeed * Time.deltaTime);
+
+        // Player can't get outside its boundaries
+        transform.position = new Vector2(Mathf.Clamp(transform.position.x, boundary.xMin, boundary.xMax), Mathf.Clamp(transform.position.y, boundary.yMin, boundary.yMax));
 
         // Recharge shield
         if (currentShieldRechargeDelay >= shieldRechargeDelay && Shield < MaxShield)
@@ -171,3 +176,8 @@ public class Player : LivingObject
     }
 }
 
+[System.Serializable]
+public class Boundary {
+    [Tooltip("Boundary. The game object won't be able to cross it.")]
+    public float xMin, xMax, yMin, yMax;
+}
