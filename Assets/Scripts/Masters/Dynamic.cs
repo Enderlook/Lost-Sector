@@ -53,10 +53,11 @@ public class Dynamic : MonoBehaviour
 
 [System.Serializable]
 public class Boundary {
+    // Maybe we could just take the parent gameObject and then find its children
     [Tooltip("Boundary. The game object won't be able to cross it.")]
     public Transform[] boundaries;
-
-    // Is fine this hybrid behaivor or should nothing be static
+    
+    // Is fine this hybrid behavior or should nothing be static
     private static float xMin, xMax, yMin, yMax;
 
     /// <summary>
