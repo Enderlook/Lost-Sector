@@ -93,12 +93,11 @@ public class Player : LivingObject
 
     public override void TakeDamage(float amount)
     {
-
         currentShieldRechargeDelay = 0;
         System.Tuple<float, float> change = ChangeValueWithRemain(amount, Shield, MaxShield, false, "shield");
         Shield = change.Item1;
         float restDamage = change.Item2;
-        if (restDamage != 0)
+        if (restDamage > 0)
         {
             // Dynamic damage reduction which increases according to player's current health.
             // TODO: This should be a constant or something like that. Maybe a serializable field for Unity inspector?
@@ -107,14 +106,12 @@ public class Player : LivingObject
             {
                 float damage = restDamage * DamageReductionCalculator(restDamage, Health, MaxHealth, MaxHealth * health_threshold);
                 // Damage can't be lower than 1 or the decimal part of restDamage, whatever is lower, regardless of the damage reduction.
-                damage = Mathf.Min(damage, 1, restDamage % 1 != 0 ? restDamage % 1 : Mathf.Infinity);
-                Health = ChangeValue(damage, Health, MaxHealth, false, "health");
+                restDamage = Mathf.Min(damage, 1, restDamage % 1 != 0 ? restDamage % 1 : Mathf.Infinity);
             }
-            else
-                Health = ChangeValue(restDamage, Health, MaxHealth, false, "health");
-        }
 
-            base.TakeDamage(amount);
+            //Health = ChangeValue(restDamage, Health, MaxHealth, false, "health");
+            base.TakeDamage(restDamage);
+        }
     }
 
     /// <summary>
