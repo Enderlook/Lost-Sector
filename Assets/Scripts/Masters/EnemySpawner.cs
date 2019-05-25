@@ -28,14 +28,6 @@ public class EnemySpawner : MonoBehaviour
     [Range(1, 600)]
     public float difficultyIncreaseInterval = 5;
 
-    private Vector3 worldDimensions;
-
-    private void Awake()
-    {
-        // https://answers.unity.com/questions/1527535/spawning-enemies-randomly-within-the-screen.html
-        worldDimensions = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, -10));
-    }
-
     private void Start()
     {
         InvokeRepeating("DifficultyIncrease", difficultyIncreaseInterval, difficultyIncreaseInterval);
@@ -49,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
             for (int i = 0; i < 5 + (Mathf.Log(difficulty, 2) * 2); i++)
             {
                 TransformRange spawnRange = spawnPoints[Random.Range(0, spawnPoints.Length - 1)];
-                Vector3 position = spawnRange.getVector(); //new Vector3(Random.Range(-worldDimensions.x, worldDimensions.x), worldDimensions.y);
+                Vector3 position = spawnRange.getVector();
                 Vector3 impulse = new Vector2(Random.Range(0, 15), Random.Range(50, 300));
 
                 GameObject enemy = Instantiate(enemyPrefab, Global.enemiesParent);
@@ -87,7 +79,6 @@ public class EnemySpawner : MonoBehaviour
     }
 
 }
-
 
 [System.Serializable]
 public class EnemyPrefab {
@@ -158,8 +149,6 @@ public class Enemies {
         throw new System.Exception("This shouldn't be happening!!!");
     }
 }
-
-
 
 [System.Serializable]
 public class TransformRange {
