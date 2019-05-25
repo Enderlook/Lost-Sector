@@ -49,7 +49,7 @@ public class EnemySpawner : MonoBehaviour
                 Vector3 position = spawnRange.getVector(); //new Vector3(Random.Range(-worldDimensions.x, worldDimensions.x), worldDimensions.y);
                 Vector3 impulse = new Vector2(Random.Range(0, 15), Random.Range(50, 300));
 
-                GameObject enemy = Instantiate(enemyPrefab, Dynamic.Instance.enemiesParent);
+                GameObject enemy = Instantiate(enemyPrefab, Global.enemiesParent);
                 enemy.transform.position = position;
                 enemy.GetComponent<EnemyBase>().impulse = -impulse; // - for downwards impulse
 

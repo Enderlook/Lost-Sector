@@ -22,7 +22,7 @@ public class EnemyBase : LivingObject
 
     protected override void Die()
     {
-        GameObject explosion = Instantiate(onDeathExplosionPrefab, Dynamic.Instance.explosionsParent);
+        GameObject explosion = Instantiate(onDeathExplosionPrefab, Global.explosionsParent);
         explosion.transform.position = rigidbodyHelper.Position;
         explosion.transform.localScale = Vector3.one * onDeathExplosionPrefabScale;
         base.Die();
