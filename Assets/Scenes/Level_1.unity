@@ -519,6 +519,12 @@ MonoBehaviour:
   enemiesParent: {fileID: 1921411715}
   explosionsParent: {fileID: 128807551}
   projectilesParent: {fileID: 1573272530}
+  boundary:
+    boundaries:
+    - {fileID: 1630935882}
+    - {fileID: 1454780418}
+    - {fileID: 1229232861}
+    - {fileID: 2146520629}
 --- !u!4 &815039247
 Transform:
   m_ObjectHideFlags: 0
