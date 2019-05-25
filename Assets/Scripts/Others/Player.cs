@@ -161,7 +161,7 @@ public class Player : LivingObject
 
     protected override void Die()
     {
-        GameObject explosion = Instantiate(onDeathExplosionPrefab, Dynamic.Instance.explosionsParent);
+        GameObject explosion = Instantiate(onDeathExplosionPrefab, Global.explosionsParent);
         explosion.transform.position = transform.position;
         base.Die();
     }
@@ -169,7 +169,7 @@ public class Player : LivingObject
     private void Shoot(Weapon weapon)
     {
         weapon.ResetCooldown();
-        GameObject projectile = Instantiate(weapon.projectilePrefab, Dynamic.Instance.projectilesParent);
+        GameObject projectile = Instantiate(weapon.projectilePrefab, Global.projectilesParent);
         // Just to be sure. We don't really need to set rotation for our game
         projectile.transform.rotation = transform.rotation;
         projectile.GetComponent<Projectile>().SetProjectileProperties(weapon);
