@@ -51,9 +51,6 @@ public class Player : LivingObject
     [Tooltip("Shield handler.")]
     public ShieldHandler shieldHandler;
 
-    [Tooltip("Boundaries of movement. Player can't cross them.")]
-    public Boundary boundary;
-
     protected override void Start()
     {        
         Shield = InitializeBar(shieldBar, startingMaxShield, startingShield); ;
@@ -75,10 +72,12 @@ public class Player : LivingObject
         transform.rotation = Quaternion.RotateTowards(transform.rotation, lookAt, turnSpeed * Time.deltaTime);*/
 
         // Move
-        transform.position = Vector3.MoveTowards(transform.position, mousePosition, moveSpeed * Time.deltaTime);
-
-        // Player can't get outside its boundaries
-        transform.position = new Vector2(Mathf.Clamp(transform.position.x, boundary.xMin, boundary.xMax), Mathf.Clamp(transform.position.y, boundary.yMin, boundary.yMax));
+        Vector2 newPosition = Vector3.MoveTowards(transform.position, mousePosition, moveSpeed * Time.deltaTime);
+        System.Tuple<Vector2, bool> boundaryCheck = Boundary.CheckForBoundaries(newPosition);
+        transform.position = boundaryCheck.Item1;
+        // Player is punished to try to move outside the screen
+        if (boundaryCheck.Item2)
+            TakeDamage(5 * Time.deltaTime);
 
         // Recharge shield
         if (currentShieldRechargeDelay >= shieldRechargeDelay && Shield < MaxShield)
@@ -174,10 +173,4 @@ public class Player : LivingObject
         projectile.transform.rotation = transform.rotation;
         projectile.GetComponent<Projectile>().SetProjectileProperties(weapon);
     }
-}
-
-[System.Serializable]
-public class Boundary {
-    [Tooltip("Boundary. The game object won't be able to cross it.")]
-    public float xMin, xMax, yMin, yMax;
 }
