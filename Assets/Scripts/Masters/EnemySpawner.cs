@@ -178,11 +178,18 @@ public class TransformRange {
     [Tooltip("If not random will use only the start transform.")]
     public bool notRandom = false;
 
+    /// <summary>
+    /// Vector3 of startTransform.
+    /// </summary>
     public Vector3 startVector {
         get {
             return startTransform.position;
         }
     }
+
+    /// <summary>
+    /// Vector3 of endTransform.
+    /// </summary>
     public Vector3 endVector {
         get {
             return endTransform.position;
@@ -192,7 +199,7 @@ public class TransformRange {
     /// <summary>
     /// Return a Vector3 position. If notRandom is true it will return the position of the startTransfom. On false, it will return a random Vector3 between the startTransform and the endTransform.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>A random Vector3 between the values of start and end transform.</returns>
     public Vector3 getVector()
     {
         if (notRandom)
