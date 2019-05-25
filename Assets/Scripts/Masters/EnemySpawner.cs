@@ -97,10 +97,9 @@ public class EnemyPrefab {
     public float weight = 1;
 
     [Tooltip("Minimal difficulty in order to allow the spawn of this enemy.")]
-    public float minimalThreat;
-
-    [Tooltip("Multiplies the weight rarity based on difficulty above the Minimal Threat. The letter x will be replaced by the difference between difficulty and Minimal Threat.")]
-    public string threatFactorFormula = "1";
+    public float minimalDifficulty;
+    [Tooltip("Multiplies the weight rarity based on difficulty above the Minimal Difficulty. The letter x will be replaced by the difference between difficulty and Minimal Difficulty.")]
+    public string weightFactorFormula = "1";
 
     /// <summary>
     /// Return the weigthed rarity of the enemy to spawn. The weight changes according to the current difficulty.
@@ -109,14 +108,14 @@ public class EnemyPrefab {
     /// <returns>Weighted rarity.</returns>
     public float GetWeight(float difficulty)
     {
-        if (difficulty < minimalThreat)
+        if (difficulty < minimalDifficulty)
             return 0;
         else
         {
             // TODO: This could be done safer using a custom math class...
             // https://stackoverflow.com/questions/333737/evaluating-string-342-yield-int-18
             DataTable dataTable = new DataTable();
-            float multiplier = (float)dataTable.Compute(threatFactorFormula.Replace("x", difficulty.ToString()), "");
+            float multiplier = (float)dataTable.Compute(weightFactorFormula.Replace("x", difficulty.ToString()), "");
 
             return weight * multiplier;
         }
