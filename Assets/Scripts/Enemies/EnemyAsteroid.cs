@@ -5,12 +5,12 @@ using UnityEngine;
 public class EnemyAsteroid : EnemyBase
 {
     [Header("Configurable")]
-    [Tooltip("Rotation.")]
-    public float rotation;
+    [Tooltip("Random rotation between two value.")]
+    public FloatRangeTwo rotation;
 
     protected override void Start()
     {
-        rigidbodyHelper.GetRigidbody2D().angularVelocity = Random.value > 0.5 ? rotation : -rotation;
+        rigidbodyHelper.GetRigidbody2D().angularVelocity = rotation.GetValue();
         base.Start();
     }
 }
