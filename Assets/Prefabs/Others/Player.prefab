@@ -76,7 +76,7 @@ MonoBehaviour:
   weapon:
     damageOnHit: 25
     firerate: 2
-    speed: 100
+    speed: 350
     shootingPosition: {fileID: 307885710045812724}
     projectilePrefab: {fileID: 6335491896661982094, guid: 26f1086e063f186408e18e43bf41386d,
       type: 3}
