@@ -44,6 +44,28 @@ public class TransformRange
 }
 
 [System.Serializable]
+public class Vector2RangeTwo {
+    [Tooltip("Start vector.")]
+    public Vector2 startVector;
+    [Tooltip("End vector.")]
+    public Vector2 endVector;
+    [Tooltip("If not random will use only the start vector.")]
+    public bool notRandom = false;
+
+    /// <summary>
+    /// Return a Vector3 position. If notRandom is true it will return the position of the startVector. On false, it will return a random Vector3 between the startVector and the endVector.
+    /// </summary>
+    /// <returns></returns>
+    public Vector2 getVector()
+    {
+        if (notRandom)
+            return startVector;
+        else
+            return new Vector2(Random.Range(startVector.x, endVector.x), Random.Range(startVector.y, endVector.y));
+    }
+}
+
+[System.Serializable]
 public class Sound
 {
     [Tooltip("Sound clip.")]
