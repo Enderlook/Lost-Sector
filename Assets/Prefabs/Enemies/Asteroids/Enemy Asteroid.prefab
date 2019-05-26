@@ -114,6 +114,11 @@ PrefabInstance:
       propertyPath: livingObject
       value: 
       objectReference: {fileID: 768387036}
+    - target: {fileID: 7858251103388681803, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.45
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ff345a899057f1447afc58e7a15eed6e, type: 3}
