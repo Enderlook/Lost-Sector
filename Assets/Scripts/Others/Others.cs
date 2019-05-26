@@ -56,12 +56,35 @@ public class Vector2RangeTwo {
     /// Return a Vector3 position. If notRandom is true it will return the position of the startVector. On false, it will return a random Vector3 between the startVector and the endVector.
     /// </summary>
     /// <returns></returns>
-    public Vector2 getVector()
+    public Vector2 GetVector()
     {
         if (notRandom)
             return startVector;
         else
             return new Vector2(Random.Range(startVector.x, endVector.x), Random.Range(startVector.y, endVector.y));
+    }
+}
+
+[System.Serializable]
+public class FloatRangeTwo
+{
+    [Tooltip("Start.")]
+    public float start;
+    [Tooltip("End.")]
+    public float end;
+    [Tooltip("If not random will use only the start number.")]
+    public bool notRandom = false;
+
+    /// <summary>
+    /// Return a float. If notRandom is true it will return the position of the start. On false, it will return a random float between the start and the en.
+    /// </summary>
+    /// <returns></returns>
+    public float GetValue()
+    {
+        if (notRandom)
+            return start;
+        else
+            return Random.Range(start, end);
     }
 }
 
