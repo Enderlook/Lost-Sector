@@ -33,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
     
     IEnumerator SpawnWave()
     {
-        // TODO: This should stop on player death....
+        // TODO: This should stop on player death...
         // TODO: Custom modifications per enemy.
         while (true)
         {
@@ -108,11 +108,15 @@ public class EnemyPrefab {
         {
             // TODO: This could be done safer using a custom math class...
             // https://stackoverflow.com/questions/333737/evaluating-string-342-yield-int-18
+            // https://www.codeproject.com/Questions/1031807/Evaluating-an-expression-using-DataTable-Compute-m
+            // TODO: https://social.msdn.microsoft.com/Forums/en-US/2ee4bbbd-e18b-49b7-a119-57ef748e4f28/how-to-convert-a-string-operation-to-a-math-operation?forum=csharpgeneral
+            // And: https://rosettacode.org/wiki/Parsing/Shunting-yard_algorithm#C.23
             DataTable dataTable = new DataTable();
             float multiplier = float.Parse(dataTable.Compute(weightFactorFormula.Replace("x", difficulty.ToString()), "").ToString());
             return weight * multiplier;
         }
     }
+
 
     private void OnValidate()
     {
