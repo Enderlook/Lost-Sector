@@ -141,7 +141,7 @@ public class Enemies {
         float currentWeight = 0;
         foreach (EnemyPrefab enemy in enemyPrefabs)
         {
-            currentWeight += enemy.weight;
+            currentWeight += enemy.GetWeight(difficulty);
             if (currentWeight >= chosenWeight)
             {
                 return new System.Tuple<GameObject, float>(enemy.prefab, enemy.threat);
