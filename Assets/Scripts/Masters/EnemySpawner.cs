@@ -33,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
     
     IEnumerator SpawnWave()
     {
-        // TODO: this should stop on player death....
+        // TODO: This should stop on player death....
         // TODO: Custom modifications per enemy.
         while (true)
         {
@@ -182,38 +182,13 @@ public class Enemies {
     {
         float threat = 0;
         List<GameObject> enemies = new List<GameObject>();
-        //Dictionary<GameObject, int> enemies = new Dictionary<GameObject, int>();        
         while (threat < 5 + (Mathf.Log(difficulty, 2) * 2))
         {
             System.Tuple<GameObject, float> enemy = GetEnemy(difficulty);
             threat += enemy.Item2;
-            /*if (enemies.ContainsKey(enemy.Item1))
-                enemies[enemy.Item1] += 1;
-            else
-                enemies.Add(enemy.Item1, 1);*/
             enemies.Add(enemy.Item1);
         }
         return enemies;
-        
-        //GameObject[] enemiesArray = new GameObject[enemies.Sum(e => e.Value)];
-
-        /*int index = 0;
-        foreach (KeyValuePair<GameObject, int> keyValuePair in enemies)
-        {
-            for (int i = 0; i < keyValuePair.Value; i++)
-                enemiesArray[index++] = keyValuePair.Key;            
-        }*/
-
-        /*int index = 0;
-        System.Func<GameObject, string> Add = prefab => { enemiesArray[index++] = prefab; return ""; };*/
-        /*foreach (KeyValuePair<GameObject, int> keyValuePair in enemies)
-        {
-            var _ = from i in Enumerable.Range(0, keyValuePair.Value) select Add(keyValuePair.Key);  //enemiesArray[index++] = keyValuePair.Key;
-        }*/
-
-        //var _ = from keyValuePair in enemies select (from i in Enumerable.Range(0, keyValuePair.Value) select Add(keyValuePair.Key));  //enemiesArray[index++] = keyValuePair.Key);
-
-        //return enemiesArray;
     }
 }
 
