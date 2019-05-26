@@ -37,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
         // TODO: Custom modifications per enemy.
         while (true)
         {
-            foreach (GameObject enemyPrefab in enemies.SetDifficulty(difficulty)/*.GetEnemies(difficulty)*/)
+            foreach (GameObject enemyPrefab in enemies.SetDifficulty(difficulty))
             {
                 TransformRange spawnRange = spawnPoints[Random.Range(0, spawnPoints.Length - 1)];
                 Vector3 position = spawnRange.getVector();
@@ -130,7 +130,6 @@ public class Enemies : IEnumerable {
     public EnemyPrefab[] enemyPrefabs;
 
     private float difficulty;
-   
     
     /// <summary>
     /// Get an enemy prefab to spawn.
