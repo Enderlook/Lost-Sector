@@ -120,7 +120,7 @@ public class EnemyPrefab {
             Debug.LogWarning($"The field {nameof(weight)} can't be lower or equal than 0.");
         if (prefab == null)
             Debug.LogWarning($"The field {nameof(weight)} can't be null.");
-        // How to check minimalThreat?
+        // TODO: How to check minimalThreat?
     }
 }
 
@@ -163,45 +163,5 @@ public class Enemies {
             threat += enemy.Item2;
             yield return enemy.Item1;
         }
-    }
-}
-
-[System.Serializable]
-public class TransformRange {
-    [Tooltip("Start transform.")]
-    public Transform startTransform;
-    [Tooltip("End transform.")]
-    public Transform endTransform;
-    [Tooltip("If not random will use only the start transform.")]
-    public bool notRandom = false;
-
-    /// <summary>
-    /// Vector3 of startTransform.
-    /// </summary>
-    public Vector3 startVector {
-        get {
-            return startTransform.position;
-        }
-    }
-
-    /// <summary>
-    /// Vector3 of endTransform.
-    /// </summary>
-    public Vector3 endVector {
-        get {
-            return endTransform.position;
-        }
-    }
-
-    /// <summary>
-    /// Return a Vector3 position. If notRandom is true it will return the position of the startTransfom. On false, it will return a random Vector3 between the startTransform and the endTransform.
-    /// </summary>
-    /// <returns>A random Vector3 between the values of start and end transform.</returns>
-    public Vector3 getVector()
-    {
-        if (notRandom)
-            return startTransform.position;
-        else
-            return new Vector3(Random.Range(startTransform.position.x, endTransform.position.x), Random.Range(startTransform.position.y, endTransform.position.y), Random.Range(startTransform.position.z, endTransform.position.z));
     }
 }
