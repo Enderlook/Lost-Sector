@@ -100,18 +100,18 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
     }
 
     /// <summary>
-    /// Values must be positive.
+    /// Takes healing increasing its HP.
     /// </summary>
-    /// <param name="amount"></param>
+    /// <param name="amount">Amount of HP recovered. Must be positive</param>
     public void TakeHealing(float amount)
     {
         Health = ChangeValue(amount, Health, MaxHealth, true, "health");       
     }
 
     /// <summary>
-    /// Values must be positive.
+    /// Take damage reducing its HP. Values must be positive.
     /// </summary>
-    /// <param name="amount"></param>
+    /// <param name="amount">Amount of HP lost. Must be positive.</param>
     public virtual void TakeDamage(float amount)
     {
         Health = ChangeValue(amount, Health, MaxHealth, false, "health");
@@ -174,6 +174,9 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
         return ChangeValueWithRemain(amount, variable, maximum, isAdding, keyword).Item1;
     }
 
+    /// <summary>
+    /// Destroy gameObject.
+    /// </summary>
     protected virtual void Die()
     {
         Destroy(gameObject);
