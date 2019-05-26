@@ -112,7 +112,7 @@ public class EnemyPrefab {
             // TODO: https://social.msdn.microsoft.com/Forums/en-US/2ee4bbbd-e18b-49b7-a119-57ef748e4f28/how-to-convert-a-string-operation-to-a-math-operation?forum=csharpgeneral
             // And: https://rosettacode.org/wiki/Parsing/Shunting-yard_algorithm#C.23
             DataTable dataTable = new DataTable();
-            float multiplier = float.Parse(dataTable.Compute(weightFactorFormula.Replace("x", difficulty.ToString()), "").ToString());
+            float multiplier = float.Parse(dataTable.Compute(weightFactorFormula.Replace("x", difficulty.ToString()).Replace(",", "."), "").ToString());
             return weight * multiplier;
         }
     }
