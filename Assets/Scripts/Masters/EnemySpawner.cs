@@ -128,29 +128,7 @@ public class EnemyPrefab {
 public class Enemies {
     [Tooltip("Enemy prefabs to spawn.")]
     public EnemyPrefab[] enemyPrefabs;
-
-    /// <summary>
-    /// Get an enemy prefab to spawn.
-    /// </summary>
-    /// <param name="difficulty">Current difficulty used to base the type of enemy.</param>
-    /// <returns>Enemy prefab to spawn</returns>
-    /*public GameObject GetEnemyPrefab()
-    {
-        float totalWeight = enemyPrefabs.Sum((enemy) => enemy.GetWeight(difficulty));
-        float chosenWeight = Random.value * totalWeight;
-
-        float currentWeight = 0;
-        foreach (EnemyPrefab enemy in enemyPrefabs)
-        {
-            currentWeight += enemy.weight;
-            if (currentWeight >= chosenWeight)
-            {
-                return enemy.prefab;
-            }
-        }
-        throw new System.Exception("This shouldn't be happening!!!");
-    }*/
-
+    
     /// <summary>
     /// Get an enemy prefab to spawn and its treat.
     /// </summary>
@@ -227,25 +205,3 @@ public class TransformRange {
             return new Vector3(Random.Range(startTransform.position.x, endTransform.position.x), Random.Range(startTransform.position.y, endTransform.position.y), Random.Range(startTransform.position.z, endTransform.position.z));
     }
 }
-
-/*[System.Serializable]
-public class Vector2RangeTwo {
-    [Tooltip("Start vector.")]
-    public Vector2 startVector;
-    [Tooltip("End vector.")]
-    public //Vector2 endVector;
-    [Tooltip("If not random will use only the start vector.")]
-    public bool notRandom = false;
-
-    /// <summary>
-    /// Return a Vector3 position. If notRandom is true it will return the position of the startVector. On false, it will return a random Vector3 between the startVector and the endVector.
-    /// </summary>
-    /// <returns></returns>
-    public Vector2 getVector()
-    {
-        if (notRandom)
-            return startVector;
-        else
-            return new Vector2(Random.Range(startVector.x, endVector.x), Random.Range(startVector.y, endVector.y));
-    }
-}*/
