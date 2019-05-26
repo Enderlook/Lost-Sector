@@ -101,8 +101,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7858251103388681844}
-  - component: {fileID: 7858251103388681803}
   - component: {fileID: 7858251103388681802}
+  - component: {fileID: 7858251103388681803}
   - component: {fileID: 7858251103388681801}
   - component: {fileID: 937453948402544520}
   m_Layer: 0
@@ -127,22 +127,6 @@ Transform:
   m_Father: {fileID: 7858251103632841098}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &7858251103388681803
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7858251103388681800}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!50 &7858251103388681802
 Rigidbody2D:
   serializedVersion: 4
@@ -164,6 +148,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &7858251103388681803
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7858251103388681800}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!114 &7858251103388681801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317c52b6aadb3334fa7daa4a2aefc737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  livingObject: {fileID: 7858251103632841097}
   audioSource: {fileID: 937453948402544520}
 --- !u!82 &937453948402544520
 AudioSource:
@@ -435,9 +434,10 @@ MonoBehaviour:
     - 1.2
   onDeathExplosionPrefab: {fileID: 3413306239945161787, guid: 923f959ae77217a42826bcaed27098f7,
     type: 3}
+  onDeathExplosionPrefabScale: 0
   healthBar: {fileID: 296880736855787013}
-  impulse: {x: 0, y: 0}
   rigidbodyHelper: {fileID: 7858251103388681801}
+  impulse: {x: 0, y: 0}
 --- !u!1001 &7858251102938218240
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -454,16 +454,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7570734365601577221, guid: 6969e2527261f0045bc3f1b1a0c7b153,
-        type: 3}
-      propertyPath: textShowed
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7570734365601577221, guid: 6969e2527261f0045bc3f1b1a0c7b153,
-        type: 3}
-      propertyPath: dynamicNumbers
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4464618227662975336, guid: 6969e2527261f0045bc3f1b1a0c7b153,
         type: 3}
@@ -585,12 +575,17 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 110
       objectReference: {fileID: 0}
-    - target: {fileID: 7107914977076544398, guid: 6969e2527261f0045bc3f1b1a0c7b153,
+    - target: {fileID: 7570734365601577221, guid: 6969e2527261f0045bc3f1b1a0c7b153,
         type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 100
+      propertyPath: textShowed
+      value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 7107579959770660122, guid: 6969e2527261f0045bc3f1b1a0c7b153,
+    - target: {fileID: 7570734365601577221, guid: 6969e2527261f0045bc3f1b1a0c7b153,
+        type: 3}
+      propertyPath: dynamicNumbers
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107914977076544398, guid: 6969e2527261f0045bc3f1b1a0c7b153,
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 100
@@ -600,12 +595,17 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 100
       objectReference: {fileID: 0}
-    - target: {fileID: 7107715836296370818, guid: 6969e2527261f0045bc3f1b1a0c7b153,
+    - target: {fileID: 7107524005418937562, guid: 6969e2527261f0045bc3f1b1a0c7b153,
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 100
       objectReference: {fileID: 0}
-    - target: {fileID: 7107524005418937562, guid: 6969e2527261f0045bc3f1b1a0c7b153,
+    - target: {fileID: 7107579959770660122, guid: 6969e2527261f0045bc3f1b1a0c7b153,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107715836296370818, guid: 6969e2527261f0045bc3f1b1a0c7b153,
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 100

@@ -41,11 +41,13 @@ public class EnemySpawner : MonoBehaviour
             {
                 TransformRange spawnRange = spawnPoints[Random.Range(0, spawnPoints.Length - 1)];
                 Vector3 position = spawnRange.getVector();
-                Vector3 impulse = new Vector2(Random.Range(0, 15), Random.Range(50, 300));
 
                 GameObject enemy = Instantiate(enemyPrefab, Dynamic.Instance.enemiesParent);
                 enemy.transform.position = position;
-                enemy.GetComponent<EnemyBase>().impulse = -impulse; // - for downwards impulse
+
+                //https://forum.unity.com/threads/getcomponents-possible-to-use-with-c-interfaces.60596/
+                /*ISpawningSubrutine spawningSubrutine = enemy.GetComponent<ISpawningSubrutine>();
+                spawningSubrutine.Spawn();*/
 
                 yield return new WaitForSeconds(0.1f);
             }

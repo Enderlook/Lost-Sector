@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBase : LivingObject
+public class EnemyBase : LivingObject//, ISpawningSubrutine
 {
     [Header("Configurable")]
     [Tooltip("Initial impulse.")]
@@ -10,7 +10,8 @@ public class EnemyBase : LivingObject
     
     protected override void Start()
     {
-        rigidbodyHelper.GetRigidbody2D().AddRelativeForce(impulse);
+        Rigidbody2D thisRigidbody2D = rigidbodyHelper.GetRigidbody2D();
+        thisRigidbody2D.AddRelativeForce(-new Vector2(Random.Range(0, 15), Random.Range(50, 300)) * thisRigidbody2D.mass);
         base.Start();
     }
 
@@ -26,5 +27,10 @@ public class EnemyBase : LivingObject
         explosion.transform.localScale = Vector3.one * onDeathExplosionPrefabScale;
         base.Die();
     }
+
+    //public virtual void Spawn() {}
 }
 
+/*public interface ISpawningSubrutine {
+    void Spawn();
+}*/
