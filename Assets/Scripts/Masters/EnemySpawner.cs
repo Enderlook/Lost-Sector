@@ -37,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
         // TODO: Custom modifications per enemy.
         while (true)
         {
-            foreach (GameObject enemyPrefab in enemies.SetDifficulty(difficulty))
+            foreach (GameObject enemyPrefab in enemies.GetEnemies(difficulty))
             {
                 TransformRange spawnRange = spawnPoints[Random.Range(0, spawnPoints.Length - 1)];
                 Vector3 position = spawnRange.getVector();
@@ -125,12 +125,10 @@ public class EnemyPrefab {
 }
 
 [System.Serializable] 
-public class Enemies : IEnumerable {
+public class Enemies {
     [Tooltip("Enemy prefabs to spawn.")]
     public EnemyPrefab[] enemyPrefabs;
 
-    private float difficulty;
-    
     /// <summary>
     /// Get an enemy prefab to spawn.
     /// </summary>
@@ -157,7 +155,7 @@ public class Enemies : IEnumerable {
     /// Get an enemy prefab to spawn and its treat.
     /// </summary>
     /// <returns>Enemy prefab to spawn and threat of the enemy</returns>
-    public System.Tuple<GameObject, float> GetEnemy()
+    public System.Tuple<GameObject, float> GetEnemy(float difficulty)
     {
         float totalWeight = enemyPrefabs.Sum((enemy) => enemy.GetWeight(difficulty));
         float chosenWeight = Random.value * totalWeight;
@@ -173,103 +171,20 @@ public class Enemies : IEnumerable {
         }
         throw new System.Exception("This shouldn't be happening!!!");
     }
-
+    
     /// <summary>
-    /// Sets current difficulty. Used to determine the amount and type of enemies.
-    /// </summary>
-    /// <param name="difficulty">Current difficulty.</param>
-    /// <returns>Instance of the class itself.</returns>
-    public Enemies SetDifficulty(float difficulty)
-    {
-        this.difficulty = difficulty;
-        return this;
-    }
-
-    /// <summary>
-    /// Get the current difficulty used to spawn enemies.
-    /// </summary>
-    /// <returns>Difficulty used to spawn enemies.</returns>
-    public float GetDifficulty()
-    {
-        return difficulty;
-    }
-
-    /// <summary>
-    /// Returns an IEnumerator of enemies that should be spawned.
+    /// Returns an IEnumerable of enemies that should be spawned.
     /// </summary>
     /// <returns>Enemies that should be spawned.</returns>
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        // https://stackoverflow.com/questions/558304/can-anyone-explain-ienumerable-and-ienumerator-to-me
-        return new EnemiesEnumerator(this);
-    }
-
-    /// <summary>
-    /// Return a list of enemies ready to be spawned based on the game difficulty.
-    /// </summary>
-    /// <param name="difficulty">Current difficulty</param>
-    /// <returns>List of enemies prefab to spawn.</returns>
-    /*public List<GameObject> GetEnemies(float difficulty)
+    public IEnumerable GetEnemies(float difficulty)
     {
         float threat = 0;
-        List<GameObject> enemies = new List<GameObject>();
         while (threat < 5 + (Mathf.Log(difficulty, 2) * 2))
         {
             System.Tuple<GameObject, float> enemy = GetEnemy(difficulty);
             threat += enemy.Item2;
-            enemies.Add(enemy.Item1);
+            yield return enemy.Item1;
         }
-        return enemies;
-    }*/
-}
-
-public class EnemiesEnumerator : IEnumerator {
-    private Enemies enemies;
-    private GameObject currentEnemy;
-    private float threat = 0;
-
-    /// <summary>
-    /// Constructor of the EnemiesEnumerator class.
-    /// </summary>
-    /// <param name="enemies">Enemies class which invokes this method.</param>
-    public EnemiesEnumerator(Enemies enemies)
-    {
-        this.enemies = enemies;
-    }
-
-    /// <summary>
-    /// Current enemy prefab to spawn.
-    /// </summary>
-    object IEnumerator.Current {
-        get {
-            return currentEnemy;
-        }
-    }
-
-    /// <summary>
-    /// Set a new enemy prefab to spawn in currentEnemy.
-    /// </summary>
-    /// <returns>True if currentEnemy was updated. False if there are no more enemies to spawn on this wave.</returns>
-    bool IEnumerator.MoveNext()
-    {
-        while (threat < 5 + (Mathf.Log(enemies.GetDifficulty(), 2) * 2))
-        {
-            System.Tuple<GameObject, float> enemy = enemies.GetEnemy();
-            threat += enemy.Item2;
-            currentEnemy = enemy.Item1;
-            return true;
-        }
-        return false;
-    }
-
-    /// <summary>
-    /// Reset the enumerator.
-    /// </summary>
-    // Do we need this?
-    void IEnumerator.Reset()
-    {
-        threat = 0;
-        enemies.SetDifficulty(0);
     }
 }
 
