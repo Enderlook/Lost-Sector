@@ -56,8 +56,17 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration {
 }
 
 public interface IProjectileConfiguration {
+    /// <summary>
+    /// Position where the projectile will be spawned.
+    /// </summary>
     Vector3 SpawnPosition { get; }
+    /// <summary>
+    /// Damage done by the projectile.
+    /// </summary>
     float Damage { get; }
+    /// <summary>
+    /// Speed of the projectile.
+    /// </summary>
     float Speed { get; }
 }
 

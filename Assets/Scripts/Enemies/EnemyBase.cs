@@ -19,7 +19,9 @@ public class EnemyBase : LivingObject
         Destroy(gameObject);
     }*/
 
-
+    /// <summary>
+    /// Destroy gameObject and spawn an explosion instance on the current location.
+    /// </summary>
     protected override void Die()
     {
         GameObject explosion = Instantiate(onDeathExplosionPrefab, Global.explosionsParent);
