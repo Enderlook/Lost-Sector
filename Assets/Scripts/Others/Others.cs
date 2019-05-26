@@ -66,6 +66,29 @@ public class Vector2RangeTwo {
 }
 
 [System.Serializable]
+public class FloatRangeTwo
+{
+    [Tooltip("Start.")]
+    public float start;
+    [Tooltip("End.")]
+    public float end;
+    [Tooltip("If not random will use only the start number.")]
+    public bool notRandom = false;
+
+    /// <summary>
+    /// Return a float. If notRandom is true it will return the position of the start. On false, it will return a random float between the start and the en.
+    /// </summary>
+    /// <returns></returns>
+    public float GetValue()
+    {
+        if (notRandom)
+            return start;
+        else
+            return Random.Range(start, end);
+    }
+}
+
+[System.Serializable]
 public class Sound
 {
     [Tooltip("Sound clip.")]
