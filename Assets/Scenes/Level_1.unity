@@ -380,8 +380,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2402ac417ffbd9d4e865e8695df140b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 3171107085224686566, guid: 926a52539d738a7439a32750206b316e,
-    type: 3}
   spawnPoints:
   - startTransform: {fileID: 1112329302}
     endTransform: {fileID: 1023573337}
@@ -390,9 +388,10 @@ MonoBehaviour:
     enemyPrefabs:
     - prefab: {fileID: 3171107085224686566, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
-      weight: 5
-      minimalThreat: 0
-      threatFactorFormula: 1 / log(x + 1.1)
+      weight: 1
+      threat: 1
+      minimalDifficulty: 0
+      weightFactorFormula: 1
   difficulty: 100
   difficultyLinearIncrease: 1
   difficultyGeometricalIncrease: 1.1
