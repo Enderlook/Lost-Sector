@@ -134,7 +134,7 @@ public class Enemies {
     /// </summary>
     /// <param name="difficulty">Current difficulty used to base the type of enemy.</param>
     /// <returns>Enemy prefab to spawn</returns>
-    /*public GameObject GetEnemyPrefab(float difficulty)
+    /*public GameObject GetEnemyPrefab()
     {
         float totalWeight = enemyPrefabs.Sum((enemy) => enemy.GetWeight(difficulty));
         float chosenWeight = Random.value * totalWeight;
@@ -154,13 +154,12 @@ public class Enemies {
     /// <summary>
     /// Get an enemy prefab to spawn and its treat.
     /// </summary>
-    /// <param name="difficulty">Current difficulty used to base the type of enemy.</param>
     /// <returns>Enemy prefab to spawn and threat of the enemy</returns>
-    private System.Tuple<GameObject, float> GetEnemy(float difficulty)
+    public System.Tuple<GameObject, float> GetEnemy(float difficulty)
     {
         float totalWeight = enemyPrefabs.Sum((enemy) => enemy.GetWeight(difficulty));
         float chosenWeight = Random.value * totalWeight;
-
+        
         float currentWeight = 0;
         foreach (EnemyPrefab enemy in enemyPrefabs)
         {
@@ -172,23 +171,20 @@ public class Enemies {
         }
         throw new System.Exception("This shouldn't be happening!!!");
     }
-
+    
     /// <summary>
-    /// Return a list of enemies ready to be spawned based on the game difficulty.
+    /// Returns an IEnumerable of enemies that should be spawned.
     /// </summary>
-    /// <param name="difficulty">Current difficulty</param>
-    /// <returns>List of enemies prefab to spawn.</returns>
-    public List<GameObject> GetEnemies(float difficulty)
+    /// <returns>Enemies that should be spawned.</returns>
+    public IEnumerable GetEnemies(float difficulty)
     {
         float threat = 0;
-        List<GameObject> enemies = new List<GameObject>();
         while (threat < 5 + (Mathf.Log(difficulty, 2) * 2))
         {
             System.Tuple<GameObject, float> enemy = GetEnemy(difficulty);
             threat += enemy.Item2;
-            enemies.Add(enemy.Item1);
+            yield return enemy.Item1;
         }
-        return enemies;
     }
 }
 
