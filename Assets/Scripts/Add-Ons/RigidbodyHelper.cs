@@ -98,9 +98,22 @@ public class RigidbodyHelper : MonoBehaviour
 }
 
 public interface IRigidbodyHelperConfiguration {
+    /// <summary>
+    /// Take damage reducing its HP. Values must be positive.
+    /// </summary>
+    /// <param name="amount">Amount of HP lost. Must be positive.</param>
     void TakeDamage(float amount);
+    /// <summary>
+    /// Damage on impact.
+    /// </summary>
     float ImpactDamage { get; }
+    /// <summary>
+    /// Sound played on collision.
+    /// </summary>
     Sound ImpactSound { get; }
+    /// <summary>
+    /// If damage on impact is relative to the force and impulse of the collision.
+    /// </summary>
     bool IsImpactDamageRelativeToImpulse { get; }
 }
 
