@@ -201,6 +201,7 @@ public class Enemies : IEnumerable {
     /// <returns>Enemies that should be spawned.</returns>
     IEnumerator IEnumerable.GetEnumerator()
     {
+        // https://stackoverflow.com/questions/558304/can-anyone-explain-ienumerable-and-ienumerator-to-me
         return new EnemiesEnumerator(this);
     }
 
