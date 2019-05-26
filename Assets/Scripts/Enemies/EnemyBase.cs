@@ -19,7 +19,6 @@ public class EnemyBase : LivingObject
         Destroy(gameObject);
     }*/
 
-
     protected override void Die()
     {
         GameObject explosion = Instantiate(onDeathExplosionPrefab, Dynamic.Instance.explosionsParent);
