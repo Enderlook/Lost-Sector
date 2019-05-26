@@ -13,5 +13,4 @@ public class EnemyAsteroid : EnemyBase
         rigidbodyHelper.GetRigidbody2D().angularVelocity = rotation;
         base.Start();
     }
-
 }
