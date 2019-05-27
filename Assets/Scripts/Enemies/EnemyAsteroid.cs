@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyAsteroid : EnemyBase
 {
-    [Header("Configurable")]
+    [Header("Configuration")]
     [Tooltip("Rotation.")]
     public float rotation;
 
