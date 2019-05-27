@@ -33,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
     
     IEnumerator SpawnWave()
     {
-        // TODO: This should stop on player death....
+        // TODO: This should stop on player death...
         // TODO: Custom modifications per enemy.
         while (true)
         {
@@ -108,11 +108,15 @@ public class EnemyPrefab {
         {
             // TODO: This could be done safer using a custom math class...
             // https://stackoverflow.com/questions/333737/evaluating-string-342-yield-int-18
+            // https://www.codeproject.com/Questions/1031807/Evaluating-an-expression-using-DataTable-Compute-m
+            // TODO: https://social.msdn.microsoft.com/Forums/en-US/2ee4bbbd-e18b-49b7-a119-57ef748e4f28/how-to-convert-a-string-operation-to-a-math-operation?forum=csharpgeneral
+            // And: https://rosettacode.org/wiki/Parsing/Shunting-yard_algorithm#C.23
             DataTable dataTable = new DataTable();
-            float multiplier = float.Parse(dataTable.Compute(weightFactorFormula.Replace("x", difficulty.ToString()), "").ToString());
+            float multiplier = float.Parse(dataTable.Compute(weightFactorFormula.Replace("x", difficulty.ToString()).Replace(",", "."), "").ToString());
             return weight * multiplier;
         }
     }
+
 
     private void OnValidate()
     {
@@ -120,7 +124,7 @@ public class EnemyPrefab {
             Debug.LogWarning($"The field {nameof(weight)} can't be lower or equal than 0.");
         if (prefab == null)
             Debug.LogWarning($"The field {nameof(weight)} can't be null.");
-        // How to check minimalThreat?
+        // TODO: How to check minimalThreat?
     }
 }
 
@@ -159,13 +163,13 @@ public class Enemies : IEnumerable {
     /// <returns>Enemy prefab to spawn and threat of the enemy</returns>
     public System.Tuple<GameObject, float> GetEnemy()
     {
-        float totalWeight = enemyPrefabs.Sum((enemy) => enemy.GetWeight(difficulty));
+        float totalWeight = enemyPrefabs.Sum(enemy => enemy.GetWeight(difficulty));
         float chosenWeight = Random.value * totalWeight;
         
         float currentWeight = 0;
         foreach (EnemyPrefab enemy in enemyPrefabs)
         {
-            currentWeight += enemy.weight;
+            currentWeight += enemy.GetWeight(difficulty);
             if (currentWeight >= chosenWeight)
             {
                 return new System.Tuple<GameObject, float>(enemy.prefab, enemy.threat);
@@ -173,7 +177,7 @@ public class Enemies : IEnumerable {
         }
         throw new System.Exception("This shouldn't be happening!!!");
     }
-
+    
     /// <summary>
     /// Sets current difficulty. Used to determine the amount and type of enemies.
     /// </summary>
@@ -203,24 +207,6 @@ public class Enemies : IEnumerable {
         // https://stackoverflow.com/questions/558304/can-anyone-explain-ienumerable-and-ienumerator-to-me
         return new EnemiesEnumerator(this);
     }
-
-    /// <summary>
-    /// Return a list of enemies ready to be spawned based on the game difficulty.
-    /// </summary>
-    /// <param name="difficulty">Current difficulty</param>
-    /// <returns>List of enemies prefab to spawn.</returns>
-    /*public List<GameObject> GetEnemies(float difficulty)
-    {
-        float threat = 0;
-        List<GameObject> enemies = new List<GameObject>();
-        while (threat < 5 + (Mathf.Log(difficulty, 2) * 2))
-        {
-            System.Tuple<GameObject, float> enemy = GetEnemy(difficulty);
-            threat += enemy.Item2;
-            enemies.Add(enemy.Item1);
-        }
-        return enemies;
-    }*/
 }
 
 public class EnemiesEnumerator : IEnumerator {
@@ -312,25 +298,3 @@ public class TransformRange {
             return new Vector3(Random.Range(startTransform.position.x, endTransform.position.x), Random.Range(startTransform.position.y, endTransform.position.y), Random.Range(startTransform.position.z, endTransform.position.z));
     }
 }
-
-/*[System.Serializable]
-public class Vector2RangeTwo {
-    [Tooltip("Start vector.")]
-    public Vector2 startVector;
-    [Tooltip("End vector.")]
-    public //Vector2 endVector;
-    [Tooltip("If not random will use only the start vector.")]
-    public bool notRandom = false;
-
-    /// <summary>
-    /// Return a Vector3 position. If notRandom is true it will return the position of the startVector. On false, it will return a random Vector3 between the startVector and the endVector.
-    /// </summary>
-    /// <returns></returns>
-    public Vector2 getVector()
-    {
-        if (notRandom)
-            return startVector;
-        else
-            return new Vector2(Random.Range(startVector.x, endVector.x), Random.Range(startVector.y, endVector.y));
-    }
-}*/

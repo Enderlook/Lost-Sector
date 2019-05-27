@@ -10,7 +10,7 @@ using UnityEngine;
 public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
     // TODO: https://forum.unity.com/threads/exposing-fields-with-interface-type-c-solved.49524/
 
-    [Header("Configurable")]
+    [Header("Configuration")]
     [Tooltip("Maximum health.")]
     public float startingMaxHealth = 100;
     private float _maxHealth;

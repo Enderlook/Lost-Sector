@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : LivingObject
 {
-    [Header("Configurable")]
+    [Header("Configuration")]
     [Tooltip("Movement speed.")]
     public float moveSpeed;
     /*public float turnSpeed;
@@ -127,7 +127,7 @@ public class Player : LivingObject
     private float DamageReductionCalculator(float damage, float health, float maxHealth, float health_threshold, float precitionInterval = 1)
     {
 
-        System.Func<float, float> DamageReduction = (HP) => (10 + Mathf.Exp(1) / Mathf.Exp(-HP / maxHealth * 10)) / 100;
+        float DamageReduction(float HP) => (10 + Mathf.Exp(1) / Mathf.Exp(-HP / maxHealth * 10)) / 100;
 
         float currentHealth = health;
         float remainingDamage;
