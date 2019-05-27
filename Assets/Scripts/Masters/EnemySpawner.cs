@@ -136,10 +136,10 @@ public class Enemies {
     /// <summary>
     /// Get an enemy prefab to spawn and its treat.
     /// </summary>
-    /// <returns>Enemy prefab to spawn and threat of the enemy</returns>
+    /// <returns>Enemy prefab to spawn and threat of the enemy.</returns>
     public System.Tuple<GameObject, float> GetEnemy(float difficulty)
     {
-        float totalWeight = enemyPrefabs.Sum((enemy) => enemy.GetWeight(difficulty));
+        float totalWeight = enemyPrefabs.Sum(enemy => enemy.GetWeight(difficulty));
         float chosenWeight = Random.value * totalWeight;
         
         float currentWeight = 0;
