@@ -388,22 +388,28 @@ MonoBehaviour:
     enemyPrefabs:
     - prefab: {fileID: 3171107085224686566, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
-      weight: 1
+      weight: 10
       threat: 1
       minimalDifficulty: 0
       weightFactorFormula: 1 + x / 15
     - prefab: {fileID: 1240840865695367757, guid: f90e6926e0a1c7445b2d382b4ad1c5ce,
         type: 3}
-      weight: 0.5
+      weight: 5
       threat: 1.5
       minimalDifficulty: 4
       weightFactorFormula: 1 + x / 7
     - prefab: {fileID: 4216202753628173977, guid: 802c70067b8c193428ec2732ecb7e120,
         type: 3}
-      weight: 0.4
+      weight: 4
       threat: 3
       minimalDifficulty: 5
       weightFactorFormula: 1 + x / 7
+    - prefab: {fileID: 1935996649700350666, guid: e2e2f6e287f8e764c9d7eb5f86b90217,
+        type: 3}
+      weight: 2
+      threat: 5
+      minimalDifficulty: 7
+      weightFactorFormula: 1 + x / 8
   difficulty: 100
   difficultyLinearIncrease: 1
   difficultyGeometricalIncrease: 1.1
@@ -624,7 +630,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1023573336
 GameObject:
@@ -892,7 +898,7 @@ PrefabInstance:
     - target: {fileID: 1042733514730051095, guid: a74a88beaaf73cb4581de7b2050fd45c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1042733514730051095, guid: a74a88beaaf73cb4581de7b2050fd45c,
         type: 3}

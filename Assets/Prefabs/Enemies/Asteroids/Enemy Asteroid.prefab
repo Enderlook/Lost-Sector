@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingMaxHealth: 80
   startingHealth: -1
-  relativeImpactDamage: 10
+  relativeImpactDamage: 11
   impactSound:
     audioClip: {fileID: 8300000, guid: 697e432eddbaa984f9cae727c8608928, type: 3}
     volume:
@@ -114,6 +114,11 @@ PrefabInstance:
       propertyPath: livingObject
       value: 
       objectReference: {fileID: 768387036}
+    - target: {fileID: 7858251103388681802, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: m_Mass
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 7858251103388681803, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_Radius
