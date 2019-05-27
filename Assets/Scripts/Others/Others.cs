@@ -64,6 +64,12 @@ public class Vector2RangeTwo {
             return new Vector2(Random.Range(startVector.x, endVector.x), Random.Range(startVector.y, endVector.y));
     }
 
+    /// <summary>
+    /// Constructor of Vector2RangeTwo.
+    /// </summary>
+    /// <param name="startVector">Initial vector2,</param>
+    /// <param name="endVector">End vector2.</param>
+    /// <param name="notRandom">Determines if the returned vector2 from GetVector() should be random between startVector an endVector or just be startVector.</param>
     public Vector2RangeTwo(Vector2 startVector, Vector2 endVector, bool notRandom)
     {
         this.startVector = startVector;
