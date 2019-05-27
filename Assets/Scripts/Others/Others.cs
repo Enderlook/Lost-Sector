@@ -63,6 +63,17 @@ public class Vector2RangeTwo {
         else
             return new Vector2(Random.Range(startVector.x, endVector.x), Random.Range(startVector.y, endVector.y));
     }
+
+    public Vector2RangeTwo(Vector2 startVector, Vector2 endVector, bool notRandom)
+    {
+        this.startVector = startVector;
+        this.endVector = endVector;
+        this.notRandom = notRandom;
+    }
+    public static Vector2RangeTwo operator *(Vector2RangeTwo left, float right)
+    {
+        return new Vector2RangeTwo(left.startVector * right, left.endVector * right, left.notRandom);
+    }
 }
 
 [System.Serializable]
@@ -85,6 +96,11 @@ public class FloatRangeTwo
             return start;
         else
             return Random.Range(start, end);
+    }
+
+    public int GetValueInt()
+    {
+        return (int)GetValue();
     }
 }
 
