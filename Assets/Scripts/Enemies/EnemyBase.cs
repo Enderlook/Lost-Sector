@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyBase : LivingObject//, ISpawningSubrutine
 {
-    [Header("Configurable")]
+    [Header("Configuration")]
     [Tooltip("Initial impulse.")]
     public Vector2RangeTwo impulse;
         
