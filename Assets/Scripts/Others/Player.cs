@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : LivingObject
 {
-    [Header("Configurable")]
+    [Header("Configuration")]
     [Tooltip("Movement speed.")]
     public float moveSpeed;
     /*public float turnSpeed;
