@@ -410,6 +410,12 @@ MonoBehaviour:
       threat: 5
       minimalDifficulty: 7
       weightFactorFormula: 1 + x / 8
+    - prefab: {fileID: 5591194028196858734, guid: ee56611984b0ab14d9da902107326a6a,
+        type: 3}
+      weight: 1.5
+      threat: 6
+      minimalDifficulty: 7
+      weightFactorFormula: 1 + x / 9
   difficulty: 100
   difficultyLinearIncrease: 1
   difficultyGeometricalIncrease: 1.1
