@@ -39,7 +39,7 @@ MonoBehaviour:
     endVector: {x: 0, y: 10}
     notRandom: 0
   waitSecondsBeferoAccelerate: 2
-  acceleration: 25
+  acceleration: 10
 --- !u!60 &3658925818128820500
 PolygonCollider2D:
   m_ObjectHideFlags: 0
