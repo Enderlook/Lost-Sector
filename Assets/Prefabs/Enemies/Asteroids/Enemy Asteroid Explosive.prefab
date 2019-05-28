@@ -47,6 +47,50 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.9, y: 1.8}
   m_Direction: 0
+--- !u!114 &5644937882214427708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4216202753628173977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93f2cc99aedaeaf4eb14bd6dd546f3b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingMaxHealth: 60
+  startingHealth: -1
+  relativeImpactDamage: 8
+  impactSound:
+    audioClip: {fileID: 8300000, guid: 697e432eddbaa984f9cae727c8608928, type: 3}
+    volume:
+    - 1
+    pitch:
+    - 0.8
+    - 1.2
+  dieSound:
+    audioClip: {fileID: 8300000, guid: 55ee65d557d562d46ac0c7cd56427a91, type: 3}
+    volume:
+    - 1
+    pitch:
+    - 0.8
+    - 1.2
+  onDeathExplosionPrefab: {fileID: 3413306239945161787, guid: 923f959ae77217a42826bcaed27098f7,
+    type: 3}
+  onDeathExplosionPrefabScale: 3
+  healthBar: {fileID: 6021964555829029140}
+  rigidbodyHelper: {fileID: 4216202753804953944}
+  impulse:
+    startVector: {x: 0, y: 10}
+    endVector: {x: 35, y: 150}
+    notRandom: 0
+  rotation:
+    start: -50
+    end: 50
+    notRandom: 0
+  explosionRadius: 2.5
+  explosionDamage: 50
 --- !u!1001 &1621576272868885887
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57,7 +101,7 @@ PrefabInstance:
     - target: {fileID: 3171107085224686566, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
       propertyPath: m_Name
-      value: Enemy Asteroid Explosive Variant
+      value: Enemy Asteroid Explosive
       objectReference: {fileID: 0}
     - target: {fileID: 3171107085224686564, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
@@ -114,38 +158,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 768387036, guid: 926a52539d738a7439a32750206b316e, type: 3}
-      propertyPath: startingMaxHealth
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 768387036, guid: 926a52539d738a7439a32750206b316e, type: 3}
-      propertyPath: relativeImpactDamage
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 768387036, guid: 926a52539d738a7439a32750206b316e, type: 3}
-      propertyPath: impulse.startVector.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 768387036, guid: 926a52539d738a7439a32750206b316e, type: 3}
-      propertyPath: impulse.endVector.x
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 768387036, guid: 926a52539d738a7439a32750206b316e, type: 3}
-      propertyPath: impulse.endVector.y
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 768387036, guid: 926a52539d738a7439a32750206b316e, type: 3}
-      propertyPath: rotation.start
-      value: -50
-      objectReference: {fileID: 0}
-    - target: {fileID: 768387036, guid: 926a52539d738a7439a32750206b316e, type: 3}
-      propertyPath: rotation.end
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 768387036, guid: 926a52539d738a7439a32750206b316e, type: 3}
-      propertyPath: onDeathExplosionPrefabScale
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 1294656834588648454, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -159,10 +171,41 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents:
     - {fileID: 3171107084848344101, guid: 926a52539d738a7439a32750206b316e, type: 3}
+    - {fileID: 768387036, guid: 926a52539d738a7439a32750206b316e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 926a52539d738a7439a32750206b316e, type: 3}
+--- !u!1 &4216202753628173977 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3171107085224686566, guid: 926a52539d738a7439a32750206b316e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1621576272868885887}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4216202753804953957 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3171107084848344090, guid: 926a52539d738a7439a32750206b316e,
     type: 3}
   m_PrefabInstance: {fileID: 1621576272868885887}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4216202753804953944 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3171107084848344103, guid: 926a52539d738a7439a32750206b316e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1621576272868885887}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 317c52b6aadb3334fa7daa4a2aefc737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6021964555829029140 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4977233900857453675, guid: 926a52539d738a7439a32750206b316e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1621576272868885887}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 796e3bd3b299ffd45b1680b2f4bc477c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
