@@ -337,7 +337,7 @@ MonoBehaviour:
     - 1.2
   onDeathExplosionPrefab: {fileID: 3413306239945161787, guid: 923f959ae77217a42826bcaed27098f7,
     type: 3}
-  onDeathExplosionPrefabScale: 0
+  onDeathExplosionPrefabScale: 2.75
   healthBar: {fileID: 296880736855787013}
   rigidbodyHelper: {fileID: 7858251103388681801}
   impulse:
