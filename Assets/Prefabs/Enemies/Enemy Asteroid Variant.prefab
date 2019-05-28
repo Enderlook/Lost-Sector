@@ -36,7 +36,10 @@ MonoBehaviour:
   onDeathExplosionPrefabScale: 2.75
   healthBar: {fileID: 4977233900857453675}
   rigidbodyHelper: {fileID: 3171107084848344103}
-  impulse: {x: 0, y: 0}
+  impulse:
+    startVector: {x: 0, y: 15}
+    endVector: {x: 0, y: 100}
+    notRandom: 0
   rotation: 100
 --- !u!1001 &4687144031695792750
 PrefabInstance:
