@@ -169,5 +169,6 @@ public class Player : LivingObject
         // Just to be sure. We don't really need to set rotation for our game
         projectile.transform.rotation = transform.rotation;
         projectile.GetComponent<Projectile>().SetProjectileProperties(weapon);
+        weapon.PlayShootingSound(rigidbodyHelper.audioSource, 1);
     }
 }

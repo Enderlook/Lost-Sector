@@ -81,13 +81,12 @@ MonoBehaviour:
     projectilePrefab: {fileID: 6335491896661982094, guid: 26f1086e063f186408e18e43bf41386d,
       type: 3}
     shootingSound:
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 5a8c55f41a396a74894ec2e9af446247, type: 3}
       volume:
       - 1
-      - 1
       pitch:
-      - 1
-      - 1
+      - 0.8
+      - 1.2
   shieldBar: {fileID: 0}
   shieldHandler:
     maxShieldColor: {r: 0, g: 0.43460894, b: 1, a: 1}
