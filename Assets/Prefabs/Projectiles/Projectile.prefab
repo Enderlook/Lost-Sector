@@ -188,10 +188,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   impactSound:
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 5a8c55f41a396a74894ec2e9af446247, type: 3}
     volume:
-    - 0.6
-    - 1
+    - 0.4
     pitch:
     - 0.8
     - 1.2
