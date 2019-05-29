@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2767452539804092550}
   - component: {fileID: 6644087523551404826}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Rotated Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
