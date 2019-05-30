@@ -87,8 +87,9 @@ public class Player : LivingObject
 
         shieldHandler.UpdateColor(Shield, MaxShield);
 
+        // Shoot
         if (Input.GetMouseButton(0) && weapon.Recharge(Time.deltaTime))
-            Shoot(weapon);
+            weapon.Shoot(rigidbodyHelper, Instantiate);
     }
 
     public override void TakeDamage(float amount)
@@ -160,15 +161,5 @@ public class Player : LivingObject
         GameObject explosion = Instantiate(onDeathExplosionPrefab, Global.explosionsParent);
         explosion.transform.position = transform.position;
         base.Die();
-    }
-
-    private void Shoot(Weapon weapon)
-    {
-        weapon.ResetCooldown();
-        GameObject projectile = Instantiate(weapon.projectilePrefab, Global.projectilesParent);
-        // Just to be sure. We don't really need to set rotation for our game
-        projectile.transform.rotation = transform.rotation;
-        projectile.GetComponent<Projectile>().SetProjectileProperties(weapon);
-        weapon.PlayShootingSound(rigidbodyHelper.audioSource, 1);
     }
 }
