@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1042733514730051095}
   - component: {fileID: 1042733514730051092}
   - component: {fileID: 2054337060550579542}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,16 +87,14 @@ MonoBehaviour:
       pitch:
       - 0.8
       - 1.2
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 256
   shieldBar: {fileID: 0}
   shieldHandler:
     maxShieldColor: {r: 0, g: 0.43460894, b: 1, a: 1}
     minShieldColor: {r: 0.48595762, g: 0, b: 1, a: 1}
     shieldGameObject: {fileID: 1355656866895550794}
-  boundary:
-    xMin: 0
-    xMax: 0
-    yMin: 0
-    yMax: 0
 --- !u!82 &2054337060550579542
 AudioSource:
   m_ObjectHideFlags: 0
@@ -204,7 +202,7 @@ GameObject:
   - component: {fileID: 1042733514819035077}
   - component: {fileID: 1042733514819035097}
   - component: {fileID: 1042733514819035078}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +353,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2689403061922367343}
   - component: {fileID: 7164802621459825064}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -433,7 +431,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 307885710045812724}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Position 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,7 +461,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7874185713803413776}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shooting Positions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,7 +494,7 @@ GameObject:
   - component: {fileID: 9088371353735266212}
   - component: {fileID: 6176813985602108923}
   - component: {fileID: 4797325517442178793}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}

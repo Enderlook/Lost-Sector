@@ -12,25 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45fd1f20c81868b4596189673df3607a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingMaxHealth: 100
+  startingMaxHealth: 80
   startingHealth: -1
-  relativeImpactDamage: 10
+  relativeImpactDamage: 11
   impactSound:
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 697e432eddbaa984f9cae727c8608928, type: 3}
     volume:
-    - 1
-    - 1
+    - 0.5
     pitch:
-    - 1
-    - 1
+    - 0.8
+    - 1.2
   dieSound:
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 55ee65d557d562d46ac0c7cd56427a91, type: 3}
     volume:
-    - 1
-    - 1
+    - 0.5
     pitch:
-    - 1
-    - 1
+    - 0.8
+    - 1.2
   onDeathExplosionPrefab: {fileID: 3413306239945161787, guid: 923f959ae77217a42826bcaed27098f7,
     type: 3}
   onDeathExplosionPrefabScale: 2.75
@@ -38,9 +36,12 @@ MonoBehaviour:
   rigidbodyHelper: {fileID: 3171107084848344103}
   impulse:
     startVector: {x: 0, y: 15}
-    endVector: {x: 0, y: 100}
+    endVector: {x: 50, y: 300}
     notRandom: 0
-  rotation: 100
+  rotation:
+    start: -100
+    end: 100
+    notRandom: 0
 --- !u!1001 &4687144031695792750
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51,7 +52,7 @@ PrefabInstance:
     - target: {fileID: 7858251103632841096, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_Name
-      value: Enemy Asteroid Variant
+      value: Enemy Asteroid
       objectReference: {fileID: 0}
     - target: {fileID: 7858251103632841098, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
@@ -113,6 +114,16 @@ PrefabInstance:
       propertyPath: livingObject
       value: 
       objectReference: {fileID: 768387036}
+    - target: {fileID: 7858251103388681802, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: m_Mass
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103388681803, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.45
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ff345a899057f1447afc58e7a15eed6e, type: 3}
