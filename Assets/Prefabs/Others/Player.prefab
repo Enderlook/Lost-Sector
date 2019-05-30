@@ -87,7 +87,7 @@ MonoBehaviour:
       pitch:
       - 0.8
       - 1.2
-    layerMask:
+    layer:
       serializedVersion: 2
       m_Bits: 256
   shieldBar: {fileID: 0}

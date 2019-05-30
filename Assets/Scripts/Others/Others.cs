@@ -149,3 +149,24 @@ public class Sound
         audioSource.PlayOneShot(audioClip, GetVolume() * volumeMultiplier);
     }
 }
+
+public static class LayerMaskExtension
+{
+    // https://forum.unity.com/threads/get-the-layernumber-from-a-layermask.114553/#post-3021162
+    /// <summary>
+    /// Convert a LayerMask into a layer number.
+    /// </summary>
+    /// <param name="layerMask">LayerMask to convert.</param>
+    /// <returns>Layer number.</returns>
+    public static int ToLayer(this LayerMask layerMask)
+    {
+        int bitMask = layerMask.value;
+        int result = bitMask > 0 ? 0 : 31;
+        while (bitMask > 1)
+        {
+            bitMask = bitMask >> 1;
+            result++;
+        }
+        return result;
+    }
+}
