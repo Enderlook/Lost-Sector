@@ -77,7 +77,7 @@ public interface IProjectileConfiguration {
     /// <summary>
     /// Layer mask of the projectile.
     /// </summary>
-    LayerMask Layer { get; }
+    int Layer { get; }
 }
 
 [System.Serializable]
@@ -103,7 +103,7 @@ public class Weapon : IProjectileConfiguration {
     Vector3 IProjectileConfiguration.SpawnPosition => shootingPosition.position;
     float IProjectileConfiguration.Damage => damageOnHit;
     float IProjectileConfiguration.Speed => speed;
-    LayerMask IProjectileConfiguration.Layer => layer;
+    int IProjectileConfiguration.Layer => layer.ToLayer();
 
     private float cooldownTime = 0f;
 
@@ -156,5 +156,11 @@ public class Weapon : IProjectileConfiguration {
             return true;
         }
         return false;
+    }
+
+    private void OnValidate()
+    {
+        if (1 < ((IProjectileConfiguration)this).Layer && ((IProjectileConfiguration)this).Layer < 31)
+            Debug.LogWarning($"The field {nameof(layer)} should only contain a single layer.");
     }
 }
