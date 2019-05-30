@@ -9,7 +9,7 @@ public class EnemyBase : LivingObject
     protected override void Start()
     {
         Rigidbody2D thisRigidbody2D = rigidbodyHelper.GetRigidbody2D();
-        thisRigidbody2D.AddRelativeForce(-impulse.GetVector() * thisRigidbody2D.mass);
+        thisRigidbody2D.AddRelativeForce(impulse.GetVector() * thisRigidbody2D.mass);
         base.Start();
     }
 }
