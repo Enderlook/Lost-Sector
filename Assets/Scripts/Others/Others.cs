@@ -63,6 +63,51 @@ public class Vector2RangeTwo {
         else
             return new Vector2(Random.Range(startVector.x, endVector.x), Random.Range(startVector.y, endVector.y));
     }
+
+    /// <summary>
+    /// Constructor of Vector2RangeTwo.
+    /// </summary>
+    /// <param name="startVector">Initial vector2,</param>
+    /// <param name="endVector">End vector2.</param>
+    /// <param name="notRandom">Determines if the returned vector2 from GetVector() should be random between startVector an endVector or just be startVector.</param>
+    public Vector2RangeTwo(Vector2 startVector, Vector2 endVector, bool notRandom)
+    {
+        this.startVector = startVector;
+        this.endVector = endVector;
+        this.notRandom = notRandom;
+    }
+    public static Vector2RangeTwo operator *(Vector2RangeTwo left, float right)
+    {
+        return new Vector2RangeTwo(left.startVector * right, left.endVector * right, left.notRandom);
+    }
+}
+
+[System.Serializable]
+public class FloatRangeTwo
+{
+    [Tooltip("Start.")]
+    public float start;
+    [Tooltip("End.")]
+    public float end;
+    [Tooltip("If not random will use only the start number.")]
+    public bool notRandom = false;
+
+    /// <summary>
+    /// Return a float. If notRandom is true it will return the position of the start. On false, it will return a random float between the start and the en.
+    /// </summary>
+    /// <returns></returns>
+    public float GetValue()
+    {
+        if (notRandom)
+            return start;
+        else
+            return Random.Range(start, end);
+    }
+
+    public int GetValueInt()
+    {
+        return (int)GetValue();
+    }
 }
 
 [System.Serializable]
