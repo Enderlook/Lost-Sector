@@ -67,7 +67,9 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
     public GameObject onDeathExplosionPrefab;
     [Tooltip("Scale of the explosion prefab.")]
     [Range(0, 100)]
-    public float onDeathExplosionPrefabScale;
+    public float onDeathExplosionPrefabScale = 1;
+    [Tooltip("Explosion prefab duration before be destroyed.")]
+    public float onDeathExplosionPrefabDuration = 1;
 
     [Tooltip("Health bar script.")]
     public HealthBar healthBar;
@@ -175,10 +177,14 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
     }
 
     /// <summary>
-    /// Destroy gameObject.
+    /// Destroy gameObject and spawn an explosion instance on current location.
     /// </summary>
     protected virtual void Die()
     {
+        GameObject explosion = Instantiate(onDeathExplosionPrefab, Global.explosionsParent);
+        explosion.transform.position = rigidbodyHelper.Position;
+        explosion.transform.localScale = Vector3.one * onDeathExplosionPrefabScale;
+        Destroy(explosion, onDeathExplosionPrefabDuration);
         Destroy(gameObject);
     }
 }

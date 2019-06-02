@@ -20,17 +20,6 @@ public class EnemyBase : LivingObject//, ISpawningSubrutine
         Destroy(gameObject);
     }*/
 
-    /// <summary>
-    /// Destroy gameObject and spawn an explosion instance on the current location.
-    /// </summary>
-    protected override void Die()
-    {
-        GameObject explosion = Instantiate(onDeathExplosionPrefab, Global.explosionsParent);
-        explosion.transform.position = rigidbodyHelper.Position;
-        explosion.transform.localScale = Vector3.one * onDeathExplosionPrefabScale;
-        base.Die();
-    }
-
     //public virtual void Spawn() {}
 }
 
