@@ -58,6 +58,7 @@ MonoBehaviour:
   healthBar: {fileID: 7599763248378914896}
   damageBar: {fileID: 7558930798319532954}
   healingBar: {fileID: 7599522417589928272}
+  ceilValues: 1
 --- !u!1 &7597608102264197712
 GameObject:
   m_ObjectHideFlags: 0
