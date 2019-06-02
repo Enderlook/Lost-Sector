@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 7858251103632841098}
   - component: {fileID: 7858251103632841097}
   m_Layer: 9
-  m_Name: Enemy
+  m_Name: Enemy Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -338,6 +338,7 @@ MonoBehaviour:
   onDeathExplosionPrefab: {fileID: 3413306239945161787, guid: 923f959ae77217a42826bcaed27098f7,
     type: 3}
   onDeathExplosionPrefabScale: 2.75
+  onDeathExplosionPrefabDuration: 1
   healthBar: {fileID: 296880736855787013}
   rigidbodyHelper: {fileID: 7858251103388681801}
   impulse:
@@ -351,16 +352,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7858251103632841098}
     m_Modifications:
-    - target: {fileID: 7506624220066418789, guid: 6969e2527261f0045bc3f1b1a0c7b153,
-        type: 3}
-      propertyPath: m_Name
-      value: Health Bar with Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 7506624220066418789, guid: 6969e2527261f0045bc3f1b1a0c7b153,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7570734365601577221, guid: 6969e2527261f0045bc3f1b1a0c7b153,
         type: 3}
       propertyPath: textShowed
@@ -370,6 +361,16 @@ PrefabInstance:
         type: 3}
       propertyPath: dynamicNumbers
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7506624220066418789, guid: 6969e2527261f0045bc3f1b1a0c7b153,
+        type: 3}
+      propertyPath: m_Name
+      value: Health Bar with Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7506624220066418789, guid: 6969e2527261f0045bc3f1b1a0c7b153,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4464618227662975336, guid: 6969e2527261f0045bc3f1b1a0c7b153,
         type: 3}
