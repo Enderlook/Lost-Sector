@@ -115,6 +115,9 @@ public class Sound
     [Tooltip("Volume. Use range size 1 to avoid random volume.")]
     public float[] volume = new float[2] { 1, 1 };
 
+    public float minVolume;
+    public float maxVolume;
+
     [Tooltip("Pitch. Use range size 1 to avoid random volume.")]
     public float[] pitch = new float[2] { 1, 1 };
 
