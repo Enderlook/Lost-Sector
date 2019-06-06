@@ -52,6 +52,14 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
         }
     }
 
+    [Tooltip("Should spawn floating damage text on the enemy on collision?")]
+    public bool shouldDisplayDamage;
+    bool IShouldDisplayDamage.ShouldDisplayDamage {
+        get {
+            return shouldDisplayDamage;
+        }
+    }
+
     [Header("Setup")]
     [Tooltip("Impact sound.")]
     public Sound impactSound;
@@ -76,6 +84,9 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
 
     [Tooltip("RigidbodyHelper script.")]
     public RigidbodyHelper rigidbodyHelper;
+
+    [Tooltip("FloatingTextController Script")]
+    public FloatingTextController floatingTextController;
 
     protected virtual void Start()
     {
@@ -114,10 +125,12 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
     /// Take damage reducing its HP. Values must be positive.
     /// </summary>
     /// <param name="amount">Amount of HP lost. Must be positive.</param>
-    public virtual void TakeDamage(float amount)
+    /// <param name="displayText">Whenever the damage taken must be shown in a floating text.</param>
+    public virtual void TakeDamage(float amount, bool displayDamage = false)
     {
         System.Tuple<float, float, float> change = ChangeValue(amount, Health, MaxHealth, false, "health");
         Health = change.Item1;
+        SpawnFloatingText(change.Item2, Color.Lerp(Color.red, new Color(1, .5f, 0), Health / MaxHealth));
     }
 
     // Can I use this? https://stackoverflow.com/questions/1402803/passing-properties-by-reference-in-c-sharp
@@ -144,7 +157,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
             amount = -amount;
 
         float rest = 0;
-                
+
         if (variable + amount < 0)
         {
             rest = -(variable + amount);
@@ -163,7 +176,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
             total += amount;
         }
 
-        return new System.Tuple<float, float, float>(variable, total, rest);
+        return new System.Tuple<float, float, float>(variable, Mathf.Abs(total), rest);
     }
 
     /// <summary>
@@ -193,5 +206,17 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
         explosion.transform.localScale = Vector3.one * onDeathExplosionPrefabScale;
         Destroy(explosion, onDeathExplosionPrefabDuration);
         Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// Spawn a floating text above the creature.
+    /// </summary>
+    /// <param name="text">Text to display.</param>
+    /// <param name="textColor">Color of the text.</param>
+    /// <param name="checkIfPositive">Only display if the number is positive.</param>
+    protected void SpawnFloatingText(float text, Color? textColor, bool checkIfPositive = true)
+    {
+        if (floatingTextController != null && (!checkIfPositive || text > 0))
+            floatingTextController.SpawnFloatingText(text, textColor);
     }
 }
