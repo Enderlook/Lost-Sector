@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1042733514730051095}
   - component: {fileID: 1042733514730051092}
   - component: {fileID: 2054337060550579542}
+  - component: {fileID: 7723782474642780987}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -48,6 +49,7 @@ MonoBehaviour:
   startingMaxHealth: 100
   startingHealth: -1
   relativeImpactDamage: 35
+  shouldDisplayDamage: 1
   impactSound:
     audioClip: {fileID: 8300000, guid: 0ba2d0a93ab44744e99f0c0520803840, type: 3}
     volume:
@@ -66,8 +68,10 @@ MonoBehaviour:
   onDeathExplosionPrefab: {fileID: 3413306239945161787, guid: 923f959ae77217a42826bcaed27098f7,
     type: 3}
   onDeathExplosionPrefabScale: 5
+  onDeathExplosionPrefabDuration: 1
   healthBar: {fileID: 0}
   rigidbodyHelper: {fileID: 4797325517442178793}
+  floatingTextController: {fileID: 7723782474642780987}
   moveSpeed: 10
   startingMaxShield: 30
   startingShield: -1
@@ -87,9 +91,10 @@ MonoBehaviour:
       pitch:
       - 0.8
       - 1.2
-    layerMask:
+    layer:
       serializedVersion: 2
-      m_Bits: 256
+      m_Bits: 0
+    shouldDisplayDamage: 1
   shieldBar: {fileID: 0}
   shieldHandler:
     maxShieldColor: {r: 0, g: 0.43460894, b: 1, a: 1}
@@ -191,6 +196,36 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7723782474642780987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042733514730051093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e9589752773c64993f6b3502286ccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawningPoints:
+  - {fileID: 2007192992768220121}
+  maximumAmountFloatingText: 10
+  overrideTimeBeforeDestroy: 0
+  timeBeforeDestroy: 0
+  overrideTextColor: 0
+  textColor: {r: 1, g: 0, b: 0, a: 1}
+  overrideRandomOffset: 1
+  randomOffset: {x: 0.5, y: 0.5}
+  overrideScaleMultiplier: 1
+  scaleMultiplier: 0.025
+  overrideDigitPrecision: 0
+  digitPrecision: 0
+  overrideTypeOfRounding: 1
+  typeOfRounding: 1
+  floatingTextPrefab: {fileID: 8150760654224925313, guid: 2464453f149ba994292ee710d0ceaab7,
+    type: 3}
+  floatingTextParent: {fileID: 0}
 --- !u!1 &1042733514819035074
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,6 +550,7 @@ Transform:
   - {fileID: 7874185713803413776}
   - {fileID: 1042733514819035077}
   - {fileID: 2689403061922367343}
+  - {fileID: 2007192992768220121}
   m_Father: {fileID: 1042733514730051095}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -552,3 +588,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 2054337060550579542}
+--- !u!1 &9207637426293440547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2007192992768220121}
+  m_Layer: 8
+  m_Name: Floating Text Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2007192992768220121
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9207637426293440547}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9088371353735266212}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

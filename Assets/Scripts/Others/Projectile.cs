@@ -13,6 +13,14 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration {
         }
     }
 
+    [Tooltip("Should spawn floating damage text on the enemy on collision?")]
+    public bool shouldDisplayDamage;
+    bool IShouldDisplayDamage.ShouldDisplayDamage {
+        get {
+            return shouldDisplayDamage;
+        }
+    }
+
     [Header("Setup")]
     [Tooltip("Impact sound.")]
     public Sound impactSound;
@@ -36,7 +44,7 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration {
         }
     }
 
-    void IRigidbodyHelperConfiguration.TakeDamage(float amount) {
+    void IRigidbodyHelperConfiguration.TakeDamage(float amount, bool displayDamage) {
         // We are a bullet, we don't have HP... yet
         Destroy(gameObject);
     }
@@ -61,7 +69,8 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration {
     }
 }
 
-public interface IProjectileConfiguration {
+public interface IProjectileConfiguration : IShouldDisplayDamage
+{
     /// <summary>
     /// Position where the projectile will be spawned.
     /// </summary>
@@ -104,6 +113,14 @@ public class Weapon : IProjectileConfiguration {
     float IProjectileConfiguration.Damage => damageOnHit;
     float IProjectileConfiguration.Speed => speed;
     LayerMask IProjectileConfiguration.Layer => layer;
+
+    [Tooltip("Should spawn floating damage text on the enemy on collision?")]
+    public bool shouldDisplayDamage;
+    bool IShouldDisplayDamage.ShouldDisplayDamage {
+        get {
+            return shouldDisplayDamage;
+        }
+    }
 
     private float cooldownTime = 0f;
 
