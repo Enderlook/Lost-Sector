@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8480707500608085444}
   - component: {fileID: 788802717432714968}
   - component: {fileID: 7669626791480422587}
+  - component: {fileID: 3092255573539753426}
   m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
@@ -142,6 +143,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
+--- !u!114 &3092255573539753426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740246018190867273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9addc5e34ed96f1469bc1e2cf7eff67e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameObjectToDestroy: {fileID: 6335491896661982094}
+  timeToDestroy: 1
 --- !u!1 &6335491896661982094
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,6 +167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 52853986436207527}
   - component: {fileID: 3679612034254972725}
+  - component: {fileID: 3893229148572608209}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -195,3 +211,17 @@ MonoBehaviour:
     - 0.8
     - 1.2
   rigidbodyHelper: {fileID: 7669626791480422587}
+--- !u!114 &3893229148572608209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6335491896661982094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9addc5e34ed96f1469bc1e2cf7eff67e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameObjectToDestroy: {fileID: 0}
+  timeToDestroy: 1
