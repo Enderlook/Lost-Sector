@@ -9,7 +9,7 @@ public class FloatingText : MonoBehaviour
     public enum TYPE_OF_ROUNDING { ROUND, CEIL, FLOOR, TRUNC }
 
     [Header("Configuration")]
-    [Header("Overrided by Floating Text Controller")]
+    [Header("Overridable by Floating Text Controller", order = 2)]
     [Tooltip("Time before self destroy in seconds. If 0, duration of the animation will be used.")]
     public float timeBeforeDestroy;
     [Tooltip("Text color.")]
