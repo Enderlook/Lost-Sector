@@ -31,6 +31,8 @@ public class Dynamic : MonoBehaviour
     public Transform explosionsParent;
     [Tooltip("Projectiles parent transform.")]
     public Transform projectilesParent;
+    [Tooltip("Floating text parent transform.")]
+    public Transform floatingTextParent;
     [Tooltip("Boundary of screen.")]
     public Boundary boundary;
 
@@ -48,6 +50,7 @@ public class Dynamic : MonoBehaviour
         Global.explosionsParent = explosionsParent;
         Global.projectilesParent = projectilesParent;
         Global.boundary = boundary;
+        FloatingTextController.SetFloatingTextParentStatic(floatingTextParent);
     }
 }
 

@@ -81,7 +81,7 @@ public class Player : LivingObject
 
         // Recharge shield
         if (currentShieldRechargeDelay >= shieldRechargeDelay && Shield < MaxShield)
-            Shield = ChangeValue(shieldRechargeRate * Time.deltaTime, Shield, MaxShield, true, "shield");
+            Shield = ChangeValueSimple(shieldRechargeRate * Time.deltaTime, Shield, MaxShield, true, "shield");
         else
             currentShieldRechargeDelay += Time.deltaTime;
 
@@ -91,12 +91,15 @@ public class Player : LivingObject
             Shoot(weapon);
     }
 
-    public override void TakeDamage(float amount)
+    public override void TakeDamage(float amount, bool displayText = false)
     {
+        // We ignore display text because we player always spawns floating text for damage.
+
         currentShieldRechargeDelay = 0;
-        System.Tuple<float, float> change = ChangeValueWithRemain(amount, Shield, MaxShield, false, "shield");
+        System.Tuple<float, float, float> change = ChangeValue(amount, Shield, MaxShield, false, "shield");
+        SpawnFloatingText(change.Item2, Color.Lerp(new Color(.5f, 0, .5f), Color.blue, Shield / MaxShield));
         Shield = change.Item1;
-        float restDamage = change.Item2;
+        float restDamage = change.Item3;
         if (restDamage > 0)
         {
             // Dynamic damage reduction which increases according to player's current health.
@@ -110,7 +113,7 @@ public class Player : LivingObject
             }
 
             //Health = ChangeValue(restDamage, Health, MaxHealth, false, "health");
-            base.TakeDamage(restDamage);
+            base.TakeDamage(restDamage, false);
         }
     }
 

@@ -52,6 +52,14 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
         }
     }
 
+    [Tooltip("Should spawn floating damage text on the enemy on collision?")]
+    public bool shouldDisplayDamage;
+    bool IShouldDisplayDamage.ShouldDisplayDamage {
+        get {
+            return shouldDisplayDamage;
+        }
+    }
+
     [Header("Setup")]
     [Tooltip("Impact sound.")]
     public Sound impactSound;
@@ -76,6 +84,9 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
 
     [Tooltip("RigidbodyHelper script.")]
     public RigidbodyHelper rigidbodyHelper;
+
+    [Tooltip("FloatingTextController Script")]
+    public FloatingTextController floatingTextController;
 
     protected virtual void Start()
     {
@@ -107,16 +118,19 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
     /// <param name="amount">Amount of HP recovered. Must be positive</param>
     public void TakeHealing(float amount)
     {
-        Health = ChangeValue(amount, Health, MaxHealth, true, "health");       
+        Health = ChangeValueSimple(amount, Health, MaxHealth, true, "health");
     }
 
     /// <summary>
     /// Take damage reducing its HP. Values must be positive.
     /// </summary>
     /// <param name="amount">Amount of HP lost. Must be positive.</param>
-    public virtual void TakeDamage(float amount)
+    /// <param name="displayText">Whenever the damage taken must be shown in a floating text.</param>
+    public virtual void TakeDamage(float amount, bool displayDamage = false)
     {
-        Health = ChangeValue(amount, Health, MaxHealth, false, "health");
+        System.Tuple<float, float, float> change = ChangeValue(amount, Health, MaxHealth, false, "health");
+        Health = change.Item1;
+        SpawnFloatingText(change.Item2, Color.Lerp(Color.red, new Color(1, .5f, 0), Health / MaxHealth));
     }
 
     // Can I use this? https://stackoverflow.com/questions/1402803/passing-properties-by-reference-in-c-sharp
@@ -132,9 +146,10 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
     /// <param name="isAdding"></param>
     /// <param name="keyword"></param>
     /// <returns></returns>
-    protected System.Tuple<float, float> ChangeValueWithRemain(float amount, float variable, float maximum, bool isAdding, string keyword)
+    protected System.Tuple<float, float, float> ChangeValue(float amount, float variable, float maximum, bool isAdding, string keyword)
     {
         //if ((shouldBePossitive && amount < 0) || (!shouldBePossitive && amount > 0))
+        float total = 0;
         if (amount < 0)
             Debug.LogWarning($"{(isAdding ? "healing" : "damage")} amount was negative. The creature is {(isAdding ? "decreasing" : "increasing")} {keyword}.");
 
@@ -142,21 +157,26 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
             amount = -amount;
 
         float rest = 0;
-                
+
         if (variable + amount < 0)
         {
             rest = -(variable + amount);
+            total += variable;
             variable = 0;
         }
         else if (variable + amount > maximum)
         {
             rest = variable + amount - maximum;
+            total += maximum - variable;
             variable = maximum;
         }
         else
+        {
             variable += amount;
+            total += amount;
+        }
 
-        return new System.Tuple<float, float>(variable, rest);
+        return new System.Tuple<float, float, float>(variable, Mathf.Abs(total), rest);
     }
 
     /// <summary>
@@ -170,10 +190,10 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
     /// <param name="maximum"></param>
     /// <param name="isAdding"></param>
     /// <param name="keyword"></param>
-    /// <returns></returns>
-    protected float ChangeValue(float amount, float variable, float maximum, bool isAdding, string keyword)
+    /// <return></return>
+    protected float ChangeValueSimple(float amount, float variable, float maximum, bool isAdding, string keyword)
     {
-        return ChangeValueWithRemain(amount, variable, maximum, isAdding, keyword).Item1;
+        return ChangeValue(amount, variable, maximum, isAdding, keyword).Item1;
     }
 
     /// <summary>
@@ -186,5 +206,17 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
         explosion.transform.localScale = Vector3.one * onDeathExplosionPrefabScale;
         Destroy(explosion, onDeathExplosionPrefabDuration);
         Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// Spawn a floating text above the creature.
+    /// </summary>
+    /// <param name="text">Text to display.</param>
+    /// <param name="textColor">Color of the text.</param>
+    /// <param name="checkIfPositive">Only display if the number is positive.</param>
+    protected void SpawnFloatingText(float text, Color? textColor, bool checkIfPositive = true)
+    {
+        if (floatingTextController != null && (!checkIfPositive || text > 0))
+            floatingTextController.SpawnFloatingText(text, textColor);
     }
 }
