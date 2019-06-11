@@ -58,14 +58,15 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration {
         transform.position = configuration.SpawnPosition;
         damage = configuration.Damage;
         Rigidbody2D rigidbody2D = rigidbodyHelper.GetRigidbody2D();
+        shouldDisplayDamage = configuration.ShouldDisplayDamage;
         // You never know when you might need to rotate the parent, that is why we use AddRelativeForce() and transform.up instead of just AddForce()
         rigidbody2D.AddRelativeForce(transform.up * configuration.Speed * rigidbody2D.mass);
 
         // https://forum.unity.com/threads/change-gameobject-layer-at-run-time-wont-apply-to-child.10091/ See post #post-1627654, #post-1819585, #post-3405070, #post-3676213. Get your own conclusions.
         // There could be more gameObjects to change layer
         foreach (var transform in gameObject.GetComponentsInChildren<Transform>(true)) {
-            transform.gameObject.layer = configuration.Layer;
-        }
+            transform.gameObject.layer = configuration.Layer;        }
+
     }
 }
 
