@@ -119,7 +119,7 @@ MonoBehaviour:
   digitPrecision: 0
   typeOfRounding: 0
   text: {fileID: 8150760654684562821}
-  animator: {fileID: 3445836630433138146}
+  animator: {fileID: 731862126722692066}
 --- !u!1 &8150760654684562823
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 8150760654684562820}
   - component: {fileID: 8150760654684562818}
   - component: {fileID: 8150760654684562821}
-  - component: {fileID: 3445836630433138146}
+  - component: {fileID: 731862126722692066}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -200,7 +200,7 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 
---- !u!95 &3445836630433138146
+--- !u!95 &731862126722692066
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
