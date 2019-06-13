@@ -79,7 +79,7 @@ public class HealthBar : MonoBehaviour
         return Color.Lerp(minHealthColor, maxHealthColor, healthImage.fillAmount + damageBar.fillAmount - healingImage.fillAmount);
     }
 
-    private void Update()
+    public void Update()
     {
         // Unfill the damage and healing bar per frame
         if (damageBar != null && damageBar.fillAmount > 0)
@@ -218,7 +218,7 @@ public class HealthBar : MonoBehaviour
     /// <summary>
     /// Get the require components <seealso cref="healthImage"/>, <seealso cref="healthTransform"/>, <seealso cref="healingImage"/>, <seealso cref="healingTransform"/> and set <seealso cref="maxHealth"/>.
     /// </summary>
-    private void Setup()
+    public void Setup()
     {
         healthImage = healthBar.GetComponent<Image>();
         healthTransform = healthBar.GetComponent<RectTransform>();
