@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBar : MonoBehaviour {
+public class HealthBar : MonoBehaviour
+{
 
     [Header("Configuration")]
     [Tooltip("How numbers are shown, {0} is health, {1} is maximum health and {2} is percent of health. Eg: {0} / {1} ({2}%)")]
@@ -52,9 +51,9 @@ public class HealthBar : MonoBehaviour {
 
     /// <summary>
     /// Modify the health bar values without producing any animation effects (sliding the bar or changing the numbers).
-    /// The health bar fill will be instataneously set without producing animation. Health numbers will also change inmediately.
+    /// The health bar fill will be instantaneously set without producing animation. Health numbers will also change immediately.
     /// Both damage bar and healing bar fill will be set to 0, halting any current animation on them.
-    /// Designed to intialize the health bar by first time.
+    /// Designed to initialize the health bar by first time.
     /// </summary>
     /// <param name="health"></param>
     /// <param name="maxHealth"></param>
@@ -70,10 +69,10 @@ public class HealthBar : MonoBehaviour {
 
     /// <summary>
     /// Modify the health bar values without producing any animation effects (sliding the bar or changing the numbers).
-    /// The health bar fill will be instataneously set without producing animation. Health numbers will also change inmediately.
+    /// The health bar fill will be instantaneously set without producing animation. Health numbers will also change immediately.
     /// Both damage bar and healing bar fill will be set to 0, halting any current animation on them.
-    /// Both current health and maximum health will be asigned by maxHealth.
-    /// Designed to intialize the health bar by first time.
+    /// Both current health and maximum health will be assigned by maxHealth.
+    /// Designed to initialize the health bar by first time.
     /// </summary>
     /// <param name="maxHealth"></param>
     public void ManualUpdate(float maxHealth)

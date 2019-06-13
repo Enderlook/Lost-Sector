@@ -1,19 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /* https://forum.unity.com/threads/make-child-unaffected-by-parents-rotation.461161/
  * https://stackoverflow.com/questions/52179975/make-child-unaffected-by-parents-rotation-unity
  * https://docs.unity3d.com/Manual/class-ParentConstraint.html
  */
 
-public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
+public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
+{
     // TODO: https://forum.unity.com/threads/exposing-fields-with-interface-type-c-solved.49524/
 
     [Header("Configuration")]
     [Tooltip("Maximum health.")]
     public float startingMaxHealth = 100;
     private float _maxHealth;
+    /// <summary>
+    /// Maximum amount of health. <see cref="Health"/> can't be greater than this value.<br/>
+    /// If changes, <see cref="healthBar"/> will be updated using <seealso cref="HealthBar.UpdateValues(float health, float maxHealth)"/>.<br/>
+    /// If 0, <see cref="Die()"/> is called.
+    /// </summary>
+    /// <seealso cref="Health"/>
     protected float MaxHealth {
         get {
             return _maxHealth;
@@ -27,6 +32,12 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
     [Tooltip("Starting health. Set -1 to use Max Health value.")]
     public float startingHealth = -1;
     private float _health;
+    /// <summary>
+    /// Current amount of health. It can't be greater than <see cref="MaxHealth"/><br/>
+    /// If changes, <see cref="healthBar"/> will be updated using <seealso cref="HealthBar.UpdateValues(float health, float maxHealth)"/>.<br/>
+    /// If 0, <see cref="Die()"/> is called.
+    /// </summary>
+    /// <seealso cref="MaxHealth"/>
     protected float Health {
         get {
             return _health;
@@ -40,38 +51,22 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
 
     [Tooltip("Relative damage on impact based on force.")]
     public float relativeImpactDamage;
-    float IRigidbodyHelperConfiguration.ImpactDamage {
-        get {
-            return relativeImpactDamage;
-        }
-    }
+    float IRigidbodyHelperConfiguration.ImpactDamage => relativeImpactDamage;
 
-    bool IRigidbodyHelperConfiguration.IsImpactDamageRelativeToImpulse {
-        get {
-            return true;
-        }
-    }
+    bool IRigidbodyHelperConfiguration.IsImpactDamageRelativeToImpulse => true;
 
     [Tooltip("Should spawn floating damage text on the enemy on collision?")]
     public bool shouldDisplayDamage;
-    bool IShouldDisplayDamage.ShouldDisplayDamage {
-        get {
-            return shouldDisplayDamage;
-        }
-    }
+    bool IShouldDisplayDamage.ShouldDisplayDamage => shouldDisplayDamage;
 
     [Header("Setup")]
     [Tooltip("Impact sound.")]
     public Sound impactSound;
-    Sound IRigidbodyHelperConfiguration.ImpactSound {
-        get {
-            return impactSound;
-        }
-    }
+    Sound IRigidbodyHelperConfiguration.ImpactSound => impactSound;
 
     [Tooltip("Die sound.")]
     public Sound dieSound;
-    [Tooltip("Instanciate this explosion prefab on death.")]
+    [Tooltip("Instantiate this explosion prefab on death.")]
     public GameObject onDeathExplosionPrefab;
     [Tooltip("Scale of the explosion prefab.")]
     [Range(0, 100)]
@@ -98,13 +93,13 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
 
     /// <summary>
     /// Initializes the bar's values, setting the fill of the main bar and returning the current value.
-    /// If startingValue is -1, startingMaximumValue will be used instead to fill the bar.
-    /// The returned value is the value used to fill the bar, which can be startingValue or statingMaximumValue (if startingValue is -1).
+    /// If <paramref name="startingValue"/> is -1, <paramref name="startingMaximumValue"/> will be used instead to fill the bar.
     /// </summary>
-    /// <param name="bar"></param>
-    /// <param name="startingMaximumValue"></param>
-    /// <param name="startingValue"></param>
-    /// <returns></returns>
+    /// <param name="bar"><see cref="HealthBar"/> to initialize.</param>
+    /// <param name="startingMaximumValue">Maximum value of the bar.</param>
+    /// <param name="startingValue">Current value of the bar.</param>
+    /// <returns>The value used to fill the bar, which can be <paramref name="startingValue"/> or <paramref name="startingMaximumValue"/> (if <c><paramref name="startingValue"/> == -1</c>).</returns>
+    /// <seealso cref="HealthBar"/>
     protected float InitializeBar(HealthBar bar, float startingMaximumValue, float startingValue)
     {
         float value = startingValue == -1 ? startingMaximumValue : startingValue;
@@ -113,18 +108,18 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
     }
 
     /// <summary>
-    /// Takes healing increasing its HP.
+    /// Takes healing increasing its <see cref="Health"/>.
     /// </summary>
-    /// <param name="amount">Amount of HP recovered. Must be positive</param>
+    /// <param name="amount">Amount of <see cref="Health"/> recovered. Must be positive.</param>
     public void TakeHealing(float amount)
     {
         Health = ChangeValueSimple(amount, Health, MaxHealth, true, "health");
     }
 
     /// <summary>
-    /// Take damage reducing its HP. Values must be positive.
+    /// Take damage reducing its <see cref="Health"/>.
     /// </summary>
-    /// <param name="amount">Amount of HP lost. Must be positive.</param>
+    /// <param name="amount">Amount of <see cref="Health"/> lost. Must be positive.</param>
     /// <param name="displayText">Whenever the damage taken must be shown in a floating text.</param>
     public virtual void TakeDamage(float amount, bool displayDamage = false)
     {
@@ -133,19 +128,21 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
         SpawnFloatingText(change.Item2, Color.Lerp(Color.red, new Color(1, .5f, 0), Health / MaxHealth));
     }
 
-    // Can I use this? https://stackoverflow.com/questions/1402803/passing-properties-by-reference-in-c-sharp
+    // TODO: https://stackoverflow.com/questions/1402803/passing-properties-by-reference-in-c-sharp
     /// <summary>
-    /// Amount must (should) be positive.
-    /// If isAdding is true, amount will be added to variable. On false, amount will be reduced to variable.
-    /// By any mean, variable will be greater than maximum or lower than 0. If that happens, the result will be replaced by the corresponding boundary and rest will store the difference between the surpassed value and the boundary.
+    /// If <paramref name="isAdding"/> is <see langword="true"/>, <paramref name="amount"/> will be added to <paramref name="variable"/>. On <see langword="false"/>, <paramref name="amount"/> will be reduced to <paramref name="variable"/>.
+    /// By any mean, <paramref name="variable"/> will be greater than <paramref name="maximum"/> or lower than 0. If that happens, the result will be replaced by the corresponding boundary (either 0 or <paramref name="maximum"/>) and the <c>rest</c> will store the difference between the surpassed value and the boundary.
     /// The values returned are the result of variable +/- amount (determined by isAdding) and the rest. If there is no rest it'll be 0. 
     /// </summary>
-    /// <param name="amount"></param>
-    /// <param name="variable"></param>
-    /// <param name="maximum"></param>
-    /// <param name="isAdding"></param>
+    /// <param name="amount">Amount to add or reduct of <paramref name="variable"/>. Must be positive.</param>
+    /// <param name="variable">Variable where <paramref name="amount"/> will be added or reduced.</param>
+    /// <param name="maximum">Hight limit of the result. Result will be clamped between this and 0.</param>
+    /// <param name="isAdding">Whenever <paramref name="amount"/> will be added (<see langword="true"/>) or reduced (<see langword="false"/>) to <paramref name="variable"/>.</param>
     /// <param name="keyword"></param>
-    /// <returns></returns>
+    /// <returns><c>Item1</c> is the new <paramref name="variable"/> value.<br/>
+    /// <c>Item2</c> total damage taken is always positive.<br/>
+    /// <c>Item3</c> is the rest damage that wasn't able to take.</returns>
+    /// <see cref="ChangeValueSimple(float amount, float variable, float maximum, bool isAdding, string keyword)"/>
     protected System.Tuple<float, float, float> ChangeValue(float amount, float variable, float maximum, bool isAdding, string keyword)
     {
         //if ((shouldBePossitive && amount < 0) || (!shouldBePossitive && amount > 0))
@@ -180,24 +177,25 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration {
     }
 
     /// <summary>
-    /// Amount must (should) be positive.
-    /// If isAdding is true, amount will be added to variable. On false, amount will be reduced to variable.
-    /// By any mean, variable will be greater than maximum or lower than 0. If that happens, the result will be replaced by the corresponding boundary.
-    /// The value returned is the result of variable +/- amount (determined by isAdding).
+    /// <summary>
+    /// If <paramref name="isAdding"/> is <see langword="true"/>, <paramref name="amount"/> will be added to <paramref name="variable"/>. On <see langword="false"/>, <paramref name="amount"/> will be reduced to <paramref name="variable"/>.
+    /// By any mean, <paramref name="variable"/> will be greater than <paramref name="maximum"/> or lower than 0. If that happens, the result will be replaced by the corresponding boundary (either 0 or <paramref name="maximum"/>) and the <c>rest</c> will store the difference between the surpassed value and the boundary.
+    /// The values returned are the result of variable +/- amount (determined by isAdding) and the rest. If there is no rest it'll be 0. 
     /// </summary>
-    /// <param name="amount"></param>
-    /// <param name="variable"></param>
-    /// <param name="maximum"></param>
-    /// <param name="isAdding"></param>
+    /// <param name="amount">Amount to add or reduct of <paramref name="variable"/>. Must be positive.</param>
+    /// <param name="variable">Variable where <paramref name="amount"/> will be added or reduced.</param>
+    /// <param name="maximum">Hight limit of the result. Result will be clamped between this and 0.</param>
+    /// <param name="isAdding">Whenever <paramref name="amount"/> will be added (<see langword="true"/>) or reduced (<see langword="false"/>) to <paramref name="variable"/>.</param>
     /// <param name="keyword"></param>
-    /// <return></return>
+    /// <return>New <paramref name="variable"/> value.</return>
+    /// <seealso cref="ChangeValue(float amount, float variable, float maximum, bool isAdding, string keyword)"/>
     protected float ChangeValueSimple(float amount, float variable, float maximum, bool isAdding, string keyword)
     {
         return ChangeValue(amount, variable, maximum, isAdding, keyword).Item1;
     }
 
     /// <summary>
-    /// Destroy gameObject and spawn an explosion instance on current location.
+    /// Destroy <see cref="gameObject"/> and spawn an explosion prefab instance on current location.
     /// </summary>
     protected virtual void Die()
     {

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HealthBarStabilizator : MonoBehaviour
 {
@@ -25,6 +23,5 @@ public class HealthBarStabilizator : MonoBehaviour
     {
         transform.localPosition = originalLocalPosition + transformToFollow.localPosition;
         // Do? https://forum.unity.com/threads/subtracting-quaternions.317649/
-
     }
 }

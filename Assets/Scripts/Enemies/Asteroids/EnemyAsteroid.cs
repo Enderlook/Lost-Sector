@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyAsteroid : EnemyBase
 {
@@ -10,7 +8,7 @@ public class EnemyAsteroid : EnemyBase
 
     protected override void Start()
     {
-        rigidbodyHelper.GetRigidbody2D().angularVelocity = rotation.GetValue();
+        rigidbodyHelper.GetRigidbody2D().angularVelocity = rotation.Value;
         base.Start();
     }
 }

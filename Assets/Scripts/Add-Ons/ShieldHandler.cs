@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class ShieldHandler
@@ -20,40 +17,32 @@ public class ShieldHandler
     private float maxShield;
 
     /// <summary>
-    /// Initialize the shield. Mandatory.
-    /// Retrieves the SpriteRenderer from the gameObject.
-    /// maxShieldColor and minShieldColor alphas will be set to 1 and 0, respectively.
-    /// Executes UpdateColor using maxShield and current shield.
+    /// Initialize the shield. Mandatory.<br/>
+    /// Retrieves the <see cref="SpriteRenderer"/> from the <see cref="gameObject"/>.<br/>
+    /// <see cref="maxShieldColor"/> and <see cref="minShieldColor"/> alphas will be set to 1 and 0, respectively.<br/>
+    /// Executes <see cref="UpdateColor(float shield, float maxShield)"/> using <paramref name="shield"/> and <paramref name="maxShield"/>.
     /// </summary>
     public void Initialize(float shield, float maxShield)
     {
         shieldImage = shieldGameObject.GetComponent<SpriteRenderer>();
         maxShieldColor.a = 1;
         minShieldColor.a = 0;
-
         UpdateColor(shield, maxShield);
     }
 
     /// <summary>
-    /// Initialize the shield. Mandatory.
-    /// Retrieves the SpriteRenderer from the gameObject.
-    /// maxShieldColor and minShieldColor alphas will be set to 1 and 0, respectively.
-    /// Executes UpdateColor using maxShield for both maximum shield and current shield.
+    /// Initialize the shield. Mandatory.<br/>
+    /// Retrieves the <see cref="SpriteRenderer"/> from the <see cref="gameObject"/>.<br/>
+    /// <see cref="maxShieldColor"/> and <see cref="minShieldColor"/> alphas will be set to 1 and 0, respectively.<br/>
+    /// Executes <see cref="UpdateColor(float shield, float maxShield)"/> using <paramref name="shield"/> on both parameters.
     /// </summary>
-    public void Initialize(float maxShield)
-    {
-        shieldImage = shieldGameObject.GetComponent<SpriteRenderer>();
-        maxShieldColor.a = 1;
-        minShieldColor.a = 0;
-
-        UpdateColor(maxShield, maxShield);
-    }
+    public void Initialize(float maxShield) => Initialize(maxShield, maxShield);
 
     /// <summary>
     /// Update the opacity and color of the shield bubble.
     /// </summary>
-    /// <param name="shield"></param>
-    /// <param name="maxShield"></param>
+    /// <param name="shield">Current shield.</param>
+    /// <param name="maxShield">Maximum shield.</param>
     public void UpdateColor(float shield, float maxShield)
     {
         this.maxShield = maxShield;
@@ -65,8 +54,5 @@ public class ShieldHandler
     /// Since no maxShield is provided, it will use the last provided maxShield;
     /// </summary>
     /// <param name="shield"></param>
-    public void UpdateColor(float shield)
-    {
-        shieldImage.color = Color.Lerp(minShieldColor, maxShieldColor, shield / maxShield);
-    }
+    public void UpdateColor(float shield) => shieldImage.color = Color.Lerp(minShieldColor, maxShieldColor, shield / maxShield);
 }
