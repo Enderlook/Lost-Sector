@@ -36,7 +36,7 @@ MonoBehaviour:
   onDeathExplosionPrefabDuration: 1
   healthBar: {fileID: 301837309425250942}
   rigidbodyHelper: {fileID: 3171107084848344103}
-  floatingTextController: {fileID: 0}
+  floatingTextController: {fileID: 7470196966639682740}
   impulse:
     startVector: {x: 0, y: 15}
     endVector: {x: 50, y: 300}
@@ -146,6 +146,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 317c52b6aadb3334fa7daa4a2aefc737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7470196966639682740 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2785313805999255258, guid: ff345a899057f1447afc58e7a15eed6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4687144031695792750}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e9589752773c64993f6b3502286ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &301837309425250942 stripped
