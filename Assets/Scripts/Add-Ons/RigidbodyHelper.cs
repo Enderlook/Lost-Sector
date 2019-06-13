@@ -1,28 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RigidbodyHelper : MonoBehaviour
 {
     [Header("Setup")]
     [Tooltip("Audio Source component.")]
     public AudioSource audioSource;
-    
+
+    /// <summary>
+    /// Configuration of the owner of this script.
+    /// </summary>
     private IRigidbodyHelperConfiguration entity;
 
     /// <summary>
     /// Set the configuration on the RigidbodyHelper in order to use it. Mandatory.
     /// </summary>
-    /// <param name="handler">Configuration of the RigidbodyHelper</param>
+    /// <param name="handler">Configuration of this <see cref="RigidbodyHelper"/></param>
+    /// <seealso cref="RigidbodyHelper"/>
     public void SetProperties(IRigidbodyHelperConfiguration configuration)
     {
         entity = configuration;
     }
- 
+
     /// <summary>
-    /// Return Rigidbody2D of the gameObject which has this script.
+    /// Return <see cref="Rigidbody"/> of the gameObject which has this script.
     /// </summary>
-    /// <returns>Rigidbody2D of the RigidbodyHelper's gameObject.</returns>
+    /// <returns><see cref="Rigidbody"/> of this <see cref="RigidbodyHelper"/>'s <see cref="gameObject"/>.</returns>
+    /// <seealso cref="RigidbodyHelper"/>.
     public Rigidbody2D GetRigidbody2D()
     {
         return gameObject.GetComponent<Rigidbody2D>();
@@ -31,10 +34,8 @@ public class RigidbodyHelper : MonoBehaviour
     /// <summary>
     /// Current position.
     /// </summary>
-    public Vector3 Position
-    {
-        get
-        {
+    public Vector3 Position {
+        get {
             return transform.position;
         }
     }
@@ -45,6 +46,10 @@ public class RigidbodyHelper : MonoBehaviour
      * https://forum.unity.com/threads/understanding-iserializationcallbackreceiver.383757/
      */
 
+    /// <summary>
+    /// Calculate damage produced on collision, play impact sound and spawn floating text whenever it should.
+    /// </summary>
+    /// <param name="collision">Unity <see cref="Collision2D"/>.</param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // https://forum.unity.com/threads/getting-impact-force-not-just-velocity.23746/
@@ -78,6 +83,8 @@ public class RigidbodyHelper : MonoBehaviour
     /// </summary>
     /// <param name="amount">Amount (positive) of damage received</param>
     /// <param name="displayText">Whenever the damage taken must be shown in a floating text.</param>
+    /// <seealso cref="ShouldDisplayDamage()"/>
+    /// <seealso cref="CalculateDamage(float impulse)"/>
     public void TakeDamage(float amount, bool displayText = false)
     {
         entity.TakeDamage(amount, displayText);
@@ -85,15 +92,21 @@ public class RigidbodyHelper : MonoBehaviour
 
     /// <summary>
     /// Whenever if the opposite <seealso cref="RigidbodyHelper"/> should display or not the floating text when receive damage..<br/>
-    /// This property is passed as <code>displayText</code> param of <seealso cref=">TakeDamage(float amount, bool displayText = false)"/> in the opposite <seealso cref="RigidbodyHelper"/>.
+    /// This property is passed as <code>displayText</code> parameter of <seealso cref=">TakeDamage(float amount, bool displayText = false)"/> in the opposite <seealso cref="RigidbodyHelper"/>.
     /// </summary>
-    /// <returns>If damage should be displayed uisng a <seealso cref="FloatingText"/>.</returns>
+    /// <returns>If damage should be displayed using a <seealso cref="FloatingText"/>.</returns>
     /// <seealso cref="IRigidbodyHelperConfiguration.ShouldDisplayDamage"/>
     public bool ShouldDisplayDamage()
     {
         return entity.ShouldDisplayDamage;
     }
 
+    /// <summary>
+    /// Calculate damage produced taking into account the <paramref name="impulse"/> of the collision if <see cref="IRigidbodyHelperConfiguration.IsImpactDamageRelativeToImpulse"/> is <see langword="true"/>. On false <see cref="IRigidbodyHelperConfiguration.ImpactDamage"/> is return.
+    /// </summary>
+    /// <param name="impulse">Impulse or force produced on <see cref="Collision2D"/>.</param>
+    /// <returns>Damage to inflict.</returns>
+    /// <seealso cref="TakeDamage(float amount, bool displayText = false)"/>
     private float CalculateDamage(float impulse)
     {
         if (entity.IsImpactDamageRelativeToImpulse)
@@ -112,22 +125,27 @@ public class RigidbodyHelper : MonoBehaviour
 public interface IRigidbodyHelperConfiguration : IShouldDisplayDamage
 {
     /// <summary>
-    /// Take damage reducing its HP. Values must be positive.
+    /// Take damage reducing its HP.
     /// </summary>
     /// <param name="amount">Amount of HP lost. Must be positive.</param>
     /// <param name="displayText">Whenever the damage taken must be shown in a floating text.</param>
     void TakeDamage(float amount, bool displayText = false);
     /// <summary>
-    /// Damage on impact.
+    /// Damage produced on collision impact.<br/>
+    /// If <seealso cref="IRigidbodyHelperConfiguration.IsImpactDamageRelativeToImpulse"/> is <see langword="true"/>, it's your responsibility to calculate damage taking into account impulse.
     /// </summary>
+    /// <seealso cref="RigidbodyHelper.OnCollisionEnter2D(Collision2D)"/>
+    /// <seealso cref="RigidbodyHelper.CalculateDamage(float)"/>
     float ImpactDamage { get; }
     /// <summary>
     /// Sound played on collision.
     /// </summary>
     Sound ImpactSound { get; }
     /// <summary>
-    /// If damage on impact is relative to the force and impulse of the collision.
+    /// Whenever <seealso cref="IRigidbodyHelperConfiguration.ImpactDamage"/> should or not be calculated taking into account the collision impulse.
     /// </summary>
+    /// <seealso cref="RigidbodyHelper.OnCollisionEnter2D(Collision2D)"/>
+    /// <seealso cref="RigidbodyHelper.CalculateDamage(float)"/>
     bool IsImpactDamageRelativeToImpulse { get; }
 
 }
@@ -135,8 +153,8 @@ public interface IRigidbodyHelperConfiguration : IShouldDisplayDamage
 public interface IShouldDisplayDamage
 {
     /// <summary>
-    /// Whenever if the opposite <seealso cref="RigidbodyHelper"/> should display or not the floating text when receive damage..<br/>
-    /// This property is passed as <code>displayText</code> param of <seealso cref=">TakeDamage(float amount, bool displayText = false)"/> in the opposite <seealso cref="RigidbodyHelper"/>.
+    /// Whenever if the opposite <seealso cref="RigidbodyHelper"/> should display or not the floating text when receive damage.<br/>
+    /// This property is passed as <code>displayText</code> parameter of <seealso cref=">TakeDamage(float amount, bool displayText = false)"/> in the opposite <seealso cref="RigidbodyHelper"/>.
     /// </summary>
     /// <seealso cref="RigidbodyHelper.ShouldDisplayDamage()"/>
     bool ShouldDisplayDamage { get; }

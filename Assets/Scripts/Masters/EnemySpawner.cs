@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using UnityEngine;
@@ -30,7 +29,7 @@ public class EnemySpawner : MonoBehaviour
         InvokeRepeating("DifficultyIncrease", difficultyIncreaseInterval, difficultyIncreaseInterval);
         StartCoroutine(SpawnWave());
     }
-    
+
     IEnumerator SpawnWave()
     {
         // TODO: This should stop on player death...
@@ -40,7 +39,7 @@ public class EnemySpawner : MonoBehaviour
             foreach (GameObject enemyPrefab in enemies.GetEnemies(difficulty))
             {
                 TransformRange spawnRange = spawnPoints[Random.Range(0, spawnPoints.Length - 1)];
-                Vector3 position = spawnRange.getVector();
+                Vector3 position = spawnRange.GetVector();
 
                 GameObject enemy = Instantiate(enemyPrefab, Global.enemiesParent);
                 enemy.transform.position = position;
@@ -55,6 +54,9 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Increase difficulty of the game. This isn't executed per frame but on a Coroutine because it would produce a greater geometrical progression that we don't want.
+    /// </summary>
     private void DifficultyIncrease()
     {
         difficulty *= difficultyGeometricalIncrease;
@@ -82,7 +84,8 @@ public class EnemySpawner : MonoBehaviour
 }
 
 [System.Serializable]
-public class EnemyPrefab {
+public class EnemyPrefab
+{
     [Tooltip("Enemy prefab to spawn.")]
     public GameObject prefab;
     [Tooltip("Weighted rarity.")]
@@ -96,7 +99,7 @@ public class EnemyPrefab {
     public string weightFactorFormula = "1";
 
     /// <summary>
-    /// Return the weigthed rarity of the enemy to spawn. The weight changes according to the current difficulty.
+    /// Return the weighted rarity of the enemy to spawn. The weight changes according to the current difficulty.
     /// </summary>
     /// <param name="difficulty">Difficulty used to calculate weight.</param>
     /// <returns>Weighted rarity.</returns>
@@ -117,7 +120,6 @@ public class EnemyPrefab {
         }
     }
 
-
     private void OnValidate()
     {
         if (weight <= 0)
@@ -128,11 +130,12 @@ public class EnemyPrefab {
     }
 }
 
-[System.Serializable] 
-public class Enemies {
+[System.Serializable]
+public class Enemies
+{
     [Tooltip("Enemy prefabs to spawn.")]
     public EnemyPrefab[] enemyPrefabs;
-    
+
     /// <summary>
     /// Get an enemy prefab to spawn and its treat.
     /// </summary>
@@ -141,7 +144,7 @@ public class Enemies {
     {
         float totalWeight = enemyPrefabs.Sum(enemy => enemy.GetWeight(difficulty));
         float chosenWeight = Random.value * totalWeight;
-        
+
         float currentWeight = 0;
         foreach (EnemyPrefab enemy in enemyPrefabs)
         {
@@ -153,9 +156,9 @@ public class Enemies {
         }
         throw new System.Exception("This shouldn't be happening!!!");
     }
-    
+
     /// <summary>
-    /// Returns an IEnumerable of enemies that should be spawned.
+    /// Returns an <see cref="IEnumerable"/> of enemies that should be spawned.
     /// </summary>
     /// <returns>Enemies that should be spawned.</returns>
     public IEnumerable GetEnemies(float difficulty)

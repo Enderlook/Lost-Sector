@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SelfDestroyInvisible : MonoBehaviour
 {
@@ -27,12 +25,18 @@ public class SelfDestroyInvisible : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Enable self destroy countdown.
+    /// </summary>
     private void OnBecameInvisible()
     {
         destroying = true;
         timeSinceInvisible = 0f;
     }
 
+    /// <summary>
+    /// Disable self destroy countdown.
+    /// </summary>
     private void OnBecameVisible()
     {
         destroying = false;

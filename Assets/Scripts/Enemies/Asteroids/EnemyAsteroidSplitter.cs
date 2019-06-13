@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Linq;
 using UnityEngine;
-using System.Linq;
 
 public class EnemyAsteroidSplitter : EnemyAsteroid
 {
@@ -28,6 +26,10 @@ public class SpawneableGameObjects
     [Tooltip("If false, it will be spawn a number of game objects equal to Amount To Spawn value, randomly distributed by chance. On true, Amount To Spawn will be ignored and weight will be used to determine the amount of each prefab (instead of their chance).")]
     public bool notRandom;
 
+    /// <summary>
+    /// Get a random prefab from the <see cref="prefabsToSpawn"/>.
+    /// </summary>
+    /// <returns>Random prefab to spawn.</returns>
     private GameObject GetRandomPrefab()
     {
         float totalWeight = prefabsToSpawn.Sum(prefabs => prefabs.weight);
@@ -51,26 +53,29 @@ public class SpawneableGameObjects
     /// <param name="Instantiate">Instantiate UnityEngine method.</param>
     public void SpawnPrefabs(System.Func<GameObject, Transform, GameObject> Instantiate)
     {
-        void Spawn(GameObject gameObjectToSpawn) {
+        void Spawn(GameObject gameObjectToSpawn)
+        {
             GameObject prefab = Instantiate(gameObjectToSpawn, Global.enemiesParent);
             Transform spawningTransform = spawningPoints[Random.Range(0, spawningPoints.Length - 1)];
             prefab.transform.position = spawningTransform.position;
             prefab.transform.rotation = spawningTransform.rotation;
-            // To make them a bit slowler
+            // To make them a bit slower
             prefab.GetComponent<EnemyBase>().impulse *= 0.75f;
         }
 
         if (notRandom)
         {
-            foreach(SpawneableGameObject spawneableGameObject in prefabsToSpawn)
+            foreach (SpawneableGameObject spawneableGameObject in prefabsToSpawn)
             {
                 for (int i = 0; i < spawneableGameObject.weight; i++)
                 {
                     Spawn(spawneableGameObject.prefab);
                 }
             }
-        } else {
-            int total = amountToSpawn.GetValueInt();
+        }
+        else
+        {
+            int total = amountToSpawn.ValueInt;
             for (int i = 0; i < total; i++)
             {
                 Spawn(GetRandomPrefab());

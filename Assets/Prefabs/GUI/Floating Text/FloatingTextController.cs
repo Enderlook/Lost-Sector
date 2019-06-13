@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class FloatingTextController : MonoBehaviour
@@ -44,10 +43,17 @@ public class FloatingTextController : MonoBehaviour
     public Transform floatingTextParent;
 
     private static Transform floatingTextParentStatic;
-
     /// <summary>
-    /// Transform used as parent for spawned flaoting texts.<br/>
-    /// <see cref="FloatingTextParent"/> will be returned unless it's null. If null, <see cref="floatingTextParentStatic"/> will be returned.
+    /// Set the parent of all Floating Text <see cref="GameObject"/>s spawned by <see cref="FloatingTextController"/>s which <see cref="floatingTextParent"/> is <see langword="null"/>.
+    /// </summary>
+    /// <param name="floatingTextParent">Parent of all <see cref="FloatingText"/> <see cref="GameObject"/>s.</param>
+    public static void SetFloatingTextParentStatic(Transform floatingTextParent)
+    {
+        floatingTextParentStatic = floatingTextParent;
+    }
+    /// <summary>
+    /// Transform used as parent for spawned floating texts.<br/>
+    /// <see cref="FloatingTextParent"/> will be returned unless it's <see langword="null"/>. If <see langword="null"/>, <see cref="floatingTextParentStatic"/> will be returned.
     /// </summary>
     private Transform FloatingTextParent {
         get {
@@ -64,14 +70,12 @@ public class FloatingTextController : MonoBehaviour
     /// </summary>
     private List<GameObject> floatingTextList = new List<GameObject>();
 
+    /// <summary>
+    /// Spawns a floating text and return its <see cref="FloatingText"/> script.<br/>
+    /// </summary>
+    /// <returns></returns>
     private FloatingText SpawnFloatingTextBase()
     {
-        if (maximumAmountFloatingText > 0 && floatingTextList.Count >= maximumAmountFloatingText)
-        {
-            Destroy(floatingTextList[0]);
-            floatingTextList.RemoveAt(0);
-        }
-
         GameObject floatingText;
         if (floatingTextParent != null)
             floatingText = Instantiate(floatingTextPrefab, FloatingTextParent);
@@ -79,15 +83,28 @@ public class FloatingTextController : MonoBehaviour
             floatingText = Instantiate(floatingTextPrefab);
         floatingText.transform.position = spawningPoints[Mathf.RoundToInt(Random.Range(0, spawningPoints.Length))].position;
 
-        if (maximumAmountFloatingText > 0)
-            floatingTextList.Add(floatingText);
-
+        AddToFloatingTextList(floatingText);
         return floatingText.GetComponent<FloatingText>();
     }
 
     /// <summary>
+    /// Add the <paramref name="floatingText"/> to <see cref="floatingTextList"/>.<br/>
+    /// In addition, it checks if the amount of current floating texts is between the allowed by <see cref="maximumAmountFloatingText"/>. If surpassed, it will destroy them.
+    /// </summary>
+    /// <param name="floatingText"><see cref="GameObject"/> of a Floating Text</param>
+    private void AddToFloatingTextList(GameObject floatingText)
+    {
+        if (maximumAmountFloatingText > 0 && floatingTextList.Count >= maximumAmountFloatingText)
+        {
+            Destroy(floatingTextList[0]);
+            floatingTextList.RemoveAt(0);
+        }
+        floatingTextList.Add(floatingText);
+    }
+
+    /// <summary>
     /// Spawns a floating text.<br/>
-    /// All the configuration don't provided in this method will be replaced by the configuration already setted on <see cref="FloatingTextController"/>, or, if also null, on the <see cref="floatingTextPrefab"/>.
+    /// All the configuration don't provided in this method will be replaced by the configuration already set on <see cref="FloatingTextController"/>, or, if also null, on the <see cref="floatingTextPrefab"/>.
     /// </summary>
     /// <param name="text">Text to display.</param>
     /// <param name="textColor">Color of the text.</param>
@@ -108,7 +125,7 @@ public class FloatingTextController : MonoBehaviour
 
     /// <summary>
     /// Spawns a floating text.<br/>
-    /// All the configuration don't provided in this method will be replaced by the configuration already setted on <see cref="FloatingTextController"/>, or, if also null, on the <see cref="floatingTextPrefab"/>.
+    /// All the configuration don't provided in this method will be replaced by the configuration already set on <see cref="FloatingTextController"/>, or, if also null, on the <see cref="floatingTextPrefab"/>.
     /// </summary>
     /// <param name="number">Number to display.</param>
     /// <param name="numberColor">Color of the number.</param>
@@ -130,13 +147,4 @@ public class FloatingTextController : MonoBehaviour
             typeOfRounding != null ? typeOfRounding : this.typeOfRounding
         );
     }
-
-    /// <summary>
-    /// Set the parent of all Floating Text game objects spawned by <see cref="FloatingTextController"/>s which <see cref="floatingTextParent"/> is null.
-    /// </summary>
-    /// <param name="floatingTextParent">Parent of all <see cref="FloatingText"/> game objects.</param>
-    public static void SetFloatingTextParentStatic(Transform floatingTextParent)
-    {
-        floatingTextParentStatic = floatingTextParent;
-    } 
 }

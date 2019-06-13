@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyAsteroidExplosive : EnemyAsteroid
 {
@@ -26,17 +24,18 @@ public class EnemyAsteroidExplosive : EnemyAsteroid
             Collider2D[] colliders = Physics2D.OverlapCircleAll(rigidbodyHelper.Position, explosionRadius);
             foreach (Collider2D collider in colliders)
             {
-                // Avoid Recursivity (TakeDamage -> Die -> Explode -> TakeDamage -> ...)
+                // Avoid Resistivity (TakeDamage -> Die -> Explode -> TakeDamage -> ...)
                 Rigidbody2D rigidbody2D = collider.attachedRigidbody;
                 if (rigidbody2D != rigidbodyHelper.GetRigidbody2D())
                 {
-                    // This won't cause NullPointerException because the || clause will only be revised if the explose == null is false, which means there is an explosive to point.
+                    // This won't cause NullPointerException because the || clause will only be revised if the explode == null is false, which means there is an explosive to point.
                     rigidbody2D.GetComponent<RigidbodyHelper>().TakeDamage(explosionDamage);
                 }
             }
         }
         base.Die();
     }
+
     private void OnDrawGizmos()
     {
         UnityEditor.Handles.color = Color.red;

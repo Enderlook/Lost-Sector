@@ -1,34 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration {
-
+public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration
+{
     [Header("Configuration")]
     [Tooltip("Damage on impact.")]
     public float damage = 1;
-    float IRigidbodyHelperConfiguration.ImpactDamage {
-        get {
-            return damage;
-        }
-    }
+    float IRigidbodyHelperConfiguration.ImpactDamage => damage;
 
     [Tooltip("Should spawn floating damage text on the enemy on collision?")]
     public bool shouldDisplayDamage;
-    bool IShouldDisplayDamage.ShouldDisplayDamage {
-        get {
-            return shouldDisplayDamage;
-        }
-    }
+    bool IShouldDisplayDamage.ShouldDisplayDamage => shouldDisplayDamage;
 
     [Header("Setup")]
     [Tooltip("Impact sound.")]
     public Sound impactSound;
-    Sound IRigidbodyHelperConfiguration.ImpactSound {
-        get {
-            return impactSound;
-        }
-    }
+    Sound IRigidbodyHelperConfiguration.ImpactSound => impactSound;
 
     [Tooltip("RigidbodyHelper script.")]
     public RigidbodyHelper rigidbodyHelper;
@@ -37,20 +23,17 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration {
     {
         rigidbodyHelper.SetProperties(this);
     }
-    
-    bool IRigidbodyHelperConfiguration.IsImpactDamageRelativeToImpulse {
-        get {
-            return false;
-        }
-    }
 
-    void IRigidbodyHelperConfiguration.TakeDamage(float amount, bool displayDamage) {
+    bool IRigidbodyHelperConfiguration.IsImpactDamageRelativeToImpulse => false;
+
+    void IRigidbodyHelperConfiguration.TakeDamage(float amount, bool displayDamage)
+    {
         // We are a bullet, we don't have HP... yet
         Destroy(gameObject);
     }
 
     /// <summary>
-    /// Configure the projectile properties. Mandatory for usage of the projectile class.
+    /// Configure the projectile properties. Mandatory..
     /// </summary>
     /// <param name="configuration">Configuration of the projectile.</param>
     public void SetProjectileProperties(IProjectileConfiguration configuration)
@@ -64,9 +47,10 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration {
 
         // https://forum.unity.com/threads/change-gameobject-layer-at-run-time-wont-apply-to-child.10091/ See post #post-1627654, #post-1819585, #post-3405070, #post-3676213. Get your own conclusions.
         // There could be more gameObjects to change layer
-        foreach (var transform in gameObject.GetComponentsInChildren<Transform>(true)) {
-            transform.gameObject.layer = configuration.Layer;        }
-
+        foreach (var transform in gameObject.GetComponentsInChildren<Transform>(true))
+        {
+            transform.gameObject.layer = configuration.Layer;
+        }
     }
 }
 
@@ -91,7 +75,8 @@ public interface IProjectileConfiguration : IShouldDisplayDamage
 }
 
 [System.Serializable]
-public class Weapon : IProjectileConfiguration {
+public class Weapon : IProjectileConfiguration
+{
     [Header("Configuration")]
     [Tooltip("Damage on hit.")]
     public float damageOnHit = 1;
@@ -126,17 +111,17 @@ public class Weapon : IProjectileConfiguration {
     private float cooldownTime = 0f;
 
     /// <summary>
-    /// Reduce cooldown time by deltaTime and checks if the weapon's cooldown is over. Returns true if the weapon is ready to shoot.
+    /// Reduce <see cref="cooldownTime"/> time and checks if the weapon's <see cref="cooldownTime"/> is over.
     /// </summary>
-    /// <param name="deltaTime">Time from last frame (Time.deltaTime).</param>
-    /// <returns>true if the weapon is ready to shoot, false if it's on cooldown.</returns>
+    /// <param name="deltaTime"><see cref="Time.deltaTime"/></param>
+    /// <returns><see langword="true"/> if the weapon is ready to shoot, <see langword="false"/> if it's on cooldown.</returns>
     public bool Recharge(float deltaTime)
     {
         return (cooldownTime -= deltaTime) <= 0f;
     }
 
     /// <summary>
-    /// Reset cooldown time to maximum.
+    /// Reset <see cref="cooldownTime"/> time to maximum.
     /// </summary>
     public void ResetCooldown()
     {
@@ -147,7 +132,7 @@ public class Weapon : IProjectileConfiguration {
     /// Generate an instance of a projectile an shoot it.
     /// In addition, cooldown is reseted and a shooting sound is played.
     /// </summary>
-    /// <param name="rigidbodyHelper">RigibodyHelper of the shooter</param>
+    /// <param name="rigidbodyHelper">RigibodyHelper of the shooter.</param>
     /// <param name="Instantiate">Instantiate UnityEngine method.</param>
     public void Shoot(RigidbodyHelper rigidbodyHelper, System.Func<GameObject, Transform, GameObject> Instantiate)
     {
@@ -160,12 +145,12 @@ public class Weapon : IProjectileConfiguration {
     }
 
     /// <summary>
-    /// Try to shoot a projectile. It will check for the cooldown time, and if possible, shoot.
+    /// Try to shoot a projectile. It will check for the <see cref="cooldownTime"/>, and if possible, shoot.
     /// </summary>
     /// <param name="rigidbodyHelper">RigibodyHelper of the shooter</param>
     /// <param name="Instantiate">Instantiate UnityEngine method.</param>
-    /// <param name="deltaTime">Time from last frame (Time.deltaTime).</param>
-    /// <returns>true if the weapon shoot, false if it's still on cooldown.</returns>
+    /// <param name="deltaTime"><see cref="Time.deltaTime"/></param>
+    /// <returns><see langword="true"/> if the weapon shoot, <see langword="false"/> if it's still on cooldown.</returns>
     public bool TryShoot(RigidbodyHelper rigidbodyHelper, System.Func<GameObject, Transform, GameObject> Instantiate, float deltaTime)
     {
         if (Recharge(deltaTime))

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class FloatingText : MonoBehaviour
@@ -36,7 +34,6 @@ public class FloatingText : MonoBehaviour
         transform.localScale = Vector3.one * scaleMultiplier;
         transform.Translate(RandomOffset());
         // https://forum.unity.com/threads/how-to-find-animation-clip-length.465751/
-        Debug.Log(animator.runtimeAnimatorController.animationClips[0].length);
         float durationOfClip = animator.runtimeAnimatorController.animationClips[0].length;
         Destroy(gameObject, timeBeforeDestroy == 0 ? durationOfClip : timeBeforeDestroy);
     }

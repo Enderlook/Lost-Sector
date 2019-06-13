@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,7 +6,7 @@ using UnityEngine;
 public class FloatingTextcontrollerEditor : Editor
 {
     public override void OnInspectorGUI()
-    {       
+    {
         DrawDefaultInspector();
 
         // https://answers.unity.com/questions/192895/hideshow-properties-dynamically-in-inspector.html
@@ -18,7 +16,7 @@ public class FloatingTextcontrollerEditor : Editor
         EditorGUILayout.Space();
         // https://www.reddit.com/r/Unity3D/comments/3b43pf/unity_editor_scripting_how_can_i_draw_a_header_in/
         EditorGUILayout.LabelField("Floating Text Override Configuration", EditorStyles.boldLabel);
-           
+
         // Draw fields
         ToggleableField(ref floatingTextController.overrideScaleMultiplier, "Scale Multiplier", ref floatingTextController.scaleMultiplier,
             () => EditorGUILayout.FloatField(
@@ -49,7 +47,7 @@ public class FloatingTextcontrollerEditor : Editor
             () => (FloatingText.TYPE_OF_ROUNDING)EditorGUILayout.EnumPopup(
                 new GUIContent("Type of Rounding", "Determines how decimal digits are rounded."),
                 floatingTextController.typeOfRounding)
-        );        
+        );
     }
 
     /// <summary>
@@ -68,7 +66,7 @@ public class FloatingTextcontrollerEditor : Editor
         // https://www.reddit.com/r/Unity3D/comments/45bjwc/tooltip_on_custom_inspectorproperties/
         ChangeCheck(CreateToggleButton, ref confirmationVariable, confirmationVariable, confirmationLabel, $"Toggle {confirmationLabel}.");
         if (confirmationVariable)
-        {            
+        {
             EditorGUI.indentLevel++;
             ChangeCheck(toShowfield, ref field, $"Change in {confirmationLabel}.");
             EditorGUI.indentLevel--;

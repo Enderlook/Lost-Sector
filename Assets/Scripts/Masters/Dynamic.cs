@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Linq;
 using UnityEngine;
-using System.Linq;
 
-public static class Global {
+public static class Global
+{
     /// <summary>
     /// Enemies parent transform. Used to store all the enemies.
     /// </summary>
@@ -55,12 +54,13 @@ public class Dynamic : MonoBehaviour
 }
 
 [System.Serializable]
-public class Boundary {
+public class Boundary
+{
     // Maybe we could just take the parent gameObject and then find its children
     [Tooltip("Boundary. The game object won't be able to cross it.")]
     public Transform[] boundaries;
-    
-    // Is fine this hybrid behavior or should nothing be static
+
+    // Is fine this hybrid behavior or should nothing be static?
     private static float xMin, xMax, yMin, yMax;
 
     /// <summary>
@@ -79,7 +79,8 @@ public class Boundary {
     /// Constrains a position to fit inside the boundaries. If the position is outside it will be put inside.
     /// </summary>
     /// <param name="position">Position of the game object to check.</param>
-    /// <returns>Item1 is the new position of the game object. Item2 is a boolean, if true, the position was clamped inside the boundaries and so the game object position must be updated with the values from Item1.</returns>
+    /// <returns><c>Item1</c> is the new position of the game object.<br/>
+    /// <c>Item2</c> is a <see langword="bool"/>, if <see langword="true"/>, the position was clamped inside the boundaries and so the game object position must be updated with the values from <c>Item1</c>.</returns>
     public static System.Tuple<Vector2, bool> CheckForBoundaries(Vector2 position)
     {
         Vector2 newPosition = new Vector2(Mathf.Clamp(position.x, xMin, xMax), Mathf.Clamp(position.y, yMin, yMax));
