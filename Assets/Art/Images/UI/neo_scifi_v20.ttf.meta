@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 26d9755e19df12548a90fc40a17b2323
+guid: 29e1660162c7b9047ac773bef20c04b5
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -11,8 +11,7 @@ TrueTypeFontImporter:
   fontName: Neo Sci-Fi v2.0
   fontNames:
   - Neo Sci-Fi v2.0
-  fallbackFontReferences:
-  - {fileID: 12800000, guid: 29e1660162c7b9047ac773bef20c04b5, type: 3}
+  fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

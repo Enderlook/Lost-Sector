@@ -158,8 +158,10 @@ public class Sound
     /// <param name="volumeMultiplier">Volume of the sound, from 0 to 1.</param>
     public void Play(AudioSource audioSource, float volumeMultiplier)
     {
-        audioSource.pitch = GetPitch();
-        audioSource.PlayOneShot(audioClip, GetVolume() * volumeMultiplier);
+        if (Settings.IsSoundActive) {
+            audioSource.pitch = GetPitch();
+            audioSource.PlayOneShot(audioClip, GetVolume() * volumeMultiplier);
+        }
     }
 }
 
