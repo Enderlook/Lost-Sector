@@ -81,7 +81,7 @@ MonoBehaviour:
     type: 3}
   onDeathExplosionPrefabScale: 3
   onDeathExplosionPrefabDuration: 1
-  healthBar: {fileID: 2859085763303391964}
+  healthBar: {fileID: 1346761454569469697}
   rigidbodyHelper: {fileID: 4216202753804953944}
   floatingTextController: {fileID: 0}
   impulse:
@@ -205,9 +205,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317c52b6aadb3334fa7daa4a2aefc737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2859085763303391964 stripped
+--- !u!114 &1346761454569469697 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3543625224184268707, guid: 926a52539d738a7439a32750206b316e,
+  m_CorrespondingSourceObject: {fileID: 301837309425250942, guid: 926a52539d738a7439a32750206b316e,
     type: 3}
   m_PrefabInstance: {fileID: 1621576272868885887}
   m_PrefabAsset: {fileID: 0}

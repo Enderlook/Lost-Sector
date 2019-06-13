@@ -31,7 +31,7 @@ PrefabInstance:
     - target: {fileID: 3525440485917604074, guid: de0823a963396b041857777df4f64a0f,
         type: 3}
       propertyPath: m_Name
-      value: Health Bar Without Canvas
+      value: Health Bar With Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 7292877121088969191, guid: de0823a963396b041857777df4f64a0f,
         type: 3}
@@ -138,25 +138,55 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3589550661366649226, guid: de0823a963396b041857777df4f64a0f,
+        type: 3}
+      propertyPath: textShowed
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3589550661366649226, guid: de0823a963396b041857777df4f64a0f,
+        type: 3}
+      propertyPath: dynamicNumbers
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4206750193802182903, guid: de0823a963396b041857777df4f64a0f,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.8831839
+      objectReference: {fileID: 0}
+    - target: {fileID: 4206750193802182903, guid: de0823a963396b041857777df4f64a0f,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100829391673770149, guid: de0823a963396b041857777df4f64a0f,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4207295870973242035, guid: de0823a963396b041857777df4f64a0f,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.8753953
+      value: 0.85004574
       objectReference: {fileID: 0}
     - target: {fileID: 4207295870973242035, guid: de0823a963396b041857777df4f64a0f,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.014735233
+      value: 0.03187036
       objectReference: {fileID: 0}
     - target: {fileID: 4207295870973242035, guid: de0823a963396b041857777df4f64a0f,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.12557568
+      value: 0.15005678
       objectReference: {fileID: 0}
     - target: {fileID: 4207295870973242035, guid: de0823a963396b041857777df4f64a0f,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.84044206
+      value: 0.96643674
+      objectReference: {fileID: 0}
+    - target: {fileID: 4141759295332694013, guid: de0823a963396b041857777df4f64a0f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0823a963396b041857777df4f64a0f, type: 3}
