@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: LineRenderPart
+  m_Name: Start Dust Line
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _ALPHABLEND_ON _EMISSION
   m_LightmapFlags: 0
@@ -74,5 +74,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.8, g: 0.9, b: 0.9, a: 0.5019608}
+    - _Color: {r: 0.8, g: 0.9, b: 0.9, a: 0.32941177}
     - _EmissionColor: {r: 0.19313726, g: 0.25, b: 0.24901961, a: 1}
