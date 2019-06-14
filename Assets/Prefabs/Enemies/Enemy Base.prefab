@@ -122,14 +122,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7858251103388681800}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7858251103247592353}
   m_Father: {fileID: 7858251103632841098}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!50 &7858251103388681802
 Rigidbody2D:
   serializedVersion: 4
@@ -421,6 +421,28 @@ PrefabInstance:
       value: Health Bar With Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 1995666305102761812, guid: 87df97d2a6d384e43b83e8421882d21c,
+        type: 3}
+    - target: {fileID: 7570734365601577221, guid: 6969e2527261f0045bc3f1b1a0c7b153,
+        type: 3}
+      propertyPath: textShowed
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570734365601577221, guid: 6969e2527261f0045bc3f1b1a0c7b153,
+        type: 3}
+      propertyPath: dynamicNumbers
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7506624220066418789, guid: 6969e2527261f0045bc3f1b1a0c7b153,
+        type: 3}
+      propertyPath: m_Name
+      value: Health Bar with Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7506624220066418789, guid: 6969e2527261f0045bc3f1b1a0c7b153,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4464618227662975336, guid: 6969e2527261f0045bc3f1b1a0c7b153,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
