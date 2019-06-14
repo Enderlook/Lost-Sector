@@ -125,7 +125,8 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     {
         System.Tuple<float, float, float> change = ChangeValue(amount, Health, MaxHealth, false, "health");
         Health = change.Item1;
-        SpawnFloatingText(change.Item2, Color.Lerp(Color.red, new Color(1, .5f, 0), Health / MaxHealth));
+        if (displayDamage)
+            SpawnFloatingText(change.Item2, Color.Lerp(Color.red, new Color(1, .5f, 0), Health / MaxHealth));
     }
 
     // TODO: https://stackoverflow.com/questions/1402803/passing-properties-by-reference-in-c-sharp
