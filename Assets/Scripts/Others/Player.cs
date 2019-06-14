@@ -126,7 +126,7 @@ public class Player : LivingObject
             }
 
             //Health = ChangeValue(restDamage, Health, MaxHealth, false, "health");
-            base.TakeDamage(restDamage, false);
+            base.TakeDamage(restDamage, true);
         }
     }
     protected override void Die()
