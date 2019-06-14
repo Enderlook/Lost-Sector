@@ -142,8 +142,8 @@ public class Player : LivingObject
     /// <returns>Damage reduction percent (from 0 to 1).</returns>
     private float DamageReductionCalculator(float damage, float health, float maxHealth, float health_threshold, float precitionInterval = 1)
     {
-
-        float DamageReduction(float HP) => (10 + Mathf.Exp(1) / Mathf.Exp(-HP / maxHealth * 10)) / 100;
+        float e = Mathf.Exp(1);
+        float DamageReduction(float HP) => 1.25f - (e / Mathf.Exp(Mathf.Pow((-HP / maxHealth), 2)) / e);
 
         float currentHealth = health;
         float remainingDamage;
@@ -167,7 +167,7 @@ public class Player : LivingObject
         }
         // Remove last decimals
         currentHealth -= (remainingDamage - calculatedDamage) * DamageReduction(currentHealth);
-
+        
         return health - currentHealth;
     }
 
