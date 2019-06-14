@@ -120,7 +120,7 @@ public class Player : LivingObject
             float health_threshold = 0.35f;
             if (Health - restDamage < MaxHealth * health_threshold)
             {
-                float damage = restDamage * DamageReductionCalculator(restDamage, Health, MaxHealth, MaxHealth * health_threshold);
+                float damage = restDamage * 0.5f;
                 // Damage can't be lower than 1 or the decimal part of restDamage, whatever is lower, regardless of the damage reduction.
                 restDamage = Mathf.Min(damage, 1, restDamage % 1 != 0 ? restDamage % 1 : Mathf.Infinity);
             }
@@ -129,48 +129,6 @@ public class Player : LivingObject
             base.TakeDamage(restDamage, false);
         }
     }
-
-    /// <summary>
-    /// Reduced damage taking into account the special damage reduction by current health percent.
-    /// Using <paramref name="health"/> and <paramref name="health_threshold"/> we can not only reduce damage on Health, but also on Shield if we wanted.
-    /// </summary>
-    /// <param name="damage">Amount of damage received (positive).</param>
-    /// <param name="health">Current amount of health.</param>
-    /// <param name="maxHealth">Maximum amount of health.</param>
-    /// <param name="health_threshold">Health threshold for damage reduction (from 0 to 1).</param>
-    /// <param name="precitionInterval">Interval of damage used in the fake integral. Small numbers increases precision at expenses of performance.</param>
-    /// <returns>Damage reduction percent (from 0 to 1).</returns>
-    private float DamageReductionCalculator(float damage, float health, float maxHealth, float health_threshold, float precitionInterval = 1)
-    {
-
-        float DamageReduction(float HP) => (10 + Mathf.Exp(1) / Mathf.Exp(-HP / maxHealth * 10)) / 100;
-
-        float currentHealth = health;
-        float remainingDamage;
-        // Reduce health above threshold
-        if (currentHealth > health_threshold)
-        {
-            remainingDamage = damage - currentHealth;
-            currentHealth -= health_threshold;
-        }
-        else
-            remainingDamage = damage;
-
-        // Fake integral
-        // TODO: Apply a real integral
-        int currentRemainingDamage = Mathf.FloorToInt(remainingDamage);
-        float calculatedDamage = precitionInterval;
-        for (; calculatedDamage <= currentRemainingDamage; calculatedDamage += precitionInterval)
-        {
-            // Damage * Damage reduction
-            currentHealth -= 1 * DamageReduction(currentHealth);
-        }
-        // Remove last decimals
-        currentHealth -= (remainingDamage - calculatedDamage) * DamageReduction(currentHealth);
-
-        return health - currentHealth;
-    }
-
     protected override void Die()
     {
         GameObject explosion = Instantiate(onDeathExplosionPrefab, Global.explosionsParent);
