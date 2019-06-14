@@ -15,6 +15,7 @@ MonoBehaviour:
   startingMaxHealth: 80
   startingHealth: -1
   relativeImpactDamage: 11
+  shouldDisplayDamage: 0
   impactSound:
     audioClip: {fileID: 8300000, guid: 697e432eddbaa984f9cae727c8608928, type: 3}
     volume:
@@ -33,9 +34,9 @@ MonoBehaviour:
     type: 3}
   onDeathExplosionPrefabScale: 2.75
   onDeathExplosionPrefabDuration: 1
-  healthBar: {fileID: 4977233900857453675}
+  healthBar: {fileID: 3543625224184268707}
   rigidbodyHelper: {fileID: 3171107084848344103}
-  floatingTextController: {fileID: 5138623462983443255}
+  floatingTextController: {fileID: 0}
   impulse:
     startVector: {x: 0, y: 15}
     endVector: {x: 50, y: 300}
@@ -111,16 +112,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7858251103388681802, guid: ff345a899057f1447afc58e7a15eed6e,
-        type: 3}
-      propertyPath: m_Mass
-      value: 0.75
-      objectReference: {fileID: 0}
     - target: {fileID: 7858251103388681801, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: livingObject
       value: 
       objectReference: {fileID: 768387036}
+    - target: {fileID: 7858251103388681802, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: m_Mass
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 7858251103388681803, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_Radius
@@ -135,18 +136,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4687144031695792750}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5138623462983443255 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 458270371994159449, guid: ff345a899057f1447afc58e7a15eed6e,
-    type: 3}
-  m_PrefabInstance: {fileID: 4687144031695792750}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3171107085224686566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42e9589752773c64993f6b3502286ccd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3171107084848344103 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7858251103388681801, guid: ff345a899057f1447afc58e7a15eed6e,
@@ -159,9 +148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317c52b6aadb3334fa7daa4a2aefc737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4977233900857453675 stripped
+--- !u!114 &3543625224184268707 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 296880736855787013, guid: ff345a899057f1447afc58e7a15eed6e,
+  m_CorrespondingSourceObject: {fileID: 8079854604144078285, guid: ff345a899057f1447afc58e7a15eed6e,
     type: 3}
   m_PrefabInstance: {fileID: 4687144031695792750}
   m_PrefabAsset: {fileID: 0}
