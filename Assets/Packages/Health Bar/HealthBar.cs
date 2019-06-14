@@ -37,17 +37,7 @@ public class HealthBar : MonoBehaviour
     private float maxHealth;
     private float health;
 
-    private void Awake()
-    {
-        healthImage = healthBar.GetComponent<Image>();
-        healthTransform = healthBar.GetComponent<RectTransform>();
-
-        healingImage = healingBar.GetComponent<Image>();
-        healingTransform = healingBar.GetComponent<RectTransform>();
-
-        if (maxHealthColor == Color.black)
-            maxHealthColor = healthImage.color;
-    }
+    private void Awake() => Setup();
 
     /// <summary>
     /// Modify the health bar values without producing any animation effects (sliding the bar or changing the numbers).
@@ -80,6 +70,15 @@ public class HealthBar : MonoBehaviour
         ManualUpdate(maxHealth, maxHealth);
     }
 
+    /// <summary>
+    /// Get the <see cref="healthImage"/> color taking into account the percentage of remaining health.
+    /// </summary>
+    /// <returns>Color of the <see cref="healthImage"/></returns>
+    private Color GetHealthColor()
+    {
+        return Color.Lerp(minHealthColor, maxHealthColor, healthImage.fillAmount + damageBar.fillAmount - healingImage.fillAmount);
+    }
+
     private void Update()
     {
         // Unfill the damage and healing bar per frame
@@ -90,7 +89,7 @@ public class HealthBar : MonoBehaviour
 
         if (minHealthColor != Color.black)
         {
-            healthImage.color = Color.Lerp(minHealthColor, maxHealthColor, healthImage.fillAmount + damageBar.fillAmount - healingImage.fillAmount);
+            healthImage.color = GetHealthColor();
         }
         else
         {
@@ -205,5 +204,29 @@ public class HealthBar : MonoBehaviour
         {
             healingImage.fillAmount -= ((healingTransform.rect.width * healingImage.fillAmount - healingBar.transform.localPosition.x) - healingTransform.rect.width) / healingTransform.rect.width;
         }
+    }
+
+    /// <summary>
+    /// Update color of health bar.
+    /// </summary>
+    private void OnValidate()
+    {
+        Setup();
+        healthImage.color = GetHealthColor();
+    }
+
+    /// <summary>
+    /// Get the require components <seealso cref="healthImage"/>, <seealso cref="healthTransform"/>, <seealso cref="healingImage"/>, <seealso cref="healingTransform"/> and set <seealso cref="maxHealth"/>.
+    /// </summary>
+    private void Setup()
+    {
+        healthImage = healthBar.GetComponent<Image>();
+        healthTransform = healthBar.GetComponent<RectTransform>();
+
+        healingImage = healingBar.GetComponent<Image>();
+        healingTransform = healingBar.GetComponent<RectTransform>();
+
+        if (maxHealthColor == Color.black)
+            maxHealthColor = healthImage.color;
     }
 }
