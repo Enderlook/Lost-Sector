@@ -41,6 +41,11 @@ MonoBehaviour:
     startVector: {x: 0, y: 5}
     endVector: {x: 0, y: 10}
     notRandom: 0
+  moneySpawnedOnDeath:
+    start: 8
+    end: 15
+    notRandom: 0
+  coinController: {fileID: 5607631490615431216}
   waitSecondsBeferoAccelerate: 2
   acceleration: 10
 --- !u!60 &3658925818128820500
@@ -195,15 +200,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 915464485681963122, guid: ff345a899057f1447afc58e7a15eed6e,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 5477906919725349131, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_Color.a
-      value: 0.5019608
+      value: 0.7490196
       objectReference: {fileID: 0}
     - target: {fileID: 7858251103247592352, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
@@ -221,11 +221,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: a388503bbfb821c4b95b0d4947ffaefa,
         type: 3}
-    - target: {fileID: 915780078348334396, guid: ff345a899057f1447afc58e7a15eed6e,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 5835432709893246568, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -236,17 +231,17 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 915539938308353628, guid: ff345a899057f1447afc58e7a15eed6e,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 915782747013515100, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 915464485681963122, guid: ff345a899057f1447afc58e7a15eed6e,
+    - target: {fileID: 915539938308353628, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 916336456437149744, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_Layer
       value: 10
@@ -256,12 +251,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 916204840301432730, guid: ff345a899057f1447afc58e7a15eed6e,
+    - target: {fileID: 915780078348334396, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 916336456437149744, guid: ff345a899057f1447afc58e7a15eed6e,
+    - target: {fileID: 915464485681963122, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 915464485681963122, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 916204840301432730, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_Layer
       value: 10
@@ -281,6 +286,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2349177949651915494}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5607631490615431216 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7875594837939159766, guid: ff345a899057f1447afc58e7a15eed6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2349177949651915494}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5591194028196858734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d8e5da0db1cf484fb833721283a1112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5591194028556358830 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7858251103388681800, guid: ff345a899057f1447afc58e7a15eed6e,

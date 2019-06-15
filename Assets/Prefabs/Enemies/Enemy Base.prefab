@@ -344,6 +344,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7858251103632841098}
   - component: {fileID: 7858251103632841097}
+  - component: {fileID: 7875594837939159766}
   m_Layer: 9
   m_Name: Enemy Base
   m_TagString: Untagged
@@ -408,6 +409,30 @@ MonoBehaviour:
     startVector: {x: 0, y: 15}
     endVector: {x: 0, y: 100}
     notRandom: 0
+  moneySpawnedOnDeath:
+    start: 1
+    end: 2
+    notRandom: 0
+  coinController: {fileID: 7875594837939159766}
+--- !u!114 &7875594837939159766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7858251103632841096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d8e5da0db1cf484fb833721283a1112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed:
+    start: 0.2
+    end: 1
+    notRandom: 0
+  spawninigTransform: {fileID: 7858251103388681844}
+  coinPrefab: {fileID: 5012066591774042952, guid: 5e46a033ecf5de24aa75fe9b19eb2905,
+    type: 3}
 --- !u!1001 &750799849835700009
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -415,23 +440,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7858251103632841098}
     m_Modifications:
-    - target: {fileID: 5650723978850807385, guid: 87df97d2a6d384e43b83e8421882d21c,
-        type: 3}
-      propertyPath: m_Name
-      value: Health Bar With Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 1995666305102761812, guid: 87df97d2a6d384e43b83e8421882d21c,
-        type: 3}
-    - target: {fileID: 7570734365601577221, guid: 6969e2527261f0045bc3f1b1a0c7b153,
-        type: 3}
-      propertyPath: textShowed
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7570734365601577221, guid: 6969e2527261f0045bc3f1b1a0c7b153,
-        type: 3}
-      propertyPath: dynamicNumbers
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7506624220066418789, guid: 6969e2527261f0045bc3f1b1a0c7b153,
         type: 3}
       propertyPath: m_Name
@@ -442,10 +450,15 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4464618227662975336, guid: 6969e2527261f0045bc3f1b1a0c7b153,
+    - target: {fileID: 5650723978850807385, guid: 87df97d2a6d384e43b83e8421882d21c,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
+      propertyPath: m_Name
+      value: Health Bar With Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1995666305102761812, guid: 87df97d2a6d384e43b83e8421882d21c,
+        type: 3}
+      propertyPath: 
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1995666305102761812, guid: 87df97d2a6d384e43b83e8421882d21c,
         type: 3}
@@ -601,6 +614,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.a
       value: 0.7490196
+      objectReference: {fileID: 0}
+    - target: {fileID: 4464618227662975336, guid: 6969e2527261f0045bc3f1b1a0c7b153,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570734365601577221, guid: 6969e2527261f0045bc3f1b1a0c7b153,
+        type: 3}
+      propertyPath: textShowed
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570734365601577221, guid: 6969e2527261f0045bc3f1b1a0c7b153,
+        type: 3}
+      propertyPath: dynamicNumbers
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87df97d2a6d384e43b83e8421882d21c, type: 3}

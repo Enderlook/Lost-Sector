@@ -115,6 +115,14 @@ PrefabInstance:
       propertyPath: rotation.end
       value: 250
       objectReference: {fileID: 0}
+    - target: {fileID: 768387036, guid: 926a52539d738a7439a32750206b316e, type: 3}
+      propertyPath: moneySpawnedOnDeath.end
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 768387036, guid: 926a52539d738a7439a32750206b316e, type: 3}
+      propertyPath: moneySpawnedOnDeath.start
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3171107084848344103, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
       propertyPath: audioSource
