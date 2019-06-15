@@ -14,7 +14,7 @@ public class SelfDestroyEndAnimation : MonoBehaviour
     private void OnValidate()
     {
         Animator animator = gameObject.GetComponent<Animator>();
-        if (animator != null)
+        if (animator == null)
             Debug.LogWarning($"Game object {gameObject.name} lacks of an Animator Component.");
     }
 }
