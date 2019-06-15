@@ -5,4 +5,5 @@
 // a specific target and scoped to a namespace, type, member, etc.
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0052:Quitar miembros privados no leídos", Justification = "Este método es ejecutado por Unity.", Scope = "member", Target = "~M:FloatingText.Start")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0052:Quitar miembros privados no leídos", Justification = "Este método es ejecutado por Unity.", Scope = "member", Target = "~M:RigidbodyHelper.OnCollisionEnter2D(UnityEngine.Collision2D)")]
 
