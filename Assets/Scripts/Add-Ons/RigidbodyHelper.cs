@@ -147,7 +147,6 @@ public interface IRigidbodyHelperConfiguration : IShouldDisplayDamage
     /// <seealso cref="RigidbodyHelper.OnCollisionEnter2D(Collision2D)"/>
     /// <seealso cref="RigidbodyHelper.CalculateDamage(float)"/>
     bool IsImpactDamageRelativeToImpulse { get; }
-
 }
 
 public interface IShouldDisplayDamage
