@@ -24,9 +24,9 @@ public class EnemyAsteroidExplosive : EnemyAsteroid
             Collider2D[] colliders = Physics2D.OverlapCircleAll(rigidbodyHelper.Position, explosionRadius);
             foreach (Collider2D collider in colliders)
             {
-                // Avoid Resistivity (TakeDamage -> Die -> Explode -> TakeDamage -> ...)
+                // Avoid recursive loop (TakeDamage -> Die -> Explode -> TakeDamage -> ...)
                 Rigidbody2D rigidbody2D = collider.attachedRigidbody;
-                if (rigidbody2D != rigidbodyHelper.GetRigidbody2D())
+                if (rigidbody2D != rigidbodyHelper.GetRigidbody2D() && rigidbody2D != null)
                 {
                     // This won't cause NullPointerException because the || clause will only be revised if the explode == null is false, which means there is an explosive to point.
                     rigidbody2D.GetComponent<RigidbodyHelper>().TakeDamage(explosionDamage);
