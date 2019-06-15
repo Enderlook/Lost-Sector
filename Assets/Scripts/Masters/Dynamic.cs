@@ -16,9 +16,36 @@ public static class Global
     /// </summary>
     public static Transform projectilesParent;
     /// <summary>
+    /// Pickups parent transform. Used to store all the pickups.
+    /// </summary>
+    public static Transform pickupsParent;
+    /// <summary>
     /// Boundaries of the screen.
     /// </summary>
-    public static Boundary boundary;
+    public static Boundary boundary;    
+
+    private static CoinMeter coinMeter;
+    /// <summary>
+    /// Set the <seealso cref="CoinMeter"/> script that controls how money is displayed on canvas.
+    /// </summary>
+    /// <param name="coinMeterController"><seealso cref="CoinMeter"/> that controls displayed money.</param>
+    public static void SetCoinMeter(CoinMeter coinMeterController, int statingMoney)
+    {
+        coinMeter = coinMeterController;
+        coinMeter.ManualUpdate(statingMoney);
+    }
+
+    /// <summary>
+    /// Current money of the player.
+    /// </summary>
+    public static int money {
+        get {
+            return coinMeter.money;
+        }
+        set {
+            coinMeter.money = value;
+        }
+    }
 }
 
 public class Dynamic : MonoBehaviour
@@ -32,8 +59,14 @@ public class Dynamic : MonoBehaviour
     public Transform projectilesParent;
     [Tooltip("Floating text parent transform.")]
     public Transform floatingTextParent;
+    [Tooltip("Pickups parent transform.")]
+    public Transform pickupsParent;
     [Tooltip("Boundary of screen.")]
     public Boundary boundary;
+    [Tooltip("Stating money.")]
+    public int startingMoney;
+    [Tooltip("Money controller script.")]
+    public CoinMeter coinMeter;
 
     private void Awake()
     {
@@ -50,6 +83,8 @@ public class Dynamic : MonoBehaviour
         Global.projectilesParent = projectilesParent;
         Global.boundary = boundary;
         FloatingTextController.SetFloatingTextParentStatic(floatingTextParent);
+        Global.SetCoinMeter(coinMeter, startingMoney);
+        Global.pickupsParent = pickupsParent;
     }
 }
 
@@ -61,6 +96,7 @@ public class Boundary
     public Transform[] boundaries;
 
     // Is fine this hybrid behavior or should nothing be static?
+    // Maybe the whole class could be static and be separated from Global...
     private static float xMin, xMax, yMin, yMax;
 
     /// <summary>

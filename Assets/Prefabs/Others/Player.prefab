@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1042733514730051092}
   - component: {fileID: 2054337060550579542}
   - component: {fileID: 7723782474642780987}
+  - component: {fileID: 5010232521740883684}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -226,6 +227,22 @@ MonoBehaviour:
   floatingTextPrefab: {fileID: 8150760654224925313, guid: 2464453f149ba994292ee710d0ceaab7,
     type: 3}
   floatingTextParent: {fileID: 0}
+--- !u!114 &5010232521740883684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042733514730051093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a6dfdd1bd6897f4681df99d574a3a7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magnetRadius: 1.35
+  magnetStrength: 1
+  pickupRadius: 0.2
+  magnetTransform: {fileID: 9088371353735266212}
 --- !u!1 &1042733514819035074
 GameObject:
   m_ObjectHideFlags: 0

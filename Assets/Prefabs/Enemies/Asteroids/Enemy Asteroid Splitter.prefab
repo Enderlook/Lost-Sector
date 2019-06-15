@@ -71,6 +71,11 @@ MonoBehaviour:
     startVector: {x: 0, y: 10}
     endVector: {x: 15, y: 125}
     notRandom: 0
+  moneySpawnedOnDeath:
+    start: 10
+    end: 20
+    notRandom: 0
+  coinController: {fileID: 1917316055230087572}
   rotation:
     start: -100
     end: 100
@@ -387,6 +392,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3953038583085328684}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1917316055230087572 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3190711750313011384, guid: 926a52539d738a7439a32750206b316e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3953038583085328684}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935996649700350666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d8e5da0db1cf484fb833721283a1112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1935996649858581814 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3171107084848344090, guid: 926a52539d738a7439a32750206b316e,
