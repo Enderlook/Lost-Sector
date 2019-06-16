@@ -44,10 +44,6 @@ public class EnemySpawner : MonoBehaviour
                 GameObject enemy = Instantiate(enemyPrefab, Global.enemiesParent);
                 enemy.transform.position = position;
 
-                //https://forum.unity.com/threads/getcomponents-possible-to-use-with-c-interfaces.60596/
-                /*ISpawningSubrutine spawningSubrutine = enemy.GetComponent<ISpawningSubrutine>();
-                spawningSubrutine.Spawn();*/
-
                 yield return new WaitForSeconds(0.1f);
             }
             yield return new WaitForSeconds(2 / Mathf.Log10(difficulty + 1));

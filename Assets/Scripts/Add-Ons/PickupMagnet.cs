@@ -29,6 +29,7 @@ public class PickupMagnet : MonoBehaviour
 
             if (distance <= pickupRadius)
             {
+                // https://forum.unity.com/threads/getcomponents-possible-to-use-with-c-interfaces.60596/
                 IPickup pickup = item.GetComponent<IPickup>();
                 if (pickup != null)
                     pickup.Pickup();

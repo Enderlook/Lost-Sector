@@ -33,7 +33,7 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration
     }
 
     /// <summary>
-    /// Configure the projectile properties. Mandatory..
+    /// Configure the projectile properties. Mandatory.
     /// </summary>
     /// <param name="configuration">Configuration of the projectile.</param>
     public void SetProjectileProperties(IProjectileConfiguration configuration)

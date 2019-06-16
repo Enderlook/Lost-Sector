@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class CoinMeter : MonoBehaviour
 {
     [Header("Setup")]
-    [Tooltip("Text where money will be displayed")]
+    [Tooltip("Text where money will be displayed.")]
     public Text moneyText;
 
     private float showedMoney;

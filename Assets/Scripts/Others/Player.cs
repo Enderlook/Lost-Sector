@@ -115,7 +115,7 @@ public class Player : LivingObject
         float restDamage = change.Item3;
         if (restDamage > 0)
         {
-            // Dynamic damage reduction which increases according to player's current health.
+            // Damage reduction which increases according to player's current health.
             // TODO: This should be a constant or something like that. Maybe a serializable field for Unity inspector?
             float health_threshold = 0.35f;
             if (Health - restDamage < MaxHealth * health_threshold)
