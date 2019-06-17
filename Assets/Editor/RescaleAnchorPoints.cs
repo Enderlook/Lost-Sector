@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using System.Collections.Generic;
 
 public class RescaleAnchorPoints : EditorWindow
 {
     private float xScale, yScale;
-    private List<Vector2> oldAnchors = new List<Vector2>();
 
     [MenuItem("Customs/Editor Anchor Scale")]
     private static void Init()
@@ -17,24 +15,16 @@ public class RescaleAnchorPoints : EditorWindow
     private void OnGUI()
     {
         RectTransform rectTransform = Selection.activeGameObject.GetComponent<RectTransform>();
-        if (rectTransform == null)
+        bool error = rectTransform == null;
+        if (error)
             EditorGUILayout.LabelField("The active game object on Inspector must have a Rect Transform component.");
-
         
         xScale = EditorGUILayout.FloatField("X Rescale Factor", xScale);
         yScale = EditorGUILayout.FloatField("Y Rescale Factor", yScale);
 
-        EditorGUI.BeginDisabledGroup(rectTransform == null);
+        EditorGUI.BeginDisabledGroup(error);
         if (GUILayout.Button("Rescale"))
-            oldAnchors.Add(Rescale(rectTransform, xScale, yScale));
-        EditorGUI.EndDisabledGroup();
-
-        EditorGUI.BeginDisabledGroup(oldAnchors.Count < 1);
-        if (GUILayout.Button("Undo"))
-        {
-            SetMaxAnchors(rectTransform, oldAnchors[oldAnchors.Count - 1]);
-            oldAnchors.RemoveAt(oldAnchors.Count - 1);
-        }
+            Rescale(rectTransform, xScale, yScale);
         EditorGUI.EndDisabledGroup();
     }
 
@@ -47,6 +37,7 @@ public class RescaleAnchorPoints : EditorWindow
     /// <returns>New anchor max.</returns>
     private Vector2 Rescale(RectTransform rectTransform, float xScale, float yScale)
     {
+        Undo.RecordObject(rectTransform, rectTransform.name + " rescale anchors max");
         Vector2 anchorMax = rectTransform.anchorMax;
         SetMaxAnchors(rectTransform, ScaleAnchor(rectTransform.anchorMin.x, rectTransform.anchorMax.x, xScale), ScaleAnchor(rectTransform.anchorMin.y, rectTransform.anchorMax.y, yScale));
         return anchorMax;
