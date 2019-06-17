@@ -33,10 +33,4 @@ public class Menu : MonoBehaviour
     /// Hide the menu and set to <see langword="false"/> <seealso cref="isActive"/>.
     /// </summary>
     public void HideMenu() => DisplayMenuPause(false);
-
-    /// <summary>
-    /// Reload the current scene.
-    /// </summary>
-    private void Reload() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
 }
