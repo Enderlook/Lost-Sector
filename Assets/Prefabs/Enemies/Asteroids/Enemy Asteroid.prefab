@@ -34,7 +34,7 @@ MonoBehaviour:
     type: 3}
   onDeathExplosionPrefabScale: 2.75
   onDeathExplosionPrefabDuration: 1
-  healthBar: {fileID: 301837309425250942}
+  healthBar: {fileID: 3533231402177604719}
   rigidbodyHelper: {fileID: 3171107084848344103}
   floatingTextController: {fileID: 7470196966639682740}
   impulse:
@@ -57,6 +57,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7858251103388681801, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: livingObject
+      value: 
+      objectReference: {fileID: 768387036}
     - target: {fileID: 7858251103632841096, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_Name
@@ -117,11 +122,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7858251103388681801, guid: ff345a899057f1447afc58e7a15eed6e,
-        type: 3}
-      propertyPath: livingObject
-      value: 
-      objectReference: {fileID: 768387036}
     - target: {fileID: 7858251103388681802, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_Mass
@@ -177,9 +177,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e9589752773c64993f6b3502286ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &301837309425250942 stripped
+--- !u!114 &3533231402177604719 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4988937008191739920, guid: ff345a899057f1447afc58e7a15eed6e,
+  m_CorrespondingSourceObject: {fileID: 8071747493192058369, guid: ff345a899057f1447afc58e7a15eed6e,
     type: 3}
   m_PrefabInstance: {fileID: 4687144031695792750}
   m_PrefabAsset: {fileID: 0}

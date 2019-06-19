@@ -64,7 +64,7 @@ MonoBehaviour:
     type: 3}
   onDeathExplosionPrefabScale: 2.75
   onDeathExplosionPrefabDuration: 1
-  healthBar: {fileID: 3669401026055019346}
+  healthBar: {fileID: 564230438801622339}
   rigidbodyHelper: {fileID: 1935996649858581771}
   floatingTextController: {fileID: 5870296060810014104}
   impulse:
@@ -336,16 +336,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3171107084438929871, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3171107084438929871, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 1117335959791592195, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -381,6 +371,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107084438929871, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107084438929871, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7344715036232705026, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.36
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3171107084848344101, guid: 926a52539d738a7439a32750206b316e, type: 3}
@@ -434,9 +439,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e9589752773c64993f6b3502286ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3669401026055019346 stripped
+--- !u!114 &564230438801622339 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 301837309425250942, guid: 926a52539d738a7439a32750206b316e,
+  m_CorrespondingSourceObject: {fileID: 3533231402177604719, guid: 926a52539d738a7439a32750206b316e,
     type: 3}
   m_PrefabInstance: {fileID: 3953038583085328684}
   m_PrefabAsset: {fileID: 0}
