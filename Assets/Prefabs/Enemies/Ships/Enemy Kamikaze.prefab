@@ -34,7 +34,7 @@ MonoBehaviour:
     type: 3}
   onDeathExplosionPrefabScale: 0
   onDeathExplosionPrefabDuration: 1
-  healthBar: {fileID: 7324461720666065654}
+  healthBar: {fileID: 5808921631194748135}
   rigidbodyHelper: {fileID: 5591194028556358831}
   floatingTextController: {fileID: 449964963885055036}
   impulse:
@@ -150,6 +150,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7858251103388681803, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7858251103388681844, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -209,11 +214,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7858251103388681803, guid: ff345a899057f1447afc58e7a15eed6e,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7858251103247592354, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
@@ -276,6 +276,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2657616089085578860, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.07
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7858251103388681803, guid: ff345a899057f1447afc58e7a15eed6e, type: 3}
     - {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e, type: 3}
@@ -328,9 +333,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e9589752773c64993f6b3502286ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7324461720666065654 stripped
+--- !u!114 &5808921631194748135 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4988937008191739920, guid: ff345a899057f1447afc58e7a15eed6e,
+  m_CorrespondingSourceObject: {fileID: 8071747493192058369, guid: ff345a899057f1447afc58e7a15eed6e,
     type: 3}
   m_PrefabInstance: {fileID: 2349177949651915494}
   m_PrefabAsset: {fileID: 0}
