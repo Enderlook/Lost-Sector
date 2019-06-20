@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-
     [Header("Configuration")]
     [Tooltip("How numbers are shown, {0} is health, {1} is maximum health and {2} is percent of health. Eg: {0} / {1} ({2}%)")]
     public string textShowed = "{0} / {1} ({2}%)";
@@ -53,8 +52,10 @@ public class HealthBar : MonoBehaviour
         this.maxHealth = maxHealth;
 
         healthImage.fillAmount = this.health / this.maxHealth;
-        damageBar.fillAmount = 0;
-        healingImage.fillAmount = 0;
+        if (damageBar != null)
+            damageBar.fillAmount = 0;
+        if (healingBar != null)
+            healingImage.fillAmount = 0;
     }
 
     /// <summary>
@@ -76,7 +77,7 @@ public class HealthBar : MonoBehaviour
     /// <returns>Color of the <see cref="healthImage"/></returns>
     private Color GetHealthColor()
     {
-        return Color.Lerp(minHealthColor, maxHealthColor, healthImage.fillAmount + damageBar.fillAmount - healingImage.fillAmount);
+        return Color.Lerp(minHealthColor, maxHealthColor, healthImage.fillAmount + (damageBar != null ? damageBar.fillAmount : 0) - (healingBar != null ? healingImage.fillAmount : 0));
     }
 
     private void Update()
@@ -223,8 +224,11 @@ public class HealthBar : MonoBehaviour
         healthImage = healthBar.GetComponent<Image>();
         healthTransform = healthBar.GetComponent<RectTransform>();
 
-        healingImage = healingBar.GetComponent<Image>();
-        healingTransform = healingBar.GetComponent<RectTransform>();
+        if (healingBar != null)
+        {
+            healingImage = healingBar.GetComponent<Image>();
+            healingTransform = healingBar.GetComponent<RectTransform>();
+        }
 
         if (maxHealthColor == Color.black)
             maxHealthColor = healthImage.color;
