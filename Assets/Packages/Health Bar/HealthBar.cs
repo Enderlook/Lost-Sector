@@ -242,4 +242,28 @@ public class HealthBar : MonoBehaviour
         if (maxHealthColor == Color.black)
             maxHealthColor = healthImage.color;
     }
+
+    /// <summary>
+    /// Returns <seealso cref="Image.fillAmount"/> of the <see cref="healthBar"/>.<br/>
+    /// </summary>
+    public float HealthBarPercentFill => healthImage.fillAmount;
+    /// <summary>
+    /// Returns <seealso cref="Image.fillAmount"/> of the <see cref="healingBar"/>.<br/>
+    /// Warning! If <see cref="healingBar"></see> is <see langword="null"/> it will return <see langword="null"/>.
+    /// </summary>
+    public float? HealingBarPercentFill => healingImage?.fillAmount;
+    /// <summary>
+    /// Returns <seealso cref="Image.fillAmount"/> of the <see cref="damageBar"/>.<br/>
+    /// Warning! If <see cref="damageBar"/> is <see langword="null"/> it will return <see langword="null"/>.
+    /// </summary>
+    public float? DamageBarPercentFill => damageBar?.fillAmount;
+
+    /// <summary>
+    /// Returns <see langword="true"/> if <seealso cref="Image.fillAmount"/> of the <see cref="healingBar"/> if 0 or <see cref="healingBar"/> is <see langword="null"/>.<br/>
+    /// </summary>
+    public bool IsHealingBarPercentHide => healingImage == null ? true : healingImage.fillAmount == 0;
+    /// <summary>
+    /// Returns <see langword="true"/> if <seealso cref="Image.fillAmount"/> of the <see cref="damageBar"/> if 0 or <see cref="damageBar"/> is <see langword="null"/>.<br/>
+    /// </summary>
+    public bool IsDamageBarPercentHide => damageBar == null ? true : damageBar.fillAmount == 0;
 }
