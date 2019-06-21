@@ -78,13 +78,17 @@ public class Dynamic : MonoBehaviour
 
     private void StoreGlobals()
     {
-        Global.enemiesParent = enemiesParent;
-        Global.explosionsParent = explosionsParent;
-        Global.projectilesParent = projectilesParent;
-        Global.boundary = boundary;
+        // https://stackoverflow.com/questions/8151888/c-sharp-iterate-through-class-properties
+        // Use Fields instead of Properties fixes a bug
+        foreach (System.Reflection.FieldInfo field in typeof(Dynamic).GetFields())
+        {
+            // https://stackoverflow.com/questions/3460745/setting-properties-with-reflection-on-static-classes or typeof(Global), whatever works...
+            // https://stackoverflow.com/questions/7334067/how-to-get-fields-and-their-values-from-a-static-class-in-referenced-assembly
+            typeof(Global).GetField(field.Name)?.SetValue(typeof(Global), field.GetValue(this));
+        }
+
         FloatingTextController.SetFloatingTextParentStatic(floatingTextParent);
         Global.SetCoinMeter(coinMeter, startingMoney);
-        Global.pickupsParent = pickupsParent;
     }
 }
 
