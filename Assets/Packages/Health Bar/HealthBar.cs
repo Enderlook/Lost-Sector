@@ -20,8 +20,8 @@ public class HealthBar : MonoBehaviour
 
     [Tooltip("Represent object health.")]
     public GameObject healthBar;
-    Image healthImage;
-    RectTransform healthTransform;
+    private Image healthImage;
+    private RectTransform healthTransform;
 
     [Tooltip("Represent the amount of recent damage received. Use null to deactivate it.")]
     public Image damageBar = null;
@@ -126,9 +126,9 @@ public class HealthBar : MonoBehaviour
     /// </summary>
     /// <param name="health"></param>
     /// <param name="maxhealth"></param>
-    public void UpdateValues(float health, float maxhealth)
+    public void UpdateValues(float health, float maxHealth)
     {
-        this.maxHealth = maxhealth;
+        this.maxHealth = maxHealth;
         Set(health);
     }
 
@@ -144,8 +144,17 @@ public class HealthBar : MonoBehaviour
 
     /*void Heal(float amount) { Change(amount); }
     void Damage(float amount) { Change(-amount); }*/
+    /// <summary>
+    /// Set the new health value and updates bars.
+    /// </summary>
+    /// <seealso cref="Change(float)"/>
+    /// <param name="value">New <seealso cref="health"/> value.</param>
     private void Set(float value) { Change(value - health); }
 
+    /// <summary>
+    /// Updates bars and set the <see cref="health"/>.
+    /// </summary>
+    /// <param name="amount">Amount to add to <see cref="health"/>.</param>
     private void Change(float amount)
     {
         if (amount == 0)
