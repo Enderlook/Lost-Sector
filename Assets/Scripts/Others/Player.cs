@@ -121,6 +121,7 @@ public class Player : LivingObject
     }
     protected override void Die()
     {
+        Global.menu.GameOver(false);
         GameObject explosion = Instantiate(onDeathExplosionPrefab, Global.explosionsParent);
         explosion.transform.position = transform.position;
         base.Die();

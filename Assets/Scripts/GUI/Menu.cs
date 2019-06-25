@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
@@ -6,14 +7,26 @@ public class Menu : MonoBehaviour
     [Header("Setup")]
     [Tooltip("Menu to display on escape key press.")]
     public GameObject menu;
-
+    [Tooltip("Game over menu to display when game finishes.")]
+    public GameOverMenu gameOver;
+    
     private bool isActive;
-
+    private bool isGameOver = false;
+    private bool hasWon;
     private void Start() => DisplayMenuPause(false);
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        // This should be done in other script and not here...
+        if (Global.coinMeter.showedMoney >= Global.moneyToWin)
+            GameOver(true);
+        if (isGameOver && Global.playerHealthBar.IsDamageBarPercentHide && Global.playerShieldBar.IsDamageBarPercentHide)
+        {
+            gameOver.SetShown(true);
+            gameOver.SetConfiguration(hasWon, Global.money);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !isGameOver)
             DisplayMenuPause();
     }
 
@@ -33,4 +46,15 @@ public class Menu : MonoBehaviour
     /// Hide the menu and set to <see langword="false"/> <seealso cref="isActive"/>.
     /// </summary>
     public void HideMenu() => DisplayMenuPause(false);
+
+
+    /// <summary>
+    /// Toggle visibility of the Game Over menu.
+    /// </summary>
+    public void GameOver(bool win)
+    {
+        hasWon = win;
+        isGameOver = true;
+        Global.enemySpawner.StopSpawnWaves();
+    }
 }
