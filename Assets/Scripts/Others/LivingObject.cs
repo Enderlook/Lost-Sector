@@ -71,8 +71,6 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     [Tooltip("Scale of the explosion prefab.")]
     [Range(0, 100)]
     public float onDeathExplosionPrefabScale = 1;
-    [Tooltip("Explosion prefab duration before be destroyed.")]
-    public float onDeathExplosionPrefabDuration = 1;
 
     [Tooltip("Health bar script.")]
     public HealthBar healthBar;
@@ -214,7 +212,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         GameObject explosion = Instantiate(onDeathExplosionPrefab, Global.explosionsParent);
         explosion.transform.position = rigidbodyHelper.Position;
         explosion.transform.localScale = Vector3.one * onDeathExplosionPrefabScale;
-        Destroy(explosion, onDeathExplosionPrefabDuration);
+        Destroy(explosion);
         gameObject.SetActive(false);
         //Destroy(gameObject);
     }
