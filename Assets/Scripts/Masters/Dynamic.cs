@@ -24,7 +24,7 @@ public static class Global
     /// </summary>
     public static Boundary boundary;    
 
-    private static CoinMeter coinMeter;
+    public static CoinMeter coinMeter;
     /// <summary>
     /// Set the <seealso cref="CoinMeter"/> script that controls how money is displayed on canvas.
     /// </summary>
@@ -46,6 +46,30 @@ public static class Global
             coinMeter.money = value;
         }
     }
+
+    /// <summary>
+    /// Instance of the <seealso cref="Menu"/> class used during the scene.
+    /// </summary>
+    public static Menu menu; // FindObjectOfType<menu>();   Could do this work.
+
+    /// <summary>
+    /// Instance of the <seealso cref="EnemySpawner"/> class used to spawn enemies on the scene.
+    /// </summary>
+    public static EnemySpawner enemySpawner;
+
+    /// <summary>
+    /// Amount of money required to win the game.
+    /// </summary>
+    public static int moneyToWin;
+
+    /// <summary>
+    /// Player health bar.
+    /// </summary>
+    public static HealthBar playerHealthBar;
+    /// <summary>
+    /// Player shield bar.
+    /// </summary>
+    public static HealthBar playerShieldBar;
 }
 
 public class Dynamic : MonoBehaviour
@@ -67,12 +91,21 @@ public class Dynamic : MonoBehaviour
     public int startingMoney;
     [Tooltip("Money controller script.")]
     public CoinMeter coinMeter;
+    [Tooltip("Menu script.")]
+    public Menu menu;
+    [Tooltip("Enemy spawner script.")]
+    public EnemySpawner enemySpawner;
+    [Tooltip("Amount of money required to win the game.")]
+    public int moneyToWin;
+
+    [Tooltip("Player health bar.")]
+    public HealthBar playerHealthBar;
+    [Tooltip("Player shield bar.")]
+    public HealthBar playerShieldBar;
 
     private void Awake()
     {
         boundary.SetBoundaries();
-
-        // Workaround to avoid Singleton Pattern because no one likes it :(
         StoreGlobals();
     }
 
@@ -85,6 +118,11 @@ public class Dynamic : MonoBehaviour
         FloatingTextController.SetFloatingTextParentStatic(floatingTextParent);
         Global.SetCoinMeter(coinMeter, startingMoney);
         Global.pickupsParent = pickupsParent;
+        Global.menu = menu;
+        Global.enemySpawner = enemySpawner;
+        Global.moneyToWin = moneyToWin;
+        Global.playerHealthBar = playerHealthBar;
+        Global.playerShieldBar = playerShieldBar;
     }
 }
 
