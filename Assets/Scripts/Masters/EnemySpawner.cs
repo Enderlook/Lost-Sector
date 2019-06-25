@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [Tooltip("Transforms positions used to spawn enemies.")]
     public TransformRange[] spawnPoints;
 
+    [Tooltip("Enemies spawned.")]
     public Enemies enemies;
 
     [Tooltip("Difficulty.")]
@@ -24,15 +26,30 @@ public class EnemySpawner : MonoBehaviour
     [Range(1, 600)]
     public float difficultyIncreaseInterval = 5;
 
+    private Coroutine spawnWaveCoroutine;
+
     private void Start()
     {
         InvokeRepeating("DifficultyIncrease", difficultyIncreaseInterval, difficultyIncreaseInterval);
-        StartCoroutine(SpawnWave());
+        spawnWaveCoroutine = StartCoroutine(SpawnWave());
     }
 
+    /// <summary>
+    /// Stop the enemy spawning coroutine.
+    /// </summary>
+    /// <seealso cref="spawnWaveCoroutine"/>
+    /// <seealso cref="SpawnWave"/>.
+    public void StopSpawnWaves()
+    {
+        StopCoroutine(spawnWaveCoroutine);
+    }
+
+    /// <summary>
+    /// Spawns enemies on the fly.
+    /// </summary>
+    /// <returns>This must be executed on a <see cref="StartCoroutine"/>.</returns>
     IEnumerator SpawnWave()
     {
-        // TODO: This should stop on player death...
         // TODO: Custom modifications per enemy.
         while (true)
         {

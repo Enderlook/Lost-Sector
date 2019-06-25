@@ -7,7 +7,7 @@ public class CoinMeter : MonoBehaviour
     [Tooltip("Text where money will be displayed.")]
     public Text moneyText;
 
-    private float showedMoney;
+    public float showedMoney;
     private int oldMoney;
     private int realMoney;
 
