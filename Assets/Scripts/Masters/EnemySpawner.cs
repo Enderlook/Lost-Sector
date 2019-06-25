@@ -26,6 +26,7 @@ public class EnemySpawner : MonoBehaviour
     public float difficultyIncreaseInterval = 5;
 
     private Dictionary<GameObject, List<GameObject>> enemyPool = new Dictionary<GameObject, List<GameObject>>();
+    private bool requireWeightsUpdate = true;
 
     private void Start()
     {
@@ -59,6 +60,11 @@ public class EnemySpawner : MonoBehaviour
         // TODO: Custom modifications per enemy.
         while (true)
         {
+            if (requireWeightsUpdate)
+            {
+                enemies.UpdateWeights(difficulty);
+                requireWeightsUpdate = false;
+            }
             foreach (GameObject enemyPrefab in enemies.GetEnemies(difficulty))
             {
                 TransformRange spawnRange = spawnPoints[Random.Range(0, spawnPoints.Length - 1)];
@@ -80,6 +86,7 @@ public class EnemySpawner : MonoBehaviour
     {
         difficulty *= difficultyGeometricalIncrease;
         difficulty += difficultyLinearIncrease;
+        requireWeightsUpdate = true;
     }
 
     private void OnValidate()
@@ -117,15 +124,27 @@ public class EnemyPrefab
     [Tooltip("Multiplies the weight rarity based on difficulty above the Minimal Difficulty. The letter x will be replaced by the difference between difficulty and Minimal Difficulty.")]
     public string weightFactorFormula = "1";
 
+    private float calculatedWeight;
+
     /// <summary>
     /// Return the weighted rarity of the enemy to spawn. The weight changes according to the current difficulty.
     /// </summary>
-    /// <param name="difficulty">Difficulty used to calculate weight.</param>
     /// <returns>Weighted rarity.</returns>
-    public float GetWeight(float difficulty)
+    /// <seealso cref="UpdateWeight(float)"/>
+    public float Weight {
+        get {
+            return calculatedWeight;
+        }
+    }
+
+    /// <summary>
+    /// Updates the weight multiplier which changes according to the current difficulty.
+    /// </summary>
+    /// <param name="difficulty">Difficulty used to calculate weight.</param>
+    public void UpdateWeight(float difficulty)
     {
         if (difficulty < minimalDifficulty)
-            return 0;
+            calculatedWeight = 0;
         else
         {
             // TODO: This could be done safer using a custom math class...
@@ -134,8 +153,7 @@ public class EnemyPrefab
             // TODO: https://social.msdn.microsoft.com/Forums/en-US/2ee4bbbd-e18b-49b7-a119-57ef748e4f28/how-to-convert-a-string-operation-to-a-math-operation?forum=csharpgeneral
             // And: https://rosettacode.org/wiki/Parsing/Shunting-yard_algorithm#C.23
             DataTable dataTable = new DataTable();
-            float multiplier = float.Parse(dataTable.Compute(weightFactorFormula.Replace("x", difficulty.ToString()).Replace(",", "."), "").ToString());
-            return weight * multiplier;
+            calculatedWeight = float.Parse(dataTable.Compute(weightFactorFormula.Replace("x", difficulty.ToString()).Replace(",", "."), "").ToString());
         }
     }
 
@@ -161,13 +179,13 @@ public class Enemies
     /// <returns>Enemy prefab to spawn and threat of the enemy.</returns>
     public System.Tuple<GameObject, float> GetEnemy(float difficulty)
     {
-        float totalWeight = enemyPrefabs.Sum(enemy => enemy.GetWeight(difficulty));
+        float totalWeight = enemyPrefabs.Sum(enemy => enemy.Weight);
         float chosenWeight = Random.value * totalWeight;
 
         float currentWeight = 0;
         foreach (EnemyPrefab enemy in enemyPrefabs)
         {
-            currentWeight += enemy.GetWeight(difficulty);
+            currentWeight += enemy.Weight;
             if (currentWeight >= chosenWeight)
             {
                 return new System.Tuple<GameObject, float>(enemy.prefab, enemy.threat);
@@ -188,6 +206,18 @@ public class Enemies
             System.Tuple<GameObject, float> enemy = GetEnemy(difficulty);
             threat += enemy.Item2;
             yield return enemy.Item1;
+        }
+    }
+
+    /// <summary>
+    /// Updates the weight multipliers of all <seealso cref="enemyPrefabs"/> which changes according to the current difficulty.
+    /// </summary>
+    /// <param name="difficulty">Difficulty used to calculate weight.</param>
+    public void UpdateWeights(float difficulty)
+    {
+        foreach(EnemyPrefab enemy in enemyPrefabs)
+        {
+            enemy.UpdateWeight(difficulty);
         }
     }
 }
