@@ -115,16 +115,6 @@ public class Player : LivingObject
         float restDamage = change.Item3;
         if (restDamage > 0)
         {
-            // Damage reduction which increases according to player's current health.
-            // TODO: This should be a constant or something like that. Maybe a serializable field for Unity inspector?
-            float health_threshold = 0.35f;
-            if (Health - restDamage < MaxHealth * health_threshold)
-            {
-                float damage = restDamage * 0.5f;
-                // Damage can't be lower than 1 or the decimal part of restDamage, whatever is lower, regardless of the damage reduction.
-                restDamage = Mathf.Min(damage, 1, restDamage % 1 != 0 ? restDamage % 1 : Mathf.Infinity);
-            }
-
             //Health = ChangeValue(restDamage, Health, MaxHealth, false, "health");
             base.TakeDamage(restDamage, true);
         }
