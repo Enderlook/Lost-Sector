@@ -6,9 +6,9 @@ public class EnemyAsteroid : EnemyBase
     [Tooltip("Random rotation between two value.")]
     public FloatRangeTwo rotation;
 
-    protected override void Start()
+    protected override void Initialize()
     {
         rigidbodyHelper.GetRigidbody2D().angularVelocity = rotation.Value;
-        base.Start();
+        base.Initialize();
     }
 }

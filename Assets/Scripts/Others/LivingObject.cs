@@ -85,11 +85,22 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
 
     protected virtual void Start()
     {
+        rigidbodyHelper.SetProperties(this);
+        Initialize();
+    }
+
+    /// <summary>
+    /// Initializes some values that are reused during the enemies recycling.
+    /// </summary>
+    protected virtual void Initialize()
+    {
+        rigidbodyHelper.transform.position = transform.position;
+        rigidbodyHelper.transform.rotation = transform.rotation;
         Health = InitializeBar(healthBar, startingMaxHealth, startingHealth);
         MaxHealth = startingMaxHealth;
-
-        rigidbodyHelper.SetProperties(this);
     }
+
+    private void OnEnable() => Initialize();
 
     /// <summary>
     /// Initializes the bar's values, setting the fill of the main bar and returning the current value.
@@ -204,7 +215,8 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         explosion.transform.position = rigidbodyHelper.Position;
         explosion.transform.localScale = Vector3.one * onDeathExplosionPrefabScale;
         Destroy(explosion, onDeathExplosionPrefabDuration);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        //Destroy(gameObject);
     }
 
     /// <summary>

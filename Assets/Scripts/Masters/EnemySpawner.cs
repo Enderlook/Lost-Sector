@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
+using System.Collections;
 using System.Data;
 using System.Linq;
 using UnityEngine;
@@ -24,10 +25,32 @@ public class EnemySpawner : MonoBehaviour
     [Range(1, 600)]
     public float difficultyIncreaseInterval = 5;
 
+    private Dictionary<GameObject, List<GameObject>> enemyPool = new Dictionary<GameObject, List<GameObject>>();
+
     private void Start()
     {
         InvokeRepeating("DifficultyIncrease", difficultyIncreaseInterval, difficultyIncreaseInterval);
         StartCoroutine(SpawnWave());
+    }
+
+    private GameObject Spawn(GameObject enemyPrefab)
+    {
+        GameObject enemy = null;
+        if (enemyPool.ContainsKey(enemyPrefab))
+        {
+            enemy = enemyPool[enemyPrefab].Where(e => !e.activeSelf).FirstOrDefault();
+            if (enemy != null)
+            {
+                enemy.SetActive(true);
+            }
+        } else
+            enemyPool.Add(enemyPrefab, new List<GameObject>());
+        if (enemy == null)
+        {
+            enemy = Instantiate(enemyPrefab, Global.enemiesParent);
+            enemyPool[enemyPrefab].Add(enemy);
+        }
+        return enemy;
     }
 
     IEnumerator SpawnWave()
@@ -41,7 +64,7 @@ public class EnemySpawner : MonoBehaviour
                 TransformRange spawnRange = spawnPoints[Random.Range(0, spawnPoints.Length - 1)];
                 Vector3 position = spawnRange.GetVector();
 
-                GameObject enemy = Instantiate(enemyPrefab, Global.enemiesParent);
+                GameObject enemy = Spawn(enemyPrefab);
                 enemy.transform.position = position;
 
                 yield return new WaitForSeconds(0.1f);
