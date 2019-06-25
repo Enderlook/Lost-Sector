@@ -51,6 +51,10 @@ public class HealthBar : MonoBehaviour
         this.health = health;
         this.maxHealth = maxHealth;
 
+        // Fix bug, this shouldn't be happening
+        if (healthImage == null)
+            healthImage = healthBar.GetComponent<Image>();
+
         healthImage.fillAmount = this.health / this.maxHealth;
         if (damageBar != null)
             damageBar.fillAmount = 0;

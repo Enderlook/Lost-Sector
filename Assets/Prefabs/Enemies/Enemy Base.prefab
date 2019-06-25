@@ -93,8 +93,6 @@ GameObject:
   - component: {fileID: 839878824109075181}
   - component: {fileID: 7858251103388681801}
   - component: {fileID: 338621389179408544}
-  - component: {fileID: 5624730713753492301}
-  - component: {fileID: 2785313805999255258}
   m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
@@ -277,50 +275,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObjectToDestroy: {fileID: 7858251103632841096}
   timeToDestroy: 1
---- !u!114 &5624730713753492301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7858251103388681800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9addc5e34ed96f1469bc1e2cf7eff67e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameObjectToDestroy: {fileID: 7858251103632841096}
-  timeToDestroy: 1
---- !u!114 &2785313805999255258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7858251103388681800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42e9589752773c64993f6b3502286ccd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawningPoints:
-  - {fileID: 7858251103388681844}
-  maximumAmountFloatingText: 10
-  overrideTimeBeforeDestroy: 0
-  timeBeforeDestroy: 0
-  overrideTextColor: 1
-  textColor: {r: 1, g: 0, b: 0, a: 1}
-  overrideRandomOffset: 1
-  randomOffset: {x: 1, y: 1}
-  overrideScaleMultiplier: 1
-  scaleMultiplier: 0.02
-  overrideDigitPrecision: 0
-  digitPrecision: 0
-  overrideTypeOfRounding: 1
-  typeOfRounding: 1
-  floatingTextPrefab: {fileID: 8150760654224925313, guid: 2464453f149ba994292ee710d0ceaab7,
-    type: 3}
-  floatingTextParent: {fileID: 0}
 --- !u!1 &7858251103632841096
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,6 +285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7858251103632841098}
   - component: {fileID: 7858251103632841097}
+  - component: {fileID: 4083610473194778289}
   - component: {fileID: 7875594837939159766}
   m_Layer: 9
   m_Name: Enemy Base
@@ -388,10 +343,9 @@ MonoBehaviour:
   onDeathExplosionPrefab: {fileID: 3413306239945161787, guid: 923f959ae77217a42826bcaed27098f7,
     type: 3}
   onDeathExplosionPrefabScale: 2.75
-  onDeathExplosionPrefabDuration: 1
   healthBar: {fileID: 8071747493192058369}
   rigidbodyHelper: {fileID: 7858251103388681801}
-  floatingTextController: {fileID: 2785313805999255258}
+  floatingTextController: {fileID: 4083610473194778289}
   impulse:
     startVector: {x: 0, y: 15}
     endVector: {x: 0, y: 100}
@@ -401,6 +355,36 @@ MonoBehaviour:
     end: 2
     notRandom: 0
   coinController: {fileID: 7875594837939159766}
+--- !u!114 &4083610473194778289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7858251103632841096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e9589752773c64993f6b3502286ccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawningPoints:
+  - {fileID: 7858251103388681844}
+  maximumAmountFloatingText: 10
+  overrideTimeBeforeDestroy: 0
+  timeBeforeDestroy: 0
+  overrideTextColor: 1
+  textColor: {r: 1, g: 0, b: 0, a: 1}
+  overrideRandomOffset: 1
+  randomOffset: {x: 1, y: 1}
+  overrideScaleMultiplier: 1
+  scaleMultiplier: 0.02
+  overrideDigitPrecision: 0
+  digitPrecision: 0
+  overrideTypeOfRounding: 1
+  typeOfRounding: 1
+  floatingTextPrefab: {fileID: 8150760654224925313, guid: 2464453f149ba994292ee710d0ceaab7,
+    type: 3}
+  floatingTextParent: {fileID: 0}
 --- !u!114 &7875594837939159766
 MonoBehaviour:
   m_ObjectHideFlags: 0
