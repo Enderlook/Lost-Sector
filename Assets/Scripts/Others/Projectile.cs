@@ -51,6 +51,7 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration
         {
             transform.gameObject.layer = configuration.Layer;
         }
+        gameObject.layer = configuration.Layer;
     }
 }
 
