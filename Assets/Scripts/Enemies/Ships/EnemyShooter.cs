@@ -8,7 +8,7 @@ public class EnemyShooter : EnemyBase
     [Tooltip("Thruster acceleration speed.")]
     public float accelerationSpeed;
     [Tooltip("Weapon configuration.")]
-    public Weapon weapon;
+    public Weapon weapon;    
     
     private void Update()
     {
