@@ -9,6 +9,8 @@ public class Menu : MonoBehaviour
     public GameObject menu;
     [Tooltip("Game over menu to display when game finishes.")]
     public GameOverMenu gameOver;
+    [Tooltip("How to play menu.")]
+    public GameObject howToPlay;
     
     private bool isActive;
     private bool isGameOver = false;
@@ -31,15 +33,21 @@ public class Menu : MonoBehaviour
     }
 
     /// <summary>
-    /// Toggle visibility of the menu using the opposite value of <seealso cref="isActive"/>. <seealso cref="isActive"/> is set as its opposite value.<br/>
-    /// If <paramref name="active"/> isn't null this value will override the toggle.
+    /// Toggle visibility of the <see cref="menu"/> using the opposite value of <seealso cref="isActive"/>. <seealso cref="isActive"/> is set as its opposite value.<br/>
+    /// If <paramref name="active"/> isn't null this value will override the toggle.<br/>
+    /// If <c><see cref="howToPlay"/>.activeSelf</c> is <see langword="true"/>, that panel will be hidden instead.
     /// </summary>
     /// <param name="active">Whenever the menu is visible or not.</param>
     public void DisplayMenuPause(bool? active = null)
     {
-        isActive = active != null ? (bool)active : !isActive;
-        Time.timeScale = isActive ? 0 : 1;
-        menu.SetActive(isActive);
+        if (howToPlay.activeSelf)
+            ShowHowToPlay(false);
+        else
+        {
+            isActive = active != null ? (bool)active : !isActive;
+            Time.timeScale = isActive ? 0 : 1;
+            menu.SetActive(isActive);
+        }
     }
 
     /// <summary>
@@ -56,5 +64,10 @@ public class Menu : MonoBehaviour
         hasWon = win;
         isGameOver = true;
         Global.enemySpawner.StopSpawnWaves();
+    }
+
+    public void ShowHowToPlay(bool active)
+    {
+        howToPlay.SetActive(active);
     }
 }
