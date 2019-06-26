@@ -322,8 +322,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4835abbbff86c0f44ad4ac2ef011fb8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingMaxHealth: 100
-  startingHealth: -1
+  healthPoints:
+    startingMax: 100
+    startingCurrent: -1
+    bar: {fileID: 8071747493192058369}
   relativeImpactDamage: 20
   shouldDisplayDamage: 0
   impactSound:
@@ -343,7 +345,6 @@ MonoBehaviour:
   onDeathExplosionPrefab: {fileID: 3413306239945161787, guid: 923f959ae77217a42826bcaed27098f7,
     type: 3}
   onDeathExplosionPrefabScale: 2.75
-  healthBar: {fileID: 8071747493192058369}
   rigidbodyHelper: {fileID: 7858251103388681801}
   floatingTextController: {fileID: 4083610473194778289}
   impulse:
@@ -411,11 +412,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7858251103632841098}
     m_Modifications:
-    - target: {fileID: 4899925161982079344, guid: 7e38cfa2fd92d614d913ce6f701b6594,
-        type: 3}
-      propertyPath: m_Name
-      value: Health Bar With Canvas Simplified
-      objectReference: {fileID: 0}
     - target: {fileID: 1286173045874118781, guid: 7e38cfa2fd92d614d913ce6f701b6594,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -520,6 +516,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899925161982079344, guid: 7e38cfa2fd92d614d913ce6f701b6594,
+        type: 3}
+      propertyPath: m_Name
+      value: Health Bar With Canvas Simplified
       objectReference: {fileID: 0}
     - target: {fileID: 8846102638572100080, guid: 7e38cfa2fd92d614d913ce6f701b6594,
         type: 3}

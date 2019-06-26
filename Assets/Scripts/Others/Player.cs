@@ -3,45 +3,13 @@
 public class Player : LivingObject
 {
     [Header("Configuration")]
+    [Tooltip("Shield")]
+    public HealthPoints shieldPoints;
+
     [Tooltip("Movement speed.")]
     public float moveSpeed;
     /*public float turnSpeed;
-    public float rotationOffset;*/
-
-    [Tooltip("Maximum shield.")]
-    public float startingMaxShield = 100;
-    private float _maxShield;
-    /// <summary>
-    /// Maximum amount of shield. <see cref="Shield"/> can't be greater than this value.<br/>
-    /// If changes, <see cref="shieldBar"/> will be updated using <seealso cref="HealthBar.UpdateValues(float health, float maxHealth)"/>.<br/>
-    /// </summary>
-    /// <seealso cref="Shield"/>
-    protected float MaxShield {
-        get {
-            return _maxShield;
-        }
-        set {
-            _maxShield = value;
-            shieldBar.UpdateValues(Shield, MaxShield);
-        }
-    }
-    [Tooltip("Starting shield. Set -1 to use Max shield value.")]
-    public float startingShield = -1;
-    private float _shield;
-    /// <summary>
-    /// Current amount of shield. It can't be greater than <see cref="MaxShield"/><br/>
-    /// If changes, <see cref="shieldBar"/> will be updated using <seealso cref="HealthBar.UpdateValues(float health, float maxHealth)"/>.<br/>
-    /// </summary>
-    /// <seealso cref="MaxShield"/>
-    protected float Shield {
-        get {
-            return _shield;
-        }
-        set {
-            _shield = value;
-            shieldBar.UpdateValues(Shield, MaxShield);
-        }
-    }
+    public float rotationOffset;*/    
 
     [Tooltip("Shield recharge rate (points per second).")]
     public float shieldRechargeRate = 10;
@@ -59,12 +27,10 @@ public class Player : LivingObject
     [Tooltip("Shield handler.")]
     public ShieldHandler shieldHandler;
 
-    protected override void Start()
+    protected override void Initialize()
     {
-        Shield = InitializeBar(shieldBar, startingMaxShield, startingShield);
-        MaxShield = startingMaxShield;
-        shieldHandler.Initialize(Shield, MaxShield);
-        base.Start();
+        shieldPoints.Initialize();
+        base.Initialize();
     }
 
     private void Update()
@@ -87,12 +53,12 @@ public class Player : LivingObject
             TakeDamage(5 * Time.deltaTime);
 
         // Recharge shield
-        if (currentShieldRechargeDelay >= shieldRechargeDelay && Shield < MaxShield)
-            Shield = ChangeValueSimple(shieldRechargeRate * Time.deltaTime, Shield, MaxShield, true, "shield");
+        if (currentShieldRechargeDelay >= shieldRechargeDelay && shieldPoints.Current < shieldPoints.Max)
+            shieldPoints.Current = ChangeValueSimple(shieldRechargeRate * Time.deltaTime, shieldPoints.Current, shieldPoints.Max, true, "shield");
         else
             currentShieldRechargeDelay += Time.deltaTime;
 
-        shieldHandler.UpdateColor(Shield, MaxShield);
+        shieldHandler.UpdateColor(shieldPoints.Current, shieldPoints.Max);
 
         // Shoot
         if (Input.GetMouseButton(0) && weapon.Recharge(Time.deltaTime))
@@ -109,13 +75,12 @@ public class Player : LivingObject
         // We ignore display text because we player always spawns floating text for damage.
 
         currentShieldRechargeDelay = 0;
-        System.Tuple<float, float, float> change = ChangeValue(amount, Shield, MaxShield, false, "shield");
-        SpawnFloatingText(change.Item2, Color.Lerp(new Color(.5f, 0, .5f), Color.blue, Shield / MaxShield));
-        Shield = change.Item1;
+        System.Tuple<float, float, float> change = ChangeValue(amount, shieldPoints.Current, shieldPoints.Max, false, "shield");
+        SpawnFloatingText(change.Item2, Color.Lerp(new Color(.5f, 0, .5f), Color.blue, shieldPoints.Current / shieldPoints.Max));
+        shieldPoints.Current = change.Item1;
         float restDamage = change.Item3;
         if (restDamage > 0)
         {
-            //Health = ChangeValue(restDamage, Health, MaxHealth, false, "health");
             base.TakeDamage(restDamage, true);
         }
     }

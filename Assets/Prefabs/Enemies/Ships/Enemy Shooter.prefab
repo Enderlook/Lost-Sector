@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dac2fb9a20673654284d10babf1199e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingMaxHealth: 80
-  startingHealth: -1
+  healthPoints:
+    startingMax: 80
+    startingCurrent: -1
+    bar: {fileID: 9013780524430854089}
   relativeImpactDamage: 10
   shouldDisplayDamage: 0
   impactSound:
@@ -33,7 +35,6 @@ MonoBehaviour:
   onDeathExplosionPrefab: {fileID: 3413306239945161787, guid: 923f959ae77217a42826bcaed27098f7,
     type: 3}
   onDeathExplosionPrefabScale: 2.75
-  healthBar: {fileID: 9013780524430854089}
   rigidbodyHelper: {fileID: 6925946387881789313}
   floatingTextController: {fileID: 3870874820224954233}
   impulse:
@@ -47,7 +48,6 @@ MonoBehaviour:
   coinController: {fileID: 6942371334371820318}
   cruiserSpeed: {x: 0, y: 20}
   accelerationSpeed: 5
-  rotationSpeed: 2
   weapon:
     damageOnHit: 15
     firerate: 1.5
