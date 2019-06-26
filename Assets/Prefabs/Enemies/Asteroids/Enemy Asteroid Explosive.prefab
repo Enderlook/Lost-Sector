@@ -79,8 +79,7 @@ MonoBehaviour:
     - 1.2
   onDeathExplosionPrefab: {fileID: 3413306239945161787, guid: 923f959ae77217a42826bcaed27098f7,
     type: 3}
-  onDeathExplosionPrefabScale: 3
-  onDeathExplosionPrefabDuration: 1
+  onDeathExplosionPrefabScale: 10
   healthBar: {fileID: 2848650162287438096}
   rigidbodyHelper: {fileID: 4216202753804953944}
   floatingTextController: {fileID: 8009385548156912032}

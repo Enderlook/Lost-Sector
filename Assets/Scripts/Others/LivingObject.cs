@@ -81,6 +81,8 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     [Tooltip("FloatingTextController Script")]
     public FloatingTextController floatingTextController;
 
+    private Quaternion? initialRotation = null;
+
     protected virtual void Start()
     {
         rigidbodyHelper.SetProperties(this);
@@ -93,7 +95,10 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     protected virtual void Initialize()
     {
         rigidbodyHelper.transform.position = transform.position;
-        rigidbodyHelper.transform.rotation = transform.rotation;
+        if (initialRotation == null)
+            initialRotation = rigidbodyHelper.transform.rotation;
+        else
+            rigidbodyHelper.transform.rotation = (Quaternion)initialRotation;
         Health = InitializeBar(healthBar, startingMaxHealth, startingHealth);
         MaxHealth = startingMaxHealth;
     }
@@ -212,7 +217,6 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         GameObject explosion = Instantiate(onDeathExplosionPrefab, Global.explosionsParent);
         explosion.transform.position = rigidbodyHelper.Position;
         explosion.transform.localScale = Vector3.one * onDeathExplosionPrefabScale;
-        Destroy(explosion);
         gameObject.SetActive(false);
         //Destroy(gameObject);
     }
