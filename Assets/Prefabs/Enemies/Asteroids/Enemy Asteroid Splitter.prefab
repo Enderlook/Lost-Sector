@@ -42,8 +42,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a08af33a1a22a4dad3cf09c030efac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingMaxHealth: 115
-  startingHealth: -1
+  healthPoints:
+    startingMax: 115
+    startingCurrent: -1
+    bar: {fileID: 564230438801622339}
   relativeImpactDamage: 35
   shouldDisplayDamage: 0
   impactSound:
@@ -63,8 +65,6 @@ MonoBehaviour:
   onDeathExplosionPrefab: {fileID: 3413306239945161787, guid: 923f959ae77217a42826bcaed27098f7,
     type: 3}
   onDeathExplosionPrefabScale: 2.75
-  onDeathExplosionPrefabDuration: 1
-  healthBar: {fileID: 564230438801622339}
   rigidbodyHelper: {fileID: 1935996649858581771}
   floatingTextController: {fileID: 5727436447715290611}
   impulse:
@@ -341,16 +341,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 1.36
       objectReference: {fileID: 0}
-    - target: {fileID: 3171107084438929871, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3171107084438929871, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 3171107084438929868, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
       propertyPath: m_Sprite
@@ -386,6 +376,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107084438929871, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107084438929871, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3171107084848344101, guid: 926a52539d738a7439a32750206b316e, type: 3}

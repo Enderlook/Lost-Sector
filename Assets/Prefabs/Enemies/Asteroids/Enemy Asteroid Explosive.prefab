@@ -59,8 +59,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93f2cc99aedaeaf4eb14bd6dd546f3b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingMaxHealth: 60
-  startingHealth: -1
+  healthPoints:
+    startingMax: 60
+    startingCurrent: -1
+    bar: {fileID: 2848650162287438096}
   relativeImpactDamage: 8
   shouldDisplayDamage: 0
   impactSound:
@@ -80,7 +82,6 @@ MonoBehaviour:
   onDeathExplosionPrefab: {fileID: 3413306239945161787, guid: 923f959ae77217a42826bcaed27098f7,
     type: 3}
   onDeathExplosionPrefabScale: 10
-  healthBar: {fileID: 2848650162287438096}
   rigidbodyHelper: {fileID: 4216202753804953944}
   floatingTextController: {fileID: 8009385548156912032}
   impulse:

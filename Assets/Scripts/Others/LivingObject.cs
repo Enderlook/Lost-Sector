@@ -10,44 +10,8 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     // TODO: https://forum.unity.com/threads/exposing-fields-with-interface-type-c-solved.49524/
 
     [Header("Configuration")]
-    [Tooltip("Maximum health.")]
-    public float startingMaxHealth = 100;
-    private float _maxHealth;
-    /// <summary>
-    /// Maximum amount of health. <see cref="Health"/> can't be greater than this value.<br/>
-    /// If changes, <see cref="healthBar"/> will be updated using <seealso cref="HealthBar.UpdateValues(float health, float maxHealth)"/>.<br/>
-    /// If 0, <see cref="Die()"/> is called.
-    /// </summary>
-    /// <seealso cref="Health"/>
-    protected float MaxHealth {
-        get {
-            return _maxHealth;
-        }
-        set {
-            _maxHealth = value;
-            healthBar.UpdateValues(Health, MaxHealth);
-            if (MaxHealth <= 0) Die();
-        }
-    }
-    [Tooltip("Starting health. Set -1 to use Max Health value.")]
-    public float startingHealth = -1;
-    private float _health;
-    /// <summary>
-    /// Current amount of health. It can't be greater than <see cref="MaxHealth"/><br/>
-    /// If changes, <see cref="healthBar"/> will be updated using <seealso cref="HealthBar.UpdateValues(float health, float maxHealth)"/>.<br/>
-    /// If 0, <see cref="Die()"/> is called.
-    /// </summary>
-    /// <seealso cref="MaxHealth"/>
-    protected float Health {
-        get {
-            return _health;
-        }
-        set {
-            _health = value;
-            healthBar.UpdateValues(Health, MaxHealth);
-            if (Health <= 0) Die();
-        }
-    }
+    [Tooltip("Health.")]
+    public HealthPoints healthPoints;
 
     [Tooltip("Relative damage on impact based on force.")]
     public float relativeImpactDamage;
@@ -71,9 +35,6 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     [Tooltip("Scale of the explosion prefab.")]
     [Range(0, 100)]
     public float onDeathExplosionPrefabScale = 1;
-
-    [Tooltip("Health bar script.")]
-    public HealthBar healthBar;
 
     [Tooltip("RigidbodyHelper script.")]
     public RigidbodyHelper rigidbodyHelper;
@@ -99,27 +60,11 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
             initialRotation = rigidbodyHelper.transform.rotation;
         else
             rigidbodyHelper.transform.rotation = (Quaternion)initialRotation;
-        Health = InitializeBar(healthBar, startingMaxHealth, startingHealth);
-        MaxHealth = startingMaxHealth;
+        healthPoints.Initialize();
+        healthPoints.SetDie(Die);
     }
 
     private void OnEnable() => Initialize();
-
-    /// <summary>
-    /// Initializes the bar's values, setting the fill of the main bar and returning the current value.
-    /// If <paramref name="startingValue"/> is -1, <paramref name="startingMaximumValue"/> will be used instead to fill the bar.
-    /// </summary>
-    /// <param name="bar"><see cref="HealthBar"/> to initialize.</param>
-    /// <param name="startingMaximumValue">Maximum value of the bar.</param>
-    /// <param name="startingValue">Current value of the bar.</param>
-    /// <returns>The value used to fill the bar, which can be <paramref name="startingValue"/> or <paramref name="startingMaximumValue"/> (if <c><paramref name="startingValue"/> == -1</c>).</returns>
-    /// <seealso cref="HealthBar"/>
-    protected float InitializeBar(HealthBar bar, float startingMaximumValue, float startingValue)
-    {
-        float value = startingValue == -1 ? startingMaximumValue : startingValue;
-        bar.ManualUpdate(startingMaximumValue, value);
-        return value;
-    }
 
     /// <summary>
     /// Takes healing increasing its <see cref="Health"/>.
@@ -127,7 +72,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     /// <param name="amount">Amount of <see cref="Health"/> recovered. Must be positive.</param>
     public void TakeHealing(float amount)
     {
-        Health = ChangeValueSimple(amount, Health, MaxHealth, true, "health");
+        healthPoints.Current = ChangeValueSimple(amount, healthPoints.Current, healthPoints.Max, true, "health");
     }
 
     /// <summary>
@@ -137,10 +82,10 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     /// <param name="displayText">Whenever the damage taken must be shown in a floating text.</param>
     public virtual void TakeDamage(float amount, bool displayDamage = false)
     {
-        System.Tuple<float, float, float> change = ChangeValue(amount, Health, MaxHealth, false, "health");
-        Health = change.Item1;
+        System.Tuple<float, float, float> change = ChangeValue(amount, healthPoints.Current, healthPoints.Max, false, "health");
+        healthPoints.Current = change.Item1;
         if (displayDamage)
-            SpawnFloatingText(change.Item2, Color.Lerp(Color.red, new Color(1, .5f, 0), Health / MaxHealth));
+            SpawnFloatingText(change.Item2, Color.Lerp(Color.red, new Color(1, .5f, 0), healthPoints.Current / healthPoints.Max));
     }
 
     // TODO: https://stackoverflow.com/questions/1402803/passing-properties-by-reference-in-c-sharp
@@ -231,5 +176,72 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     {
         if (floatingTextController != null && (!checkIfPositive || text > 0))
             floatingTextController.SpawnFloatingText(text, textColor);
+    }
+}
+
+[System.Serializable]
+public class HealthPoints
+{
+    [Tooltip("Maximum Current.")]
+    public float startingMax = 100;
+    private float _max;
+    /// <summary>
+    /// Maximum amount. <see cref="Current"/> can't be greater than this value.<br/>
+    /// If changes, <see cref="healthBar"/> will be updated using <seealso cref="HealthBar.UpdateValues(float health, float maxHealth)"/>.<br/>
+    /// If 0, <see cref="Die()"/> is called.
+    /// </summary>
+    /// <seealso cref="Current"/>
+    public float Max {
+        get {
+            return _max;
+        }
+        set {
+            _max = value;
+            bar.UpdateValues(Current, Max);
+            if (Max <= 0 && Die != null) Die();
+        }
+    }
+    [Tooltip("Starting Current. Set -1 to use Max value.")]
+    public float startingCurrent = -1;
+
+    [Tooltip("Health bar script.")]
+    public HealthBar bar;
+
+    private System.Action Die;
+
+    /// <summary>
+    /// Set the die method called when <see cref="Current"/> or <see cref="Max"/> are 0.
+    /// </summary>
+    /// <param name="Die">Method to call.</param>
+    public void SetDie(System.Action Die) => this.Die = Die;
+
+    private float _current;
+    /// <summary>
+    /// Current amount. It can't be greater than <see cref="MaxCurrent"/><br/>
+    /// If changes, <see cref="Bar"/> will be updated using <seealso cref="HealthBar.UpdateValues(float health, float maxHealth)"/>.<br/>
+    /// If 0, <see cref="Die()"/> is called.
+    /// </summary>
+    /// <seealso cref="Max"/>
+    public float Current {
+        get {
+            return _current;
+        }
+        set {
+            _current = value;
+            bar.UpdateValues(Current, Max);
+            if (Current <= 0 && Die != null) Die();
+        }
+    }
+
+    /// <summary>
+    /// Initializes the bar's Currents, setting the fill of the main bar and returning the current value.
+    /// If <see cref="startingCurrent"/> is -1, <see cref="startingMaximumCurrent"/> will be used instead to fill the bar.
+    /// </summary>
+    public void Initialize()
+    {
+        float current = startingCurrent == -1 ? startingMax : startingCurrent;
+        bar.ManualUpdate(startingMax, current);
+        Current = current;
+        Max = startingMax;
     }
 }
