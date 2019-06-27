@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main_Menu.unity
     guid: 25e1c505898eb61488e9d85919ae951c
+  - enabled: 0
+    path: Assets/__DELETED_GUID_Trash/406b5253a65eacd4e836c5f9eab903e8
+    guid: 406b5253a65eacd4e836c5f9eab903e8
   - enabled: 1
     path: Assets/Scenes/Level_1.unity
-    guid: 406b5253a65eacd4e836c5f9eab903e8
+    guid: c366b8f726e4d8e4aae0374e0d02d053
   m_configObjects: {}

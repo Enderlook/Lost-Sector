@@ -301,7 +301,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: You have a health and a shield bar. You shield bar recharges over time,
-    but health not. If you run out of health, you die.
+    but health don't. If you run out of health, you die.
 --- !u!1 &348976371
 GameObject:
   m_ObjectHideFlags: 0
@@ -1788,8 +1788,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: That is an asteroid. Take care that some asteroids are more dangerous than
-    they seem.
+  m_Text: That is an asteroid. Watch out! Some asteroids are more dangerous than they
+    seem.
 --- !u!1 &1817410637
 GameObject:
   m_ObjectHideFlags: 0
@@ -2188,8 +2188,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: This are you. Avoid at all cost being hit by enemies. You receive damage
-    proportional to the impact. Be careful.
+  m_Text: This is you. Avoid at all cost being hit by enemies. You receive damage
+    proportional to the impact.
 --- !u!1 &2117655016
 GameObject:
   m_ObjectHideFlags: 0

@@ -1133,7 +1133,7 @@ MonoBehaviour:
       threat: 6
       minimalDifficulty: 6
       weightFactorFormula: 1 + x / 10
-  difficulty: 100
+  difficulty: 50
   difficultyLinearIncrease: 1
   difficultyGeometricalIncrease: 1.1
   difficultyIncreaseInterval: 5

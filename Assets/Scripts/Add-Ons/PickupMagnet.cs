@@ -51,6 +51,7 @@ public class PickupMagnet : MonoBehaviour
             Debug.LogWarning($"Game object {gameObject.name} has a {nameof(pickupRadius)} of {pickupRadius}. It must be greater than 0.");
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         UnityEditor.Handles.color = Color.blue;
@@ -58,4 +59,5 @@ public class PickupMagnet : MonoBehaviour
         UnityEditor.Handles.color = Color.green;
         UnityEditor.Handles.DrawWireDisc(magnetTransform.position, Vector3.back, pickupRadius);
     }
+#endif
 }
