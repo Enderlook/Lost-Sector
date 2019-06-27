@@ -36,9 +36,11 @@ public class EnemyAsteroidExplosive : EnemyAsteroid
         base.Die();
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         UnityEditor.Handles.color = Color.red;
         UnityEditor.Handles.DrawWireDisc(rigidbodyHelper.Position, Vector3.back, explosionRadius);
     }
+#endif
 }

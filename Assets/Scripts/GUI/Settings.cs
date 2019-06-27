@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class Settings : MonoBehaviour
 {
-    public static bool IsSoundActive = false;
+    public static bool IsSoundActive = true;
 
     /*private void Start()
     {

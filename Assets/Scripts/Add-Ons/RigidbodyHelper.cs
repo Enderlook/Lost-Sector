@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class RigidbodyHelper : MonoBehaviour
 {
@@ -68,14 +68,10 @@ public class RigidbodyHelper : MonoBehaviour
         // Downwards damage doesn't work. Why?
         RigidbodyHelper target = collision.gameObject.GetComponent<RigidbodyHelper>();
         if (target != null)
-        {
             target.TakeDamage(CalculateDamage(impulse), ShouldDisplayDamage());
-        }
 
         if (audioSource != null && entity.ImpactSound != null)
-        {
             entity.ImpactSound.Play(audioSource, collision.relativeVelocity.magnitude);
-        }
     }
 
     /// <summary>
