@@ -13,7 +13,7 @@ public class EnemyBase : LivingObject
     [Tooltip("Coins. spawner controller.")]
     public CoinController coinController;
 
-    private Rigidbody2D thisRigidbody2D;
+    protected Rigidbody2D thisRigidbody2D;
 
     private void Awake() => thisRigidbody2D = rigidbodyHelper.GetRigidbody2D();
 

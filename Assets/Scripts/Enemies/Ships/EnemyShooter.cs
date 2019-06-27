@@ -10,14 +10,6 @@ public class EnemyShooter : EnemyBase
     [Tooltip("Weapon configuration.")]
     public Weapon weapon;
     
-    private Rigidbody2D thisRigidbody2D;
-
-    protected override void Start()
-    {
-        thisRigidbody2D = rigidbodyHelper.GetRigidbody2D();
-        base.Start();
-    }
-
     private void Update()
     {
         // Slowly accelerate to crusierSpeed
