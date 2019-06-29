@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnemyAsteroid : EnemyBase
+public class EnemyAsteroid : Enemy
 {
     [Header("Configuration")]
     [Tooltip("Random rotation between two value.")]

@@ -18,7 +18,7 @@ public class GameOverMenu : MonoBehaviour
     private int money;
     private float showedMoney = 0;
     private float MONEY_RATE_PERCENT = 0.35f;
-    
+
     /// <summary>
     /// Determines whenever the game over menu is displayed or hidden.
     /// </summary>
@@ -32,12 +32,13 @@ public class GameOverMenu : MonoBehaviour
         {
             subtitle.text = "Congratulation, you win!";
             subtitle.color = winColor;
-        } else
+        }
+        else
         {
             subtitle.text = "You failed the mission!";
             subtitle.color = loseColor;
         }
-        isFinished = true;       
+        isFinished = true;
     }
 
     private void Update()

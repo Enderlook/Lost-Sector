@@ -9,7 +9,7 @@ public class Player : LivingObject
     [Tooltip("Movement speed.")]
     public float moveSpeed;
     /*public float turnSpeed;
-    public float rotationOffset;*/    
+    public float rotationOffset;*/
 
     [Tooltip("Shield recharge rate (points per second).")]
     public float shieldRechargeRate = 10;

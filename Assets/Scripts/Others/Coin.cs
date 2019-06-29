@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class Coin : MonoBehaviour, IPickup
-{    
+{
     private int price;
     private Transform player;
     private Rigidbody2D thisRigidbody2D;
@@ -54,5 +54,5 @@ public interface IPickup
     /// <summary>
     /// <seealso cref="Rigidbody2D"/> of this pickup.
     /// </summary>
-    Rigidbody2D Rigidbody2D { get; } 
+    Rigidbody2D Rigidbody2D { get; }
 }

@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using UnityEditor;
+using UnityEngine;
 
 public class RescaleAnchorPoints : EditorWindow
 {
@@ -18,7 +18,7 @@ public class RescaleAnchorPoints : EditorWindow
         bool error = rectTransform == null;
         if (error)
             EditorGUILayout.LabelField("The active game object on Inspector must have a Rect Transform component.");
-        
+
         xScale = EditorGUILayout.FloatField("X Rescale Factor", xScale);
         yScale = EditorGUILayout.FloatField("Y Rescale Factor", yScale);
 
