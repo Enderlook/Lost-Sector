@@ -549,7 +549,7 @@ MonoBehaviour:
     startingMax: 100
     startingCurrent: -1
     bar: {fileID: 166792902}
-  moveSpeed: 10
+  moveSpeed: 15
   shieldRechargeRate: 8
   shieldRechargeDelay: 4
   weapon:
