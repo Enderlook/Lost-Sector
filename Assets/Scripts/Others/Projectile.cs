@@ -162,9 +162,11 @@ public class Weapon : IProjectileConfiguration
         return false;
     }
 
+#if UNITY_EDITOR
     private void OnValidate()
     {
         if (1 < ((IProjectileConfiguration)this).Layer && ((IProjectileConfiguration)this).Layer < 31)
             Debug.LogWarning($"The field {nameof(layer)} should only contain a single layer.");
     }
+#endif
 }

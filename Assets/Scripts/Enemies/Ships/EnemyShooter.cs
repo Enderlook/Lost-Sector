@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyShooter : EnemyBase
+public class EnemyShooter : Enemy
 {
     [Header("Configuration")]
     [Tooltip("Constant speed of movement.")]
@@ -8,8 +8,8 @@ public class EnemyShooter : EnemyBase
     [Tooltip("Thruster acceleration speed.")]
     public float accelerationSpeed;
     [Tooltip("Weapon configuration.")]
-    public Weapon weapon;    
-    
+    public Weapon weapon;
+
     private void Update()
     {
         // Slowly accelerate to crusierSpeed

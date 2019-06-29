@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class Menu : MonoBehaviour
 {
@@ -11,7 +9,7 @@ public class Menu : MonoBehaviour
     public GameOverMenu gameOver;
     [Tooltip("How to play menu.")]
     public GameObject howToPlay;
-    
+
     private bool isActive;
     private bool isGameOver = false;
     private bool hasWon;

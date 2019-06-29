@@ -57,11 +57,11 @@ public class SpawneableGameObjects
         {
             GameObject spawned = Instantiate(gameObjectToSpawn, Global.enemiesParent);
             Transform spawningTransform = spawningPoints[Random.Range(0, spawningPoints.Length - 1)];
-            RigidbodyHelper spawnedRigidbodyHelper = spawned.GetComponent<EnemyBase>().rigidbodyHelper; // Or spawned.GetComponentInChildren<RigidbodyHelper>(); ?
+            RigidbodyHelper spawnedRigidbodyHelper = spawned.GetComponent<Enemy>().rigidbodyHelper; // Or spawned.GetComponentInChildren<RigidbodyHelper>(); ?
             spawnedRigidbodyHelper.transform.position = spawningTransform.position;
             spawnedRigidbodyHelper.transform.transform.rotation = spawningTransform.rotation;
             // To make them a bit slower
-            spawned.GetComponent<EnemyBase>().impulse *= 0.75f;
+            spawned.GetComponent<Enemy>().impulse *= 0.75f;
         }
 
         if (notRandom)

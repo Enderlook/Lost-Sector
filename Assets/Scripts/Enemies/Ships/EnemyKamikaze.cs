@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnemyKamikaze : EnemyBase
+public class EnemyKamikaze : Enemy
 {
     [Header("Configuration")]
     [Tooltip("Seconds waited before start accelerating.")]

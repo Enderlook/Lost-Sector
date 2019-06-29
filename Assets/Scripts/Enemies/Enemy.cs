@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnemyBase : LivingObject
+public class Enemy : LivingObject
 {
     [Header("Configuration")]
     [Tooltip("Initial impulse.")]
@@ -18,7 +18,7 @@ public class EnemyBase : LivingObject
     private void Awake() => thisRigidbody2D = rigidbodyHelper.GetRigidbody2D();
 
     protected override void Start()
-    {        
+    {
         // Just to be sure...
         coinController.spawninigTransform = thisRigidbody2D.transform;
 

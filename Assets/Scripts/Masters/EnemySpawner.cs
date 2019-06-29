@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using UnityEngine;
@@ -57,7 +57,8 @@ public class EnemySpawner : MonoBehaviour
             {
                 enemy.SetActive(true);
             }
-        } else
+        }
+        else
             enemyPool.Add(enemyPrefab, new List<GameObject>());
         if (enemy == null)
         {
@@ -231,7 +232,7 @@ public class Enemies
     /// <param name="difficulty">Difficulty used to calculate weight.</param>
     public void UpdateWeights(float difficulty)
     {
-        foreach(EnemyPrefab enemy in enemyPrefabs)
+        foreach (EnemyPrefab enemy in enemyPrefabs)
         {
             enemy.UpdateWeight(difficulty);
         }

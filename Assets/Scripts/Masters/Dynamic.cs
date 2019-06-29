@@ -22,7 +22,7 @@ public static class Global
     /// <summary>
     /// Boundaries of the screen.
     /// </summary>
-    public static Boundary boundary;    
+    public static Boundary boundary;
 
     public static CoinMeter coinMeter;
     /// <summary>

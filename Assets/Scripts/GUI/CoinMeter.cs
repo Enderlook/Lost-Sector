@@ -29,11 +29,11 @@ public class CoinMeter : MonoBehaviour
     }
 
     private void Update()
-    { 
+    {
         if (showedMoney != realMoney)
         {
             showedMoney = Mathf.Clamp(showedMoney + (realMoney - oldMoney) * Time.deltaTime, Mathf.Min(realMoney, oldMoney), Mathf.Max(realMoney, oldMoney));
             moneyText.text = ((int)showedMoney).ToString();
-        }    
+        }
     }
 }
