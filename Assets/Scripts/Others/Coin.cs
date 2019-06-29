@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Coin : Pickup
+public class Coin : Pickupable
 {
     private int price;
     private Transform player;
@@ -15,7 +15,7 @@ public class Coin : Pickup
     /// <summary>
     /// Collect its money.
     /// </summary>
-    public override void PickupVoid() => Global.money += price;
+    public override void Pickup() => Global.money += price;
 
     /// <summary>
     /// Set configuration of the coin.

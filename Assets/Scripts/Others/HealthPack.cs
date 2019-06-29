@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPack : Pickup
+public class HealthPack : Pickupable
 {
     [Header("Configuration")]
     [Tooltip("Health restored on pick up.")]
@@ -24,7 +24,7 @@ public class HealthPack : Pickup
     /// Heal the <paramref name="livingObject"/> who pickup it by <see cref="healthRestored"/>.
     /// </summary>
     /// <param name="livingObject"><see cref="LivingObject"/> to heal.</param>
-    public override void PickupLivingObject(LivingObject livingObject) => livingObject.TakeHealing(healthRestored);
+    public override void Pickup(LivingObject livingObject) => livingObject.TakeHealing(healthRestored);
 
     private void OnValidate()
     {

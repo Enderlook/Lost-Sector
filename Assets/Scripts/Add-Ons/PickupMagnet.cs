@@ -33,6 +33,7 @@ public class PickupMagnet : MonoBehaviour
         livingObject = gameObject.GetComponent<LivingObject>();
     }
 
+
     private void FixedUpdate()
     {
         foreach (Transform item in Global.pickupsParent)
@@ -59,10 +60,10 @@ public class PickupMagnet : MonoBehaviour
     /// <param name="item">Item to be picked up.</param>
     private void Pickup(Transform item)
     {
-        Pickup pickup = item.GetComponent<Pickup>();
+        Pickupable pickup = item.GetComponent<Pickupable>();
         if (pickup != null)
         {
-            Action[] actions = new Action[] { pickup.PickupVoid, () => pickup.PickupLivingObject(livingObject) };
+            Action[] actions = new Action[] { pickup.Pickup, () => pickup.Pickup(livingObject) };
             bool hasFoundImplementedMethod = false;
             foreach (Action action in actions)
             {
@@ -104,29 +105,22 @@ public class PickupMagnet : MonoBehaviour
 #endif
 }
 
-// We may have more pickups in the future
-public interface IPickup
+public abstract class Pickupable : MonoBehaviour
 {
     /// <summary>
     /// <seealso cref="Rigidbody2D"/> of this pickup.
     /// </summary>
-    Rigidbody2D Rigidbody2D { get; }
+    public abstract Rigidbody2D Rigidbody2D { get; }
     /// <summary>
     /// Whenever the game object should be destroyed or not when pickup.
     /// </summary>
-    bool ShouldBeDestroyedOnPickup { get; }
-}
-
-public abstract class Pickup : MonoBehaviour, IPickup
-{
-    public abstract Rigidbody2D Rigidbody2D { get; }
     public abstract bool ShouldBeDestroyedOnPickup { get; }
     /// <summary>
     /// Method executed when a pickup is used.
     /// </summary>
-    public virtual void PickupVoid() => throw new NotImplementedException();
+    public virtual void Pickup() => throw new NotImplementedException();
     /// <summary>
     /// Method executed when a pickup is used.
     /// </summary>
-    public virtual void PickupLivingObject(LivingObject livingObject) => throw new NotImplementedException();
+    public virtual void Pickup(LivingObject livingObject) => throw new NotImplementedException();
 }
