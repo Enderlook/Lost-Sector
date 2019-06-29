@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public abstract class IVectorRangeTwo
 {
@@ -72,10 +72,10 @@ public class TransformRange : IVectorRangeTwo
 
     protected override Vector3 EndVector3 {
         get {
-            return startTransform.position;
+            return endTransform.position;
         }
         set {
-            startTransform.position = value;
+            endTransform.position = value;
         }
     }
 
@@ -83,18 +83,12 @@ public class TransformRange : IVectorRangeTwo
     /// Return a <seealso cref="Vector3"/> position. If <see cref="IVectorRangeTwo.isRandom"/> is <see langword="true"/> it will return the position of the <see cref="StartVector"/>. On <see langword="false"/>, it will return a random <seealso cref="Vector3"/> between the <see cref="StartVector"/> and the <see cref="EndVector"/>.
     /// </summary>
     /// <param name="x"><see cref="TransformRange"/> instance used to determine the random <seealso cref="Vector3"/>.</param>
-    public static explicit operator Vector3(TransformRange x)
-    {
-        return x.Vector3;
-    }
+    public static explicit operator Vector3(TransformRange x) => x.Vector3;
     /// <summary>
     /// Return a <seealso cref="Vector2"/> position. If <see cref="IVectorRangeTwo.isRandom"/> is <see langword="true"/> it will return the position of the <see cref="StartVector"/>. On <see langword="false"/>, it will return a random <seealso cref="Vector2"/> between the <see cref="StartVector"/> and the <see cref="EndVector"/>.
     /// </summary>
     /// <param name="x"><see cref="TransformRange"/> instance used to determine the random <seealso cref="Vector3"/>.</param>
-    public static explicit operator Vector2(TransformRange x)
-    {
-        return x.Vector2;
-    }
+    public static explicit operator Vector2(TransformRange x) => x.Vector2;
 }
 
 [System.Serializable]
@@ -127,19 +121,13 @@ public class Vector2RangeTwo : IVectorRangeTwo
     /// Return a <seealso cref="Vector3"/> position. If <see cref="IVectorRangeTwo.isRandom"/> is <see langword="true"/> it will return the position of the <see cref="StartVector"/>. On <see langword="false"/>, it will return a random <seealso cref="Vector3"/> between the <see cref="StartVector"/> and the <see cref="EndVector"/>.
     /// </summary>
     /// <param name="x"><see cref="Vector2RangeTwo"/> instance used to determine the random <seealso cref="Vector3"/>.</param>
-    public static explicit operator Vector3(Vector2RangeTwo x)
-    {
-        return x.Vector3;
-    }
+    public static explicit operator Vector3(Vector2RangeTwo x) => x.Vector3;
     /// <summary>
     /// Return a <seealso cref="Vector2"/> position. If <see cref="IVectorRangeTwo.isRandom"/> is <see langword="true"/> it will return the position of the <see cref="StartVector"/>. On <see langword="false"/>, it will return a random <seealso cref="Vector2"/> between the <see cref="StartVector"/> and the <see cref="EndVector"/>.
     /// </summary>
     /// <param name="x"><see cref="Vector2RangeTwo"/> instance used to determine the random <seealso cref="Vector3"/>.</param>
-    public static explicit operator Vector2(Vector2RangeTwo x)
-    {
-        return x.Vector2;
-    }
-    
+    public static explicit operator Vector2(Vector2RangeTwo x) => x.Vector2;
+
     /// <summary>
     /// Multiplicatives a given range of two <seealso cref="Vector2"/> (<seealso cref="Vector2RangeTwo"/>) with a <see langword="float"/>.<br/>
     /// The float multiplies each <seealso cref="Vector2"/>.
@@ -147,10 +135,7 @@ public class Vector2RangeTwo : IVectorRangeTwo
     /// <param name="left"><see cref="Vector2RangeTwo"/> to multiply.</param>
     /// <param name="right"><see langword="float"/> to multiply.</param>
     /// <returns>The multiplication of the <seealso cref="Vector2"/> inside <paramref name="left"/> with the number <paramref name="right"/>.</returns>
-    public static Vector2RangeTwo operator *(Vector2RangeTwo left, float right)
-    {
-        return new Vector2RangeTwo { startVector = left.startVector * right, endVector = left.endVector * right, isRandom = left.isRandom };
-    }
+    public static Vector2RangeTwo operator *(Vector2RangeTwo left, float right) => new Vector2RangeTwo { startVector = left.startVector * right, endVector = left.endVector * right, isRandom = left.isRandom };
 }
 
 [System.Serializable]
@@ -167,19 +152,13 @@ public class FloatRangeTwo
     /// Return a random number between <see cref="start"/> and <see cref="end"/>. The result is casted to <see langword="int"/>.
     /// </summary>
     /// <param name="x"><see cref="FloatRangeTwo"/> instance used to determine the random float.</param>
-    public static explicit operator float(FloatRangeTwo x)
-    {
-        return x.isRandom ? x.start : Random.Range(x.start, x.end);
-    }
+    public static explicit operator float(FloatRangeTwo x) => x.isRandom ? x.start : Random.Range(x.start, x.end);
 
     /// <summary>
     /// Return a random number between <see cref="start"/> and <see cref="end"/>. The result is casted to <see langword="int"/>.
     /// </summary>
     /// <param name="x"><see cref="FloatRangeTwo"/> instance used to determine the random int.</param>
-    public static explicit operator int(FloatRangeTwo x)
-    {
-        return x.isRandom ? (int)x.start : Random.Range((int)x.start, (int)x.end);
-    }
+    public static explicit operator int(FloatRangeTwo x) => x.isRandom ? (int)x.start : Random.Range((int)x.start, (int)x.end);
 }
 
 [System.Serializable]
@@ -199,20 +178,14 @@ public class Sound
     /// </summary>
     /// <returns>Random volume. If <c><see cref="volume"/>.lenght <= 1</c> it <see langword="return"/> the <c><see cref="volume"/>[1]</c>.</returns>
     /// <seealso cref="GetRandom(float[])"/>
-    private float GetVolume()
-    {
-        return GetRandom(volume);
-    }
+    private float GetVolume() => GetRandom(volume);
 
     /// <summary>
     /// Calculates a random pitch between the given by the two first elements of <see cref="pitch"/>.
     /// </summary>
     /// <returns>Random volume. If <c><see cref="pitch"/>.lenght <= 1</c> it <see langword="return"/> the <c><see cref="pitch"/>[1]</c>.</returns>
     /// <seealso cref="GetRandom(float[] array)"/>
-    private float GetPitch()
-    {
-        return GetRandom(pitch);
-    }
+    private float GetPitch() => GetRandom(pitch);
 
     /// <summary>
     /// Calculates a random value between the given by the two first elements of <paramref name="array"/>.
