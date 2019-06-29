@@ -81,23 +81,23 @@ MonoBehaviour:
     - 1.2
   onDeathExplosionPrefab: {fileID: 3413306239945161787, guid: 923f959ae77217a42826bcaed27098f7,
     type: 3}
-  onDeathExplosionPrefabScale: 10
+  onDeathExplosionPrefabScale: 7
   rigidbodyHelper: {fileID: 4216202753804953944}
   floatingTextController: {fileID: 8009385548156912032}
   impulse:
+    isRandom: 0
     startVector: {x: 0, y: 10}
     endVector: {x: 35, y: 150}
-    notRandom: 0
   moneySpawnedOnDeath:
     start: 8
     end: 15
-    notRandom: 0
+    isRandom: 0
   coinController: {fileID: 4235442390000676295}
   rotation:
     start: -50
     end: 50
-    notRandom: 0
-  explosionRadius: 2.5
+    isRandom: 0
+  explosionRadius: 2
   explosionDamage: 50
 --- !u!1001 &1621576272868885887
 PrefabInstance:
