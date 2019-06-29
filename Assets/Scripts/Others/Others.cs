@@ -1,75 +1,145 @@
 ﻿using UnityEngine;
 
+public abstract class IVectorRangeTwo
+{
+    /// <summary>
+    /// Whenever it should return only the initial vector or a random vector made by two vectors.
+    /// </summary>
+    [Tooltip("Whenever it should return only the initial vector or a random vector made by two vectors.")]
+    public bool isRandom = true;
+
+    /// <summary>
+    /// Return the start parameter in <see cref="UnityEngine.Vector3"/>
+    /// </summary>
+    protected abstract Vector3 StartVector3 { get; set; }
+    /// <summary>
+    /// Return the end parameter in <see cref="UnityEngine.Vector3"/>
+    /// </summary>
+    protected abstract Vector3 EndVector3 { get; set; }
+    /// <summary>
+    /// Whenever it should return only the initial vector or a random vector made by two vectors.
+    /// </summary>
+    protected Vector3 Vector3 {
+        get {
+            if (isRandom)
+                return new Vector3(Random.Range(StartVector3.x, EndVector3.x),
+                    Random.Range(StartVector3.y, EndVector3.y),
+                    Random.Range(StartVector3.z, EndVector3.z));
+            else
+                return StartVector3;
+        }
+    }
+
+    /// <summary>
+    /// Return the start parameter in <see cref="UnityEngine.Vector2"/>
+    /// </summary>
+    protected Vector2 StartVector2 => StartVector3;
+    /// <summary>
+    /// Return the end parameter in <see cref="UnityEngine.Vector2"/>
+    /// </summary>
+    protected Vector2 EndVector2 => EndVector3;
+    /// <summary>
+    /// Return a <seealso cref="UnityEngine.Vector2"/> position. If <see cref="IsRandom"/> is <see langword="true"/>, it will return a random <seealso cref="UnityEngine.Vector2"/> between the <see cref="StartVector2"/> and the <see cref="EndVector2"/>. On <see langword="false"/> it will return the position of the <see cref="StartVector2"/>.
+    /// </summary>
+    protected Vector2 Vector2 {
+        get {
+            if (isRandom)
+                return new Vector2(Random.Range(StartVector2.x, EndVector2.x),
+                    Random.Range(StartVector2.y, EndVector2.y));
+            else
+                return StartVector2;
+        }
+    }
+}
+
+
 [System.Serializable]
-public class TransformRange
+public class TransformRange : IVectorRangeTwo
 {
     [Tooltip("Start transform.")]
     public Transform startTransform;
     [Tooltip("End transform.")]
     public Transform endTransform;
-    [Tooltip("If not random will use only the start transform.")]
-    public bool notRandom = false;
 
-    /// <summary>
-    /// Vector3 of startTransform.
-    /// </summary>
-    public Vector3 StartVector => startTransform.position;
-
-    /// <summary>
-    /// Vector3 of endTransform.
-    /// </summary>
-    public Vector3 EndVector => endTransform.position;
-
-    /// <summary>
-    /// Return a Vector3 position. If notRandom is true it will return the position of the startTransfom. On false, it will return a random Vector3 between the startTransform and the endTransform.
-    /// </summary>
-    /// <returns>A random Vector3 between the values of start and end transform.</returns>
-    public Vector3 GetVector()
-    {
-        if (notRandom)
+    protected override Vector3 StartVector3 {
+        get {
             return startTransform.position;
-        else
-            return new Vector3(Random.Range(startTransform.position.x, endTransform.position.x),
-                Random.Range(startTransform.position.y, endTransform.position.y),
-                Random.Range(startTransform.position.z, endTransform.position.z));
+        }
+        set {
+            startTransform.position = value;
+        }
+    }
+
+    protected override Vector3 EndVector3 {
+        get {
+            return startTransform.position;
+        }
+        set {
+            startTransform.position = value;
+        }
+    }
+
+    /// <summary>
+    /// Return a <seealso cref="Vector3"/> position. If <see cref="IVectorRangeTwo.isRandom"/> is <see langword="true"/> it will return the position of the <see cref="StartVector"/>. On <see langword="false"/>, it will return a random <seealso cref="Vector3"/> between the <see cref="StartVector"/> and the <see cref="EndVector"/>.
+    /// </summary>
+    /// <param name="x"><see cref="TransformRange"/> instance used to determine the random <seealso cref="Vector3"/>.</param>
+    public static explicit operator Vector3(TransformRange x)
+    {
+        return x.Vector3;
+    }
+    /// <summary>
+    /// Return a <seealso cref="Vector2"/> position. If <see cref="IVectorRangeTwo.isRandom"/> is <see langword="true"/> it will return the position of the <see cref="StartVector"/>. On <see langword="false"/>, it will return a random <seealso cref="Vector2"/> between the <see cref="StartVector"/> and the <see cref="EndVector"/>.
+    /// </summary>
+    /// <param name="x"><see cref="TransformRange"/> instance used to determine the random <seealso cref="Vector3"/>.</param>
+    public static explicit operator Vector2(TransformRange x)
+    {
+        return x.Vector2;
     }
 }
 
 [System.Serializable]
-public class Vector2RangeTwo
+public class Vector2RangeTwo : IVectorRangeTwo
 {
     [Tooltip("Start vector.")]
     public Vector2 startVector;
     [Tooltip("End vector.")]
     public Vector2 endVector;
-    [Tooltip("If not random will use only the start vector.")]
-    public bool notRandom = false;
 
-    /// <summary>
-    /// Return a Vector3 position. If notRandom is true it will return the position of the StartVector. On false, it will return a random Vector3 between the StartVector and the EndVector.
-    /// </summary>
-    /// <returns></returns>
-    public Vector2 GetVector()
-    {
-        if (notRandom)
+    protected override Vector3 StartVector3 {
+        get {
             return startVector;
-        else
-            return new Vector2(Random.Range(startVector.x, endVector.x), Random.Range(startVector.y, endVector.y));
+        }
+        set {
+            startVector = value;
+        }
+    }
+
+    protected override Vector3 EndVector3 {
+        get {
+            return endVector;
+        }
+        set {
+            endVector = value;
+        }
     }
 
     /// <summary>
-    /// Constructor of <see cref="Vector2RangeTwo"/>.
+    /// Return a <seealso cref="Vector3"/> position. If <see cref="IVectorRangeTwo.isRandom"/> is <see langword="true"/> it will return the position of the <see cref="StartVector"/>. On <see langword="false"/>, it will return a random <seealso cref="Vector3"/> between the <see cref="StartVector"/> and the <see cref="EndVector"/>.
     /// </summary>
-    /// <param name="StartVector">Initial <see cref="Vector2"/>.</param>
-    /// <param name="EndVector">End <see cref="Vector2"/>.</param>
-    /// <param name="notRandom">Determines if the returned <see cref="Vector2"/> from <seealso cref="GetVector()"/> should be random between <see cref="startVector"/> an <see cref="endVector"/> or just be <see cref="startVector"/>.</param>
-    public Vector2RangeTwo(Vector2 startVector, Vector2 endVector, bool notRandom)
+    /// <param name="x"><see cref="Vector2RangeTwo"/> instance used to determine the random <seealso cref="Vector3"/>.</param>
+    public static explicit operator Vector3(Vector2RangeTwo x)
     {
-        this.startVector = startVector;
-        this.endVector = endVector;
-        this.notRandom = notRandom;
+        return x.Vector3;
     }
-
+    /// <summary>
+    /// Return a <seealso cref="Vector2"/> position. If <see cref="IVectorRangeTwo.isRandom"/> is <see langword="true"/> it will return the position of the <see cref="StartVector"/>. On <see langword="false"/>, it will return a random <seealso cref="Vector2"/> between the <see cref="StartVector"/> and the <see cref="EndVector"/>.
+    /// </summary>
+    /// <param name="x"><see cref="Vector2RangeTwo"/> instance used to determine the random <seealso cref="Vector3"/>.</param>
+    public static explicit operator Vector2(Vector2RangeTwo x)
+    {
+        return x.Vector2;
+    }
+    
     /// <summary>
     /// Multiplicatives a given range of two <seealso cref="Vector2"/> (<seealso cref="Vector2RangeTwo"/>) with a <see langword="float"/>.<br/>
     /// The float multiplies each <seealso cref="Vector2"/>.
@@ -79,7 +149,7 @@ public class Vector2RangeTwo
     /// <returns>The multiplication of the <seealso cref="Vector2"/> inside <paramref name="left"/> with the number <paramref name="right"/>.</returns>
     public static Vector2RangeTwo operator *(Vector2RangeTwo left, float right)
     {
-        return new Vector2RangeTwo(left.startVector * right, left.endVector * right, left.notRandom);        
+        return new Vector2RangeTwo { startVector = left.startVector * right, endVector = left.endVector * right, isRandom = left.isRandom };
     }
 }
 
@@ -90,20 +160,26 @@ public class FloatRangeTwo
     public float start;
     [Tooltip("End.")]
     public float end;
-    [Tooltip("If not random will use only the start number.")]
-    public bool notRandom = false;
+    [Tooltip("Whenever it should return only the initial vector or a random vector made by two vectors.")]
+    public bool isRandom = false;
 
     /// <summary>
-    /// Calculates a random number between <see cref="start"/> and <see cref="end"/>.
+    /// Return a random number between <see cref="start"/> and <see cref="end"/>. The result is casted to <see langword="int"/>.
     /// </summary>
-    /// <returns>If <see cref="notRandom"/> is <see langword="true"/> it will return the position of the start. On <see langword="false"/>, it will <see langword="return"/> a random <see langword="float"/> between the start and the en.</returns>
-    public float Value => notRandom ? start : Random.Range(start, end);
+    /// <param name="x"><see cref="FloatRangeTwo"/> instance used to determine the random float.</param>
+    public static explicit operator float(FloatRangeTwo x)
+    {
+        return x.isRandom ? x.start : Random.Range(x.start, x.end);
+    }
 
     /// <summary>
-    /// Calculates a random number between <see cref="start"/> and <see cref="end"/>. The result is casted to <see langword="int"/>.
+    /// Return a random number between <see cref="start"/> and <see cref="end"/>. The result is casted to <see langword="int"/>.
     /// </summary>
-    /// <returns>If <see cref="notRandom"/> is <see langword="true"/> it will <see langword="return"/> the position of the start. On <see langword="false"/>, it will <see langword="return"/> a random <see langword="float"/> between the <see cref="start"/> and the <see cref="end"/>.</returns>
-    public int ValueInt => (int)Value;
+    /// <param name="x"><see cref="FloatRangeTwo"/> instance used to determine the random int.</param>
+    public static explicit operator int(FloatRangeTwo x)
+    {
+        return x.isRandom ? (int)x.start : Random.Range((int)x.start, (int)x.end);
+    }
 }
 
 [System.Serializable]
@@ -158,7 +234,8 @@ public class Sound
     /// <param name="volumeMultiplier">Volume of the sound, from 0 to 1.</param>
     public void Play(AudioSource audioSource, float volumeMultiplier)
     {
-        if (Settings.IsSoundActive) {
+        if (Settings.IsSoundActive)
+        {
             audioSource.pitch = GetPitch();
             audioSource.PlayOneShot(audioClip, GetVolume() * volumeMultiplier);
         }

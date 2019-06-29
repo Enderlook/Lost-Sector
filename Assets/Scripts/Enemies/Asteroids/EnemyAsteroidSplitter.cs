@@ -76,7 +76,7 @@ public class SpawneableGameObjects
         }
         else
         {
-            int total = amountToSpawn.ValueInt;
+            int total = (int)amountToSpawn;
             for (int i = 0; i < total; i++)
             {
                 Spawn(GetRandomPrefab());

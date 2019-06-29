@@ -50,7 +50,7 @@ public class CoinController : MonoBehaviour
                 coinScript.SetConfiguration((int)PRICES_TABLE[coinToSpawn.Item1], coinToSpawn.Item1);
 
                 // https://answers.unity.com/questions/1111106/add-force-in-random-direction-with-set-speed.html
-                coin.GetComponent<Rigidbody2D>().velocity = Random.insideUnitCircle * movementSpeed.Value;
+                coin.GetComponent<Rigidbody2D>().velocity = Random.insideUnitCircle * (float)movementSpeed;
             }
         }
     }
