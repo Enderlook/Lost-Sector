@@ -84,8 +84,7 @@ public class EnemySpawner : MonoBehaviour
             }
             foreach (GameObject enemyPrefab in enemies.GetEnemies(difficulty))
             {
-                TransformRange spawnRange = spawnPoints[Random.Range(0, spawnPoints.Length - 1)];
-                Vector3 position = (Vector3)spawnRange;
+                Vector3 position = (Vector3)spawnPoints[Random.Range(0, spawnPoints.Length - 1)]; 
 
                 GameObject enemy = Spawn(enemyPrefab);
                 enemy.transform.position = position;
