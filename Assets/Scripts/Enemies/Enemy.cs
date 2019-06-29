@@ -27,13 +27,13 @@ public class Enemy : LivingObject
 
     protected override void Initialize()
     {
-        thisRigidbody2D.AddRelativeForce(impulse.GetVector() * thisRigidbody2D.mass);
+        thisRigidbody2D.AddRelativeForce((Vector2)impulse * thisRigidbody2D.mass);
         base.Initialize();
     }
 
     protected override void Die()
     {
-        coinController.SpawnCoins(moneySpawnedOnDeath.ValueInt);
+        coinController.SpawnCoins((int)moneySpawnedOnDeath);
         base.Die();
     }
 }

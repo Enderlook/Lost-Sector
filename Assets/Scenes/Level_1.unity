@@ -1620,7 +1620,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints:
-  - startTransform: {fileID: 1112329302}
+  - isRandom: 1
+    startTransform: {fileID: 1112329302}
     endTransform: {fileID: 1023573337}
     notRandom: 0
   enemies:

@@ -8,7 +8,7 @@ public class EnemyAsteroid : Enemy
 
     protected override void Initialize()
     {
-        rigidbodyHelper.GetRigidbody2D().angularVelocity = rotation.Value;
+        rigidbodyHelper.GetRigidbody2D().angularVelocity = (float)rotation;
         base.Initialize();
     }
 }
