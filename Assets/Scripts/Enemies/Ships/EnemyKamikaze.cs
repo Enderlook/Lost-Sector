@@ -11,7 +11,7 @@ public class EnemyKamikaze : Enemy
     private bool isAccelerating = false;
     private float secondsWaitedBeforeAccelerate = 0;
 
-    private void Update()
+    protected override void Update()
     {
         if (isAccelerating)
             rigidbodyHelper.GetRigidbody2D().AddRelativeForce(new Vector2(0, acceleration));
@@ -20,5 +20,6 @@ public class EnemyKamikaze : Enemy
             secondsWaitedBeforeAccelerate += Time.deltaTime;
             isAccelerating = secondsWaitedBeforeAccelerate > waitSecondsBeferoAccelerate;
         }
+        base.Update();
     }
 }

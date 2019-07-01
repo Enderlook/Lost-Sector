@@ -50,6 +50,8 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         Initialize();
     }
 
+    protected virtual void Update() => healthPoints.Update(Time.deltaTime);
+
     /// <summary>
     /// Initializes some values that are reused during the enemies recycling.
     /// </summary>
@@ -70,10 +72,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     /// Takes healing increasing its <see cref="Health"/>.
     /// </summary>
     /// <param name="amount">Amount of <see cref="Health"/> recovered. Must be positive.</param>
-    public void TakeHealing(float amount)
-    {
-        healthPoints.Current = ChangeValueSimple(amount, healthPoints.Current, healthPoints.Max, true, "health");
-    }
+    public void TakeHealing(float amount) => healthPoints.TakeHealing(amount);
 
     /// <summary>
     /// Take damage reducing its <see cref="Health"/>.
@@ -82,76 +81,9 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     /// <param name="displayText">Whenever the damage taken must be shown in a floating text.</param>
     public virtual void TakeDamage(float amount, bool displayDamage = false)
     {
-        System.Tuple<float, float, float> change = ChangeValue(amount, healthPoints.Current, healthPoints.Max, false, "health");
-        healthPoints.Current = change.Item1;
+        healthPoints.TakeDamage(amount);
         if (displayDamage)
-            SpawnFloatingText(change.Item2, Color.Lerp(Color.red, new Color(1, .5f, 0), healthPoints.Current / healthPoints.Max));
-    }
-
-    // TODO: https://stackoverflow.com/questions/1402803/passing-properties-by-reference-in-c-sharp
-    /// <summary>
-    /// If <paramref name="isAdding"/> is <see langword="true"/>, <paramref name="amount"/> will be added to <paramref name="variable"/>. On <see langword="false"/>, <paramref name="amount"/> will be reduced to <paramref name="variable"/>.
-    /// By any mean, <paramref name="variable"/> will be greater than <paramref name="maximum"/> or lower than 0. If that happens, the result will be replaced by the corresponding boundary (either 0 or <paramref name="maximum"/>) and the <c>rest</c> will store the difference between the surpassed value and the boundary.
-    /// The values returned are the result of variable +/- amount (determined by isAdding) and the rest. If there is no rest it'll be 0. 
-    /// </summary>
-    /// <param name="amount">Amount to add or reduct of <paramref name="variable"/>. Must be positive.</param>
-    /// <param name="variable">Variable where <paramref name="amount"/> will be added or reduced.</param>
-    /// <param name="maximum">Hight limit of the result. Result will be clamped between this and 0.</param>
-    /// <param name="isAdding">Whenever <paramref name="amount"/> will be added (<see langword="true"/>) or reduced (<see langword="false"/>) to <paramref name="variable"/>.</param>
-    /// <param name="keyword"></param>
-    /// <returns><c>Item1</c> is the new <paramref name="variable"/> value.<br/>
-    /// <c>Item2</c> total damage taken is always positive.<br/>
-    /// <c>Item3</c> is the rest damage that wasn't able to take.</returns>
-    /// <see cref="ChangeValueSimple(float amount, float variable, float maximum, bool isAdding, string keyword)"/>
-    protected System.Tuple<float, float, float> ChangeValue(float amount, float variable, float maximum, bool isAdding, string keyword)
-    {
-        //if ((shouldBePossitive && amount < 0) || (!shouldBePossitive && amount > 0))
-        float total = 0;
-        if (amount < 0)
-            Debug.LogWarning($"{(isAdding ? "healing" : "damage")} amount was negative. The creature is {(isAdding ? "decreasing" : "increasing")} {keyword}.");
-
-        if (!isAdding)
-            amount = -amount;
-
-        float rest = 0;
-
-        if (variable + amount < 0)
-        {
-            rest = -(variable + amount);
-            total += variable;
-            variable = 0;
-        }
-        else if (variable + amount > maximum)
-        {
-            rest = variable + amount - maximum;
-            total += maximum - variable;
-            variable = maximum;
-        }
-        else
-        {
-            variable += amount;
-            total += amount;
-        }
-
-        return new System.Tuple<float, float, float>(variable, Mathf.Abs(total), rest);
-    }
-
-    /// <summary>
-    /// <summary>
-    /// If <paramref name="isAdding"/> is <see langword="true"/>, <paramref name="amount"/> will be added to <paramref name="variable"/>. On <see langword="false"/>, <paramref name="amount"/> will be reduced to <paramref name="variable"/>.
-    /// By any mean, <paramref name="variable"/> will be greater than <paramref name="maximum"/> or lower than 0. If that happens, the result will be replaced by the corresponding boundary (either 0 or <paramref name="maximum"/>) and the <c>rest</c> will store the difference between the surpassed value and the boundary.
-    /// The values returned are the result of variable +/- amount (determined by isAdding) and the rest. If there is no rest it'll be 0. 
-    /// </summary>
-    /// <param name="amount">Amount to add or reduct of <paramref name="variable"/>. Must be positive.</param>
-    /// <param name="variable">Variable where <paramref name="amount"/> will be added or reduced.</param>
-    /// <param name="maximum">Hight limit of the result. Result will be clamped between this and 0.</param>
-    /// <param name="isAdding">Whenever <paramref name="amount"/> will be added (<see langword="true"/>) or reduced (<see langword="false"/>) to <paramref name="variable"/>.</param>
-    /// <param name="keyword"></param>
-    /// <return>New <paramref name="variable"/> value.</return>
-    /// <seealso cref="ChangeValue(float amount, float variable, float maximum, bool isAdding, string keyword)"/>
-    protected float ChangeValueSimple(float amount, float variable, float maximum, bool isAdding, string keyword)
-    {
-        return ChangeValue(amount, variable, maximum, isAdding, keyword).Item1;
+            SpawnFloatingText(amount, Color.Lerp(Color.red, new Color(1, .5f, 0), healthPoints.Ratio));
     }
 
     /// <summary>
@@ -176,72 +108,5 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     {
         if (floatingTextController != null && (!checkIfPositive || text > 0))
             floatingTextController.SpawnFloatingText(text, textColor);
-    }
-}
-
-[System.Serializable]
-public class HealthPoints
-{
-    [Tooltip("Maximum Current.")]
-    public float startingMax = 100;
-    private float _max;
-    /// <summary>
-    /// Maximum amount. <see cref="Current"/> can't be greater than this value.<br/>
-    /// If changes, <see cref="healthBar"/> will be updated using <seealso cref="HealthBar.UpdateValues(float health, float maxHealth)"/>.<br/>
-    /// If 0, <see cref="Die()"/> is called.
-    /// </summary>
-    /// <seealso cref="Current"/>
-    public float Max {
-        get {
-            return _max;
-        }
-        set {
-            _max = value;
-            bar.UpdateValues(Current, Max);
-            if (Max <= 0 && Die != null) Die();
-        }
-    }
-    [Tooltip("Starting Current. Set -1 to use Max value.")]
-    public float startingCurrent = -1;
-
-    [Tooltip("Health bar script.")]
-    public HealthBar bar;
-
-    private System.Action Die;
-
-    /// <summary>
-    /// Set the die method called when <see cref="Current"/> or <see cref="Max"/> are 0.
-    /// </summary>
-    /// <param name="Die">Method to call.</param>
-    public void SetDie(System.Action Die) => this.Die = Die;
-
-    private float _current;
-    /// <summary>
-    /// Current amount. It can't be greater than <see cref="MaxCurrent"/><br/>
-    /// If changes, <see cref="Bar"/> will be updated using <seealso cref="HealthBar.UpdateValues(float health, float maxHealth)"/>.<br/>
-    /// If 0, <see cref="Die()"/> is called.
-    /// </summary>
-    /// <seealso cref="Max"/>
-    public float Current {
-        get {
-            return _current;
-        }
-        set {
-            _current = value;
-            bar.UpdateValues(Current, Max);
-            if (Current <= 0 && Die != null) Die();
-        }
-    }
-
-    /// <summary>
-    /// Initializes the bar's Currents, setting the fill of the main bar and returning the current value.
-    /// If <see cref="startingCurrent"/> is -1, <see cref="startingMaximumCurrent"/> will be used instead to fill the bar.
-    /// </summary>
-    public void Initialize()
-    {
-        float current = startingCurrent == -1 ? startingMax : startingCurrent;
-        bar.ManualUpdate(startingMax, current);
-        Current = current;
-        Max = startingMax;
     }
 }

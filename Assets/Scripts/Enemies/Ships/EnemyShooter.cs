@@ -10,7 +10,7 @@ public class EnemyShooter : Enemy
     [Tooltip("Weapon configuration.")]
     public Weapon weapon;
 
-    private void Update()
+    protected override void Update()
     {
         // Slowly accelerate to crusierSpeed
         Vector2 speedToReachCrusier = cruiserSpeed - thisRigidbody2D.velocity;
@@ -21,5 +21,6 @@ public class EnemyShooter : Enemy
         // Shoot
         if (weapon.Recharge(Time.deltaTime))
             weapon.Shoot(rigidbodyHelper, Instantiate);
+        base.Update();
     }
 }
