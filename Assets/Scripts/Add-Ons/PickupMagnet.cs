@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PickupMagnet : MonoBehaviour
 {
@@ -24,7 +25,13 @@ public class PickupMagnet : MonoBehaviour
     [Tooltip("Transform where pickups should be pulled.")]
     public Transform magnetTransform;
 
-    private void Start() => magnetRadiusSquared = magnetRadius * magnetRadius;
+    private LivingObject livingObject;
+
+    private void Start()
+    {
+        magnetRadiusSquared = magnetRadius * magnetRadius;
+        livingObject = gameObject.GetComponent<LivingObject>();
+    }
 
     private void FixedUpdate()
     {
@@ -35,16 +42,43 @@ public class PickupMagnet : MonoBehaviour
 
             if (distance <= pickupRadius)
             {
-                // https://forum.unity.com/threads/getcomponents-possible-to-use-with-c-interfaces.60596/
-                IPickup pickup = item.GetComponent<IPickup>();
-                if (pickup != null)
-                    pickup.Pickup();
+                Pickup(item);
             }
             else if (distance <= magnetRadiusSquared)
             {
                 float pullingSpeed = (magnetRadiusSquared / distance) * magnetRadius * Time.fixedDeltaTime;
                 item.position = Vector3.MoveTowards(item.position, magnetTransform.position, pullingSpeed);
             }
+        }
+    }
+
+    /// <summary>
+    /// Pickup the <paramref name="item"/>.<br/>
+    /// Execute the <see cref="Pickupable.Pickup"/> from <paramref name="item"/> method using the implemented overload with the correct parameters.
+    /// </summary>
+    /// <param name="item">Item to be picked up.</param>
+    private void Pickup(Transform item)
+    {
+        Pickup pickup = item.GetComponent<Pickup>();
+        if (pickup != null)
+        {
+            Action[] actions = new Action[] { pickup.PickupVoid, () => pickup.PickupLivingObject(livingObject) };
+            bool hasFoundImplementedMethod = false;
+            foreach (Action action in actions)
+            {
+                try
+                {
+                    action();
+                    hasFoundImplementedMethod = true;
+                    break;
+                }
+                catch (NotImplementedException) { }
+            }
+
+            if (!hasFoundImplementedMethod)
+                throw new NotImplementedException($"The {item.gameObject}'s {nameof(Pickup)} class lack of any Pickup method implementation.");
+            else if (pickup.ShouldBeDestroyedOnPickup)
+                Destroy(item.gameObject);
         }
     }
 
@@ -68,4 +102,31 @@ public class PickupMagnet : MonoBehaviour
         UnityEditor.Handles.DrawWireDisc(magnetTransform.position, Vector3.back, pickupRadius);
     }
 #endif
+}
+
+// We may have more pickups in the future
+public interface IPickup
+{
+    /// <summary>
+    /// <seealso cref="Rigidbody2D"/> of this pickup.
+    /// </summary>
+    Rigidbody2D Rigidbody2D { get; }
+    /// <summary>
+    /// Whenever the game object should be destroyed or not when pickup.
+    /// </summary>
+    bool ShouldBeDestroyedOnPickup { get; }
+}
+
+public abstract class Pickup : MonoBehaviour, IPickup
+{
+    public abstract Rigidbody2D Rigidbody2D { get; }
+    public abstract bool ShouldBeDestroyedOnPickup { get; }
+    /// <summary>
+    /// Method executed when a pickup is used.
+    /// </summary>
+    public virtual void PickupVoid() => throw new NotImplementedException();
+    /// <summary>
+    /// Method executed when a pickup is used.
+    /// </summary>
+    public virtual void PickupLivingObject(LivingObject livingObject) => throw new NotImplementedException();
 }

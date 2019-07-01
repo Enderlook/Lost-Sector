@@ -1,28 +1,21 @@
 ﻿using UnityEngine;
 
-public class Coin : MonoBehaviour, IPickup
+public class Coin : Pickup
 {
     private int price;
     private Transform player;
-    private Rigidbody2D thisRigidbody2D;
     private Animator animator;
+    private Rigidbody2D thisRigidbody2D;
+
+    public override Rigidbody2D Rigidbody2D => thisRigidbody2D;
+    public override bool ShouldBeDestroyedOnPickup => true;
+
     private void Start() => thisRigidbody2D = gameObject.GetComponent<Rigidbody2D>();
 
     /// <summary>
-    /// Destroy this coin and collect its money.
+    /// Collect its money.
     /// </summary>
-    void IPickup.Pickup()
-    {
-        Global.money += price;
-        Destroy(gameObject);
-    }
-
-    Rigidbody2D IPickup.Rigidbody2D {
-        get {
-            return thisRigidbody2D;
-        }
-    }
-
+    public override void PickupVoid() => Global.money += price;
 
     /// <summary>
     /// Set configuration of the coin.
@@ -42,17 +35,4 @@ public class Coin : MonoBehaviour, IPickup
         if (gameObject.GetComponent<Rigidbody2D>() == null)
             Debug.LogWarning($"Game object {gameObject.name} lacks of an Rigidbody2D Component.");
     }
-}
-
-// We may have more pickups in the future
-public interface IPickup
-{
-    /// <summary>
-    /// Method executed when the object must be picked up.
-    /// </summary>
-    void Pickup();
-    /// <summary>
-    /// <seealso cref="Rigidbody2D"/> of this pickup.
-    /// </summary>
-    Rigidbody2D Rigidbody2D { get; }
 }
