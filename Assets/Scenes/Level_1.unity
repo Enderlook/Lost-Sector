@@ -578,8 +578,7 @@ MonoBehaviour:
   shieldHandler:
     maxShieldColor: {r: 0, g: 0.43460894, b: 1, a: 1}
     minShieldColor: {r: 0.48595762, g: 0, b: 1, a: 1}
-    shieldGameObject: {fileID: 1381430228}
-    shieldImage: {fileID: 0}
+    shieldImage: {fileID: 1381430230}
 --- !u!4 &118295644
 Transform:
   m_ObjectHideFlags: 0
