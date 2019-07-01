@@ -8,8 +8,6 @@ public class Player : LivingObject
 
     [Tooltip("Movement speed.")]
     public float moveSpeed;
-    /*public float turnSpeed;
-    public float rotationOffset;*/
 
     [Tooltip("Shield recharge rate (points per second).")]
     public float shieldRechargeRate = 10;
@@ -38,11 +36,6 @@ public class Player : LivingObject
         // Position to translate
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = transform.position.z;
-        /*// Rotate https://answers.unity.com/questions/798707/2d-look-at-mouse-position-z-rotation-c.html
-        Vector3 direction = mousePosition - transform.position;
-        float angleTarget = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + rotationOffset;       
-        Quaternion lookAt = Quaternion.Euler(0, 0, angleTarget);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, lookAt, turnSpeed * Time.deltaTime);*/
 
         // Move
         Vector2 newPosition = Vector3.MoveTowards(transform.position, mousePosition, moveSpeed * Time.deltaTime);
