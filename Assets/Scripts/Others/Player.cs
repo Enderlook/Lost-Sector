@@ -22,6 +22,7 @@ public class Player : LivingObject
     protected override void Initialize()
     {
         shieldPoints.Initialize();
+        shieldHandler.Initialize(shieldPoints.Ratio);
         base.Initialize();
     }
 
@@ -40,7 +41,7 @@ public class Player : LivingObject
             TakeDamage(5 * Time.deltaTime);
 
         shieldPoints.Update(Time.deltaTime);
-        shieldHandler.UpdateColor(shieldPoints.Current, shieldPoints.Max);
+        shieldHandler.UpdateColor(shieldPoints.Ratio);
 
         // Shoot
         if (Input.GetMouseButton(0) && weapon.Recharge(Time.deltaTime))

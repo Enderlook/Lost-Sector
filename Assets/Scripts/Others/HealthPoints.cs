@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class HealthPoints
 {
+    [Header("Main Configuration")]
     [Tooltip("Maximum Current.")]
     public float startingMax = 100;
     private float _max;
@@ -47,7 +48,7 @@ public class HealthPoints
     [Tooltip("Health bar script.")]
     public HealthBar bar;
 
-    [Header("Recharge Zone")]
+    [Header("Regeneration")]
     [Tooltip("Does regenerate?")]
     public bool canRegenerate;
     [Tooltip("Regeneration rate (points per second).")]
