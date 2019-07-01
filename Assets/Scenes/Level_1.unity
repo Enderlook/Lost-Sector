@@ -523,6 +523,9 @@ MonoBehaviour:
     startingMax: 100
     startingCurrent: -1
     bar: {fileID: 1201430408}
+    doesRegenerate: 0
+    regenerateRate: 10
+    regenerationDelay: 3
   relativeImpactDamage: 35
   shouldDisplayDamage: 1
   impactSound:
@@ -549,9 +552,10 @@ MonoBehaviour:
     startingMax: 100
     startingCurrent: -1
     bar: {fileID: 166792902}
+    canRegenerate: 1
+    regenerateRate: 10
+    regenerationDelay: 3
   moveSpeed: 15
-  shieldRechargeRate: 8
-  shieldRechargeDelay: 4
   weapon:
     damageOnHit: 25
     firerate: 2
@@ -575,6 +579,7 @@ MonoBehaviour:
     maxShieldColor: {r: 0, g: 0.43460894, b: 1, a: 1}
     minShieldColor: {r: 0.48595762, g: 0, b: 1, a: 1}
     shieldGameObject: {fileID: 1381430228}
+    shieldImage: {fileID: 0}
 --- !u!4 &118295644
 Transform:
   m_ObjectHideFlags: 0
@@ -588,7 +593,7 @@ Transform:
   m_Children:
   - {fileID: 574265758}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &128807550
 GameObject:
@@ -1582,7 +1587,7 @@ RectTransform:
   - {fileID: 1539470396}
   - {fileID: 2014182440}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1623,7 +1628,6 @@ MonoBehaviour:
   - isRandom: 1
     startTransform: {fileID: 1112329302}
     endTransform: {fileID: 1023573337}
-    notRandom: 0
   enemies:
     enemyPrefabs:
     - prefab: {fileID: 3171107085224686566, guid: 926a52539d738a7439a32750206b316e,
@@ -1795,7 +1799,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &815039245
 GameObject:
@@ -4149,7 +4153,7 @@ PrefabInstance:
     - target: {fileID: 2942914704747052437, guid: d10a5ed95b3a285459f087bd488de713,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2942914704747052437, guid: d10a5ed95b3a285459f087bd488de713,
         type: 3}

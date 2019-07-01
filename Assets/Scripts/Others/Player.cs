@@ -9,12 +9,6 @@ public class Player : LivingObject
     [Tooltip("Movement speed.")]
     public float moveSpeed;
 
-    [Tooltip("Shield recharge rate (points per second).")]
-    public float shieldRechargeRate = 10;
-    [Tooltip("Amount of time in seconds after receive damage in order to start recharging shield.")]
-    public float shieldRechargeDelay = 3f;
-    private float currentShieldRechargeDelay = 0f;
-
     [Tooltip("Weapon configuration.")]
     public Weapon weapon;
 
@@ -31,7 +25,7 @@ public class Player : LivingObject
         base.Initialize();
     }
 
-    private void Update()
+    protected override void Update()
     {
         // Position to translate
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -45,17 +39,13 @@ public class Player : LivingObject
         if (boundaryCheck.Item2)
             TakeDamage(5 * Time.deltaTime);
 
-        // Recharge shield
-        if (currentShieldRechargeDelay >= shieldRechargeDelay && shieldPoints.Current < shieldPoints.Max)
-            shieldPoints.Current = ChangeValueSimple(shieldRechargeRate * Time.deltaTime, shieldPoints.Current, shieldPoints.Max, true, "shield");
-        else
-            currentShieldRechargeDelay += Time.deltaTime;
-
+        shieldPoints.Update(Time.deltaTime);
         shieldHandler.UpdateColor(shieldPoints.Current, shieldPoints.Max);
 
         // Shoot
         if (Input.GetMouseButton(0) && weapon.Recharge(Time.deltaTime))
             weapon.Shoot(rigidbodyHelper, Instantiate);
+        base.Update();
     }
 
     /// <summary>
@@ -66,16 +56,10 @@ public class Player : LivingObject
     public override void TakeDamage(float amount, bool displayText = false)
     {
         // We ignore display text because we player always spawns floating text for damage.
-
-        currentShieldRechargeDelay = 0;
-        System.Tuple<float, float, float> change = ChangeValue(amount, shieldPoints.Current, shieldPoints.Max, false, "shield");
-        SpawnFloatingText(change.Item2, Color.Lerp(new Color(.5f, 0, .5f), Color.blue, shieldPoints.Current / shieldPoints.Max));
-        shieldPoints.Current = change.Item1;
-        float restDamage = change.Item3;
+        float restDamage = shieldPoints.TakeDamage(amount);
+        SpawnFloatingText(amount, Color.Lerp(new Color(.5f, 0, .5f), Color.blue, shieldPoints.Ratio));
         if (restDamage > 0)
-        {
             base.TakeDamage(restDamage, true);
-        }
     }
     protected override void Die()
     {
