@@ -43,9 +43,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthPoints:
-    startingMax: 115
+    startingMax: 80
     startingCurrent: -1
     bar: {fileID: 564230438801622339}
+    canRegenerate: 0
+    regenerateRate: 10
+    regenerationDelay: 3
   relativeImpactDamage: 35
   shouldDisplayDamage: 0
   impactSound:
@@ -68,18 +71,18 @@ MonoBehaviour:
   rigidbodyHelper: {fileID: 1935996649858581771}
   floatingTextController: {fileID: 5727436447715290611}
   impulse:
+    isRandom: 1
     startVector: {x: 0, y: 10}
     endVector: {x: 15, y: 125}
-    notRandom: 0
   moneySpawnedOnDeath:
     start: 10
     end: 20
-    notRandom: 0
+    isRandom: 0
   coinController: {fileID: 1917316055230087572}
   rotation:
     start: -100
     end: 100
-    notRandom: 0
+    isRandom: 0
   spawnsOnDeath:
     spawningPoints:
     - {fileID: 3990780080843788397}
@@ -96,7 +99,7 @@ MonoBehaviour:
     amountToSpawn:
       start: 1
       end: 4
-      notRandom: 0
+      isRandom: 0
     notRandom: 0
 --- !u!1 &5393303838719322650
 GameObject:
@@ -341,6 +344,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 1.36
       objectReference: {fileID: 0}
+    - target: {fileID: 3171107084438929871, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107084438929871, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3171107084438929868, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
       propertyPath: m_Sprite
@@ -376,16 +389,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3171107084438929871, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3171107084438929871, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3171107084848344101, guid: 926a52539d738a7439a32750206b316e, type: 3}

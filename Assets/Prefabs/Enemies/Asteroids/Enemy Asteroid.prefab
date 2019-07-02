@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthPoints:
-    startingMax: 100
+    startingMax: 50
     startingCurrent: -1
     bar: {fileID: 3533231402177604719}
+    canRegenerate: 0
+    regenerateRate: 10
+    regenerationDelay: 3
   relativeImpactDamage: 11
   shouldDisplayDamage: 0
   impactSound:
@@ -38,18 +41,18 @@ MonoBehaviour:
   rigidbodyHelper: {fileID: 3171107084848344103}
   floatingTextController: {fileID: 8766242102582904031}
   impulse:
+    isRandom: 1
     startVector: {x: 0, y: 15}
     endVector: {x: 50, y: 300}
-    notRandom: 0
   moneySpawnedOnDeath:
     start: 1
     end: 4
-    notRandom: 0
+    isRandom: 0
   coinController: {fileID: 3190711750313011384}
   rotation:
     start: -100
     end: 100
-    notRandom: 0
+    isRandom: 0
 --- !u!1001 &4687144031695792750
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57,11 +60,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7858251103388681801, guid: ff345a899057f1447afc58e7a15eed6e,
-        type: 3}
-      propertyPath: livingObject
-      value: 
-      objectReference: {fileID: 768387036}
     - target: {fileID: 7858251103632841096, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_Name
@@ -122,6 +120,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7858251103388681801, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: livingObject
+      value: 
+      objectReference: {fileID: 768387036}
     - target: {fileID: 7858251103388681802, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_Mass

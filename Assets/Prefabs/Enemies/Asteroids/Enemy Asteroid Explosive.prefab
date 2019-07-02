@@ -60,9 +60,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthPoints:
-    startingMax: 60
+    startingMax: 40
     startingCurrent: -1
     bar: {fileID: 2848650162287438096}
+    canRegenerate: 0
+    regenerateRate: 10
+    regenerationDelay: 3
   relativeImpactDamage: 8
   shouldDisplayDamage: 0
   impactSound:
