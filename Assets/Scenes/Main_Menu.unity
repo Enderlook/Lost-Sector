@@ -748,9 +748,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25dae29d9c6c7e943953f62f6b15a418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: {fileID: 0}
+  menu: {fileID: 1963235563}
   gameOver: {fileID: 0}
   howToPlay: {fileID: 1680339322}
+  menuNoToggleable: 1
 --- !u!1 &1346998552
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,7 +1392,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1929766934}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1001999020}
+        m_MethodName: Exit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1929766934
