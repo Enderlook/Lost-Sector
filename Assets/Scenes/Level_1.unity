@@ -192,7 +192,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1560176981}
-        m_MethodName: Exit
+        m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2810,6 +2810,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1947903234940100012, guid: 996e20757a8f7b343a9f2327c6d93787,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 996e20757a8f7b343a9f2327c6d93787, type: 3}
 --- !u!224 &1309082848 stripped
@@ -4289,6 +4294,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1560176980}
+    - target: {fileID: 855245099, guid: 55e7c301d39f93a49a38d11e99d9dd76, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55e7c301d39f93a49a38d11e99d9dd76, type: 3}
 --- !u!114 &8859902053401161403

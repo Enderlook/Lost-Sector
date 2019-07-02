@@ -9,6 +9,8 @@ public class Menu : MonoBehaviour
     public GameOverMenu gameOver;
     [Tooltip("How to play menu.")]
     public GameObject howToPlay;
+    [Tooltip("Force menu to not be toggleable.")]
+    public bool menuNoToggleable = false;
 
     private bool isActive;
     private bool isGameOver = false;
@@ -38,6 +40,8 @@ public class Menu : MonoBehaviour
     /// <param name="active">Whenever the menu is visible or not.</param>
     public void DisplayMenuPause(bool? active = null)
     {
+        if (menuNoToggleable)
+            return;
         if (howToPlay.activeSelf)
             ShowHowToPlay(false);
         else
