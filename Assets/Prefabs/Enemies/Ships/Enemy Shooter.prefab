@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthPoints:
-    startingMax: 80
+    startingMax: 60
     startingCurrent: -1
     bar: {fileID: 9013780524430854089}
+    canRegenerate: 0
+    regenerateRate: 10
+    regenerationDelay: 3
   relativeImpactDamage: 10
   shouldDisplayDamage: 0
   impactSound:
@@ -38,13 +41,13 @@ MonoBehaviour:
   rigidbodyHelper: {fileID: 6925946387881789313}
   floatingTextController: {fileID: 3870874820224954233}
   impulse:
+    isRandom: 1
     startVector: {x: 0, y: 15}
     endVector: {x: 0, y: 100}
-    notRandom: 0
   moneySpawnedOnDeath:
-    start: 0
-    end: 0
-    notRandom: 0
+    start: 10
+    end: 16
+    isRandom: 1
   coinController: {fileID: 6942371334371820318}
   cruiserSpeed: {x: 0, y: 20}
   accelerationSpeed: 5
@@ -232,25 +235,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7858251103388681802, guid: ff345a899057f1447afc58e7a15eed6e,
-        type: 3}
-      propertyPath: m_Mass
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7858251103388681802, guid: ff345a899057f1447afc58e7a15eed6e,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 7858251103388681844, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7858251103388681800, guid: ff345a899057f1447afc58e7a15eed6e,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7858251103247592353, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
@@ -287,10 +275,25 @@ PrefabInstance:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7858251103388681800, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7858251103247592352, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103388681802, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: m_Mass
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103388681802, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7858251103247592354, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}

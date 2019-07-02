@@ -16,7 +16,7 @@ MonoBehaviour:
     startingMax: 30
     startingCurrent: -1
     bar: {fileID: 5808921631194748135}
-    doesRegenerate: 0
+    canRegenerate: 0
     regenerateRate: 10
     regenerationDelay: 3
   relativeImpactDamage: 12

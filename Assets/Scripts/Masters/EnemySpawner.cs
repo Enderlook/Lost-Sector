@@ -217,7 +217,7 @@ public class Enemies
     public IEnumerable GetEnemies(float difficulty)
     {
         float threat = 0;
-        while (threat < 5 + (Mathf.Log(difficulty, 2) * 2))
+        while (threat < 3 + (Mathf.Pow(difficulty, 0.4f) * 1.5))
         {
             System.Tuple<GameObject, float> enemy = GetEnemy(difficulty);
             threat += enemy.Item2;
