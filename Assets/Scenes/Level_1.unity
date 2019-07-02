@@ -958,7 +958,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 26d9755e19df12548a90fc40a17b2323, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
@@ -3300,6 +3300,7 @@ MonoBehaviour:
   menu: {fileID: 145805903}
   gameOver: {fileID: 1309082850}
   howToPlay: {fileID: 1173852154}
+  menuNoToggleable: 0
 --- !u!114 &1560176981
 MonoBehaviour:
   m_ObjectHideFlags: 0
