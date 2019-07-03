@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class Global
 {
@@ -74,7 +75,14 @@ public static class Global
 
 public class Dynamic : MonoBehaviour
 {
+    [Header("Configuration")]
+    [Tooltip("Stating money.")]
+    public int startingMoney;
+    [Tooltip("Amount of money required to win the game.")]
+    public int moneyToWin;
+
     [Header("Setup")]
+    [Header("Parents")]
     [Tooltip("Enemies parent transform.")]
     public Transform enemiesParent;
     [Tooltip("Explosion parent transform.")]
@@ -85,23 +93,26 @@ public class Dynamic : MonoBehaviour
     public Transform floatingTextParent;
     [Tooltip("Pickups parent transform.")]
     public Transform pickupsParent;
-    [Tooltip("Boundary of screen.")]
-    public Boundary boundary;
-    [Tooltip("Stating money.")]
-    public int startingMoney;
+
+    [Header("Menu")]
     [Tooltip("Money controller script.")]
     public CoinMeter coinMeter;
     [Tooltip("Menu script.")]
     public Menu menu;
     [Tooltip("Enemy spawner script.")]
     public EnemySpawner enemySpawner;
-    [Tooltip("Amount of money required to win the game.")]
-    public int moneyToWin;
+    [Tooltip("Text component to show time.")]
+    public Text timePlayerText;
 
+    [Header("Player")]
     [Tooltip("Player health bar.")]
     public HealthBar playerHealthBar;
     [Tooltip("Player shield bar.")]
     public HealthBar playerShieldBar;
+    [Tooltip("Boundary of screen.")]
+    public Boundary boundary;
+
+    public static float playedTime = 0;
 
     private void Awake()
     {
@@ -123,6 +134,13 @@ public class Dynamic : MonoBehaviour
         Global.moneyToWin = moneyToWin;
         Global.playerHealthBar = playerHealthBar;
         Global.playerShieldBar = playerShieldBar;
+    }
+    private void Update()
+    {
+        playedTime += Time.deltaTime;
+        int minutes = (int)playedTime / 60;
+        float seconds = playedTime - minutes * 60;
+        timePlayerText.text = $"{minutes:00}:{seconds:00.00}";
     }
 }
 

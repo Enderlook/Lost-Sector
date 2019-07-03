@@ -25,7 +25,7 @@ public class Menu : MonoBehaviour
         if (isGameOver && Global.playerHealthBar.IsDamageBarPercentHide && Global.playerShieldBar.IsDamageBarPercentHide)
         {
             gameOver.SetShown(true);
-            gameOver.SetConfiguration(hasWon, Global.money);
+            gameOver.SetConfiguration(hasWon, Global.money, Dynamic.playedTime);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) && !isGameOver)
@@ -68,6 +68,10 @@ public class Menu : MonoBehaviour
         Global.enemySpawner.StopSpawnWaves();
     }
 
+    /// <summary>
+    /// Show how to play panel.
+    /// </summary>
+    /// <param name="active"></param>
     public void ShowHowToPlay(bool active)
     {
         howToPlay.SetActive(active);
