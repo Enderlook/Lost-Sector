@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPack : MonoBehaviour, ICanBePickedUp
+public class HealthPack : CanBePickedUp
 {
     [Header("Configuration")]
     [Tooltip("Health restored on pick up.")]
@@ -12,7 +12,7 @@ public class HealthPack : MonoBehaviour, ICanBePickedUp
 
     private Rigidbody2D thisRigidbody2D;
 
-    Rigidbody2D ICanBePickedUp.Rigidbody2D => thisRigidbody2D;
+    public override Rigidbody2D Rigidbody2D => thisRigidbody2D;
 
     private void Start()
     {
@@ -20,7 +20,11 @@ public class HealthPack : MonoBehaviour, ICanBePickedUp
         thisRigidbody2D.AddRelativeForce((Vector2)impulse * thisRigidbody2D.mass);
     }
 
-    void ICanBePickedUp.Pickup(LivingObject livingObject) => livingObject.TakeHealing(healthRestored);
+    /// <summary>
+    /// Heal the <paramref name="livingObject"/> who pickup it by <see cref="healthRestored"/>.
+    /// </summary>
+    /// <param name="livingObject"><see cref="LivingObject"/> to heal.</param>
+    public override void Pickup(LivingObject livingObject) => livingObject.TakeHealing(healthRestored);
 
     private void OnValidate()
     {

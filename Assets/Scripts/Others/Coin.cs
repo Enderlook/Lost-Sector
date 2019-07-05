@@ -1,20 +1,20 @@
 ﻿using UnityEngine;
 
-public class Coin : MonoBehaviour, ICanBePickedUp
+public class Coin : CanBePickedUp
 {
     private int price;
     private Transform player;
     private Animator animator;
     private Rigidbody2D thisRigidbody2D;
 
-    Rigidbody2D ICanBePickedUp.Rigidbody2D => thisRigidbody2D;
+    public override Rigidbody2D Rigidbody2D => thisRigidbody2D;
 
     private void Start() => thisRigidbody2D = gameObject.GetComponent<Rigidbody2D>();
 
     /// <summary>
     /// Collect its money.
     /// </summary>
-    void ICanBePickedUp.Pickup(LivingObject livingObject) => Global.money += price;
+    public override void Pickup() => Global.money += price;
 
     /// <summary>
     /// Set configuration of the coin.

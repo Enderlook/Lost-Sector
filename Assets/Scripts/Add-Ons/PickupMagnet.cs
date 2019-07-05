@@ -33,6 +33,7 @@ public class PickupMagnet : MonoBehaviour
         livingObject = gameObject.GetComponent<LivingObject>();
     }
 
+
     private void FixedUpdate()
     {
         foreach (Transform item in Global.pickupsParent)
@@ -54,16 +55,31 @@ public class PickupMagnet : MonoBehaviour
 
     /// <summary>
     /// Pickup the <paramref name="item"/>.<br/>
-    /// Execute the <see cref="Pickupable.Pickup"/> from <paramref name="item"/> method using the implemented overload with the correct parameters.
+    /// Execute the <see cref="CanBePickedUp.Pickup"/> from <paramref name="item"/> method using the implemented overload with the correct parameters.
     /// </summary>
     /// <param name="item">Item to be picked up.</param>
     private void Pickup(Transform item)
     {
-        ICanBePickedUp pickup = item.GetComponent<ICanBePickedUp>();
+        CanBePickedUp pickup = item.GetComponent<CanBePickedUp>();
         if (pickup != null)
         {
-            pickup.Pickup(livingObject);
-            Destroy(item.gameObject);
+            Action[] actions = new Action[] { pickup.Pickup, () => pickup.Pickup(livingObject) };
+            bool hasFoundImplementedMethod = false;
+            foreach (Action action in actions)
+            {
+                try
+                {
+                    action();
+                    hasFoundImplementedMethod = true;
+                    break;
+                }
+                catch (NotImplementedException) { }
+            }
+
+            if (!hasFoundImplementedMethod)
+                throw new NotImplementedException($"The {item.gameObject}'s {nameof(Pickup)} class lack of any Pickup method implementation.");
+            else
+                Destroy(item.gameObject);
         }
     }
 
@@ -89,16 +105,18 @@ public class PickupMagnet : MonoBehaviour
 #endif
 }
 
-// We may have more pickups in the future
-public interface ICanBePickedUp
+public abstract class CanBePickedUp : MonoBehaviour
 {
     /// <summary>
     /// <seealso cref="Rigidbody2D"/> of this pickup.
     /// </summary>
-    Rigidbody2D Rigidbody2D { get; }
+    public abstract Rigidbody2D Rigidbody2D { get; }
     /// <summary>
     /// Method executed when a pickup is used.
     /// </summary>
-    /// <param name="livingObject">Instance of the <see cref="LivingObject"/> which picked it up</param>
-    void Pickup(LivingObject livingObject);
+    public virtual void Pickup() => throw new NotImplementedException();
+    /// <summary>
+    /// Method executed when a pickup is used.
+    /// </summary>
+    public virtual void Pickup(LivingObject livingObject) => throw new NotImplementedException();
 }
