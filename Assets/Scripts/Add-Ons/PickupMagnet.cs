@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
 public class PickupMagnet : MonoBehaviour
@@ -26,11 +29,13 @@ public class PickupMagnet : MonoBehaviour
     public Transform magnetTransform;
 
     private LivingObject livingObject;
+    private Dictionary<Type, object> parameters;
 
     private void Start()
     {
         magnetRadiusSquared = magnetRadius * magnetRadius;
         livingObject = gameObject.GetComponent<LivingObject>();
+        parameters = new Dictionary<Type, object> { { typeof(LivingObject), livingObject } };
     }
 
 
@@ -54,6 +59,26 @@ public class PickupMagnet : MonoBehaviour
     }
 
     /// <summary>
+    /// Try to execute the <paramref name="method"/> from the given <paramref name="instance"/> using the <paramref name="args"/> as parameters 
+    /// </summary>
+    /// <param name="instance">Instance of the class were the <paramref name="method"/> is executed.</param>
+    /// <param name="method">Method to execute.</param>
+    /// <param name="args">Arguments of the method to execute.</param>
+    /// <returns>Whenever an exception was raised or not during the execution of <paramref name="method"/>.</returns>
+    private bool TryCatchInvoke(CanBePickedUp instance, MethodInfo method, object[] args)
+    {
+        try
+        {
+            method.Invoke(instance, args);
+            return true;
+        }
+        catch (Exception) // NotImplementedException doesn't work...
+        {
+            return false;
+        }
+    }
+
+    /// <summary>
     /// Pickup the <paramref name="item"/>.<br/>
     /// Execute the <see cref="CanBePickedUp.Pickup"/> from <paramref name="item"/> method using the implemented overload with the correct parameters.
     /// </summary>
@@ -63,17 +88,25 @@ public class PickupMagnet : MonoBehaviour
         CanBePickedUp pickup = item.GetComponent<CanBePickedUp>();
         if (pickup != null)
         {
-            Action[] actions = new Action[] { pickup.Pickup, () => pickup.Pickup(livingObject) };
             bool hasFoundImplementedMethod = false;
-            foreach (Action action in actions)
+            foreach (MethodInfo method in typeof(CanBePickedUp).GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
             {
-                try
+                if (method.Name == "Pickup")
                 {
-                    action();
-                    hasFoundImplementedMethod = true;
-                    break;
+                    ParameterInfo[] parametersGetted = method.GetParameters();
+                    int parametersAmount = parametersGetted.Length;
+                    object[] parametersObjects = new object[parametersAmount];
+                    for (int i = 0; i < parametersAmount; i++)
+                    {
+                        Type parameterType = parametersGetted[i].ParameterType;
+                        if (parameters.TryGetValue(parameterType, out object parameterObject))
+                            parametersObjects[i] = parameterObject;
+                        else
+                            throw new KeyNotFoundException($"The key Type {parameterType} was not found in the {nameof(parameters)} dictionary.");
+                    }
+                    bool succed = TryCatchInvoke(pickup, method, parametersObjects);
+                    if (succed) hasFoundImplementedMethod = true;
                 }
-                catch (NotImplementedException) { }
             }
 
             if (!hasFoundImplementedMethod)
