@@ -27,6 +27,14 @@ public class EnemySpawner : MonoBehaviour
     [Range(1, 600)]
     public float difficultyIncreaseInterval = 5;
 
+    [Tooltip("Health Pack")]
+    public GameObject healthPack;
+    [Tooltip("Time between spawn attemps of Health Pack")]
+    public float healthPackSpawnTime;
+    private float healthPackSpawnCharging = 0;
+    [Tooltip("Health Pack spawn probability per spawn attempt. From 0 to 1.")]
+    public float healthPackSpawnChance;
+
     private Dictionary<GameObject, List<GameObject>> enemyPool = new Dictionary<GameObject, List<GameObject>>();
     private bool requireWeightsUpdate = true;
     private Coroutine spawnWaveCoroutine;
@@ -35,6 +43,20 @@ public class EnemySpawner : MonoBehaviour
     {
         InvokeRepeating("DifficultyIncrease", difficultyIncreaseInterval, difficultyIncreaseInterval);
         spawnWaveCoroutine = StartCoroutine(SpawnWave());
+    }
+
+    private void Update()
+    {
+        if (healthPackSpawnCharging >= healthPackSpawnTime)
+        {
+            healthPackSpawnCharging = 0;
+            if (Random.Range(0f, 1f) < healthPackSpawnChance)
+            {
+                GameObject pack = Instantiate(healthPack, Global.pickupsParent);
+                pack.transform.position = (Vector3)spawnPoints[Random.Range(0, spawnPoints.Length - 1)];
+            }
+        } else
+            healthPackSpawnCharging += Time.deltaTime;
     }
 
     /// <summary>
@@ -91,7 +113,7 @@ public class EnemySpawner : MonoBehaviour
 
                 yield return new WaitForSeconds(0.1f);
             }
-            yield return new WaitForSeconds(2 / Mathf.Log10(difficulty + 1));
+            yield return new WaitForSeconds(3.25f / Mathf.Log10(difficulty + 1));
         }
     }
 

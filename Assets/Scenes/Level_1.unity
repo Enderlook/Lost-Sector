@@ -523,7 +523,7 @@ MonoBehaviour:
     startingMax: 100
     startingCurrent: -1
     bar: {fileID: 1201430408}
-    doesRegenerate: 0
+    canRegenerate: 0
     regenerateRate: 10
     regenerationDelay: 3
   relativeImpactDamage: 35
@@ -1645,30 +1645,34 @@ MonoBehaviour:
         type: 3}
       weight: 4
       threat: 3
-      minimalDifficulty: 5
+      minimalDifficulty: 7
       weightFactorFormula: 1 + x / 7
     - prefab: {fileID: 1935996649700350666, guid: e2e2f6e287f8e764c9d7eb5f86b90217,
         type: 3}
       weight: 2
       threat: 5
-      minimalDifficulty: 7
+      minimalDifficulty: 9
       weightFactorFormula: 1 + x / 8
     - prefab: {fileID: 5591194028196858734, guid: 6be2edc74bf4e6e43aed5620980a4116,
         type: 3}
       weight: 10.5
       threat: 6
-      minimalDifficulty: 7
+      minimalDifficulty: 10
       weightFactorFormula: 1 + x / 9
     - prefab: {fileID: 6925946388057331776, guid: 5d290ae17071cf44da90b52fefb54cd2,
         type: 3}
       weight: 20
       threat: 6
-      minimalDifficulty: 6
+      minimalDifficulty: 15
       weightFactorFormula: 1 + x / 10
-  difficulty: 50
+  difficulty: 1
   difficultyLinearIncrease: 1
   difficultyGeometricalIncrease: 1.1
   difficultyIncreaseInterval: 5
+  healthPack: {fileID: 8501959861086569156, guid: ffa4aa802ec98984fa2024e878b4f9ba,
+    type: 3}
+  healthPackSpawnTime: 4
+  healthPackSpawnChance: 0.5
 --- !u!4 &801854807
 Transform:
   m_ObjectHideFlags: 0
