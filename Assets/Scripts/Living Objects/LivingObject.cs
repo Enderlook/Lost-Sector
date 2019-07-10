@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 using LivingObjectAddons;
 
 /* https://forum.unity.com/threads/make-child-unaffected-by-parents-rotation.461161/
@@ -46,12 +47,15 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     [Tooltip("Actions executed on initialize.")]
     public OnInitialize[] onInitializes;
 
+    [Tooltip("Actions executed on death.")]
+    public OnDeath[] onDeaths;
+
     private Quaternion? initialRotation = null;
 
     protected virtual void Start()
     {
         rigidbodyHelper.SetProperties(this);
-        foreach(IStart action in onInitializes)
+        foreach(IStart action in onInitializes.Concat(onDeaths.Cast<IStart>()))
         {
             action.OnStart(this);
         }
@@ -107,6 +111,10 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         explosion.transform.position = rigidbodyHelper.Position;
         explosion.transform.localScale = Vector3.one * onDeathExplosionPrefabScale;
         gameObject.SetActive(false);
+        foreach (OnDeath action in onDeaths)
+        {
+            action.Die();
+        }
         //Destroy(gameObject);
     }
 

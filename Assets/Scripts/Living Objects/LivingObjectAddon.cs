@@ -11,4 +11,9 @@ namespace LivingObjectAddons
         public virtual void Initialize() { }
         public abstract void OnStart(LivingObject livingObject);
     }
+    public abstract class OnDeath : MonoBehaviour, IStart
+    {
+        public virtual void Die() { }
+        public abstract void OnStart(LivingObject livingObject);
+    }
 }
