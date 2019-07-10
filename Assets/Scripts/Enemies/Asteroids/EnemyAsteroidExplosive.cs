@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnemyAsteroidExplosive : EnemyAsteroid
+public class EnemyAsteroidExplosive : Enemy
 {
     [Header("Configuration")]
     [Tooltip("Explosion radius.")]

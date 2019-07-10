@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using LivingObjectAddons;
 
 /* https://forum.unity.com/threads/make-child-unaffected-by-parents-rotation.461161/
  * https://stackoverflow.com/questions/52179975/make-child-unaffected-by-parents-rotation-unity
@@ -42,11 +43,18 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     [Tooltip("FloatingTextController Script")]
     public FloatingTextController floatingTextController;
 
+    [Tooltip("Actions executed on initialize.")]
+    public OnInitialize[] onInitializes;
+
     private Quaternion? initialRotation = null;
 
     protected virtual void Start()
     {
         rigidbodyHelper.SetProperties(this);
+        foreach(IStart action in onInitializes)
+        {
+            action.OnStart(this);
+        }
         Initialize();
     }
 
@@ -64,6 +72,10 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
             rigidbodyHelper.transform.rotation = (Quaternion)initialRotation;
         healthPoints.Initialize();
         healthPoints.SetDie(Die);
+        foreach(OnInitialize action in onInitializes)
+        {
+            action.Initialize();
+        }
     }
 
     private void OnEnable() => Initialize();

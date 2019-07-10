@@ -70,6 +70,8 @@ MonoBehaviour:
   onDeathExplosionPrefabScale: 2.75
   rigidbodyHelper: {fileID: 1935996649858581771}
   floatingTextController: {fileID: 5727436447715290611}
+  onInitializes:
+  - {fileID: 3953038582779367152}
   impulse:
     isRandom: 1
     startVector: {x: 0, y: 10}
@@ -79,10 +81,6 @@ MonoBehaviour:
     end: 20
     isRandom: 0
   coinController: {fileID: 1917316055230087572}
-  rotation:
-    start: -100
-    end: 100
-    isRandom: 0
   spawnsOnDeath:
     spawningPoints:
     - {fileID: 3990780080843788397}
@@ -392,7 +390,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3171107084848344101, guid: 926a52539d738a7439a32750206b316e, type: 3}
-    - {fileID: 768387036, guid: 926a52539d738a7439a32750206b316e, type: 3}
+    - {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 926a52539d738a7439a32750206b316e, type: 3}
 --- !u!1 &1935996649700350666 stripped
 GameObject:
@@ -422,6 +420,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d8e5da0db1cf484fb833721283a1112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3953038582779367152 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 768387036, guid: 926a52539d738a7439a32750206b316e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3953038583085328684}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935996649700350666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45fd1f20c81868b4596189673df3607a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1935996649858581814 stripped
