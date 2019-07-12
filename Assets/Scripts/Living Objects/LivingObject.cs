@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Linq;
 using LivingObjectAddons;
 
@@ -57,7 +57,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         rigidbodyHelper.SetProperties(this);
         foreach(IStart action in onInitializes.Concat(onDeaths.Cast<IStart>()))
         {
-            action.OnStart(this);
+            action?.OnStart(this);
         }
         Initialize();
     }
@@ -78,7 +78,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         healthPoints.SetDie(Die);
         foreach(OnInitialize action in onInitializes)
         {
-            action.Initialize();
+            action?.Initialize();
         }
     }
 
