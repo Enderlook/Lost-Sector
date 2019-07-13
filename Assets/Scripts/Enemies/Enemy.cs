@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Enemy : LivingObject
 {
@@ -8,6 +8,9 @@ public class Enemy : LivingObject
 
     [Tooltip("Money spawned on death.\nOnly integers will be used.\nIf 0, no coins will be spawned.")]
     public FloatRangeTwo moneySpawnedOnDeath;
+
+    [Tooltip("Weapons")]
+    public Weapon[] weapons;
 
     [Header("Setup")]
     [Tooltip("Coins. spawner controller.")]
@@ -24,6 +27,12 @@ public class Enemy : LivingObject
     }
 
     protected override void Update()
+    {
+        foreach(Weapon weapon in weapons)
+        {
+            weapon?.TryShoot(rigidbodyHelper, Instantiate, Time.deltaTime);
+        }
+        base.Update();
     }
 
     protected override void Initialize()
