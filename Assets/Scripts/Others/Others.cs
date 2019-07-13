@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class IVectorRangeTwo
@@ -235,4 +237,16 @@ public static class LayerMaskExtension
         }
         return result;
     }
+}
+
+public static class LINQExtension
+{
+    /// <summary>
+    /// Add a the <paramref name="element"/> at the end of the returned <seealso cref="IEnumerable{T}"/> <paramref name="source"/>.
+    /// </summary>
+    /// <typeparam name="T">Type of the <paramref name="element"/> to append to <paramref name="source"/>.</typeparam>
+    /// <param name="source">Source to append the <paramref name="element"/>.</param>
+    /// <param name="element">Element to append to <paramref name="source"/>.</param>
+    /// <returns><paramref name="source"/> with the <paramref name="element"/> added at the end of it.</returns>
+    public static IEnumerable<T> Append<T>(this IEnumerable<T> source, T element) => source.Concat(new T[] { element });
 }

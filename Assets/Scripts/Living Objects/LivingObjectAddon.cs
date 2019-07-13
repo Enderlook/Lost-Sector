@@ -16,4 +16,8 @@ namespace LivingObjectAddons
         public virtual void Die() { }
         public abstract void OnStart(LivingObject livingObject);
     }
+    public abstract class Movement : OnInitialize
+    {
+        public virtual void Move() { }
+    }
 }

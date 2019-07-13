@@ -1,6 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Linq;
 using LivingObjectAddons;
+using System.Collections.Generic;
 
 /* https://forum.unity.com/threads/make-child-unaffected-by-parents-rotation.461161/
  * https://stackoverflow.com/questions/52179975/make-child-unaffected-by-parents-rotation-unity
@@ -50,19 +51,33 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     [Tooltip("Actions executed on death.")]
     public OnDeath[] onDeaths;
 
+    [Tooltip("Type of movement.")]
+    public Movement movement;
+
     private Quaternion? initialRotation = null;
+
+    private IEnumerable<OnInitialize> toInitialize;
+
+    private void Awake()
+    {
+        toInitialize = onInitializes.Append(movement);
+    }
 
     protected virtual void Start()
     {
         rigidbodyHelper.SetProperties(this);
-        foreach(IStart action in onInitializes.Concat(onDeaths.Cast<IStart>()))
+        foreach (IStart action in onInitializes.Concat(onDeaths.Cast<IStart>()).Append(movement))
         {
             action?.OnStart(this);
         }
         Initialize();
     }
 
-    protected virtual void Update() => healthPoints.Update(Time.deltaTime);
+    protected virtual void Update()
+    {
+        healthPoints.Update(Time.deltaTime);
+        movement?.Move();
+    }
 
     /// <summary>
     /// Initializes some values that are reused during the enemies recycling.
@@ -76,7 +91,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
             rigidbodyHelper.transform.rotation = (Quaternion)initialRotation;
         healthPoints.Initialize();
         healthPoints.SetDie(Die);
-        foreach(OnInitialize action in onInitializes)
+        foreach(OnInitialize action in toInitialize)
         {
             action?.Initialize();
         }
