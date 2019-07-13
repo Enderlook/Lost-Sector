@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class Enemy : LivingObject
 {
@@ -17,12 +17,13 @@ public class Enemy : LivingObject
 
     private void Awake() => thisRigidbody2D = rigidbodyHelper.GetRigidbody2D();
 
-    protected override void Start()
+    protected void Start()
     {
         // Just to be sure...
         coinController.spawninigTransform = thisRigidbody2D.transform;
+    }
 
-        base.Start();
+    protected override void Update()
     }
 
     protected override void Initialize()

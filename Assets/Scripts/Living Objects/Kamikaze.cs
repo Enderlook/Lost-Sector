@@ -13,16 +13,16 @@ namespace LivingObjectAddons
         private bool isAccelerating = false;
         private float secondsWaitedBeforeAccelerate = 0;
 
-        private RigidbodyHelper rigidbodyHelper;
+        private Rigidbody2D thisRigidbody;
 
-        public override void OnStart(LivingObject livingObject) => rigidbodyHelper = livingObject.rigidbodyHelper;
+        public override void OnBuild(LivingObject livingObject) => thisRigidbody = livingObject.rigidbodyHelper.GetRigidbody2D();
 
         public override void Initialize() => isAccelerating = false;
 
         public override void Move()
         {
             if (isAccelerating)
-                rigidbodyHelper.GetRigidbody2D().AddRelativeForce(new Vector2(0, acceleration));
+                thisRigidbody.AddRelativeForce(new Vector2(0, acceleration));
             else
             {
                 secondsWaitedBeforeAccelerate += Time.deltaTime;

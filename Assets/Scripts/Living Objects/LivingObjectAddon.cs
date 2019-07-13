@@ -2,19 +2,19 @@
 
 namespace LivingObjectAddons
 {
-    public interface IStart
+    public interface IBuild
     {
-        void OnStart(LivingObject livingObject);
+        void OnBuild(LivingObject livingObject);
     }
-    public abstract class OnInitialize : MonoBehaviour, IStart
+    public abstract class OnInitialize : MonoBehaviour, IBuild
     {
         public virtual void Initialize() { }
-        public abstract void OnStart(LivingObject livingObject);
+        public abstract void OnBuild(LivingObject livingObject);
     }
-    public abstract class OnDeath : MonoBehaviour, IStart
+    public abstract class OnDeath : MonoBehaviour, IBuild
     {
         public virtual void Die() { }
-        public abstract void OnStart(LivingObject livingObject);
+        public abstract void OnBuild(LivingObject livingObject);
     }
     public abstract class Movement : OnInitialize
     {

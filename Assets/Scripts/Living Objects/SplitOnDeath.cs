@@ -9,7 +9,7 @@ namespace LivingObjectAddons
         [Tooltip("Configuration of gameObjects to spawn on death.")]
         public SpawneableGameObjects spawnsOnDeath;
 
-        public override void OnStart(LivingObject livingObject) { }
+        public override void OnBuild(LivingObject livingObject) { }
         public override void Die() => spawnsOnDeath.SpawnPrefabs(Instantiate);
     }
 

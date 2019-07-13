@@ -8,10 +8,11 @@ namespace LivingObjectAddons
         [Tooltip("Random rotation between two value.")]
         public FloatRangeTwo rotation;
 
-        private RigidbodyHelper rigidbodyHelper;
+        private Rigidbody2D thisRigidbody2D;
 
-        public override void OnStart(LivingObject livingObject) => rigidbodyHelper = livingObject.rigidbodyHelper;
+        public override void OnBuild(LivingObject livingObject) => thisRigidbody2D = livingObject.rigidbodyHelper.GetRigidbody2D();
 
-        public override void Initialize() => rigidbodyHelper.GetRigidbody2D().angularVelocity = (float)rotation;
+        public override void Initialize() => thisRigidbody2D.angularVelocity = (float)rotation;
     }
+
 }
