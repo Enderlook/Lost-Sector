@@ -58,19 +58,20 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
 
     private IEnumerable<OnInitialize> toInitialize;
 
-    private void Awake()
-    {
-        toInitialize = onInitializes.Append(movement);
-    }
+    private bool hasBeenBuilded = false;
 
-    protected virtual void Start()
+    private void Build()
+    /* We could have used Awake,
+     * but in order to use that we would need to make Initialize public and call it from EnemySpawner through GetComponent.
+     * That is because OnEnable is called before Awake.
+     */
     {
         rigidbodyHelper.SetProperties(this);
-        foreach (IStart action in onInitializes.Concat(onDeaths.Cast<IStart>()).Append(movement))
+        toInitialize = onInitializes.Append(movement);
+        foreach (IBuild action in onInitializes.Concat(onDeaths.Cast<IBuild>()).Append(movement))
         {
-            action?.OnStart(this);
+            action?.OnBuild(this);
         }
-        Initialize();
     }
 
     protected virtual void Update()
@@ -91,13 +92,21 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
             rigidbodyHelper.transform.rotation = (Quaternion)initialRotation;
         healthPoints.Initialize();
         healthPoints.SetDie(Die);
-        foreach(OnInitialize action in toInitialize)
+        foreach (OnInitialize action in toInitialize)
         {
             action?.Initialize();
         }
     }
 
-    private void OnEnable() => Initialize();
+    private void OnEnable()
+    {
+        if (!hasBeenBuilded)
+        {
+            hasBeenBuilded = true;
+            Build();
+        }
+        Initialize();
+    }
 
     /// <summary>
     /// Takes healing increasing its <see cref="Health"/>.

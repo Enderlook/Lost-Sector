@@ -15,10 +15,10 @@ namespace LivingObjectAddons
         [Tooltip("Used to draw the gizmos.")]
         public RigidbodyHelper rigidbodyHelperGizmos;
 
-        private LivingObject livingObject;
+        private Rigidbody2D thisRigidbody2D;
         private bool hasAlreadyExploded = false;
 
-        public override void OnStart(LivingObject livingObject) => this.livingObject = livingObject;
+        public override void OnBuild(LivingObject livingObject) => thisRigidbody2D = livingObject.rigidbodyHelper.GetRigidbody2D();
 
         public override void Die()
         {
@@ -30,12 +30,12 @@ namespace LivingObjectAddons
                 // https://answers.unity.com/questions/532746/finding-gameobjects-within-a-radius.html
                 // https://forum.unity.com/threads/find-gameobjects-in-a-circular-range-of-a-point.36197/
                 // We can also do this without Physics2D.OverlapCircleAll...
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(livingObject.rigidbodyHelper.Position, explosionRadius);
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(thisRigidbody2D.position, explosionRadius);
                 foreach (Collider2D collider in colliders)
                 {
                     // Avoid recursive loop (TakeDamage -> Die -> Explode -> TakeDamage -> ...)
                     Rigidbody2D rigidbody2D = collider.attachedRigidbody;
-                    if (rigidbody2D != livingObject.rigidbodyHelper.GetRigidbody2D() && rigidbody2D != null)
+                    if (rigidbody2D != thisRigidbody2D && rigidbody2D != null)
                     {
                         // This won't cause NullPointerException because the || clause will only be revised if the explode == null is false, which means there is an explosive to point.
                         rigidbody2D.GetComponent<RigidbodyHelper>()?.TakeDamage(explosionDamage);
