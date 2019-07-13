@@ -1,4 +1,7 @@
 ﻿using UnityEngine;
+using System.Linq;
+using LivingObjectAddons;
+using System.Collections.Generic;
 
 /* https://forum.unity.com/threads/make-child-unaffected-by-parents-rotation.461161/
  * https://stackoverflow.com/questions/52179975/make-child-unaffected-by-parents-rotation-unity
@@ -42,15 +45,40 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     [Tooltip("FloatingTextController Script")]
     public FloatingTextController floatingTextController;
 
+    [Tooltip("Actions executed on initialize.")]
+    public OnInitialize[] onInitializes;
+
+    [Tooltip("Actions executed on death.")]
+    public OnDeath[] onDeaths;
+
+    [Tooltip("Type of movement.")]
+    public Movement movement;
+
     private Quaternion? initialRotation = null;
 
-    protected virtual void Start()
+    private IEnumerable<OnInitialize> toInitialize;
+
+    private bool hasBeenBuilded = false;
+
+    private void Build()
+    /* We could have used Awake,
+     * but in order to use that we would need to make Initialize public and call it from EnemySpawner through GetComponent.
+     * That is because OnEnable is called before Awake.
+     */
     {
         rigidbodyHelper.SetProperties(this);
-        Initialize();
+        toInitialize = onInitializes.Append(movement);
+        foreach (IBuild action in onInitializes.Concat(onDeaths.Cast<IBuild>()).Append(movement))
+        {
+            action?.OnBuild(this);
+        }
     }
 
-    protected virtual void Update() => healthPoints.Update(Time.deltaTime);
+    protected virtual void Update()
+    {
+        healthPoints.Update(Time.deltaTime);
+        movement?.Move();
+    }
 
     /// <summary>
     /// Initializes some values that are reused during the enemies recycling.
@@ -64,9 +92,21 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
             rigidbodyHelper.transform.rotation = (Quaternion)initialRotation;
         healthPoints.Initialize();
         healthPoints.SetDie(Die);
+        foreach (OnInitialize action in toInitialize)
+        {
+            action?.Initialize();
+        }
     }
 
-    private void OnEnable() => Initialize();
+    private void OnEnable()
+    {
+        if (!hasBeenBuilded)
+        {
+            hasBeenBuilded = true;
+            Build();
+        }
+        Initialize();
+    }
 
     /// <summary>
     /// Takes healing increasing its <see cref="Health"/>.
@@ -95,6 +135,10 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         explosion.transform.position = rigidbodyHelper.Position;
         explosion.transform.localScale = Vector3.one * onDeathExplosionPrefabScale;
         gameObject.SetActive(false);
+        foreach (OnDeath action in onDeaths)
+        {
+            action.Die();
+        }
         //Destroy(gameObject);
     }
 
