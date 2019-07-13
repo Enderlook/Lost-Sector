@@ -9,6 +9,9 @@ public class Enemy : LivingObject
     [Tooltip("Money spawned on death.\nOnly integers will be used.\nIf 0, no coins will be spawned.")]
     public FloatRangeTwo moneySpawnedOnDeath;
 
+    [Tooltip("Weapons")]
+    public Weapon[] weapons;
+
     [Header("Setup")]
     [Tooltip("Coins. spawner controller.")]
     public CoinController coinController;
@@ -17,12 +20,19 @@ public class Enemy : LivingObject
 
     private void Awake() => thisRigidbody2D = rigidbodyHelper.GetRigidbody2D();
 
-    protected override void Start()
+    protected void Start()
     {
         // Just to be sure...
         coinController.spawninigTransform = thisRigidbody2D.transform;
+    }
 
-        base.Start();
+    protected override void Update()
+    {
+        foreach(Weapon weapon in weapons)
+        {
+            weapon?.TryShoot(rigidbodyHelper, Instantiate, Time.deltaTime);
+        }
+        base.Update();
     }
 
     protected override void Initialize()

@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 4083610473194778289}
   - component: {fileID: 7875594837939159766}
   m_Layer: 9
-  m_Name: Enemy Base
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -326,6 +326,9 @@ MonoBehaviour:
     startingMax: 100
     startingCurrent: -1
     bar: {fileID: 8071747493192058369}
+    canRegenerate: 0
+    regenerateRate: 10
+    regenerationDelay: 3
   relativeImpactDamage: 20
   shouldDisplayDamage: 0
   impactSound:
@@ -347,14 +350,17 @@ MonoBehaviour:
   onDeathExplosionPrefabScale: 2.75
   rigidbodyHelper: {fileID: 7858251103388681801}
   floatingTextController: {fileID: 4083610473194778289}
+  onInitializes: []
+  onDeaths: []
+  movement: {fileID: 0}
   impulse:
+    isRandom: 1
     startVector: {x: 0, y: 15}
     endVector: {x: 0, y: 100}
-    notRandom: 0
   moneySpawnedOnDeath:
     start: 1
     end: 2
-    notRandom: 0
+    isRandom: 1
   coinController: {fileID: 7875594837939159766}
 --- !u!114 &4083610473194778289
 MonoBehaviour:
@@ -401,7 +407,7 @@ MonoBehaviour:
   movementSpeed:
     start: 0.2
     end: 1
-    notRandom: 0
+    isRandom: 0
   spawninigTransform: {fileID: 7858251103388681844}
   coinPrefab: {fileID: 5012066591774042952, guid: 5e46a033ecf5de24aa75fe9b19eb2905,
     type: 3}
@@ -412,6 +418,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7858251103632841098}
     m_Modifications:
+    - target: {fileID: 4899925161982079344, guid: 7e38cfa2fd92d614d913ce6f701b6594,
+        type: 3}
+      propertyPath: m_Name
+      value: Health Bar With Canvas Simplified
+      objectReference: {fileID: 0}
     - target: {fileID: 1286173045874118781, guid: 7e38cfa2fd92d614d913ce6f701b6594,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -516,11 +527,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4899925161982079344, guid: 7e38cfa2fd92d614d913ce6f701b6594,
-        type: 3}
-      propertyPath: m_Name
-      value: Health Bar With Canvas Simplified
       objectReference: {fileID: 0}
     - target: {fileID: 8846102638572100080, guid: 7e38cfa2fd92d614d913ce6f701b6594,
         type: 3}

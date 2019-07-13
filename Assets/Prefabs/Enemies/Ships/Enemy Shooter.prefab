@@ -12,43 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dac2fb9a20673654284d10babf1199e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints:
-    startingMax: 60
-    startingCurrent: -1
-    bar: {fileID: 9013780524430854089}
-    canRegenerate: 0
-    regenerateRate: 10
-    regenerationDelay: 3
-  relativeImpactDamage: 10
-  shouldDisplayDamage: 0
-  impactSound:
-    audioClip: {fileID: 8300000, guid: 697e432eddbaa984f9cae727c8608928, type: 3}
-    volume:
-    - 0.5
-    pitch:
-    - 0.8
-    - 1.2
-  dieSound:
-    audioClip: {fileID: 8300000, guid: 55ee65d557d562d46ac0c7cd56427a91, type: 3}
-    volume:
-    - 0.5
-    pitch:
-    - 0.8
-    - 1.2
-  onDeathExplosionPrefab: {fileID: 3413306239945161787, guid: 923f959ae77217a42826bcaed27098f7,
-    type: 3}
-  onDeathExplosionPrefabScale: 2.75
-  rigidbodyHelper: {fileID: 6925946387881789313}
-  floatingTextController: {fileID: 3870874820224954233}
-  impulse:
-    isRandom: 1
-    startVector: {x: 0, y: 15}
-    endVector: {x: 0, y: 100}
-  moneySpawnedOnDeath:
-    start: 10
-    end: 16
-    isRandom: 1
-  coinController: {fileID: 6942371334371820318}
   cruiserSpeed: {x: 0, y: 20}
   accelerationSpeed: 5
   weapon:
@@ -235,6 +198,97 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: weapons.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: weapons.Array.data[0].shootingSound.volume.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: weapons.Array.data[0].shootingSound.pitch.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: relativeImpactDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: healthPoints.startingMax
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: moneySpawnedOnDeath.start
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: moneySpawnedOnDeath.end
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: movement
+      value: 
+      objectReference: {fileID: 3283243146478307659}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: weapons.Array.data[0].damageOnHit
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: weapons.Array.data[0].firerate
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: weapons.Array.data[0].speed
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: weapons.Array.data[0].shootingPosition
+      value: 
+      objectReference: {fileID: 5535042231883977222}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: weapons.Array.data[0].projectilePrefab
+      value: 
+      objectReference: {fileID: 6335491896661982094, guid: 26f1086e063f186408e18e43bf41386d,
+        type: 3}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: weapons.Array.data[0].layer.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: weapons.Array.data[0].shootingSound.audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5a8c55f41a396a74894ec2e9af446247, type: 3}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: weapons.Array.data[0].shootingSound.volume.Array.data[0]
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: weapons.Array.data[0].shootingSound.pitch.Array.data[0]
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: weapons.Array.data[0].shootingSound.pitch.Array.data[1]
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7858251103388681844, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -357,7 +411,6 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e, type: 3}
     - {fileID: 7858251103388681803, guid: ff345a899057f1447afc58e7a15eed6e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ff345a899057f1447afc58e7a15eed6e, type: 3}
 --- !u!1 &6925946388057331776 stripped
@@ -366,30 +419,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 942371852629950920}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3870874820224954233 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4083610473194778289, guid: ff345a899057f1447afc58e7a15eed6e,
-    type: 3}
-  m_PrefabInstance: {fileID: 942371852629950920}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6925946388057331776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42e9589752773c64993f6b3502286ccd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6942371334371820318 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7875594837939159766, guid: ff345a899057f1447afc58e7a15eed6e,
-    type: 3}
-  m_PrefabInstance: {fileID: 942371852629950920}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6925946388057331776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d8e5da0db1cf484fb833721283a1112, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6925946387881789312 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7858251103388681800, guid: ff345a899057f1447afc58e7a15eed6e,
@@ -402,27 +431,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 942371852629950920}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6925946387881789313 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7858251103388681801, guid: ff345a899057f1447afc58e7a15eed6e,
-    type: 3}
-  m_PrefabInstance: {fileID: 942371852629950920}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6925946387881789312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 317c52b6aadb3334fa7daa4a2aefc737, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &9013780524430854089 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8071747493192058369, guid: ff345a899057f1447afc58e7a15eed6e,
-    type: 3}
-  m_PrefabInstance: {fileID: 942371852629950920}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 796e3bd3b299ffd45b1680b2f4bc477c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

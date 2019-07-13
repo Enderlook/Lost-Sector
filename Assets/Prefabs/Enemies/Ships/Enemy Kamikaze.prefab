@@ -12,43 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 252f5edb21786dd41bc68c20e3d98aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints:
-    startingMax: 30
-    startingCurrent: -1
-    bar: {fileID: 5808921631194748135}
-    canRegenerate: 0
-    regenerateRate: 10
-    regenerationDelay: 3
-  relativeImpactDamage: 12
-  shouldDisplayDamage: 0
-  impactSound:
-    audioClip: {fileID: 8300000, guid: 697e432eddbaa984f9cae727c8608928, type: 3}
-    volume:
-    - 1
-    pitch:
-    - 0.8
-    - 1.2
-  dieSound:
-    audioClip: {fileID: 8300000, guid: 55ee65d557d562d46ac0c7cd56427a91, type: 3}
-    volume:
-    - 1
-    pitch:
-    - 0.8
-    - 1.2
-  onDeathExplosionPrefab: {fileID: 3413306239945161787, guid: 923f959ae77217a42826bcaed27098f7,
-    type: 3}
-  onDeathExplosionPrefabScale: 2.75
-  rigidbodyHelper: {fileID: 5591194028556358831}
-  floatingTextController: {fileID: 1743476831857163351}
-  impulse:
-    isRandom: 1
-    startVector: {x: 0, y: 7}
-    endVector: {x: 0, y: 15}
-  moneySpawnedOnDeath:
-    start: 8
-    end: 15
-    isRandom: 0
-  coinController: {fileID: 5607631490615431216}
   waitSecondsBeferoAccelerate: 2
   acceleration: 2
 --- !u!60 &3658925818128820500
@@ -153,6 +116,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: healthPoints.startingMax
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: relativeImpactDamage
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: impulse.startVector.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: impulse.endVector.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: moneySpawnedOnDeath.start
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: moneySpawnedOnDeath.end
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: movement
+      value: 
+      objectReference: {fileID: 6477092595907649460}
     - target: {fileID: 2657616089085578860, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -286,7 +284,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7858251103388681803, guid: ff345a899057f1447afc58e7a15eed6e, type: 3}
-    - {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ff345a899057f1447afc58e7a15eed6e, type: 3}
 --- !u!1 &5591194028196858734 stripped
 GameObject:
@@ -294,57 +291,9 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2349177949651915494}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1743476831857163351 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4083610473194778289, guid: ff345a899057f1447afc58e7a15eed6e,
-    type: 3}
-  m_PrefabInstance: {fileID: 2349177949651915494}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5591194028196858734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42e9589752773c64993f6b3502286ccd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5607631490615431216 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7875594837939159766, guid: ff345a899057f1447afc58e7a15eed6e,
-    type: 3}
-  m_PrefabInstance: {fileID: 2349177949651915494}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5591194028196858734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d8e5da0db1cf484fb833721283a1112, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5591194028556358830 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7858251103388681800, guid: ff345a899057f1447afc58e7a15eed6e,
     type: 3}
   m_PrefabInstance: {fileID: 2349177949651915494}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5591194028556358831 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7858251103388681801, guid: ff345a899057f1447afc58e7a15eed6e,
-    type: 3}
-  m_PrefabInstance: {fileID: 2349177949651915494}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5591194028556358830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 317c52b6aadb3334fa7daa4a2aefc737, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5808921631194748135 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8071747493192058369, guid: ff345a899057f1447afc58e7a15eed6e,
-    type: 3}
-  m_PrefabInstance: {fileID: 2349177949651915494}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 796e3bd3b299ffd45b1680b2f4bc477c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
