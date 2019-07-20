@@ -9,9 +9,6 @@ public class Enemy : LivingObject
     [Tooltip("Money spawned on death.\nOnly integers will be used.\nIf 0, no coins will be spawned.")]
     public FloatRangeTwo moneySpawnedOnDeath;
 
-    [Tooltip("Weapons")]
-    public Weapon[] weapons;
-
     [Header("Setup")]
     [Tooltip("Coins. spawner controller.")]
     public CoinController coinController;

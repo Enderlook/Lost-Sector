@@ -26,6 +26,9 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     public bool shouldDisplayDamage;
     bool IShouldDisplayDamage.ShouldDisplayDamage => shouldDisplayDamage;
 
+    [Tooltip("Weapons configuration.")]
+    public Weapon[] weapons;
+
     [Header("Setup")]
     [Tooltip("Impact sound.")]
     public Sound impactSound;
@@ -78,6 +81,10 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     {
         healthPoints.Update(Time.deltaTime);
         movement?.Move();
+        foreach (Weapon weapon in weapons)
+        {
+            weapon.Recharge(Time.deltaTime);
+        }
     }
 
     /// <summary>
