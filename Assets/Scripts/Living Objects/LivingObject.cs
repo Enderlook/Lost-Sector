@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
 using System.Linq;
 using LivingObjectAddons;
-using System.Collections.Generic;
+using UnityEngine;
 
 /* https://forum.unity.com/threads/make-child-unaffected-by-parents-rotation.461161/
  * https://stackoverflow.com/questions/52179975/make-child-unaffected-by-parents-rotation-unity
