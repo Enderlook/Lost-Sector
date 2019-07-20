@@ -65,6 +65,9 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
 
     private EffectManager effectManager;
 
+    [HideInInspector]
+    public float fireRateMultiplier;
+
     private void Build()
     /* We could have used Awake,
      * but in order to use that we would need to make Initialize public and call it from EnemySpawner through GetComponent.
@@ -107,6 +110,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         {
             action?.Initialize();
         }
+        fireRateMultiplier = 1;
     }
 
     private void OnEnable()
