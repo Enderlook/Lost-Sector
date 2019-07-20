@@ -63,6 +63,8 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
 
     private bool hasBeenBuilded = false;
 
+    private EffectManager effectManager;
+
     private void Build()
     /* We could have used Awake,
      * but in order to use that we would need to make Initialize public and call it from EnemySpawner through GetComponent.
@@ -70,6 +72,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
      */
     {
         rigidbodyHelper.SetProperties(this);
+        effectManager = new EffectManager(this);
         toInitialize = onInitializes.Append(movement);
         foreach (IBuild action in onInitializes.Concat(onDeaths.Cast<IBuild>()).Append(movement))
         {
@@ -81,6 +84,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     {
         healthPoints.Update(Time.deltaTime);
         movement?.Move();
+        effectManager.Update(Time.deltaTime);
         foreach (Weapon weapon in weapons)
         {
             weapon.Recharge(Time.deltaTime);
@@ -160,4 +164,10 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         if (floatingTextController != null && (!checkIfPositive || text > 0))
             floatingTextController.SpawnFloatingText(text, textColor);
     }
+
+    /// <summary>
+    /// Add effect to this creature.
+    /// </summary>
+    /// <param name="effect">Effect to add.</param>
+    public void AddEffect(Effect effect) => effectManager.AddEffect(effect);
 }
