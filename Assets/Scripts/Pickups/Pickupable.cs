@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class Pickupable : MonoBehaviour, ICanBePickedUp
 {
@@ -25,5 +23,5 @@ public abstract class Pickupable : MonoBehaviour, ICanBePickedUp
             Debug.LogWarning($"Game object {gameObject.name} lacks of an Rigidbody2D Component.");
     }
 
-    public abstract void Pickup(LivingObject livingObject);
+    public abstract void Pickup(Player player);
 }
