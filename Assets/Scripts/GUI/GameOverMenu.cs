@@ -21,6 +21,22 @@ public class GameOverMenu : MonoBehaviour
     private TextOverTime money;
     private TextOverTime time;
 
+#if UNITY_EDITOR
+    [HideInInspector]
+    private bool hasWon;
+    /// <summary>
+    /// Used by <see cref="GameOverEditor"/>.
+    /// </summary>
+    public bool HasWon {
+        get {
+            return hasWon;
+        }
+        set {
+            SetConfiguration(value, 1234, 1234);
+            hasWon = value;
+        }
+    }
+#endif
 
     /// <summary>
     /// Determines whenever the game over menu is displayed or hidden.
