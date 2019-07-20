@@ -1057,7 +1057,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: If you are seeing this panel... something gone wrong...
+  m_Text: If you are seeing this panel... something goes wrong...
 --- !u!222 &450651112
 CanvasRenderer:
   m_ObjectHideFlags: 0
