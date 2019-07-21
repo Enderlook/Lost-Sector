@@ -19,10 +19,10 @@ namespace LivingObjectAddons
 
         public override void Initialize() => isAccelerating = false;
 
-        public override void Move()
+        public override void Move(float speedMultiplier)
         {
             if (isAccelerating)
-                thisRigidbody.AddRelativeForce(new Vector2(0, acceleration));
+                thisRigidbody.AddRelativeForce(new Vector2(0, acceleration) * speedMultiplier);
             else
             {
                 secondsWaitedBeforeAccelerate += Time.deltaTime;

@@ -13,10 +13,10 @@ namespace LivingObjectAddons
         private Rigidbody2D thisRigidbody;
         public override void OnBuild(LivingObject livingObject) => thisRigidbody = livingObject.rigidbodyHelper.GetRigidbody2D();
 
-        public override void Move()
+        public override void Move(float speedMultiplier)
         {
             // Slowly accelerate to crusierSpeed
-            Vector2 speedToReachCrusier = cruiserSpeed - thisRigidbody.velocity;
+            Vector2 speedToReachCrusier = cruiserSpeed * speedMultiplier - thisRigidbody.velocity;
             Vector2 forceToReachCrusier = speedToReachCrusier * thisRigidbody.mass;
             Vector2 forceToApply = Vector2.ClampMagnitude(forceToReachCrusier * Time.deltaTime, accelerationSpeed);
             thisRigidbody.AddRelativeForce(forceToApply);

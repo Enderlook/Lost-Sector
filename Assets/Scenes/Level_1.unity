@@ -454,6 +454,24 @@ MonoBehaviour:
     regenerationDelay: 3
   relativeImpactDamage: 35
   shouldDisplayDamage: 1
+  weapons:
+  - damageOnHit: 25
+    firerate: 2
+    speed: 350
+    shootingPosition: {fileID: 1623832068}
+    projectilePrefab: {fileID: 6335491896661982094, guid: 26f1086e063f186408e18e43bf41386d,
+      type: 3}
+    shootingSound:
+      audioClip: {fileID: 8300000, guid: 5a8c55f41a396a74894ec2e9af446247, type: 3}
+      volume:
+      - 1
+      pitch:
+      - 0.8
+      - 1.2
+    layer:
+      serializedVersion: 2
+      m_Bits: 0
+    shouldDisplayDamage: 1
   impactSound:
     audioClip: {fileID: 8300000, guid: 0ba2d0a93ab44744e99f0c0520803840, type: 3}
     volume:
@@ -477,6 +495,8 @@ MonoBehaviour:
   onInitializes: []
   onDeaths: []
   movement: {fileID: 0}
+  fireRateMultiplier: 0
+  speedMultiplier: 0
   shieldPoints:
     startingMax: 100
     startingCurrent: -1
@@ -485,24 +505,6 @@ MonoBehaviour:
     regenerateRate: 10
     regenerationDelay: 3
   moveSpeed: 15
-  weapon:
-    damageOnHit: 25
-    firerate: 2
-    speed: 350
-    shootingPosition: {fileID: 1623832068}
-    projectilePrefab: {fileID: 6335491896661982094, guid: 26f1086e063f186408e18e43bf41386d,
-      type: 3}
-    shootingSound:
-      audioClip: {fileID: 8300000, guid: 5a8c55f41a396a74894ec2e9af446247, type: 3}
-      volume:
-      - 1
-      pitch:
-      - 0.8
-      - 1.2
-    layer:
-      serializedVersion: 2
-      m_Bits: 0
-    shouldDisplayDamage: 1
   shieldBar: {fileID: 166792902}
   shieldHandler:
     maxShieldColor: {r: 0, g: 0.43460894, b: 1, a: 1}
@@ -1757,7 +1759,7 @@ MonoBehaviour:
   difficultyLinearIncrease: 1
   difficultyGeometricalIncrease: 1.1
   difficultyIncreaseInterval: 5
-  healthPack: {fileID: 8501959861086569156, guid: ffa4aa802ec98984fa2024e878b4f9ba,
+  healthPack: {fileID: 535086599481409440, guid: f84cf23a7962e65488b58c3f49368c8c,
     type: 3}
   healthPackSpawnTime: 4
   healthPackSpawnChance: 0.5

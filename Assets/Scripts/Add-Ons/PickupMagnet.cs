@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PickupMagnet : MonoBehaviour
 {
@@ -25,12 +24,12 @@ public class PickupMagnet : MonoBehaviour
     [Tooltip("Transform where pickups should be pulled.")]
     public Transform magnetTransform;
 
-    private LivingObject livingObject;
+    private Player player;
 
     private void Start()
     {
         magnetRadiusSquared = magnetRadius * magnetRadius;
-        livingObject = gameObject.GetComponent<LivingObject>();
+        player = gameObject.GetComponent<Player>();
     }
 
     private void FixedUpdate()
@@ -62,7 +61,7 @@ public class PickupMagnet : MonoBehaviour
         ICanBePickedUp pickup = item.GetComponent<ICanBePickedUp>();
         if (pickup != null)
         {
-            pickup.Pickup(livingObject);
+            pickup.Pickup(player);
             Destroy(item.gameObject);
         }
     }
@@ -89,7 +88,6 @@ public class PickupMagnet : MonoBehaviour
 #endif
 }
 
-// We may have more pickups in the future
 public interface ICanBePickedUp
 {
     /// <summary>
@@ -99,6 +97,6 @@ public interface ICanBePickedUp
     /// <summary>
     /// Method executed when a pickup is used.
     /// </summary>
-    /// <param name="livingObject">Instance of the <see cref="LivingObject"/> which picked it up</param>
-    void Pickup(LivingObject livingObject);
+    /// <param name="player">Instance of the <see cref="Player"/> which picked it up.</param>
+    void Pickup(Player player);
 }
