@@ -110,12 +110,14 @@ public class RigidbodyHelper : MonoBehaviour
         else
             return entity.ImpactDamage;
     }
-
+    
+#if UNITY_EDITOR
     private void OnValidate()
     {
         if (gameObject.GetComponent<Rigidbody2D>() == null)
             Debug.LogWarning($"Gameobject {gameObject.name} lacks of rigidbody2D component.");
     }
+#endif
 }
 
 public interface IRigidbodyHelperConfiguration : IShouldDisplayDamage
