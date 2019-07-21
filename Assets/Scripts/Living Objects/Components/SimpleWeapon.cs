@@ -11,6 +11,12 @@ namespace LivingObjectAddons
         public float firerate = 1;
         [Tooltip("Speed.")]
         public float speed = 1;
+        [Tooltip("Relative damage on impact based on force.")]
+        public bool isDamageRelativeToImpulse;
+        bool IMelee.IsImpactDamageRelativeToImpulse { get => isDamageRelativeToImpulse; set => isDamageRelativeToImpulse = value; }
+        [Tooltip("Should spawn floating damage text on the enemy on collision?")]
+        public bool shouldDisplayDamage;
+        bool IShouldDisplayDamage.ShouldDisplayDamage { get => shouldDisplayDamage; set => shouldDisplayDamage = value; }
 
         [Header("Setup")]
         [Tooltip("Transform point where projectiles will be spawn.")]
@@ -25,18 +31,10 @@ namespace LivingObjectAddons
         private RigidbodyHelper rigidbodyHelper;
 
         Vector3 IProjectileConfiguration.SpawnPosition => shootingPosition.position;
-        float IProjectileConfiguration.Damage => damageOnHit;
+        float IMelee.ImpactDamage { get => damageOnHit; set => damageOnHit = value; }
         float IProjectileConfiguration.Speed => speed;
         int IProjectileConfiguration.Layer => layer.ToLayer();
-
-        [Tooltip("Should spawn floating damage text on the enemy on collision?")]
-        public bool shouldDisplayDamage;
-        bool IShouldDisplayDamage.ShouldDisplayDamage {
-            get {
-                return shouldDisplayDamage;
-            }
-        }
-
+       
         private float cooldownTime = 0f;
 
         public bool CanShoot {
