@@ -14,6 +14,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitSecondsBeferoAccelerate: 2
   acceleration: 2
+--- !u!114 &4990759774334309280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5591194028196858734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a08af33a1a22a4dad3cf09c030efac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnsOnDeath:
+    spawningPoints:
+    - spawnPoint: {fileID: 5591194028556358802}
+      distance:
+        start: 0
+        end: 0
+        isRandom: 0
+    prefabsToSpawn:
+    - prefab: {fileID: 3065380558525474565, guid: 4f499ea6cd4dbcf489d7ed7fd269c742,
+        type: 3}
+      weight: 1
+    amountToSpawn:
+      start: 0.15
+      end: 0
+      isRandom: 0
+    notRandom: 0
 --- !u!60 &3658925818128820500
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -61,6 +89,41 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: healthPoints.startingMax
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: relativeImpactDamage
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: impulse.startVector.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: impulse.endVector.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: moneySpawnedOnDeath.start
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: moneySpawnedOnDeath.end
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: movement
+      value: 
+      objectReference: {fileID: 6477092595907649460}
     - target: {fileID: 7858251103632841098, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -116,41 +179,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
-        type: 3}
-      propertyPath: healthPoints.startingMax
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
-        type: 3}
-      propertyPath: relativeImpactDamage
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
-        type: 3}
-      propertyPath: impulse.startVector.y
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
-        type: 3}
-      propertyPath: impulse.endVector.y
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
-        type: 3}
-      propertyPath: moneySpawnedOnDeath.start
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
-        type: 3}
-      propertyPath: moneySpawnedOnDeath.end
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
-        type: 3}
-      propertyPath: movement
-      value: 
-      objectReference: {fileID: 6477092595907649460}
     - target: {fileID: 2657616089085578860, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -294,6 +322,12 @@ GameObject:
 --- !u!1 &5591194028556358830 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7858251103388681800, guid: ff345a899057f1447afc58e7a15eed6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2349177949651915494}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5591194028556358802 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7858251103388681844, guid: ff345a899057f1447afc58e7a15eed6e,
     type: 3}
   m_PrefabInstance: {fileID: 2349177949651915494}
   m_PrefabAsset: {fileID: 0}

@@ -67,6 +67,8 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
 
     [HideInInspector]
     public float fireRateMultiplier;
+    [HideInInspector]
+    public float speedMultiplier;
 
     private void Build()
     /* We could have used Awake,
@@ -86,7 +88,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     protected virtual void Update()
     {
         healthPoints.Update(Time.deltaTime);
-        movement?.Move();
+        movement?.Move(speedMultiplier);
         effectManager.Update(Time.deltaTime);
         foreach (Weapon weapon in weapons)
         {
@@ -111,6 +113,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
             action?.Initialize();
         }
         fireRateMultiplier = 1;
+        speedMultiplier = 1;
     }
 
     private void OnEnable()

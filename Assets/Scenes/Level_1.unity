@@ -496,6 +496,7 @@ MonoBehaviour:
   onDeaths: []
   movement: {fileID: 0}
   fireRateMultiplier: 0
+  speedMultiplier: 0
   shieldPoints:
     startingMax: 100
     startingCurrent: -1
