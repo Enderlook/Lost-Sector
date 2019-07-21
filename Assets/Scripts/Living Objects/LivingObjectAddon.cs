@@ -1,23 +1,19 @@
-﻿using UnityEngine;
-
-namespace LivingObjectAddons
+﻿namespace LivingObjectAddons
 {
     public interface IBuild
     {
-        void OnBuild(LivingObject livingObject);
+        void Build(LivingObject livingObject);
     }
-    public abstract class OnInitialize : MonoBehaviour, IBuild
+    public interface IInitialize
     {
-        public virtual void Initialize() { }
-        public abstract void OnBuild(LivingObject livingObject);
+        void Initialize();
     }
-    public abstract class OnDeath : MonoBehaviour, IBuild
+    public interface IDie
     {
-        public virtual void Die() { }
-        public abstract void OnBuild(LivingObject livingObject);
+        void Die();
     }
-    public abstract class Movement : OnInitialize
+    public interface IMove
     {
-        public virtual void Move(float speedMultiplier) { }
+        void Move(float speedMultiplier);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace LivingObjectAddons
 {
-    public class ExplosionOnDeath : OnDeath
+    public class ExplosionOnDeath : MonoBehaviour, IBuild, IDie
     {
         [Header("Configuration")]
         [Tooltip("Explosion radius.")]
@@ -18,9 +18,8 @@ namespace LivingObjectAddons
         private Rigidbody2D thisRigidbody2D;
         private bool hasAlreadyExploded = false;
 
-        public override void OnBuild(LivingObject livingObject) => thisRigidbody2D = livingObject.rigidbodyHelper.GetRigidbody2D();
-
-        public override void Die()
+        void IBuild.Build(LivingObject livingObject) => thisRigidbody2D = livingObject.rigidbodyHelper.GetRigidbody2D();
+        void IDie.Die()
         {
             if (!hasAlreadyExploded)
             {
