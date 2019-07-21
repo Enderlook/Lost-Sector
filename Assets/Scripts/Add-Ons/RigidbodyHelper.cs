@@ -96,10 +96,9 @@ public class RigidbodyHelper : MonoBehaviour
 
         if (audioSource != null)
         {
-            if (entity.Melee.ImpactSound != null)
-                entity.Melee.ImpactSound.Play(audioSource, collision.relativeVelocity.magnitude);
-            else if (entity.ImpactSound != null)
-                entity.ImpactSound.Play(audioSource, collision.relativeVelocity.magnitude);
+            IImpactSound impactSound = entity as IImpactSound;
+            if (impactSound != null)
+                impactSound.ImpactSound.Play(audioSource, collision.relativeVelocity.magnitude);
         }
     }
 
@@ -147,7 +146,7 @@ public class RigidbodyHelper : MonoBehaviour
     }
 }
 
-public interface IRigidbodyHelperConfiguration : IImpactSound
+public interface IRigidbodyHelperConfiguration
 {
     /// <summary>
     /// Take damage reducing its HP.
@@ -166,7 +165,7 @@ public interface IShouldDisplayDamage
     /// This property is passed as <code>displayText</code> parameter of <seealso cref=">TakeDamage(float amount, bool displayText = false)"/> in the opposite <seealso cref="RigidbodyHelper"/>.
     /// </summary>
     /// <seealso cref="RigidbodyHelper.ShouldDisplayDamage()"/>
-    bool ShouldDisplayDamage { get; }
+    bool ShouldDisplayDamage { get; set; }
 }
 
 public interface IImpactSound

@@ -14,11 +14,6 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     [Tooltip("Health.")]
     public HealthPoints healthPoints;
 
-    [Header("Setup")]
-    [Tooltip("Impact sound.")]
-    public Sound impactSound;
-    Sound IImpactSound.ImpactSound => impactSound;
-
     [Tooltip("Die sound.")]
     public Sound dieSound;
     [Tooltip("Instantiate this explosion prefab on death.")]
