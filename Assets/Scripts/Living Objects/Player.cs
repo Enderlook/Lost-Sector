@@ -42,7 +42,7 @@ public class Player : LivingObject
 
         // Shoot
         if (Input.GetMouseButton(0) && weapons[0].CanShoot)
-            weapons[0].Shoot(rigidbodyHelper, Instantiate);
+            weapons[0].Shoot();
         base.Update();
     }
 

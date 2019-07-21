@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 118295642}
   - component: {fileID: 118295641}
   - component: {fileID: 118295640}
+  - component: {fileID: 118295645}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -454,24 +455,6 @@ MonoBehaviour:
     regenerationDelay: 3
   relativeImpactDamage: 35
   shouldDisplayDamage: 1
-  weapons:
-  - damageOnHit: 25
-    firerate: 2
-    speed: 350
-    shootingPosition: {fileID: 1623832068}
-    projectilePrefab: {fileID: 6335491896661982094, guid: 26f1086e063f186408e18e43bf41386d,
-      type: 3}
-    shootingSound:
-      audioClip: {fileID: 8300000, guid: 5a8c55f41a396a74894ec2e9af446247, type: 3}
-      volume:
-      - 1
-      pitch:
-      - 0.8
-      - 1.2
-    layer:
-      serializedVersion: 2
-      m_Bits: 0
-    shouldDisplayDamage: 1
   impactSound:
     audioClip: {fileID: 8300000, guid: 0ba2d0a93ab44744e99f0c0520803840, type: 3}
     volume:
@@ -492,9 +475,6 @@ MonoBehaviour:
   onDeathExplosionPrefabScale: 5
   rigidbodyHelper: {fileID: 574265759}
   floatingTextController: {fileID: 118295641}
-  onInitializes: []
-  onDeaths: []
-  movement: {fileID: 0}
   fireRateMultiplier: 0
   speedMultiplier: 0
   shieldPoints:
@@ -525,6 +505,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &118295645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118295639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba9d17193cac90c408c5e452ec2ebcd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageOnHit: 25
+  firerate: 2
+  speed: 350
+  shootingPosition: {fileID: 1623832068}
+  projectilePrefab: {fileID: 6335491896661982094, guid: 26f1086e063f186408e18e43bf41386d,
+    type: 3}
+  shootingSound:
+    audioClip: {fileID: 8300000, guid: 5a8c55f41a396a74894ec2e9af446247, type: 3}
+    volume:
+    - 1
+    pitch:
+    - 0.8
+    - 1.2
+  layer:
+    serializedVersion: 2
+    m_Bits: 0
+  shouldDisplayDamage: 1
 --- !u!1 &128807550
 GameObject:
   m_ObjectHideFlags: 0
