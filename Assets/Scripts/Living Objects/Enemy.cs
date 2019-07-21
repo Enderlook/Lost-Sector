@@ -15,7 +15,7 @@ public class Enemy : LivingObject
 
     protected Rigidbody2D thisRigidbody2D;
 
-    private void Awake() => thisRigidbody2D = rigidbodyHelper.GetRigidbody2D();
+    private void Awake() => thisRigidbody2D = rigidbodyHelper.Rigidbody2D;
 
     protected void Start()
     {

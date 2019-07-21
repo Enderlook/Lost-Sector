@@ -476,7 +476,6 @@ MonoBehaviour:
   rigidbodyHelper: {fileID: 574265759}
   floatingTextController: {fileID: 118295641}
   fireRateMultiplier: 0
-  speedMultiplier: 0
   shieldPoints:
     startingMax: 100
     startingCurrent: -1

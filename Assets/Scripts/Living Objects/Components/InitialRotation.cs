@@ -10,7 +10,7 @@ namespace LivingObjectAddons
 
         private Rigidbody2D thisRigidbody2D;
 
-        void IBuild.Build(LivingObject livingObject) => thisRigidbody2D = livingObject.rigidbodyHelper.GetRigidbody2D();
+        void IBuild.Build(LivingObject livingObject) => thisRigidbody2D = livingObject.rigidbodyHelper.Rigidbody2D;
         void IInitialize.Initialize() => thisRigidbody2D.angularVelocity = (float)rotation;
     }
 
