@@ -32,7 +32,7 @@ public class PickupMagnet : MonoBehaviour
         player = gameObject.GetComponent<Player>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         foreach (Transform item in Global.pickupsParent)
         {
