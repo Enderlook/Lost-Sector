@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace LivingObjectAddons
 {
@@ -7,13 +7,19 @@ namespace LivingObjectAddons
         [Header("Configuration")]
         [Tooltip("Damage on hit.")]
         public float damageOnHit = 1;
+        float IMelee.ImpactDamage { get => damageOnHit; set => damageOnHit = value; }
+
         [Tooltip("Firerate (shoots per second).")]
         public float firerate = 1;
+
         [Tooltip("Speed.")]
         public float speed = 1;
+        float IProjectileConfiguration.Speed => speed;
+
         [Tooltip("Relative damage on impact based on force.")]
         public bool isDamageRelativeToImpulse;
         bool IMelee.IsImpactDamageRelativeToImpulse { get => isDamageRelativeToImpulse; set => isDamageRelativeToImpulse = value; }
+
         [Tooltip("Should spawn floating damage text on the enemy on collision?")]
         public bool shouldDisplayDamage;
         bool IShouldDisplayDamage.ShouldDisplayDamage { get => shouldDisplayDamage; set => shouldDisplayDamage = value; }
@@ -27,13 +33,11 @@ namespace LivingObjectAddons
         public Sound shootingSound;
         [Tooltip("Layer mask of the projectile")]
         public LayerMask layer;
+        int IProjectileConfiguration.Layer => layer.ToLayer();
 
         private RigidbodyHelper rigidbodyHelper;
-
-        Vector3 IProjectileConfiguration.SpawnPosition => shootingPosition.position;
-        float IMelee.ImpactDamage { get => damageOnHit; set => damageOnHit = value; }
-        float IProjectileConfiguration.Speed => speed;
-        int IProjectileConfiguration.Layer => layer.ToLayer();
+        
+        Vector3 IProjectileConfiguration.SpawnPosition => shootingPosition.position;        
        
         private float cooldownTime = 0f;
 
