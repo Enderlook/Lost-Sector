@@ -1,20 +1,15 @@
 ﻿using UnityEngine;
 
-public class Coin : MonoBehaviour, ICanBePickedUp
+public class Coin : Pickupable
 {
     private int price;
     private Transform player;
     private Animator animator;
-    private Rigidbody2D thisRigidbody2D;
-
-    Rigidbody2D ICanBePickedUp.Rigidbody2D => thisRigidbody2D;
-
-    private void Start() => thisRigidbody2D = gameObject.GetComponent<Rigidbody2D>();
 
     /// <summary>
     /// Collect its money.
     /// </summary>
-    void ICanBePickedUp.Pickup(LivingObject livingObject) => Global.money += price;
+    public override void Pickup(LivingObject livingObject) => Global.money += price;
 
     /// <summary>
     /// Set configuration of the coin.
@@ -27,11 +22,10 @@ public class Coin : MonoBehaviour, ICanBePickedUp
         gameObject.GetComponent<Animator>().Play(animationState);
     }
 
-    private void OnValidate()
+    protected override void OnValidate()
     {
         if (gameObject.GetComponent<Animator>() == null)
             Debug.LogWarning($"Game object {gameObject.name} lacks of an Animator Component.");
-        if (gameObject.GetComponent<Rigidbody2D>() == null)
-            Debug.LogWarning($"Game object {gameObject.name} lacks of an Rigidbody2D Component.");
+        base.OnValidate();
     }
 }
