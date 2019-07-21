@@ -154,7 +154,6 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         {
             action.Die();
         }
-        //Destroy(gameObject);
     }
 
     /// <summary>
