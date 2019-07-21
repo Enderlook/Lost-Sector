@@ -40,7 +40,7 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration
     {
         transform.position = configuration.SpawnPosition;
         damage = configuration.Damage;
-        Rigidbody2D rigidbody2D = rigidbodyHelper.GetRigidbody2D();
+        Rigidbody2D rigidbody2D = rigidbodyHelper.Rigidbody2D;
         shouldDisplayDamage = configuration.ShouldDisplayDamage;
         // You never know when you might need to rotate the parent, that is why we use AddRelativeForce() and transform.up instead of just AddForce()
         rigidbody2D.AddRelativeForce(transform.up * configuration.Speed * rigidbody2D.mass);

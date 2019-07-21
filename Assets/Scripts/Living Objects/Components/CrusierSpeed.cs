@@ -11,7 +11,7 @@ namespace LivingObjectAddons
         public float accelerationSpeed;
 
         private Rigidbody2D thisRigidbody;
-        void IBuild.Build(LivingObject livingObject) => thisRigidbody = livingObject.rigidbodyHelper.GetRigidbody2D();
+        void IBuild.Build(LivingObject livingObject) => thisRigidbody = livingObject.rigidbodyHelper.Rigidbody2D;
         void IMove.Move(float speedMultiplier)
         {
             // Slowly accelerate to crusierSpeed

@@ -15,7 +15,7 @@ namespace LivingObjectAddons
 
         private Rigidbody2D thisRigidbody;
 
-        void IBuild.Build(LivingObject livingObject) => thisRigidbody = livingObject.rigidbodyHelper.GetRigidbody2D();
+        void IBuild.Build(LivingObject livingObject) => thisRigidbody = livingObject.rigidbodyHelper.Rigidbody2D;
         void IInitialize.Initialize() => isAccelerating = false;
         void IMove.Move(float speedMultiplier)
         {

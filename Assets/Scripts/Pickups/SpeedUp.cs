@@ -12,33 +12,42 @@ public class SpeedUp : Pickupable
 
     public override void Pickup(Player player)
     {
-        player.AddEffect(new SpeedUpEffect(speedMultiplier, durationOfEffect));
+        player.AddEffect(new SpeedEffect(speedMultiplier, durationOfEffect,
+            (strength, maxDuration, duration, initialValue) => initialValue + strength * Mathf.Pow(duration / maxDuration, .5f)
+        ));
     }
 }
 
-public class SpeedUpEffect : Effect
+public class SpeedEffect : Effect
 {
-    public SpeedUpEffect(float strength, float duration) : base(strength, duration) { }
+    public SpeedEffect(float strength, float duration, StrengthCalculate strengthCalculate) : base(strength, duration)
+    {
+        this.strengthCalculate = strengthCalculate;
+    }
 
     public override bool ReplaceCurrentInstance => true;
 
     private float initialValue;
 
+    private StrengthCalculate strengthCalculate;
+
     protected override void OnStart()
     {
-        initialValue = livingObject.speedMultiplier;
+        initialValue = livingObject.SpeedMultiplier;
         base.OnStart();
     }
 
     protected override void OnUpdate(float time)
     {
-        livingObject.speedMultiplier = initialValue + strength * Mathf.Pow(duration / maxDuration, .5f);
+        livingObject.SpeedMultiplier = strengthCalculate(strength, maxDuration, duration, initialValue);        
         base.OnUpdate(time);
     }
 
     protected override void OnEnd(bool wasAborted)
     {
-        livingObject.speedMultiplier = initialValue;
+        livingObject.SpeedMultiplier = initialValue;
         base.OnEnd(wasAborted);
     }
 }
+
+public delegate float StrengthCalculate(float strength, float maxDuration, float duration, float initialValue);
