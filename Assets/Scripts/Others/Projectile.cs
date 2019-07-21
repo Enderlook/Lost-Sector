@@ -1,11 +1,15 @@
-﻿using UnityEngine;
+﻿using LivingObjectAddons;
+using UnityEngine;
 
-public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration
+public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration, IMelee
 {
     [Header("Configuration")]
     [Tooltip("Damage on impact.")]
     public float damage = 1;
-    float IRigidbodyHelperConfiguration.ImpactDamage => damage;
+    float IMelee.ImpactDamage => damage;
+    [Tooltip("Relative damage on impact based on force.")]
+    public bool isDamageRelativeToImpulse;
+    bool IMelee.IsImpactDamageRelativeToImpulse => false;
 
     [Tooltip("Should spawn floating damage text on the enemy on collision?")]
     public bool shouldDisplayDamage;
@@ -14,17 +18,16 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration
     [Header("Setup")]
     [Tooltip("Impact sound.")]
     public Sound impactSound;
-    Sound IRigidbodyHelperConfiguration.ImpactSound => impactSound;
+    Sound IImpactSound.ImpactSound => impactSound;
 
     [Tooltip("RigidbodyHelper script.")]
     public RigidbodyHelper rigidbodyHelper;
+    IMelee IRigidbodyHelperConfiguration.Melee => this;
 
     private void Start()
     {
         rigidbodyHelper.SetProperties(this);
     }
-
-    bool IRigidbodyHelperConfiguration.IsImpactDamageRelativeToImpulse => false;
 
     void IRigidbodyHelperConfiguration.TakeDamage(float amount, bool displayDamage)
     {

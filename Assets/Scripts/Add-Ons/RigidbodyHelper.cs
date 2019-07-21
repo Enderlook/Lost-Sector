@@ -94,8 +94,13 @@ public class RigidbodyHelper : MonoBehaviour
         if (target != null)
             target.TakeDamage(CalculateDamage(impulse), ShouldDisplayDamage());
 
-        if (audioSource != null && entity.ImpactSound != null)
-            entity.ImpactSound.Play(audioSource, collision.relativeVelocity.magnitude);
+        if (audioSource != null)
+        {
+            if (entity.Melee.ImpactSound != null)
+                entity.Melee.ImpactSound.Play(audioSource, collision.relativeVelocity.magnitude);
+            else if (entity.ImpactSound != null)
+                entity.ImpactSound.Play(audioSource, collision.relativeVelocity.magnitude);
+        }
     }
 
     /// <summary>
@@ -118,7 +123,7 @@ public class RigidbodyHelper : MonoBehaviour
     /// <seealso cref="IRigidbodyHelperConfiguration.ShouldDisplayDamage"/>
     public bool ShouldDisplayDamage()
     {
-        return entity.ShouldDisplayDamage;
+        return entity.Melee.ShouldDisplayDamage;
     }
 
     /// <summary>
@@ -129,10 +134,10 @@ public class RigidbodyHelper : MonoBehaviour
     /// <seealso cref="TakeDamage(float amount, bool displayText = false)"/>
     private float CalculateDamage(float impulse)
     {
-        if (entity.IsImpactDamageRelativeToImpulse)
-            return entity.ImpactDamage * impulse;
+        if (entity.Melee.IsImpactDamageRelativeToImpulse)
+            return entity.Melee.ImpactDamage * impulse;
         else
-            return entity.ImpactDamage;
+            return entity.Melee.ImpactDamage;
     }
 
     private void OnValidate()
@@ -142,7 +147,7 @@ public class RigidbodyHelper : MonoBehaviour
     }
 }
 
-public interface IRigidbodyHelperConfiguration : IShouldDisplayDamage
+public interface IRigidbodyHelperConfiguration : IImpactSound
 {
     /// <summary>
     /// Take damage reducing its HP.
@@ -150,23 +155,8 @@ public interface IRigidbodyHelperConfiguration : IShouldDisplayDamage
     /// <param name="amount">Amount of HP lost. Must be positive.</param>
     /// <param name="displayText">Whenever the damage taken must be shown in a floating text.</param>
     void TakeDamage(float amount, bool displayText = false);
-    /// <summary>
-    /// Damage produced on collision impact.<br/>
-    /// If <seealso cref="IRigidbodyHelperConfiguration.IsImpactDamageRelativeToImpulse"/> is <see langword="true"/>, it's your responsibility to calculate damage taking into account impulse.
-    /// </summary>
-    /// <seealso cref="RigidbodyHelper.OnCollisionEnter2D(Collision2D)"/>
-    /// <seealso cref="RigidbodyHelper.CalculateDamage(float)"/>
-    float ImpactDamage { get; }
-    /// <summary>
-    /// Sound played on collision.
-    /// </summary>
-    Sound ImpactSound { get; }
-    /// <summary>
-    /// Whenever <seealso cref="IRigidbodyHelperConfiguration.ImpactDamage"/> should or not be calculated taking into account the collision impulse.
-    /// </summary>
-    /// <seealso cref="RigidbodyHelper.OnCollisionEnter2D(Collision2D)"/>
-    /// <seealso cref="RigidbodyHelper.CalculateDamage(float)"/>
-    bool IsImpactDamageRelativeToImpulse { get; }
+
+    LivingObjectAddons.IMelee Melee { get; }
 }
 
 public interface IShouldDisplayDamage
@@ -177,4 +167,12 @@ public interface IShouldDisplayDamage
     /// </summary>
     /// <seealso cref="RigidbodyHelper.ShouldDisplayDamage()"/>
     bool ShouldDisplayDamage { get; }
+}
+
+public interface IImpactSound
+{
+    /// <summary>
+    /// Sound played on collision.
+    /// </summary>
+    Sound ImpactSound { get; }
 }
