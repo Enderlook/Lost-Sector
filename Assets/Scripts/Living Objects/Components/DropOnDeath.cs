@@ -3,15 +3,15 @@ using UnityEngine;
 
 namespace LivingObjectAddons
 {
-    public class DropOnDeath : OnDeath
+    public class DropOnDeath : MonoBehaviour, IBuild, IDie
     {
         [Header("Configuration")]
         [Tooltip("Configuration of gameObjects to spawn on death.")]
         public SpawneableGameObjects spawnsOnDeath;
 
         private void Awake() => spawnsOnDeath.SetSpawnedInstructions(SpawnedInstructions);
-        public override void OnBuild(LivingObject livingObject) { }
-        public override void Die() => spawnsOnDeath.SpawnPrefabs(Instantiate);
+        void IBuild.Build(LivingObject livingObject) { }
+        void IDie.Die() => spawnsOnDeath.SpawnPrefabs(MonoBehaviour.Instantiate);
 
         /// <summary>
         ///  Set additional spawn instructions used when a prefab is instantiated.

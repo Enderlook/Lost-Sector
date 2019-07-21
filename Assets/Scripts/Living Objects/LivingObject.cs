@@ -1,5 +1,3 @@
-﻿using System.Collections.Generic;
-using System.Linq;
 using LivingObjectAddons;
 using UnityEngine;
 
@@ -48,18 +46,11 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     [Tooltip("FloatingTextController Script")]
     public FloatingTextController floatingTextController;
 
-    [Tooltip("Actions executed on initialize.")]
-    public OnInitialize[] onInitializes;
-
-    [Tooltip("Actions executed on death.")]
-    public OnDeath[] onDeaths;
-
-    [Tooltip("Type of movement.")]
-    public Movement movement;
-
     private Quaternion? initialRotation = null;
 
-    private IEnumerable<OnInitialize> toInitialize;
+    private IInitialize[] initializes;
+    private IDie[] dies;
+    private IMove move;
 
     private bool hasBeenBuilded = false;
 
@@ -78,17 +69,24 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     {
         rigidbodyHelper.SetProperties(this);
         effectManager = new EffectManager(this);
-        toInitialize = onInitializes.Append(movement);
-        foreach (IBuild action in onInitializes.Concat(onDeaths.Cast<IBuild>()).Append(movement))
+        foreach (IBuild action in gameObject.GetComponents<IBuild>())
         {
-            action?.OnBuild(this);
+            action.Build(this);
         }
+        LoadComponents();
+    }
+
+    private void LoadComponents()
+    {
+        initializes = gameObject.GetComponents<IInitialize>();
+        dies = gameObject.GetComponents<IDie>();
+        move = gameObject.GetComponent<IMove>();
     }
 
     protected virtual void Update()
     {
         healthPoints.Update(Time.deltaTime);
-        movement?.Move(speedMultiplier);
+        move?.Move(speedMultiplier);
         effectManager.Update(Time.deltaTime);
         foreach (Weapon weapon in weapons)
         {
@@ -108,7 +106,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
             rigidbodyHelper.transform.rotation = (Quaternion)initialRotation;
         healthPoints.Initialize();
         healthPoints.SetDie(Die);
-        foreach (OnInitialize action in toInitialize)
+        foreach (IInitialize action in initializes)
         {
             action?.Initialize();
         }
@@ -153,7 +151,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         explosion.transform.position = rigidbodyHelper.Position;
         explosion.transform.localScale = Vector3.one * onDeathExplosionPrefabScale;
         gameObject.SetActive(false);
-        foreach (OnDeath action in onDeaths)
+        foreach (IDie action in dies)
         {
             action.Die();
         }

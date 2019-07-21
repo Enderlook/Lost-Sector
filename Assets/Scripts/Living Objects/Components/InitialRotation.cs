@@ -2,7 +2,7 @@
 
 namespace LivingObjectAddons
 {
-    public class InitialRotation : OnInitialize
+    public class InitialRotation : MonoBehaviour, IBuild, IInitialize
     {
         [Header("Configuration")]
         [Tooltip("Random rotation between two value.")]
@@ -10,9 +10,8 @@ namespace LivingObjectAddons
 
         private Rigidbody2D thisRigidbody2D;
 
-        public override void OnBuild(LivingObject livingObject) => thisRigidbody2D = livingObject.rigidbodyHelper.GetRigidbody2D();
-
-        public override void Initialize() => thisRigidbody2D.angularVelocity = (float)rotation;
+        void IBuild.Build(LivingObject livingObject) => thisRigidbody2D = livingObject.rigidbodyHelper.GetRigidbody2D();
+        void IInitialize.Initialize() => thisRigidbody2D.angularVelocity = (float)rotation;
     }
 
 }

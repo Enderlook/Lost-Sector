@@ -2,7 +2,7 @@
 
 namespace LivingObjectAddons
 {
-    public class Kamikaze : Movement
+    public class Kamikaze : MonoBehaviour, IBuild, IInitialize, IMove
     {
         [Header("Configuration")]
         [Tooltip("Seconds waited before start accelerating.")]
@@ -15,11 +15,9 @@ namespace LivingObjectAddons
 
         private Rigidbody2D thisRigidbody;
 
-        public override void OnBuild(LivingObject livingObject) => thisRigidbody = livingObject.rigidbodyHelper.GetRigidbody2D();
-
-        public override void Initialize() => isAccelerating = false;
-
-        public override void Move(float speedMultiplier)
+        void IBuild.Build(LivingObject livingObject) => thisRigidbody = livingObject.rigidbodyHelper.GetRigidbody2D();
+        void IInitialize.Initialize() => isAccelerating = false;
+        void IMove.Move(float speedMultiplier)
         {
             if (isAccelerating)
                 thisRigidbody.AddRelativeForce(new Vector2(0, acceleration) * speedMultiplier);
