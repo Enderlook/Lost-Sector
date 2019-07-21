@@ -30,7 +30,7 @@ public class Player : LivingObject
         mousePosition.z = transform.position.z;
 
         // Move
-        Vector2 newPosition = Vector3.MoveTowards(transform.position, mousePosition, moveSpeed * speedMultiplier * Time.deltaTime);
+        Vector2 newPosition = Vector3.MoveTowards(transform.position, mousePosition, moveSpeed * SpeedMultiplier * Time.deltaTime);
         System.Tuple<Vector2, bool> boundaryCheck = Boundary.CheckForBoundaries(newPosition);
         transform.position = boundaryCheck.Item1;
         // Player is punished to try to move outside the screen

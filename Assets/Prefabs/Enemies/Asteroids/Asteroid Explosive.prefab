@@ -59,9 +59,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93f2cc99aedaeaf4eb14bd6dd546f3b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionRadius: 2
-  explosionDamage: 50
+  radius: 2
   rigidbodyHelperGizmos: {fileID: 4216202753804953944}
+  explosionDamage: 50
 --- !u!1001 &1621576272868885887
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -72,7 +72,7 @@ PrefabInstance:
     - target: {fileID: 3171107085224686566, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
       propertyPath: m_Name
-      value: Enemy Asteroid Explosive
+      value: Asteroid Explosive
       objectReference: {fileID: 0}
     - target: {fileID: 3171107085224686564, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
@@ -129,37 +129,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7344715036232705026, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 1.19
-      objectReference: {fileID: 0}
-    - target: {fileID: 3171107084438929868, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300098, guid: 4cf6de76bffe1d649b092af0274ca582,
-        type: 3}
-    - target: {fileID: 1117335959791592195, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.7060988
-      objectReference: {fileID: 0}
-    - target: {fileID: 1117335959791592195, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1.7060988
-      objectReference: {fileID: 0}
-    - target: {fileID: 1294656834588648454, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 1.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4203861797842692847, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
       propertyPath: onDeaths.Array.size
@@ -210,6 +179,37 @@ PrefabInstance:
       propertyPath: onDeaths.Array.data[0]
       value: 
       objectReference: {fileID: 5644937882214427708}
+    - target: {fileID: 7344715036232705026, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107084438929868, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300098, guid: 4cf6de76bffe1d649b092af0274ca582,
+        type: 3}
+    - target: {fileID: 1117335959791592195, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.7060988
+      objectReference: {fileID: 0}
+    - target: {fileID: 1117335959791592195, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1.7060988
+      objectReference: {fileID: 0}
+    - target: {fileID: 1294656834588648454, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4203861797842692847, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3171107084848344101, guid: 926a52539d738a7439a32750206b316e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 926a52539d738a7439a32750206b316e, type: 3}

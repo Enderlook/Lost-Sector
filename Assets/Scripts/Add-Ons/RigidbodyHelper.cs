@@ -26,10 +26,34 @@ public class RigidbodyHelper : MonoBehaviour
     /// </summary>
     /// <returns><see cref="Rigidbody"/> of this <see cref="RigidbodyHelper"/>'s <see cref="gameObject"/>.</returns>
     /// <seealso cref="RigidbodyHelper"/>.
-    public Rigidbody2D GetRigidbody2D()
-    {
-        return gameObject.GetComponent<Rigidbody2D>();
+    public Rigidbody2D Rigidbody2D {
+        get {
+            if (thisRigidbody2D == null)
+                thisRigidbody2D = gameObject.GetComponent<Rigidbody2D>();
+            return thisRigidbody2D;
+        }
+        set => thisRigidbody2D = value;
     }
+    private Rigidbody2D thisRigidbody2D;
+
+    // https://answers.unity.com/questions/711749/slow-time-for-a-single-rigid-body.html
+    private float speedMultiplier = 1;
+    /// <summary>
+    /// Change this value affect the speed of the current and future <seealso cref="Rigidbody2D"/>.
+    /// </summary>
+    public float SpeedMultiplier {
+        get => speedMultiplier;
+        set {
+            Rigidbody2D.mass *= speedMultiplier;
+            Rigidbody2D.velocity /= speedMultiplier;
+            Rigidbody2D.angularVelocity /= speedMultiplier;
+            speedMultiplier = value;
+            Rigidbody2D.mass /= speedMultiplier;
+            Rigidbody2D.velocity *= speedMultiplier;
+            Rigidbody2D.angularVelocity *= speedMultiplier;
+        }
+    }
+
 
     /// <summary>
     /// Current position.
