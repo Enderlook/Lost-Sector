@@ -1757,7 +1757,7 @@ MonoBehaviour:
   difficultyLinearIncrease: 1
   difficultyGeometricalIncrease: 1.1
   difficultyIncreaseInterval: 5
-  healthPack: {fileID: 8501959861086569156, guid: ffa4aa802ec98984fa2024e878b4f9ba,
+  healthPack: {fileID: 535086599481409440, guid: f84cf23a7962e65488b58c3f49368c8c,
     type: 3}
   healthPackSpawnTime: 4
   healthPackSpawnChance: 0.5
