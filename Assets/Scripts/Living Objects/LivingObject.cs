@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
 using System.Linq;
 using LivingObjectAddons;
-using System.Collections.Generic;
+using UnityEngine;
 
 /* https://forum.unity.com/threads/make-child-unaffected-by-parents-rotation.461161/
  * https://stackoverflow.com/questions/52179975/make-child-unaffected-by-parents-rotation-unity
@@ -25,6 +25,9 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     [Tooltip("Should spawn floating damage text on the enemy on collision?")]
     public bool shouldDisplayDamage;
     bool IShouldDisplayDamage.ShouldDisplayDamage => shouldDisplayDamage;
+
+    [Tooltip("Weapons configuration.")]
+    public Weapon[] weapons;
 
     [Header("Setup")]
     [Tooltip("Impact sound.")]
@@ -60,6 +63,13 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
 
     private bool hasBeenBuilded = false;
 
+    private EffectManager effectManager;
+
+    [HideInInspector]
+    public float fireRateMultiplier;
+    [HideInInspector]
+    public float speedMultiplier;
+
     private void Build()
     /* We could have used Awake,
      * but in order to use that we would need to make Initialize public and call it from EnemySpawner through GetComponent.
@@ -67,6 +77,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
      */
     {
         rigidbodyHelper.SetProperties(this);
+        effectManager = new EffectManager(this);
         toInitialize = onInitializes.Append(movement);
         foreach (IBuild action in onInitializes.Concat(onDeaths.Cast<IBuild>()).Append(movement))
         {
@@ -77,7 +88,12 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     protected virtual void Update()
     {
         healthPoints.Update(Time.deltaTime);
-        movement?.Move();
+        movement?.Move(speedMultiplier);
+        effectManager.Update(Time.deltaTime);
+        foreach (Weapon weapon in weapons)
+        {
+            weapon.Recharge(Time.deltaTime);
+        }
     }
 
     /// <summary>
@@ -96,6 +112,8 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         {
             action?.Initialize();
         }
+        fireRateMultiplier = 1;
+        speedMultiplier = 1;
     }
 
     private void OnEnable()
@@ -153,4 +171,10 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         if (floatingTextController != null && (!checkIfPositive || text > 0))
             floatingTextController.SpawnFloatingText(text, textColor);
     }
+
+    /// <summary>
+    /// Add effect to this creature.
+    /// </summary>
+    /// <param name="effect">Effect to add.</param>
+    public void AddEffect(Effect effect) => effectManager.AddEffect(effect);
 }

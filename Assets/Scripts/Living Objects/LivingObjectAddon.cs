@@ -18,6 +18,6 @@ namespace LivingObjectAddons
     }
     public abstract class Movement : OnInitialize
     {
-        public virtual void Move() { }
+        public virtual void Move(float speedMultiplier) { }
     }
 }

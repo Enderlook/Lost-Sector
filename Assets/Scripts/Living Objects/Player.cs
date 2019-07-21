@@ -9,9 +9,6 @@ public class Player : LivingObject
     [Tooltip("Movement speed.")]
     public float moveSpeed;
 
-    [Tooltip("Weapon configuration.")]
-    public Weapon weapon;
-
     [Header("Build")]
     [Tooltip("Shield bar script.")]
     public HealthBar shieldBar;
@@ -33,7 +30,7 @@ public class Player : LivingObject
         mousePosition.z = transform.position.z;
 
         // Move
-        Vector2 newPosition = Vector3.MoveTowards(transform.position, mousePosition, moveSpeed * Time.deltaTime);
+        Vector2 newPosition = Vector3.MoveTowards(transform.position, mousePosition, moveSpeed * speedMultiplier * Time.deltaTime);
         System.Tuple<Vector2, bool> boundaryCheck = Boundary.CheckForBoundaries(newPosition);
         transform.position = boundaryCheck.Item1;
         // Player is punished to try to move outside the screen
@@ -44,8 +41,8 @@ public class Player : LivingObject
         shieldHandler.UpdateColor(shieldPoints.Ratio);
 
         // Shoot
-        if (Input.GetMouseButton(0) && weapon.Recharge(Time.deltaTime))
-            weapon.Shoot(rigidbodyHelper, Instantiate);
+        if (Input.GetMouseButton(0) && weapons[0].CanShoot)
+            weapons[0].Shoot(rigidbodyHelper, Instantiate);
         base.Update();
     }
 

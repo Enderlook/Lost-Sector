@@ -1,5 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &248910431629052755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240840865695367757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a08af33a1a22a4dad3cf09c030efac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnsOnDeath:
+    spawningPoints:
+    - spawnPoint: {fileID: 1240840865855380913}
+      distance:
+        start: 0
+        end: 0
+        isRandom: 0
+    prefabsToSpawn:
+    - prefab: {fileID: 3065380558525474565, guid: 4f499ea6cd4dbcf489d7ed7fd269c742,
+        type: 3}
+      weight: 1
+    amountToSpawn:
+      start: 0.05
+      end: 0
+      isRandom: 0
+    notRandom: 0
 --- !u!70 &492986429906842921
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -83,6 +111,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: healthPoints.startingMax
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: onDeathExplosionPrefabScale
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: impulse.startVector.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: impulse.endVector.x
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: impulse.endVector.y
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: moneySpawnedOnDeath.start
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: moneySpawnedOnDeath.end
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 768387036, guid: 926a52539d738a7439a32750206b316e, type: 3}
       propertyPath: impulse.startVector.y
       value: 70
@@ -127,15 +190,15 @@ PrefabInstance:
       propertyPath: healthPoints.startingMax
       value: 15
       objectReference: {fileID: 0}
-    - target: {fileID: 3171107084848344103, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: audioSource
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7344715036232705026, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107084848344103, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: audioSource
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3171107084438929871, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
@@ -173,47 +236,24 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: healthPoints.startingMax
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: onDeathExplosionPrefabScale
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: impulse.startVector.y
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: impulse.endVector.x
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: impulse.endVector.y
-      value: 700
-      objectReference: {fileID: 0}
-    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: moneySpawnedOnDeath.start
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: moneySpawnedOnDeath.end
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3171107084848344101, guid: 926a52539d738a7439a32750206b316e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 926a52539d738a7439a32750206b316e, type: 3}
+--- !u!1 &1240840865695367757 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3171107085224686566, guid: 926a52539d738a7439a32750206b316e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4411930211143463339}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1240840865855380877 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3171107084848344102, guid: 926a52539d738a7439a32750206b316e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4411930211143463339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1240840865855380913 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3171107084848344090, guid: 926a52539d738a7439a32750206b316e,
     type: 3}
   m_PrefabInstance: {fileID: 4411930211143463339}
   m_PrefabAsset: {fileID: 0}

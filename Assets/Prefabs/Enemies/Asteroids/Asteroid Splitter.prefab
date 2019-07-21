@@ -45,7 +45,7 @@ MonoBehaviour:
   explosionRadius: 1.25
   explosionDamage: 20
   rigidbodyHelperGizmos: {fileID: 1935996649858581771}
---- !u!114 &4765169393410483037
+--- !u!114 &6570954776888686763
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -54,15 +54,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 1935996649700350666}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7a08af33a1a22a4dad3cf09c030efac, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e48f71e88f43bd4b876f2aa0b62a87e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnsOnDeath:
     spawningPoints:
-    - {fileID: 3990780080843788397}
-    - {fileID: 1885657550562902146}
-    - {fileID: 418308888328791060}
-    - {fileID: 4672884716728519536}
+    - spawnPoint: {fileID: 3990780080843788397}
+      distance:
+        start: 0
+        end: 0
+        isRandom: 0
+    - spawnPoint: {fileID: 1885657550562902146}
+      distance:
+        start: 0
+        end: 0
+        isRandom: 0
+    - spawnPoint: {fileID: 418308888328791060}
+      distance:
+        start: 0
+        end: 0
+        isRandom: 0
+    - spawnPoint: {fileID: 4672884716728519536}
+      distance:
+        start: 0
+        end: 0
+        isRandom: 0
     prefabsToSpawn:
     - prefab: {fileID: 3171107085224686566, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
@@ -73,7 +89,7 @@ MonoBehaviour:
     amountToSpawn:
       start: 1
       end: 4
-      isRandom: 0
+      isRandom: 1
     notRandom: 0
 --- !u!1 &5393303838719322650
 GameObject:
@@ -313,6 +329,56 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: onDeaths.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: healthPoints.startingMax
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: relativeImpactDamage
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: impulse.endVector.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: impulse.endVector.y
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: moneySpawnedOnDeath.start
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: moneySpawnedOnDeath.end
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: onDeaths.Array.data[0]
+      value: 
+      objectReference: {fileID: 3588456094741467652}
+    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: onDeathExplosionPrefabScale
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: onDeaths.Array.data[1]
+      value: 
+      objectReference: {fileID: 6570954776888686763}
     - target: {fileID: 7344715036232705026, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -364,56 +430,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: onDeaths.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: healthPoints.startingMax
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: relativeImpactDamage
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: impulse.endVector.x
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: impulse.endVector.y
-      value: 125
-      objectReference: {fileID: 0}
-    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: moneySpawnedOnDeath.start
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: moneySpawnedOnDeath.end
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: onDeaths.Array.data[0]
-      value: 
-      objectReference: {fileID: 3588456094741467652}
-    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: onDeathExplosionPrefabScale
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: onDeaths.Array.data[1]
-      value: 
-      objectReference: {fileID: 4765169393410483037}
     m_RemovedComponents:
     - {fileID: 3171107084848344101, guid: 926a52539d738a7439a32750206b316e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 926a52539d738a7439a32750206b316e, type: 3}

@@ -111,6 +111,12 @@ public class Weapon : IProjectileConfiguration
 
     private float cooldownTime = 0f;
 
+    public bool CanShoot {
+        get {
+            return cooldownTime <= 0f;
+        }
+    }
+
     /// <summary>
     /// Reduce <see cref="cooldownTime"/> time and checks if the weapon's <see cref="cooldownTime"/> is over.
     /// </summary>
@@ -152,7 +158,7 @@ public class Weapon : IProjectileConfiguration
     /// <param name="Instantiate">Instantiate UnityEngine method.</param>
     /// <param name="deltaTime"><see cref="Time.deltaTime"/></param>
     /// <returns><see langword="true"/> if the weapon shoot, <see langword="false"/> if it's still on cooldown.</returns>
-    public bool TryShoot(RigidbodyHelper rigidbodyHelper, System.Func<GameObject, Transform, GameObject> Instantiate, float deltaTime)
+    public bool TryShoot(RigidbodyHelper rigidbodyHelper, System.Func<GameObject, Transform, GameObject> Instantiate, float deltaTime = 0)
     {
         if (Recharge(deltaTime))
         {
