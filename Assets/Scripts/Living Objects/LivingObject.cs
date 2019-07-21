@@ -1,4 +1,4 @@
-using LivingObjectAddons;
+﻿using LivingObjectAddons;
 using UnityEngine;
 
 /* https://forum.unity.com/threads/make-child-unaffected-by-parents-rotation.461161/
@@ -24,9 +24,6 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     public bool shouldDisplayDamage;
     bool IShouldDisplayDamage.ShouldDisplayDamage => shouldDisplayDamage;
 
-    [Tooltip("Weapons configuration.")]
-    public Weapon[] weapons;
-
     [Header("Setup")]
     [Tooltip("Impact sound.")]
     public Sound impactSound;
@@ -51,6 +48,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     private IInitialize[] initializes;
     private IDie[] dies;
     private IMove move;
+    protected IWeapon[] weapons;
 
     private bool hasBeenBuilded = false;
 
@@ -81,6 +79,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         initializes = gameObject.GetComponents<IInitialize>();
         dies = gameObject.GetComponents<IDie>();
         move = gameObject.GetComponent<IMove>();
+        weapons = gameObject.GetComponents<IWeapon>();
     }
 
     protected virtual void Update()
@@ -88,7 +87,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         healthPoints.Update(Time.deltaTime);
         move?.Move(speedMultiplier);
         effectManager.Update(Time.deltaTime);
-        foreach (Weapon weapon in weapons)
+        foreach (IWeapon weapon in weapons)
         {
             weapon.Recharge(Time.deltaTime);
         }

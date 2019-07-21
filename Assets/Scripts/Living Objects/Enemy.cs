@@ -25,9 +25,9 @@ public class Enemy : LivingObject
 
     protected override void Update()
     {
-        foreach(Weapon weapon in weapons)
+        foreach(LivingObjectAddons.IWeapon weapon in weapons)
         {
-            weapon?.TryShoot(rigidbodyHelper, Instantiate, Time.deltaTime);
+            weapon?.TryShoot(Time.deltaTime);
         }
         base.Update();
     }
