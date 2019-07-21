@@ -87,7 +87,7 @@ public class RigidbodyHelper : MonoBehaviour
     }
 
     /// <summary>
-    /// Whenever if the opposite <seealso cref="RigidbodyHelper"/> should display or not the floating text when receive damage..<br/>
+    /// Whenever if the opposite <seealso cref="RigidbodyHelper"/> should display or not the floating text when receive damage.<br/>
     /// This property is passed as <code>displayText</code> parameter of <seealso cref=">TakeDamage(float amount, bool displayText = false)"/> in the opposite <seealso cref="RigidbodyHelper"/>.
     /// </summary>
     /// <returns>If damage should be displayed using a <seealso cref="FloatingText"/>.</returns>
