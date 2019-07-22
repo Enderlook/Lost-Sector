@@ -9,20 +9,14 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration
 
     private IMelee melee;
     IMelee IRigidbodyHelperConfiguration.Melee => melee;
+    
+    void IRigidbodyHelperConfiguration.TakeDamage(float amount, bool displayDamage) => Destroy(gameObject);
 
+    bool IRigidbodyHelperConfiguration.IsImpactDamageRelativeToImpulse => false;    
+    
     private void Awake() => melee = gameObject.GetComponent<IMelee>();
-
-    private void Start()
-    {
-        rigidbodyHelper.SetProperties(this);
-    }
-
-    void IRigidbodyHelperConfiguration.TakeDamage(float amount, bool displayDamage)
-    {
-        // We are a bullet, we don't have HP... yet
-        Destroy(gameObject);
-    }
-
+    private void Start() => rigidbodyHelper.SetProperties(this);
+    
     /// <summary>
     /// Configure the projectile properties. Mandatory.
     /// </summary>

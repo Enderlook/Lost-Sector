@@ -39,6 +39,33 @@ namespace LivingObjectAddons
         void IBuild.Build(LivingObject livingObject) => rigidbodyHelper = livingObject.rigidbodyHelper;
 
         /// <summary>
+        [Tooltip("Should spawn floating damage text on the enemy on collision?")]
+        public bool shouldDisplayDamage;
+        bool IShouldDisplayDamage.ShouldDisplayDamage {
+            get {
+                return shouldDisplayDamage;
+            }
+        }
+
+        private float cooldownTime = 0f;
+
+        public bool CanShoot => cooldownTime <= 0f;
+
+        void IBuild.Build(LivingObject livingObject) => rigidbodyHelper = livingObject.rigidbodyHelper;
+
+        /// <summary>
+        /// Reduce <see cref="cooldownTime"/> time and checks if the weapon's <see cref="cooldownTime"/> is over.
+        /// </summary>
+        /// <param name="deltaTime"><see cref="Time.deltaTime"/></param>
+        /// <returns><see langword="true"/> if the weapon is ready to shoot, <see langword="false"/> if it's on cooldown.</returns>
+        public bool Recharge(float deltaTime) => (cooldownTime -= deltaTime) <= 0f;
+
+        /// <summary>
+        /// Reset <see cref="cooldownTime"/> time to maximum.
+        /// </summary>
+        public void ResetCooldown() => cooldownTime = 1 / firerate;
+
+        /// <summary>
         /// Generate an instance of a projectile an shoot it.<br/>
         /// In addition, cooldown is reseted and a shooting sound is played.<br/>
         /// This method forces to shoot even when the weapon is still on cooldown.

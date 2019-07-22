@@ -14,7 +14,7 @@ namespace LivingObjectAddons
         void IDie.Die() => spawnsOnDeath.SpawnPrefabs(MonoBehaviour.Instantiate);
 
         /// <summary>
-        ///  Set additional spawn instructions used when a prefab is instantiated.
+        /// Set additional spawn instructions used when a prefab is instantiated.
         /// </summary>
         /// <param name="spawned"><seealso cref="GameObject"/> recently spawned.</param>
         /// <param name="spawningTransform"><seealso cref="Transform"/> point where it's being spawned</param>

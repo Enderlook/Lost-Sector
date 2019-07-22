@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class RigidbodyHelper : MonoBehaviour
 {
     [Header("Setup")]
@@ -16,10 +17,7 @@ public class RigidbodyHelper : MonoBehaviour
     /// </summary>
     /// <param name="handler">Configuration of this <see cref="RigidbodyHelper"/></param>
     /// <seealso cref="RigidbodyHelper"/>
-    public void SetProperties(IRigidbodyHelperConfiguration configuration)
-    {
-        entity = configuration;
-    }
+    public void SetProperties(IRigidbodyHelperConfiguration configuration) => entity = configuration;
 
     /// <summary>
     /// Return <see cref="Rigidbody"/> of the gameObject which has this script.
@@ -115,7 +113,7 @@ public class RigidbodyHelper : MonoBehaviour
     }
 
     /// <summary>
-    /// Whenever if the opposite <seealso cref="RigidbodyHelper"/> should display or not the floating text when receive damage..<br/>
+    /// Whenever if the opposite <seealso cref="RigidbodyHelper"/> should display or not the floating text when receive damage.<br/>
     /// This property is passed as <code>displayText</code> parameter of <seealso cref=">TakeDamage(float amount, bool displayText = false)"/> in the opposite <seealso cref="RigidbodyHelper"/>.
     /// </summary>
     /// <returns>If damage should be displayed using a <seealso cref="FloatingText"/>.</returns>
@@ -138,12 +136,14 @@ public class RigidbodyHelper : MonoBehaviour
         else
             return entity.Melee.ImpactDamage;
     }
-
+    
+#if UNITY_EDITOR
     private void OnValidate()
     {
         if (gameObject.GetComponent<Rigidbody2D>() == null)
             Debug.LogWarning($"Gameobject {gameObject.name} lacks of rigidbody2D component.");
     }
+#endif
 }
 
 public interface IRigidbodyHelperConfiguration
