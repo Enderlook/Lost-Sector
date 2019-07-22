@@ -17,10 +17,7 @@ public class RigidbodyHelper : MonoBehaviour
     /// </summary>
     /// <param name="handler">Configuration of this <see cref="RigidbodyHelper"/></param>
     /// <seealso cref="RigidbodyHelper"/>
-    public void SetProperties(IRigidbodyHelperConfiguration configuration)
-    {
-        entity = configuration;
-    }
+    public void SetProperties(IRigidbodyHelperConfiguration configuration) => entity = configuration;
 
     /// <summary>
     /// Return <see cref="Rigidbody"/> of the gameObject which has this script.
