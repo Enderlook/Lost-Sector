@@ -33,7 +33,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     private IInitialize[] initializes;
     private IDie[] dies;
     private IMove move;
-    protected IWeapon[] weapons;
+    protected Weapon[] weapons;
     private IMelee melee;
     IMelee IRigidbodyHelperConfiguration.Melee => melee;
 
@@ -69,7 +69,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         initializes = gameObject.GetComponents<IInitialize>();
         dies = gameObject.GetComponents<IDie>();
         move = gameObject.GetComponent<IMove>();
-        weapons = gameObject.GetComponents<IWeapon>();
+        weapons = gameObject.GetComponents<Weapon>();
         melee = gameObject.GetComponent<IMelee>();
     }
 
@@ -78,7 +78,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         healthPoints.Update(Time.deltaTime);
         move?.Move(SpeedMultiplier);
         effectManager.Update(Time.deltaTime);
-        foreach (IWeapon weapon in weapons)
+        foreach (Weapon weapon in weapons)
         {
             weapon.Recharge(Time.deltaTime);
         }
