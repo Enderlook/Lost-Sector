@@ -39,11 +39,7 @@ namespace LivingObjectAddons
 
         private float cooldownTime = 0f;
 
-        public bool CanShoot {
-            get {
-                return cooldownTime <= 0f;
-            }
-        }
+        public bool CanShoot => cooldownTime <= 0f;
 
         void IBuild.Build(LivingObject livingObject) => rigidbodyHelper = livingObject.rigidbodyHelper;
 
@@ -52,18 +48,12 @@ namespace LivingObjectAddons
         /// </summary>
         /// <param name="deltaTime"><see cref="Time.deltaTime"/></param>
         /// <returns><see langword="true"/> if the weapon is ready to shoot, <see langword="false"/> if it's on cooldown.</returns>
-        public bool Recharge(float deltaTime)
-        {
-            return (cooldownTime -= deltaTime) <= 0f;
-        }
+        public bool Recharge(float deltaTime) => (cooldownTime -= deltaTime) <= 0f;
 
         /// <summary>
         /// Reset <see cref="cooldownTime"/> time to maximum.
         /// </summary>
-        public void ResetCooldown()
-        {
-            cooldownTime = 1 / firerate;
-        }
+        public void ResetCooldown() => cooldownTime = 1 / firerate;
 
         /// <summary>
         /// Generate an instance of a projectile an shoot it.<br/>

@@ -19,19 +19,10 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration
     [Tooltip("RigidbodyHelper script.")]
     public RigidbodyHelper rigidbodyHelper;
 
-    private void Start()
-    {
-        rigidbodyHelper.SetProperties(this);
-    }
+    private void Start() => rigidbodyHelper.SetProperties(this);
+    void IRigidbodyHelperConfiguration.TakeDamage(float amount, bool displayDamage) => Destroy(gameObject);
 
     bool IRigidbodyHelperConfiguration.IsImpactDamageRelativeToImpulse => false;
-
-    void IRigidbodyHelperConfiguration.TakeDamage(float amount, bool displayDamage)
-    {
-        // We are a bullet, we don't have HP... yet
-        Destroy(gameObject);
-    }
-
     /// <summary>
     /// Configure the projectile properties. Mandatory.
     /// </summary>
