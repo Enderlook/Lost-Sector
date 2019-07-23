@@ -16,6 +16,5 @@ namespace LivingObjectAddons
                 (strength, maxDuration, duration, initialValue) => initialValue / (1 + strength * Mathf.Pow(duration / maxDuration, .5f))
             ));
         }
-
     }
 }
