@@ -40,9 +40,6 @@ public class Player : LivingObject
         shieldPoints.Update(Time.deltaTime);
         shieldHandler.UpdateColor(shieldPoints.Ratio);
 
-        // Shoot
-        if (Input.GetMouseButton(0) && weapons[0].CanShoot)
-            weapons[0].Shoot();
         base.Update();
     }
 
