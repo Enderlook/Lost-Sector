@@ -2,11 +2,11 @@ using UnityEngine;
 
 namespace LivingObjectAddons
 {
-    public class SimpleWeapon : Weapon, IProjectileConfiguration, IBuild
+    public class SimpleWeapon : WeaponWithSound, IProjectileConfiguration
     {
         [Header("Configuration")]
         [Tooltip("Damage on hit.")]
-        public float damageOnHit = 1;
+        public float damageOnHit;
         float IMelee.ImpactDamage { get => damageOnHit; set => damageOnHit = value; }
 
         [Tooltip("Speed.")]
@@ -26,19 +26,11 @@ namespace LivingObjectAddons
         public Transform shootingPosition;
         [Tooltip("Projectile prefab.")]
         public GameObject projectilePrefab;
-        [Tooltip("Shooting sound.")]
-        public Sound shootingSound;
         [Tooltip("Layer mask of the projectile")]
         public LayerMask layer;
         int IProjectileConfiguration.Layer => layer.ToLayer();
-
-        private RigidbodyHelper rigidbodyHelper;
         
-        Vector3 IProjectileConfiguration.SpawnPosition => shootingPosition.position;
-
-        private float cooldownTime = 0f;
-
-        void IBuild.Build(LivingObject livingObject) => rigidbodyHelper = livingObject.rigidbodyHelper;        
+        Vector3 IProjectileConfiguration.SpawnPosition => shootingPosition.position;    
 
         /// <summary>
         /// Generate an instance of a projectile an shoot it.<br/>
@@ -48,12 +40,11 @@ namespace LivingObjectAddons
         /// <seealso cref="TryShoot(float)"/>
         public override void Shoot()
         {
-            ResetCooldown();
             GameObject projectile = Instantiate(projectilePrefab, Global.projectilesParent);
             // Just to be sure. We don't really need to set rotation for our game
             projectile.transform.rotation = shootingPosition.rotation;
             projectile.GetComponent<Projectile>().SetProjectileProperties(this);
-            shootingSound.Play(rigidbodyHelper.audioSource, 1);
+            base.Shoot();
         }
 
 #if UNITY_EDITOR
@@ -65,14 +56,36 @@ namespace LivingObjectAddons
 #endif
     }
     
+    public abstract class WeaponWithSound : Weapon, IBuild
+    {
+        [Header("Setup")]
+        [Tooltip("Shooting sound.")]
+        public Sound shootingSound;
+
+        protected RigidbodyHelper rigidbodyHelper;
+
+        void IBuild.Build(LivingObject livingObject) => rigidbodyHelper = livingObject.rigidbodyHelper;
+
+        public override void Shoot()
+        {
+            shootingSound.Play(rigidbodyHelper.audioSource, 1);
+            base.Shoot();
+        }
+    }
+
     public abstract class Weapon : MonoBehaviour
     {
+        [Header("Configuration")]
         [Tooltip("Firerate (shoots per second).")]
         public float firerate = 1;
         private float cooldownTime = 0f;
+
+        /// <summary>
+        /// Whenever it can shoot or is still in cooldown.
+        /// </summary>
         public bool CanShoot => cooldownTime <= 0;
 
-        public abstract void Shoot();
+        public virtual void Shoot() => ResetCooldown();
 
         /// <summary>
         /// Try to shoot a projectile. It will check for the <see cref="cooldownTime"/>, and if possible, shoot.

@@ -287,6 +287,7 @@ GameObject:
   - component: {fileID: 118295645}
   - component: {fileID: 118295646}
   - component: {fileID: 118295647}
+  - component: {fileID: 118295648}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -510,13 +511,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firerate: 2
-  damageOnHit: 25
-  speed: 350
-  isDamageRelativeToImpulse: 0
-  shouldDisplayDamage: 1
-  shootingPosition: {fileID: 1623832068}
-  projectilePrefab: {fileID: 6335491896661982094, guid: 26f1086e063f186408e18e43bf41386d,
-    type: 3}
   shootingSound:
     audioClip: {fileID: 8300000, guid: 5a8c55f41a396a74894ec2e9af446247, type: 3}
     volume:
@@ -524,6 +518,13 @@ MonoBehaviour:
     pitch:
     - 0.8
     - 1.2
+  damageOnHit: 25
+  speed: 350
+  isDamageRelativeToImpulse: 0
+  shouldDisplayDamage: 1
+  shootingPosition: {fileID: 1623832068}
+  projectilePrefab: {fileID: 6335491896661982094, guid: 26f1086e063f186408e18e43bf41386d,
+    type: 3}
   layer:
     serializedVersion: 2
     m_Bits: 0
@@ -566,6 +567,36 @@ MonoBehaviour:
     key: 0
     button: 0
     canBeHoldDown: 1
+  - weapon: {fileID: 118295648}
+    key: 32
+    button: -1
+    canBeHoldDown: 0
+--- !u!114 &118295648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118295639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa4dbd0a9cd9d04b8ee0f1e9ccfa2b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firerate: 10
+  shootingSound:
+    audioClip: {fileID: 8300000, guid: ffc8627e04cd5d94485d6447ce4bbf99, type: 3}
+    volume:
+    - 1
+    pitch:
+    - 0.8
+    - 1.2
+  damageOnHit: 40
+  forceOnHit: 20
+  radius: 2.5
+  shouldDisplayDamage: 1
+  shockwaveSprite: {fileID: 21300000, guid: 821d0f8c70fdba547bb67e2d62a77263, type: 3}
+  shootingPosition: {fileID: 574265758}
 --- !u!1 &128807550
 GameObject:
   m_ObjectHideFlags: 0
