@@ -78,17 +78,22 @@ namespace LivingObjectAddons
         [Header("Configuration")]
         [Tooltip("Firerate (shoots per second).")]
         public float firerate = 1;
-        private float cooldownTime = 0f;
 
         /// <summary>
-        /// Cooldown percent from 0 to 1.
+        /// Current cooldown time.
         /// </summary>
-        public float CooldownPercent => cooldownTime / (1 / firerate);
+        public float CooldownTime => cooldownTime;
+        protected float cooldownTime = 0f;
+
+        /// <summary>
+        /// Cooldown percent from 0 to 1. When 0, it's ready to shoot.
+        /// </summary>
+        public float CooldownPercent => Mathf.Clamp01(cooldownTime / (1 / firerate));
 
         /// <summary>
         /// Whenever it can shoot or is still in cooldown.
         /// </summary>
-        public bool CanShoot => cooldownTime <= 0;
+        public virtual bool CanShoot => cooldownTime <= 0;
 
         public virtual void Shoot() => ResetCooldown();
 
@@ -118,6 +123,10 @@ namespace LivingObjectAddons
         /// </summary>
         /// <param name="deltaTime"><see cref="Time.deltaTime"/></param>
         /// <returns><see langword="true"/> if the weapon is ready to shoot, <see langword="false"/> if it's on cooldown.</returns>
-        public bool Recharge(float deltaTime) => (cooldownTime -= deltaTime) <= 0f;
+        public bool Recharge(float deltaTime)
+        {
+            cooldownTime -= deltaTime;
+            return CanShoot;
+        }
     }
 }
