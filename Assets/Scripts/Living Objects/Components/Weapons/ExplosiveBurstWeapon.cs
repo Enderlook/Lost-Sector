@@ -29,9 +29,10 @@ namespace LivingObjectAddons
                 Rigidbody2D rigidbody2D = collider.attachedRigidbody;
                 if (rigidbody2D != rigidbodyHelper.Rigidbody2D)
                 {
-                    float power = CalculatePower(collider);
-                    Push(rigidbody2D, power * forceOnHit);
-                    Hurt(rigidbody2D, power * damageOnHit);
+                    float chargeFactor = CalculateChargeFactor();
+                    float distanceFactor = CalculateDistanceFactor(collider);
+                    Push(rigidbody2D, distanceFactor * forceOnHit * chargeFactor);
+                    Hurt(rigidbody2D, distanceFactor * damageOnHit * chargeFactor);
                 }
             }
             base.Shoot();
@@ -55,8 +56,11 @@ namespace LivingObjectAddons
 
         private void Push(Rigidbody2D target, float force) => target.AddForce(-(shootingPosition.position - target.transform.position) * force);
 
-        private float CalculatePower(Collider2D target) => (rigidbodyHelper.Rigidbody2D.Distance(target).distance / radius) * .5f + .5f;
+        private float CalculateDistanceFactor(Collider2D target) => (rigidbodyHelper.Rigidbody2D.Distance(target).distance / radius) * .5f + .5f;
 
+        private float CalculateChargeFactor() => CooldownPercent <= 0 ? 1 : (1 - CooldownPercent) * .5f + .25f;
+
+        public override bool CanShoot => cooldownTime <= (1 / firerate) / 2;
 
 #if UNITY_EDITOR
         private void OnDrawGizmos()
