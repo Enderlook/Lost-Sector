@@ -81,6 +81,11 @@ namespace LivingObjectAddons
         private float cooldownTime = 0f;
 
         /// <summary>
+        /// Cooldown percent from 0 to 1.
+        /// </summary>
+        public float CooldownPercent => cooldownTime / (1 / firerate);
+
+        /// <summary>
         /// Whenever it can shoot or is still in cooldown.
         /// </summary>
         public bool CanShoot => cooldownTime <= 0;
