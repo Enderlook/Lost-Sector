@@ -286,6 +286,7 @@ GameObject:
   - component: {fileID: 118295640}
   - component: {fileID: 118295645}
   - component: {fileID: 118295646}
+  - component: {fileID: 118295647}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -508,8 +509,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba9d17193cac90c408c5e452ec2ebcd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageOnHit: 25
   firerate: 2
+  damageOnHit: 25
   speed: 350
   isDamageRelativeToImpulse: 0
   shouldDisplayDamage: 1
@@ -548,6 +549,23 @@ MonoBehaviour:
     pitch:
     - 0.8
     - 1.2
+--- !u!114 &118295647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118295639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61c4ad91610afb4e864a9836d7a9ca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - weapon: {fileID: 118295645}
+    key: 0
+    button: 0
+    canBeHoldDown: 1
 --- !u!1 &128807550
 GameObject:
   m_ObjectHideFlags: 0
