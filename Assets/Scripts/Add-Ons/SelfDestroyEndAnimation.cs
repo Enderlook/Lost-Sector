@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class SelfDestroyEndAnimation : MonoBehaviour
 {
     private void Start()
