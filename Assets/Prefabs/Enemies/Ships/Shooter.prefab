@@ -14,34 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cruiserSpeed: {x: 0, y: 20}
   accelerationSpeed: 5
---- !u!114 &8857318500456853168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6925946388057331776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7a08af33a1a22a4dad3cf09c030efac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnsOnDeath:
-    spawningPoints:
-    - spawnPoint: {fileID: 6925946387881789372}
-      distance:
-        start: 0
-        end: 0
-        isRandom: 0
-    prefabsToSpawn:
-    - prefab: {fileID: 3321478458202144441, guid: e6be4adf8a372a447a4afc4230d2a53f,
-        type: 3}
-      weight: 1
-    amountToSpawn:
-      start: 0.2
-      end: 0
-      isRandom: 0
-    notRandom: 0
 --- !u!114 &8623705778090590418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,6 +43,34 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   shouldDisplayDamage: 0
+--- !u!114 &8857318500456853168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6925946388057331776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a08af33a1a22a4dad3cf09c030efac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnsOnDeath:
+    spawningPoints:
+    - spawnPoint: {fileID: 6925946387881789372}
+      distance:
+        start: 0
+        end: 0
+        isRandom: 0
+    prefabsToSpawn:
+    - prefab: {fileID: 3321478458202144441, guid: e6be4adf8a372a447a4afc4230d2a53f,
+        type: 3}
+      weight: 1
+    amountToSpawn:
+      start: 0.2
+      end: 0
+      isRandom: 0
+    notRandom: 0
 --- !u!60 &4644564590116679955
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -457,6 +457,11 @@ PrefabInstance:
     - target: {fileID: 914912105844178268, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7600557256923828307, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: damageOnHit
       value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents:

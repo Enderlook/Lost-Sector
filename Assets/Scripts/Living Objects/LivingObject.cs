@@ -1,4 +1,4 @@
-﻿using LivingObjectAddons;
+using LivingObjectAddons;
 using UnityEngine;
 
 /* https://forum.unity.com/threads/make-child-unaffected-by-parents-rotation.461161/
@@ -13,21 +13,6 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     [Header("Configuration")]
     [Tooltip("Health.")]
     public HealthPoints healthPoints;
-
-    [Tooltip("Relative damage on impact based on force.")]
-    public float relativeImpactDamage;
-    float IRigidbodyHelperConfiguration.ImpactDamage => relativeImpactDamage;
-
-    bool IRigidbodyHelperConfiguration.IsImpactDamageRelativeToImpulse => true;
-
-    [Tooltip("Should spawn floating damage text on the enemy on collision?")]
-    public bool shouldDisplayDamage;
-    bool IShouldDisplayDamage.ShouldDisplayDamage => shouldDisplayDamage;
-
-    [Header("Setup")]
-    [Tooltip("Impact sound.")]
-    public Sound impactSound;
-    Sound IRigidbodyHelperConfiguration.ImpactSound => impactSound;
 
     [Tooltip("Die sound.")]
     public Sound dieSound;
@@ -48,7 +33,9 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     private IInitialize[] initializes;
     private IDie[] dies;
     private IMove move;
-    protected IWeapon[] weapons;
+    protected Weapon[] weapons;
+    private IMelee melee;
+    IMelee IRigidbodyHelperConfiguration.Melee => melee;
 
     private bool hasBeenBuilded = false;
 
@@ -60,6 +47,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         get => rigidbodyHelper.SpeedMultiplier;
         set => rigidbodyHelper.SpeedMultiplier = value;
     }
+
 
     private void Build()
     /* We could have used Awake,
@@ -81,7 +69,8 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         initializes = gameObject.GetComponents<IInitialize>();
         dies = gameObject.GetComponents<IDie>();
         move = gameObject.GetComponent<IMove>();
-        weapons = gameObject.GetComponents<IWeapon>();
+        weapons = gameObject.GetComponents<Weapon>();
+        melee = gameObject.GetComponent<IMelee>();
     }
 
     protected virtual void Update()
@@ -89,7 +78,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         healthPoints.Update(Time.deltaTime);
         move?.Move(SpeedMultiplier);
         effectManager.Update(Time.deltaTime);
-        foreach (IWeapon weapon in weapons)
+        foreach (Weapon weapon in weapons)
         {
             weapon.Recharge(Time.deltaTime);
         }
