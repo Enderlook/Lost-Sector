@@ -17,7 +17,7 @@ namespace LivingObjectAddons
         private bool hasAlreadyBeenUsed = false;
 
         void IBuild.Build(LivingObject livingObject) => thisRigidbody2D = livingObject.rigidbodyHelper.Rigidbody2D;
-        void IDie.Die()
+        void IDie.Die(bool suicide)
         {
             if (!hasAlreadyBeenUsed)
             {

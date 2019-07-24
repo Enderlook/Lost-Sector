@@ -227,7 +227,8 @@ public class Sound
     /// <param name="volumeMultiplier">Volume of the sound, from 0 to 1.</param>
     public void Play(AudioSource audioSource, float volumeMultiplier)
     {
-        if (Settings.IsSoundActive)
+        // audioSource != null shouldn't be used but it's to prevents a bug
+        if (Settings.IsSoundActive && audioSource != null)
         {
             audioSource.pitch = GetPitch();
             audioSource.PlayOneShot(audioClip, GetVolume() * volumeMultiplier);
