@@ -1,16 +1,25 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace LivingObjectAddons
 {
-    public class SimpleWeapon : MonoBehaviour, IProjectileConfiguration, IBuild, IWeapon
+    public class SimpleWeapon : Weapon, IProjectileConfiguration, IBuild
     {
         [Header("Configuration")]
         [Tooltip("Damage on hit.")]
         public float damageOnHit = 1;
-        [Tooltip("Firerate (shoots per second).")]
-        public float firerate = 1;
+        float IMelee.ImpactDamage { get => damageOnHit; set => damageOnHit = value; }
+
         [Tooltip("Speed.")]
         public float speed = 1;
+        float IProjectileConfiguration.Speed => speed;
+
+        [Tooltip("Relative damage on impact based on force.")]
+        public bool isDamageRelativeToImpulse;
+        bool IMelee.IsImpactDamageRelativeToImpulse { get => isDamageRelativeToImpulse; set => isDamageRelativeToImpulse = value; }
+
+        [Tooltip("Should spawn floating damage text on the enemy on collision?")]
+        public bool shouldDisplayDamage;
+        bool IShouldDisplayDamage.ShouldDisplayDamage { get => shouldDisplayDamage; set => shouldDisplayDamage = value; }
 
         [Header("Setup")]
         [Tooltip("Transform point where projectiles will be spawn.")]
@@ -21,39 +30,15 @@ namespace LivingObjectAddons
         public Sound shootingSound;
         [Tooltip("Layer mask of the projectile")]
         public LayerMask layer;
-
-        private RigidbodyHelper rigidbodyHelper;
-
-        Vector3 IProjectileConfiguration.SpawnPosition => shootingPosition.position;
-        float IProjectileConfiguration.Damage => damageOnHit;
-        float IProjectileConfiguration.Speed => speed;
         int IProjectileConfiguration.Layer => layer.ToLayer();
 
-        [Tooltip("Should spawn floating damage text on the enemy on collision?")]
-        public bool shouldDisplayDamage;
-        bool IShouldDisplayDamage.ShouldDisplayDamage {
-            get {
-                return shouldDisplayDamage;
-            }
-        }
+        private RigidbodyHelper rigidbodyHelper;
+        
+        Vector3 IProjectileConfiguration.SpawnPosition => shootingPosition.position;
 
         private float cooldownTime = 0f;
 
-        public bool CanShoot => cooldownTime <= 0f;
-
-        void IBuild.Build(LivingObject livingObject) => rigidbodyHelper = livingObject.rigidbodyHelper;
-
-        /// <summary>
-        /// Reduce <see cref="cooldownTime"/> time and checks if the weapon's <see cref="cooldownTime"/> is over.
-        /// </summary>
-        /// <param name="deltaTime"><see cref="Time.deltaTime"/></param>
-        /// <returns><see langword="true"/> if the weapon is ready to shoot, <see langword="false"/> if it's on cooldown.</returns>
-        public bool Recharge(float deltaTime) => (cooldownTime -= deltaTime) <= 0f;
-
-        /// <summary>
-        /// Reset <see cref="cooldownTime"/> time to maximum.
-        /// </summary>
-        public void ResetCooldown() => cooldownTime = 1 / firerate;
+        void IBuild.Build(LivingObject livingObject) => rigidbodyHelper = livingObject.rigidbodyHelper;        
 
         /// <summary>
         /// Generate an instance of a projectile an shoot it.<br/>
@@ -61,7 +46,7 @@ namespace LivingObjectAddons
         /// This method forces to shoot even when the weapon is still on cooldown.
         /// </summary>
         /// <seealso cref="TryShoot(float)"/>
-        public void Shoot()
+        public override void Shoot()
         {
             ResetCooldown();
             GameObject projectile = Instantiate(projectilePrefab, Global.projectilesParent);
@@ -70,6 +55,24 @@ namespace LivingObjectAddons
             projectile.GetComponent<Projectile>().SetProjectileProperties(this);
             shootingSound.Play(rigidbodyHelper.audioSource, 1);
         }
+
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            if (1 < ((IProjectileConfiguration)this).Layer && ((IProjectileConfiguration)this).Layer < 31)
+                Debug.LogWarning($"The field {nameof(layer)} should only contain a single layer.");
+        }
+#endif
+    }
+    
+    public abstract class Weapon : MonoBehaviour
+    {
+        [Tooltip("Firerate (shoots per second).")]
+        public float firerate = 1;
+        private float cooldownTime = 0f;
+        public bool CanShoot => cooldownTime <= 0;
+
+        public abstract void Shoot();
 
         /// <summary>
         /// Try to shoot a projectile. It will check for the <see cref="cooldownTime"/>, and if possible, shoot.
@@ -86,20 +89,17 @@ namespace LivingObjectAddons
             return false;
         }
 
-#if UNITY_EDITOR
-        private void OnValidate()
-        {
-            if (1 < ((IProjectileConfiguration)this).Layer && ((IProjectileConfiguration)this).Layer < 31)
-                Debug.LogWarning($"The field {nameof(layer)} should only contain a single layer.");
-        }
-#endif
-    }
-    public interface IWeapon
-    {
-        bool CanShoot { get; }
-        void Shoot();
-        bool TryShoot(float deltaTime);
-        void ResetCooldown();
-        bool Recharge(float deltaTime);
+
+        /// <summary>
+        /// Reset <see cref="cooldownTime"/> time to maximum.
+        /// </summary>
+        public void ResetCooldown() => cooldownTime = 1 / firerate;
+
+        /// <summary>
+        /// Reduce <see cref="cooldownTime"/> time and checks if the weapon's <see cref="cooldownTime"/> is over.
+        /// </summary>
+        /// <param name="deltaTime"><see cref="Time.deltaTime"/></param>
+        /// <returns><see langword="true"/> if the weapon is ready to shoot, <see langword="false"/> if it's on cooldown.</returns>
+        public bool Recharge(float deltaTime) => (cooldownTime -= deltaTime) <= 0f;
     }
 }

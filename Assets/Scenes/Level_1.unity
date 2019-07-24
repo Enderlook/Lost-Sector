@@ -285,6 +285,7 @@ GameObject:
   - component: {fileID: 118295641}
   - component: {fileID: 118295640}
   - component: {fileID: 118295645}
+  - component: {fileID: 118295646}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -453,15 +454,6 @@ MonoBehaviour:
     canRegenerate: 0
     regenerateRate: 10
     regenerationDelay: 3
-  relativeImpactDamage: 35
-  shouldDisplayDamage: 1
-  impactSound:
-    audioClip: {fileID: 8300000, guid: 0ba2d0a93ab44744e99f0c0520803840, type: 3}
-    volume:
-    - 1
-    pitch:
-    - 0.8
-    - 1.2
   dieSound:
     audioClip: {fileID: 8300000, guid: 5a8c55f41a396a74894ec2e9af446247, type: 3}
     volume:
@@ -519,6 +511,8 @@ MonoBehaviour:
   damageOnHit: 25
   firerate: 2
   speed: 350
+  isDamageRelativeToImpulse: 0
+  shouldDisplayDamage: 1
   shootingPosition: {fileID: 1623832068}
   projectilePrefab: {fileID: 6335491896661982094, guid: 26f1086e063f186408e18e43bf41386d,
     type: 3}
@@ -532,7 +526,28 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 0
-  shouldDisplayDamage: 1
+--- !u!114 &118295646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118295639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1219cdc38d5030b488c9b6d57c07ee65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageOnHit: 35
+  isDamageRelativeToImpulse: 1
+  shouldDisplayDamage: 0
+  impactSound:
+    audioClip: {fileID: 8300000, guid: 0ba2d0a93ab44744e99f0c0520803840, type: 3}
+    volume:
+    - 1
+    pitch:
+    - 0.8
+    - 1.2
 --- !u!1 &128807550
 GameObject:
   m_ObjectHideFlags: 0
