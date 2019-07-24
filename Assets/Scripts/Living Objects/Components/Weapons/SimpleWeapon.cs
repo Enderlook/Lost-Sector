@@ -28,9 +28,7 @@ namespace LivingObjectAddons
         public GameObject projectilePrefab;
         [Tooltip("Layer mask of the projectile")]
         public LayerMask layer;
-        int IProjectileConfiguration.Layer => layer.ToLayer();
-        
-        Vector3 IProjectileConfiguration.SpawnPosition => shootingPosition.position;    
+        int IProjectileConfiguration.Layer => layer.ToLayer();   
 
         /// <summary>
         /// Generate an instance of a projectile an shoot it.<br/>
@@ -41,6 +39,7 @@ namespace LivingObjectAddons
         public override void Shoot()
         {
             GameObject projectile = Instantiate(projectilePrefab, Global.projectilesParent);
+            projectile.transform.position = shootingPosition.position;
             // Just to be sure. We don't really need to set rotation for our game
             projectile.transform.rotation = shootingPosition.rotation;
             projectile.GetComponent<Projectile>().SetProjectileProperties(this);
@@ -53,9 +52,11 @@ namespace LivingObjectAddons
             if (1 < ((IProjectileConfiguration)this).Layer && ((IProjectileConfiguration)this).Layer < 31)
                 Debug.LogWarning($"The field {nameof(layer)} should only contain a single layer.");
         }
+
+        private void OnDrawGizmos() => Gizmos.DrawIcon(shootingPosition.position, "Aim.png");
 #endif
     }
-    
+
     public abstract class WeaponWithSound : Weapon, IBuild
     {
         [Header("Setup")]

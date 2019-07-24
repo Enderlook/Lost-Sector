@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 2828732619232932489}
   - component: {fileID: 8846102638572100080}
   m_Layer: 5
-  m_Name: Health Bar With Canvas 1
+  m_Name: Health Bar With Canvas Simplified
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,6 +209,9 @@ MonoBehaviour:
   damageBar: {fileID: 0}
   healingBar: {fileID: 0}
   ceilValues: 1
+  canvas: {fileID: 2828732619232932489}
+  frame: {fileID: 1501170253018799657}
+  background: {fileID: 4279119600481364503}
 --- !u!223 &2828732619232932489
 Canvas:
   m_ObjectHideFlags: 0

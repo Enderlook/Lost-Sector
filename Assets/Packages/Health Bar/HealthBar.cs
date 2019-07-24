@@ -33,8 +33,52 @@ public class HealthBar : MonoBehaviour
     [Tooltip("Check to ceil health values (round up), useful if health is float, to avoid show 0 HP on bar while you still have 0.44 or below HP. On false, normal round will be performed.")]
     public bool ceilValues = true;
 
+    [Tooltip("Used to show or hide the health bar. If null, it will show and hide each part by separate instead of just the canvas.")]
+    public Canvas canvas;
+    [Tooltip("Only used to hide or show in case Canvas is null.")]
+    public Image frame;
+    [Tooltip("Only used to hide or show in case Canvas is null.")]
+    public Image background;
+
     private float maxHealth;
     private float health;
+
+    /// <summary>
+    /// Whenever the health bar is showed or hidden.<br/>
+    /// Take into account that the script is still enabled and will update the health bar even if it's hidden.
+    /// </summary>
+    /// <seealso cref="IsEnabled"/>
+    public bool IsVisible {
+        get => canvas != null ? canvas.enabled : isVisible;
+        set {
+            isVisible = value;
+            if (canvas != null)
+                canvas.enabled = isVisible;
+            else
+            {                
+                healthImage.enabled = isVisible;
+                if (textNumber != null)
+                    textNumber.enabled = isVisible;
+                if (damageBar != null)
+                    damageBar.enabled = isVisible;
+                if (healingImage != null)
+                    healingImage.enabled = isVisible;
+                if (frame != null)
+                    frame.enabled = isVisible;
+                if (background != null)
+                    background.enabled = isVisible;
+            }
+        }
+    }
+    private bool isVisible = false;
+
+    /// <summary>
+    /// Whenever the health bar will be updated each frame or not.<br/>
+    /// Take into account that the script is still enabled but it won't be updated on each frame. Also, it's still visible.
+    /// </summary>
+    /// <seealso cref="IsHidden"/>
+    public bool IsEnabled { get => isEnabled; set => isEnabled = value; }
+    private bool isEnabled = true;
 
     private void Awake() => Setup();
 
@@ -86,32 +130,35 @@ public class HealthBar : MonoBehaviour
 
     private void Update()
     {
-        // Unfill the damage and healing bar per frame
-        if (damageBar != null && damageBar.fillAmount > 0)
-            damageBar.fillAmount -= Time.deltaTime;
-        if (healingImage != null && healingImage.fillAmount > 0)
-            healingImage.fillAmount -= Time.deltaTime;
+        if (IsEnabled)
+        {
+            // Unfill the damage and healing bar per frame
+            if (damageBar != null && damageBar.fillAmount > 0)
+                damageBar.fillAmount -= Time.deltaTime;
+            if (healingImage != null && healingImage.fillAmount > 0)
+                healingImage.fillAmount -= Time.deltaTime;
 
-        if (minHealthColor != Color.black)
-        {
-            healthImage.color = GetHealthColor();
-        }
-        else
-        {
-            healthImage.color = maxHealthColor;
-        }
-
-        if (textNumber != null)
-        {
-            if (dynamicNumbers)
+            if (minHealthColor != Color.black)
             {
-                float dynamicPercent = healthImage.fillAmount + damageBar.fillAmount - healingImage.fillAmount,
-                      dynamicHealth = maxHealth * dynamicPercent;
-                textNumber.text = string.Format(textShowed, Rounding(dynamicHealth), Rounding(maxHealth), Rounding(dynamicHealth / maxHealth * 100));
+                healthImage.color = GetHealthColor();
             }
             else
             {
-                textNumber.text = string.Format(textShowed, Rounding(health), Rounding(maxHealth), Rounding(health / maxHealth * 100));
+                healthImage.color = maxHealthColor;
+            }
+
+            if (textNumber != null)
+            {
+                if (dynamicNumbers)
+                {
+                    float dynamicPercent = healthImage.fillAmount + damageBar.fillAmount - healingImage.fillAmount,
+                          dynamicHealth = maxHealth * dynamicPercent;
+                    textNumber.text = string.Format(textShowed, Rounding(dynamicHealth), Rounding(maxHealth), Rounding(dynamicHealth / maxHealth * 100));
+                }
+                else
+                {
+                    textNumber.text = string.Format(textShowed, Rounding(health), Rounding(maxHealth), Rounding(health / maxHealth * 100));
+                }
             }
         }
     }
@@ -220,14 +267,19 @@ public class HealthBar : MonoBehaviour
         }
     }
 
+#if UNITY_EDITOR
     /// <summary>
     /// Update color of health bar.
     /// </summary>
     private void OnValidate()
     {
         Setup();
-        healthImage.color = GetHealthColor();
+        if ((healthImage = healthBar.GetComponent<Image>()) == null)
+            Debug.LogWarning($"Gameobject {gameObject.name} has a {nameof(healthBar)} which lacks of {nameof(Image)} component.");
+        else
+            healthImage.color = GetHealthColor();
     }
+#endif
 
     /// <summary>
     /// Get the require components <seealso cref="healthImage"/>, <seealso cref="healthTransform"/>, <seealso cref="healingImage"/>, <seealso cref="healingTransform"/> and set <seealso cref="maxHealth"/>.
