@@ -178,4 +178,11 @@ public class Boundary
         Vector2 newPosition = new Vector2(Mathf.Clamp(position.x, xMin, xMax), Mathf.Clamp(position.y, yMin, yMax));
         return new System.Tuple<Vector2, bool>(newPosition, !position.Equals(newPosition));
     }
+
+    /// <summary>
+    /// Get the percentage of the yY axis where <paramref name="y"/> is.
+    /// </summary>
+    /// <param name="y">Y axis to check.</param>
+    /// <returns>Percent from 0 to 1 where the <paramref name="y"/> is located in the Y axis.</returns>
+    public static float GetYPercent(float y) => (y - yMin) / (yMax - yMin);
 }
