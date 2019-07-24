@@ -37,7 +37,7 @@ public class SpeedEffect : Effect
 
     protected override void OnUpdate(float time)
     {
-        livingObject.SpeedMultiplier = strengthCalculate(strength, maxDuration, duration, initialValue);        
+        livingObject.SpeedMultiplier = strengthCalculate(strength, maxDuration, duration, initialValue);
         base.OnUpdate(time);
     }
 

@@ -136,7 +136,7 @@ public class RigidbodyHelper : MonoBehaviour
         else
             return entity.Melee.ImpactDamage;
     }
-    
+
 #if UNITY_EDITOR
     private void OnValidate()
     {

@@ -37,7 +37,7 @@ namespace LivingObjectAddons
 
         public override void Shoot()
         {
-            foreach((Vector3 position, float angle) in GetCoordinates())
+            foreach ((Vector3 position, float angle) in GetCoordinates())
             {
                 MakeProjectile(position, angle);
             }

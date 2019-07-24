@@ -75,8 +75,8 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         initializes = gameObject.GetComponents<IInitialize>();
         dies = gameObject.GetComponents<IDie>();
         updates = gameObject.GetComponents<IUpdate>();
-        move = gameObject.GetComponent<IMove>();
         weapons = gameObject.GetComponents<Weapon>();
+        move = gameObject.GetComponent<IMove>();
         melee = gameObject.GetComponent<IMelee>();
     }
 
