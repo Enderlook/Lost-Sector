@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class Enemy : LivingObject
 {
@@ -8,6 +8,9 @@ public class Enemy : LivingObject
 
     [Tooltip("Money spawned on death.\nOnly integers will be used.\nIf 0, no coins will be spawned.")]
     public FloatRangeTwo moneySpawnedOnDeath;
+
+    [Tooltip("If it should always shoot.")]
+    public bool autoShoot;
 
     [Header("Setup")]
     [Tooltip("Coins. spawner controller.")]
@@ -25,9 +28,12 @@ public class Enemy : LivingObject
 
     protected override void Update()
     {
-        foreach(LivingObjectAddons.Weapon weapon in weapons)
+        if (autoShoot)
         {
-            weapon?.TryShoot(Time.deltaTime);
+            foreach (LivingObjectAddons.Weapon weapon in weapons)
+            {
+                weapon?.TryShoot(Time.deltaTime);
+            }
         }
         base.Update();
     }
@@ -38,10 +44,11 @@ public class Enemy : LivingObject
         base.Initialize();
     }
 
-    protected override void Die()
+    public override void Die(bool suicide = false)
     {
-        coinController.SpawnCoins((int)moneySpawnedOnDeath);
-        base.Die();
+        if (!suicide && !isDead)
+            coinController.SpawnCoins((int)moneySpawnedOnDeath);
+        base.Die(suicide);
     }
 }
 

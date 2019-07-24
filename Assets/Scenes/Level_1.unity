@@ -1908,6 +1908,18 @@ MonoBehaviour:
       threat: 7
       minimalDifficulty: 22
       weightFactorFormula: 1 + x / 8
+    - prefab: {fileID: 1829191654384863712, guid: 472cbe78a748f1843b92b8a2e9483ce5,
+        type: 3}
+      weight: 12
+      threat: 5
+      minimalDifficulty: 20
+      weightFactorFormula: 1 + x / 9
+    - prefab: {fileID: 9010879735824746043, guid: d528902bb91fbf5469af926817aed5e1,
+        type: 3}
+      weight: 5
+      threat: 15
+      minimalDifficulty: 30
+      weightFactorFormula: 1 + x / 13
   difficulty: 1
   difficultyLinearIncrease: 1
   difficultyGeometricalIncrease: 1.1
@@ -2046,7 +2058,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &815039245
 GameObject:
@@ -4806,7 +4818,7 @@ PrefabInstance:
     - target: {fileID: 2942914704747052437, guid: d10a5ed95b3a285459f087bd488de713,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2942914704747052437, guid: d10a5ed95b3a285459f087bd488de713,
         type: 3}

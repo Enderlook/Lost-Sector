@@ -148,6 +148,11 @@ PrefabInstance:
       propertyPath: dynamicNumbers
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3589550661366649226, guid: de0823a963396b041857777df4f64a0f,
+        type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 7900718535696734789}
     - target: {fileID: 4206750193802182903, guid: de0823a963396b041857777df4f64a0f,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -157,11 +162,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4100829391673770149, guid: de0823a963396b041857777df4f64a0f,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4207295870973242035, guid: de0823a963396b041857777df4f64a0f,
         type: 3}
@@ -187,6 +187,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100829391673770149, guid: de0823a963396b041857777df4f64a0f,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0823a963396b041857777df4f64a0f, type: 3}

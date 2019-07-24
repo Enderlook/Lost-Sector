@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -22,7 +20,7 @@ public class HealthPoints
         set {
             _max = value;
             bar.UpdateValues(Current, Max);
-            if (Max <= 0 && Die != null) Die();
+            if (Max <= 0 && die != null) die();
         }
     }
     [Tooltip("Starting Current. Set -1 to use Max value.")]
@@ -41,7 +39,7 @@ public class HealthPoints
         set {
             _current = value;
             bar.UpdateValues(Current, Max);
-            if (Current <= 0 && Die != null) Die();
+            if (Current <= 0 && die != null) die();
         }
     }
 
@@ -57,7 +55,8 @@ public class HealthPoints
     public float regenerationDelay = 3f;
     private float currentRegenerationDelay = 0f;
 
-    private System.Action Die;
+    public delegate void Die(bool suicide = false);
+    private Die die;
 
     /// <summary>
     /// Ration between <see cref="Current"/> and <see cref="Max"/>.
@@ -72,10 +71,18 @@ public class HealthPoints
     }
 
     /// <summary>
+    /// Whenever the health bar is showed or hidden.
+    /// </summary>
+    public bool IsVisible {
+        get => bar.IsVisible;
+        set => bar.IsVisible = value;
+    }
+
+    /// <summary>
     /// Set the die method called when <see cref="Current"/> or <see cref="Max"/> are 0.
     /// </summary>
     /// <param name="Die">Method to call.</param>
-    public void SetDie(System.Action Die) => this.Die = Die;
+    public void SetDie(Die die) => this.die = die;
 
     /// <summary>
     /// Initializes the bar's Currents, setting the fill of the main bar and returning the current value.

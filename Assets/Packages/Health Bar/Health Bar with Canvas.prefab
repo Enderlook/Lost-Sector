@@ -138,11 +138,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7558894700856959856, guid: d53e9038544373f468a4d49b83a0d569,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7668843870264375412, guid: d53e9038544373f468a4d49b83a0d569,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -158,10 +153,20 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7051775634454849801, guid: d53e9038544373f468a4d49b83a0d569,
+        type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1796805699}
     - target: {fileID: 7599307599146815358, guid: d53e9038544373f468a4d49b83a0d569,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7558894700856959856, guid: d53e9038544373f468a4d49b83a0d569,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d53e9038544373f468a4d49b83a0d569, type: 3}

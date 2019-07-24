@@ -1,3 +1,4 @@
+using System.Collections;
 using LivingObjectAddons;
 using UnityEngine;
 
@@ -32,14 +33,18 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
 
     private IInitialize[] initializes;
     private IDie[] dies;
+    private IUpdate[] updates;
     private IMove move;
     protected Weapon[] weapons;
     private IMelee melee;
+
     IMelee IRigidbodyHelperConfiguration.Melee => melee;
 
     private bool hasBeenBuilded = false;
 
     private EffectManager effectManager;
+
+    protected bool isDead = false;
 
     [HideInInspector]
     public float fireRateMultiplier;
@@ -62,12 +67,14 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
             action.Build(this);
         }
         LoadComponents();
+        healthPoints.SetDie(Die);
     }
 
     private void LoadComponents()
     {
         initializes = gameObject.GetComponents<IInitialize>();
         dies = gameObject.GetComponents<IDie>();
+        updates = gameObject.GetComponents<IUpdate>();
         move = gameObject.GetComponent<IMove>();
         weapons = gameObject.GetComponents<Weapon>();
         melee = gameObject.GetComponent<IMelee>();
@@ -75,12 +82,17 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
 
     protected virtual void Update()
     {
+        if (isDead) return;
         healthPoints.Update(Time.deltaTime);
         move?.Move(SpeedMultiplier);
         effectManager.Update(Time.deltaTime);
         foreach (Weapon weapon in weapons)
         {
             weapon.Recharge(Time.deltaTime);
+        }
+        foreach (IUpdate action in updates)
+        {
+            action.Update();
         }
     }
 
@@ -95,12 +107,12 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         else
             rigidbodyHelper.transform.rotation = (Quaternion)initialRotation;
         healthPoints.Initialize();
-        healthPoints.SetDie(Die);
         foreach (IInitialize action in initializes)
         {
             action?.Initialize();
         }
         fireRateMultiplier = 1;
+        isDead = false;
     }
 
     private void OnEnable()
@@ -110,6 +122,11 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
             hasBeenBuilded = true;
             Build();
         }
+        else
+        {
+            // If hasBeenBuilded is alreay true it means this is the second time it's enabled, and so it must be set visible.
+            SetVisibility(true);
+        }
         Initialize();
     }
 
@@ -117,7 +134,11 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     /// Takes healing increasing its <see cref="Health"/>.
     /// </summary>
     /// <param name="amount">Amount of <see cref="Health"/> recovered. Must be positive.</param>
-    public void TakeHealing(float amount) => healthPoints.TakeHealing(amount);
+    public void TakeHealing(float amount)
+    {
+        if (isDead) return;
+        healthPoints.TakeHealing(amount);
+    }
 
     /// <summary>
     /// Take damage reducing its <see cref="Health"/>.
@@ -126,6 +147,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     /// <param name="displayText">Whenever the damage taken must be shown in a floating text.</param>
     public virtual void TakeDamage(float amount, bool displayDamage = false)
     {
+        if (isDead) return;
         healthPoints.TakeDamage(amount);
         if (displayDamage)
             SpawnFloatingText(amount, Color.Lerp(Color.red, new Color(1, .5f, 0), healthPoints.Ratio));
@@ -134,16 +156,41 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     /// <summary>
     /// Destroy <see cref="gameObject"/> and spawn an explosion prefab instance on current location.
     /// </summary>
-    protected virtual void Die()
+    /// <param name="suicide"><see langword="true"/> if it was a suicide. <see langword="false"/> if it was murderer.</param>
+    public virtual void Die(bool suicide = false)
     {
+        if (isDead) return;
+        isDead = true;
+        dieSound.Play(rigidbodyHelper.audioSource, 1);
         GameObject explosion = Instantiate(onDeathExplosionPrefab, Global.explosionsParent);
         explosion.transform.position = rigidbodyHelper.Position;
         explosion.transform.localScale = Vector3.one * onDeathExplosionPrefabScale;
-        gameObject.SetActive(false);
         foreach (IDie action in dies)
         {
-            action.Die();
+            action.Die(suicide);
         }
+        StartCoroutine(Hide());
+    }
+
+    private IEnumerator Hide()
+    {
+        SetVisibility(false);
+        // https://answers.unity.com/questions/1158528/wait-until-audio-is-finished-before-set-active-is.html
+        // rigidbodyHelper.audioSource == null shouldn't be there but it prevents a bug 
+        yield return new WaitWhile(() => rigidbodyHelper.audioSource == null || rigidbodyHelper.audioSource.isPlaying);
+        gameObject.SetActive(false);
+    }
+
+    private void SetVisibility(bool isVisible)
+    {
+        // https://answers.unity.com/questions/410875/how-can-i-hide-a-gameobject-without-activefalse.html
+        Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
+        foreach (Renderer render in renderers)
+        {
+            render.enabled = isVisible;
+        }
+        healthPoints.IsVisible = isVisible;
+        rigidbodyHelper.gameObject.SetActive(isVisible);
     }
 
     /// <summary>
