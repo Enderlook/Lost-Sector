@@ -585,13 +585,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firerate: 2
-  damageOnHit: 25
-  speed: 350
-  isDamageRelativeToImpulse: 0
-  shouldDisplayDamage: 1
-  shootingPosition: {fileID: 1623832068}
-  projectilePrefab: {fileID: 6335491896661982094, guid: 26f1086e063f186408e18e43bf41386d,
-    type: 3}
   shootingSound:
     audioClip: {fileID: 8300000, guid: 5a8c55f41a396a74894ec2e9af446247, type: 3}
     volume:
@@ -1862,7 +1855,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 801854805}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2402ac417ffbd9d4e865e8695df140b8, type: 3}
   m_Name: 
@@ -1921,7 +1914,7 @@ MonoBehaviour:
       threat: 5
       minimalDifficulty: 20
       weightFactorFormula: 1 + x / 9
-  difficulty: 100
+  difficulty: 1
   difficultyLinearIncrease: 1
   difficultyGeometricalIncrease: 1.1
   difficultyIncreaseInterval: 5
