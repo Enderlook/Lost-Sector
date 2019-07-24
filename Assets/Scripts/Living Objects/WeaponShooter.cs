@@ -30,7 +30,6 @@ namespace PlayerAddons
             }
         }
 #endif
-
     }
 
     [System.Serializable]

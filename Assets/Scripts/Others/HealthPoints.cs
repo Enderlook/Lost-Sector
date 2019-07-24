@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class HealthPoints
@@ -112,7 +112,8 @@ public class HealthPoints
         {
             flow = Max - Current;
             Current = Max;
-        } else if (Current < 0 && !allowUnderflow)
+        }
+        else if (Current < 0 && !allowUnderflow)
         {
             flow = Current;
             Current = 0;

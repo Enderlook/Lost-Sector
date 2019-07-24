@@ -55,7 +55,7 @@ public class HealthBar : MonoBehaviour
             if (canvas != null)
                 canvas.enabled = isVisible;
             else
-            {                
+            {
                 healthImage.enabled = isVisible;
                 if (textNumber != null)
                     textNumber.enabled = isVisible;

@@ -13,7 +13,7 @@ public class MenuCarousel : MonoBehaviour
     /// </summary>
     /// <param name="amount">Amount of pages to shift.</param>
     public void Change(int amount)
-    {        
+    {
         pages[currentPage].SetActive(false);
         currentPage += amount;
         if (currentPage == pages.Length)

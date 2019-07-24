@@ -42,7 +42,7 @@ namespace LivingObjectAddons
         {
             GameObject shockwave = new GameObject("Shockwave");
             SpriteRenderer spriteRenderer = shockwave.AddComponent<SpriteRenderer>();
-            spriteRenderer.sprite = shockwaveSprite;            
+            spriteRenderer.sprite = shockwaveSprite;
             shockwave.transform.position = shootingPosition.position;
             shockwave.AddComponent<Expand>().size = radius * 2;
 
@@ -68,9 +68,9 @@ namespace LivingObjectAddons
             UnityEditor.Handles.color = Color.red;
             UnityEditor.Handles.DrawWireDisc(shootingPosition.position, Vector3.back, radius);
         }
-#endif    
+#endif
 
-    private class Expand : MonoBehaviour
+        private class Expand : MonoBehaviour
         {
             public float size;
             private SpriteRenderer spriteRenderer;

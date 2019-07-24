@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Enemy : LivingObject
 {
@@ -16,15 +16,8 @@ public class Enemy : LivingObject
     [Tooltip("Coins. spawner controller.")]
     public CoinController coinController;
 
-    protected Rigidbody2D thisRigidbody2D;
-
-    private void Awake() => thisRigidbody2D = rigidbodyHelper.Rigidbody2D;
-
-    protected void Start()
-    {
-        // Just to be sure...
-        coinController.spawninigTransform = thisRigidbody2D.transform;
-    }
+    // Just to be sure...
+    protected void Start() => coinController.spawninigTransform = rigidbodyHelper.Rigidbody2D.transform;
 
     protected override void Update()
     {
@@ -40,7 +33,7 @@ public class Enemy : LivingObject
 
     protected override void Initialize()
     {
-        thisRigidbody2D.AddRelativeForce((Vector2)impulse * thisRigidbody2D.mass);
+        rigidbodyHelper.Rigidbody2D.AddRelativeForce((Vector2)impulse * rigidbodyHelper.Rigidbody2D.mass);
         base.Initialize();
     }
 

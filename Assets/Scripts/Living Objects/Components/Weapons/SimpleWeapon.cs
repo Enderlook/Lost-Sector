@@ -28,7 +28,7 @@ namespace LivingObjectAddons
         public GameObject projectilePrefab;
         [Tooltip("Layer mask of the projectile")]
         public LayerMask layer;
-        int IProjectileConfiguration.Layer => layer.ToLayer();   
+        int IProjectileConfiguration.Layer => layer.ToLayer();
 
         /// <summary>
         /// Generate an instance of a projectile an shoot it.<br/>

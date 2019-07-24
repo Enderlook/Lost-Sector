@@ -55,7 +55,8 @@ public class EnemySpawner : MonoBehaviour
                 GameObject pack = Instantiate(healthPack, Global.pickupsParent);
                 pack.transform.position = (Vector3)spawnPoints[Random.Range(0, spawnPoints.Length - 1)];
             }
-        } else
+        }
+        else
             healthPackSpawnCharging += Time.deltaTime;
     }
 
@@ -106,7 +107,7 @@ public class EnemySpawner : MonoBehaviour
             }
             foreach (GameObject enemyPrefab in enemies.GetEnemies(difficulty))
             {
-                Vector3 position = (Vector3)spawnPoints[Random.Range(0, spawnPoints.Length - 1)]; 
+                Vector3 position = (Vector3)spawnPoints[Random.Range(0, spawnPoints.Length - 1)];
 
                 GameObject enemy = Spawn(enemyPrefab);
                 enemy.transform.position = position;
