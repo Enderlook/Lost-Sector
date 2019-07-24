@@ -19,7 +19,6 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration
     /// <param name="configuration">Configuration of the projectile.</param>
     public void SetProjectileProperties(IProjectileConfiguration configuration)
     {
-        transform.position = configuration.SpawnPosition;
         melee.ImpactDamage = configuration.ImpactDamage;
         Rigidbody2D rigidbody2D = rigidbodyHelper.Rigidbody2D;
         melee.ShouldDisplayDamage = configuration.ShouldDisplayDamage;
@@ -39,10 +38,6 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration
 
 public interface IProjectileConfiguration : IMelee
 {
-    /// <summary>
-    /// Position where the projectile will be spawned.
-    /// </summary>
-    Vector3 SpawnPosition { get; }
     /// <summary>
     /// Speed of the projectile.
     /// </summary>
