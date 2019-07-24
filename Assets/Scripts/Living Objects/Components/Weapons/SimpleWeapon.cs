@@ -52,9 +52,11 @@ namespace LivingObjectAddons
             if (1 < ((IProjectileConfiguration)this).Layer && ((IProjectileConfiguration)this).Layer < 31)
                 Debug.LogWarning($"The field {nameof(layer)} should only contain a single layer.");
         }
+
+        private void OnDrawGizmos() => Gizmos.DrawIcon(shootingPosition.position, "Aim.png");
 #endif
     }
-    
+
     public abstract class WeaponWithSound : Weapon, IBuild
     {
         [Header("Setup")]

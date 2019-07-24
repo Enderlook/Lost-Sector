@@ -56,11 +56,10 @@ public class Player : LivingObject
         if (restDamage > 0)
             base.TakeDamage(restDamage, true);
     }
-    protected override void Die()
+    public override void Die(bool suicide = false)
     {
-        Global.menu.GameOver(false);
-        GameObject explosion = Instantiate(onDeathExplosionPrefab, Global.explosionsParent);
-        explosion.transform.position = transform.position;
-        base.Die();
+        if (!isDead)
+            Global.menu.GameOver(false);
+        base.Die(suicide);
     }
 }

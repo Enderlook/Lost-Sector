@@ -10,15 +10,13 @@ namespace LivingObjectAddons
         [Tooltip("Thruster acceleration speed.")]
         public float accelerationSpeed;
 
-        private Rigidbody2D thisRigidbody;
-        void IBuild.Build(LivingObject livingObject) => thisRigidbody = livingObject.rigidbodyHelper.Rigidbody2D;
-        void IMove.Move(float speedMultiplier)
+        protected Rigidbody2D thisRigidbody;
+        public virtual void Build(LivingObject livingObject) => thisRigidbody = livingObject.rigidbodyHelper.Rigidbody2D;
+        public virtual void Move(float speedMultiplier)
         {
-            // Slowly accelerate to crusierSpeed
-            Vector2 speedToReachCrusier = cruiserSpeed * speedMultiplier - thisRigidbody.velocity;
-            Vector2 forceToReachCrusier = speedToReachCrusier * thisRigidbody.mass;
-            Vector2 forceToApply = Vector2.ClampMagnitude(forceToReachCrusier * Time.deltaTime, accelerationSpeed);
-            thisRigidbody.AddRelativeForce(forceToApply);
+            Vector2 localVelocity = thisRigidbody.transform.InverseTransformVector(thisRigidbody.velocity);
+            Vector2 impulse = Vector2.ClampMagnitude(cruiserSpeed - localVelocity, accelerationSpeed * Time.deltaTime);
+            thisRigidbody.AddRelativeForce(impulse * thisRigidbody.mass);
         }
     }
 }
