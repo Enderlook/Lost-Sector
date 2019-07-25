@@ -75,7 +75,7 @@ public abstract class Effect
     /// <summary>
     /// Get duration percent from <c><see cref="duration"/> / <see cref="maxDuration"/></c>
     /// </summary>
-    public float DurationPercent { get => duration / maxDuration; }
+    public float DurationPercent => duration / maxDuration;
 
     /// <summary>
     /// Whenever the old instance of this effect should be removed before add this one.

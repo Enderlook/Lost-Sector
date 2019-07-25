@@ -8,11 +8,8 @@ namespace LivingObjectAddons
         [Tooltip("Explosion damage.")]
         public float explosionDamage;
 
-        protected override void AffectTarget(RigidbodyHelper target)
-        {
-            // TODO: Add explosion damage falls-off over distance
-            target.TakeDamage(explosionDamage);
-        }
+        // TODO: Add explosion damage falls-off over distance
+        protected override void AffectTarget(RigidbodyHelper target) => target.TakeDamage(explosionDamage);
 
     }
 }

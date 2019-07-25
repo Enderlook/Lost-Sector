@@ -16,9 +16,6 @@ public class HealthBarStabilizator : MonoBehaviour
 
     private void Awake() => originalLocalPosition = transform.localPosition;
 
-    private void LateUpdate()
-    {
-        transform.localPosition = originalLocalPosition + transformToFollow.localPosition;
-        // Do? https://forum.unity.com/threads/subtracting-quaternions.317649/
-    }
+    // Do? https://forum.unity.com/threads/subtracting-quaternions.317649/
+    private void LateUpdate() => transform.localPosition = originalLocalPosition + transformToFollow.localPosition;
 }
