@@ -234,6 +234,13 @@ public class Sound
             audioSource.PlayOneShot(audioClip, GetVolume() * volumeMultiplier);
         }
     }
+
+    /// <summary>
+    /// Play the sound on the specified <paramref name="position"/>.
+    /// </summary>
+    /// <param name="position">Position to play the sound.</param>
+    /// <param name="volumeMultiplier">Volume of the sound, from 0 to 1.</param>
+    public void PlayAtPoint(Vector3 position, float volumeMultiplier = 1) => AudioSource.PlayClipAtPoint(audioClip, position, volumeMultiplier);
 }
 
 public static class LayerMaskExtension

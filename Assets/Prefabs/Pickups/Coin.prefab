@@ -135,6 +135,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a2d1b99fb733e4eb0f4329580e44cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  impulse:
+    isRandom: 1
+    startVector: {x: 0, y: 0}
+    endVector: {x: 0, y: 0}
 --- !u!114 &6494154499918903054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,3 +153,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObjectToDestroy: {fileID: 0}
   timeToDestroy: 1
+  hide: 0
+  camerasToCheck: []
+  mainCamera: 1
