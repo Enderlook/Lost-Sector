@@ -38,9 +38,8 @@ namespace LivingObjectAddons
         /// <seealso cref="TryShoot(float)"/>
         public override void Shoot()
         {
-            GameObject projectile = Instantiate(projectilePrefab, Global.projectilesParent);
+            GameObject projectile = Global.enemySpawner.Spawn(projectilePrefab, Global.projectilesParent);
             projectile.transform.position = shootingPosition.position;
-            // Just to be sure. We don't really need to set rotation for our game
             projectile.transform.rotation = shootingPosition.rotation;
             projectile.GetComponent<Projectile>().SetProjectileProperties(this);
             base.Shoot();

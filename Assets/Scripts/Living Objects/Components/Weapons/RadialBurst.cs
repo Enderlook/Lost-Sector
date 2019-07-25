@@ -47,7 +47,7 @@ namespace LivingObjectAddons
         private void MakeProjectile(Vector3 position, float angle)
         {
             // https://answers.unity.com/questions/27365/radialomni-directional-shooting-problem.html
-            GameObject projectile = Instantiate(projectilePrefab, Global.projectilesParent);
+            GameObject projectile = Global.enemySpawner.Spawn(projectilePrefab, Global.projectilesParent);
             projectile.transform.position = position;
             projectile.transform.rotation = Quaternion.AngleAxis(angle, shootingPosition.forward);
             projectile.GetComponent<Projectile>().SetProjectileProperties(this);

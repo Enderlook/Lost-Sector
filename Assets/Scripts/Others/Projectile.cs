@@ -11,7 +11,7 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration
     IMelee IRigidbodyHelperConfiguration.Melee => melee;
     private void Awake() => melee = gameObject.GetComponent<IMelee>();
     private void Start() => rigidbodyHelper.SetProperties(this);
-    void IRigidbodyHelperConfiguration.TakeDamage(float amount, bool displayDamage) => Destroy(gameObject);
+    void IRigidbodyHelperConfiguration.TakeDamage(float amount, bool displayDamage) => gameObject.SetActive(false);
 
     /// <summary>
     /// Configure the projectile properties. Mandatory.
@@ -19,6 +19,7 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration
     /// <param name="configuration">Configuration of the projectile.</param>
     public void SetProjectileProperties(IProjectileConfiguration configuration)
     {
+        Reset();
         melee.ImpactDamage = configuration.ImpactDamage;
         Rigidbody2D rigidbody2D = rigidbodyHelper.Rigidbody2D;
         melee.ShouldDisplayDamage = configuration.ShouldDisplayDamage;
@@ -33,6 +34,12 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration
             transform.gameObject.layer = configuration.Layer;
         }
         gameObject.layer = configuration.Layer;
+    }
+
+    private void Reset()
+    {
+        rigidbodyHelper.transform.localPosition = Vector3.zero;
+        rigidbodyHelper.transform.localRotation = new Quaternion(0, 0, 0, 0);
     }
 }
 
