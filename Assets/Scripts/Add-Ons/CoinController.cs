@@ -41,7 +41,7 @@ public class CoinController : MonoBehaviour
         {
             for (int i = 0; i < coinToSpawn.Item2; i++)
             {
-                GameObject coin = Instantiate(coinPrefab, Global.pickupsParent);
+                GameObject coin = Global.enemySpawner.Spawn(coinPrefab, Global.pickupsParent);
 
                 coin.transform.position = spawninigTransform.position;
 

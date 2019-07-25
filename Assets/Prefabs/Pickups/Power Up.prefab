@@ -196,6 +196,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObjectToDestroy: {fileID: 0}
   timeToDestroy: 3
-  hide: 0
+  hide: 1
   camerasToCheck: []
   mainCamera: 1
