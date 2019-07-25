@@ -14,9 +14,7 @@ public class HealthPoints
     /// </summary>
     /// <seealso cref="Current"/>
     public float Max {
-        get {
-            return _max;
-        }
+        get => _max;
         set {
             _max = value;
             bar.UpdateValues(Current, Max);
@@ -33,9 +31,7 @@ public class HealthPoints
     /// </summary>
     /// <seealso cref="Max"/>
     public float Current {
-        get {
-            return _current;
-        }
+        get => _current;
         set {
             _current = value;
             bar.UpdateValues(Current, Max);
@@ -61,14 +57,7 @@ public class HealthPoints
     /// <summary>
     /// Ration between <see cref="Current"/> and <see cref="Max"/>.
     /// </summary>
-    public float Ratio {
-        get {
-            return Current / Max;
-        }
-        /*set {
-            Current = value * Max;
-        }*/
-    }
+    public float Ratio => Current / Max;
 
     /// <summary>
     /// Whenever the health bar is showed or hidden.

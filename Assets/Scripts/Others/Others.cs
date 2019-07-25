@@ -64,21 +64,13 @@ public class TransformRange : IVectorRangeTwo
     public Transform endTransform;
 
     protected override Vector3 StartVector3 {
-        get {
-            return startTransform.position;
-        }
-        set {
-            startTransform.position = value;
-        }
+        get => startTransform.position;
+        set => startTransform.position = value;
     }
 
     protected override Vector3 EndVector3 {
-        get {
-            return endTransform.position;
-        }
-        set {
-            endTransform.position = value;
-        }
+        get => endTransform.position;
+        set => endTransform.position = value;
     }
 
     /// <summary>
@@ -102,21 +94,13 @@ public class Vector2RangeTwo : IVectorRangeTwo
     public Vector2 endVector;
 
     protected override Vector3 StartVector3 {
-        get {
-            return startVector;
-        }
-        set {
-            startVector = value;
-        }
+        get => startVector;
+        set => startVector = value;
     }
 
     protected override Vector3 EndVector3 {
-        get {
-            return endVector;
-        }
-        set {
-            endVector = value;
-        }
+        get => endVector;
+        set => endVector = value;
     }
 
     /// <summary>

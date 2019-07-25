@@ -8,10 +8,7 @@ public class RapidFireRate : Pickupable
     [Tooltip("Duration of effect in seconds.")]
     public float durationOfEffect;
 
-    public override void Pickup(Player player)
-    {
-        player.AddEffect(new RapidFireRateEffect(fireRateMultiplier, durationOfEffect));
-    }
+    public override void Pickup(Player player) => player.AddEffect(new RapidFireRateEffect(fireRateMultiplier, durationOfEffect));
 }
 
 public class RapidFireRateEffect : Effect

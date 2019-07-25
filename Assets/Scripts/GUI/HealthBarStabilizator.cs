@@ -14,10 +14,7 @@ public class HealthBarStabilizator : MonoBehaviour
      * https://forum.unity.com/threads/understanding-iserializationcallbackreceiver.383757/
      */
 
-    private void Awake()
-    {
-        originalLocalPosition = transform.localPosition;
-    }
+    private void Awake() => originalLocalPosition = transform.localPosition;
 
     private void LateUpdate()
     {
