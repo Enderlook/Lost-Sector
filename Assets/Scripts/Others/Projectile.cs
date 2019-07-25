@@ -38,8 +38,8 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration
 
     private void Reset()
     {
-        rigidbodyHelper.transform.localPosition = Vector3.zero;
-        rigidbodyHelper.transform.localRotation = new Quaternion(0, 0, 0, 0);
+        rigidbodyHelper.transform.position = transform.position;
+        rigidbodyHelper.transform.rotation = transform.rotation;
     }
 }
 
