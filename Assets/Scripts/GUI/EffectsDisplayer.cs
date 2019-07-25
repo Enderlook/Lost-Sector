@@ -45,8 +45,7 @@ namespace Effects
 
             foreach (Effect effect in effects)
             {
-                EffectUI effectUI;
-                if (effectSlots.TryGetValue(effect, out effectUI))
+                if (effectSlots.TryGetValue(effect, out EffectUI effectUI))
                     UpdateEffect(effectUI, effect);
                 else
                     toUpdate.Add(effect);
