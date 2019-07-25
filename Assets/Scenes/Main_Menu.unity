@@ -594,7 +594,7 @@ PrefabInstance:
     - target: {fileID: 6597998823378680384, guid: 55e7c301d39f93a49a38d11e99d9dd76,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6597998823378680384, guid: 55e7c301d39f93a49a38d11e99d9dd76,
         type: 3}
@@ -661,8 +661,22 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1587951061, guid: 55e7c301d39f93a49a38d11e99d9dd76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 1587951061, guid: 55e7c301d39f93a49a38d11e99d9dd76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55e7c301d39f93a49a38d11e99d9dd76, type: 3}
+--- !u!1 &853625821 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1947903233823702610, guid: 996e20757a8f7b343a9f2327c6d93787,
+    type: 3}
+  m_PrefabInstance: {fileID: 79253014}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &975227229
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,7 +808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25dae29d9c6c7e943953f62f6b15a418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: {fileID: 0}
+  menu: {fileID: 853625821}
   gameOver: {fileID: 0}
   howToPlay: {fileID: 1680339322}
   menuNoToggleable: 1
