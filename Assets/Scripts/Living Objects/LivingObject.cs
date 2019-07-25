@@ -194,6 +194,8 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         }
         healthPoints.IsVisible = isVisible;
         rigidbodyHelper.gameObject.SetActive(isVisible);
+        if (effectsDisplayer != null)
+            effectsDisplayer.IsVisible = isVisible;
     }
 
     /// <summary>
