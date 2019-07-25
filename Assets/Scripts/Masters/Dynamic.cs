@@ -137,6 +137,10 @@ public class Dynamic : MonoBehaviour
         int minutes = (int)playedTime / 60;
         float seconds = playedTime - minutes * 60;
         timePlayerText.text = $"{minutes:00}:{seconds:00.00}";
+
+        if (Global.coinMeter.showedMoney >= Global.moneyToWin)
+            Global.menu.GameOver(true);
+        Global.menu.canBeShown = Global.playerHealthBar.IsDamageBarPercentHide && Global.playerShieldBar.IsDamageBarPercentHide;
     }
 }
 
