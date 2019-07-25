@@ -25,7 +25,11 @@ public class Settings : MonoBehaviour
     /// <summary>
     /// Reload the current scene.
     /// </summary>
-    public void Restart() => LoadScene(SceneManager.GetActiveScene().name);
+    public void Restart()
+    {
+        Dynamic.playedTime = 0;
+        LoadScene(SceneManager.GetActiveScene().name);
+    }
 
     /// <summary>
     /// Load the main menu scene.

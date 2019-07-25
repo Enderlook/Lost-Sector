@@ -15,14 +15,16 @@ public class Menu : MonoBehaviour
     private bool isActive;
     private bool isGameOver = false;
     private bool hasWon;
+
+    [HideInInspector]
+    public bool canBeShown;
+
     private void Start() => DisplayMenuPause(false);
 
     private void Update()
     {
-        // This should be done in other script and not here...
-        if (Global.coinMeter.showedMoney >= Global.moneyToWin)
-            GameOver(true);
-        if (isGameOver && Global.playerHealthBar.IsDamageBarPercentHide && Global.playerShieldBar.IsDamageBarPercentHide)
+        // This should be done in other script and not here...        
+        if (isGameOver && canBeShown)
         {
             gameOver.SetShown(true);
             gameOver.SetConfiguration(hasWon, Global.money, Dynamic.playedTime);

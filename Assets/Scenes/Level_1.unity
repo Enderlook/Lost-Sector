@@ -3873,6 +3873,7 @@ MonoBehaviour:
   gameOver: {fileID: 1309082850}
   howToPlay: {fileID: 1173852154}
   menuNoToggleable: 0
+  canBeShown: 0
 --- !u!114 &1560176981
 MonoBehaviour:
   m_ObjectHideFlags: 0
