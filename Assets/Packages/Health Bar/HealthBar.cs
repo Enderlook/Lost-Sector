@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
@@ -119,10 +119,7 @@ public class HealthBar : MonoBehaviour
     /// Designed to initialize the health bar by first time.
     /// </summary>
     /// <param name="maxHealth"></param>
-    public void ManualUpdate(float maxHealth)
-    {
-        ManualUpdate(maxHealth, maxHealth);
-    }
+    public void ManualUpdate(float maxHealth) => ManualUpdate(maxHealth, maxHealth);
 
     /// <summary>
     /// Get the <see cref="healthImage"/> color taking into account the percentage of remaining health.
@@ -193,10 +190,7 @@ public class HealthBar : MonoBehaviour
     /// This method will automatically calculate, show and animate the health bar, damage bar, healing bar and health number.
     /// </summary>
     /// <param name="health"></param>
-    public void UpdateValues(float health)
-    {
-        Set(health);
-    }
+    public void UpdateValues(float health) => Set(health);
 
     /*void Heal(float amount) { Change(amount); }
     void Damage(float amount) { Change(-amount); }*/
@@ -205,7 +199,7 @@ public class HealthBar : MonoBehaviour
     /// </summary>
     /// <seealso cref="Change(float)"/>
     /// <param name="value">New <seealso cref="health"/> value.</param>
-    private void Set(float value) { Change(value - health); }
+    private void Set(float value) => Change(value - health);
 
     /// <summary>
     /// Updates bars and set the <see cref="health"/>.

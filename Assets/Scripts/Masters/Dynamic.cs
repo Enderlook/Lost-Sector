@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -40,12 +40,8 @@ public static class Global
     /// Current money of the player.
     /// </summary>
     public static int money {
-        get {
-            return coinMeter.money;
-        }
-        set {
-            coinMeter.money = value;
-        }
+        get => coinMeter.money;
+        set => coinMeter.money = value;
     }
 
     /// <summary>

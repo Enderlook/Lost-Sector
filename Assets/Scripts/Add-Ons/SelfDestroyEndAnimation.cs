@@ -22,7 +22,7 @@ public class SelfDestroyEndAnimation : MonoBehaviour
 
     private void Update()
     {
-        if (hide  && (cooldown -= Time.deltaTime) <= 0)
+        if (hide && (cooldown -= Time.deltaTime) <= 0)
         {
             gameObject.SetActive(false);
         }
