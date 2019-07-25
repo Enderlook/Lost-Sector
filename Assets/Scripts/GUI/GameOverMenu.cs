@@ -21,7 +21,6 @@ public class GameOverMenu : MonoBehaviour
     private TextOverTime money;
     private TextOverTime time;
 
-
     /// <summary>
     /// Determines whenever the game over menu is displayed or hidden.
     /// </summary>

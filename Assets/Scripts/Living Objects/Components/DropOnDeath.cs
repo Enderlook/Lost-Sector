@@ -9,9 +9,10 @@ namespace LivingObjectAddons
         [Tooltip("Configuration of gameObjects to spawn on death.")]
         public SpawneableGameObjects spawnsOnDeath;
 
-        private void Awake() => spawnsOnDeath.SetSpawnedInstructions(SpawnedInstructions);
         void IBuild.Build(LivingObject livingObject) { }
         void IDie.Die(bool suicide) => spawnsOnDeath.SpawnPrefabs(Instantiate);
+
+        private void Awake() => spawnsOnDeath.SetSpawnedInstructions(SpawnedInstructions);
 
         /// <summary>
         /// Set additional spawn instructions used when a prefab is instantiated.
