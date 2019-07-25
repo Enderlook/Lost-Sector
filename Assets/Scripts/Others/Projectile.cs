@@ -1,4 +1,4 @@
-﻿using LivingObjectAddons;
+using LivingObjectAddons;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration
@@ -28,7 +28,7 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration
 
         // https://forum.unity.com/threads/change-gameobject-layer-at-run-time-wont-apply-to-child.10091/ See post #post-1627654, #post-1819585, #post-3405070, #post-3676213. Get your own conclusions.
         // There could be more gameObjects to change layer
-        foreach (var transform in gameObject.GetComponentsInChildren<Transform>(true))
+        foreach (Transform transform in gameObject.GetComponentsInChildren<Transform>(true))
         {
             transform.gameObject.layer = configuration.Layer;
         }
