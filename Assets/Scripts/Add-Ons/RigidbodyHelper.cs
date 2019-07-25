@@ -63,7 +63,7 @@ public class RigidbodyHelper : MonoBehaviour
     /// </summary>
     /// <param name="collision">Unity <see cref="Collision2D"/>.</param>
     private void OnCollisionEnter2D(Collision2D collision)
-    {        
+    {
         RigidbodyHelper target = collision.gameObject.GetComponent<RigidbodyHelper>();
         if (target != null)
             target.TakeDamage(CalculateDamage(collision), ShouldDisplayDamage());
