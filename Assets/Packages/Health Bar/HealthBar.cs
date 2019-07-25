@@ -33,12 +33,15 @@ public class HealthBar : MonoBehaviour
     [Tooltip("Check to ceil health values (round up), useful if health is float, to avoid show 0 HP on bar while you still have 0.44 or below HP. On false, normal round will be performed.")]
     public bool ceilValues = true;
 
+    [Header("Hidding Setup")]
     [Tooltip("Used to show or hide the health bar. If null, it will show and hide each part by separate instead of just the canvas.")]
     public Canvas canvas;
     [Tooltip("Only used to hide or show in case Canvas is null.")]
     public Image frame;
     [Tooltip("Only used to hide or show in case Canvas is null.")]
     public Image background;
+    [Tooltip("Only used to hide or show in case Canvas is null.")]
+    public Image icon;
 
     private float maxHealth;
     private float health;
@@ -67,6 +70,8 @@ public class HealthBar : MonoBehaviour
                     frame.enabled = isVisible;
                 if (background != null)
                     background.enabled = isVisible;
+                if (icon != null)
+                    icon.enabled = isVisible;
             }
         }
     }
