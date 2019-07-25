@@ -7,7 +7,6 @@ public abstract class Pickupable : MonoBehaviour, ICanBePickedUp
     public Vector2RangeTwo impulse;
 
     private Rigidbody2D thisRigidbody2D;
-
     Rigidbody2D ICanBePickedUp.Rigidbody2D => thisRigidbody2D;
 
     private void Start()
