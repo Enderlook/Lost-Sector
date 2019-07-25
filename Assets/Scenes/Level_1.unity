@@ -546,7 +546,7 @@ MonoBehaviour:
   effectsDisplayer: {fileID: 2144885173}
   fireRateMultiplier: 0
   shieldPoints:
-    startingMax: 100
+    startingMax: 40
     startingCurrent: -1
     bar: {fileID: 166792902}
     canRegenerate: 1
@@ -594,7 +594,7 @@ MonoBehaviour:
     - 0.8
     - 1.2
   damageOnHit: 25
-  speed: 350
+  speed: 425
   isDamageRelativeToImpulse: 0
   shouldDisplayDamage: 1
   shootingPosition: {fileID: 1623832068}
@@ -602,7 +602,7 @@ MonoBehaviour:
     type: 3}
   layer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!114 &118295646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2217,7 +2217,7 @@ PrefabInstance:
     - target: {fileID: 8241607451615469021, guid: 08163147365e4014187b7a0eb2ac78e2,
         type: 3}
       propertyPath: textShowed
-      value: '{0} / {1} ({2}%)'
+      value: '{0} / {1}'
       objectReference: {fileID: 0}
     - target: {fileID: 8241607451615469021, guid: 08163147365e4014187b7a0eb2ac78e2,
         type: 3}
@@ -3073,7 +3073,7 @@ PrefabInstance:
     - target: {fileID: 3589550661366649226, guid: de0823a963396b041857777df4f64a0f,
         type: 3}
       propertyPath: textShowed
-      value: '{0} / {1} ({2}%)'
+      value: '{0} / {1}'
       objectReference: {fileID: 0}
     - target: {fileID: 3589550661366649226, guid: de0823a963396b041857777df4f64a0f,
         type: 3}
