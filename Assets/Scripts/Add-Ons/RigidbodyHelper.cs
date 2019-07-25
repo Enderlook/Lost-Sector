@@ -52,16 +52,6 @@ public class RigidbodyHelper : MonoBehaviour
         }
     }
 
-
-    /// <summary>
-    /// Current position.
-    /// </summary>
-    public Vector3 Position {
-        get {
-            return transform.position;
-        }
-    }
-
     /* TODO:
      * https://forum.unity.com/threads/exposing-fields-with-interface-type-c-solved.49524/
      * https://forum.unity.com/threads/c-interface-wont-show-in-inspector.383886/

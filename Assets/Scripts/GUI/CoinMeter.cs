@@ -12,9 +12,7 @@ public class CoinMeter : MonoBehaviour
     private int realMoney;
 
     public int money {
-        get {
-            return realMoney;
-        }
+        get => realMoney;
         set {
             oldMoney = (int)showedMoney;
             realMoney = value;
