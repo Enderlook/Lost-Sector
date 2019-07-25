@@ -48,7 +48,7 @@ namespace LivingObjectAddons
         private void OnDrawGizmos()
         {
             UnityEditor.Handles.color = Color.red;
-            UnityEditor.Handles.DrawWireDisc(rigidbodyHelperGizmos.Position, Vector3.back, radius);
+            UnityEditor.Handles.DrawWireDisc(rigidbodyHelperGizmos.transform.position, Vector3.back, radius);
         }
 #endif
     }
