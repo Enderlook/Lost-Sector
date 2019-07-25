@@ -6,12 +6,6 @@ public class Settings : MonoBehaviour
 {
     public static bool IsSoundActive = true;
 
-    /*private void Start()
-    {
-        // Make a persistent game object through scenes
-        DontDestroyOnLoad(gameObject);
-    }*/
-
     /// <summary>
     /// Load the Level_1 scene.
     /// </summary>
