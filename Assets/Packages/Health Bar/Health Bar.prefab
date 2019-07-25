@@ -62,6 +62,7 @@ MonoBehaviour:
   canvas: {fileID: 0}
   frame: {fileID: 7558525923945543718}
   background: {fileID: 7558325305389770306}
+  icon: {fileID: 7558894700856959856}
 --- !u!1 &7597608102264197712
 GameObject:
   m_ObjectHideFlags: 0
