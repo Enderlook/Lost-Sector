@@ -112,7 +112,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         healthPoints.Initialize();
         foreach (IInitialize action in initializes)
         {
-            action?.Initialize();
+            action.Initialize();
         }
         fireRateMultiplier = 1;
         isDead = false;

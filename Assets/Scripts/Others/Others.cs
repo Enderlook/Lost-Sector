@@ -225,7 +225,7 @@ public class Sound
     /// </summary>
     /// <param name="audioSource"><see cref="AudioSource"/> where the sound will be played.</param>
     /// <param name="volumeMultiplier">Volume of the sound, from 0 to 1.</param>
-    public void Play(AudioSource audioSource, float volumeMultiplier)
+    public void Play(AudioSource audioSource, float volumeMultiplier = 1)
     {
         // audioSource != null shouldn't be used but it's to prevents a bug
         if (Settings.IsSoundActive && audioSource != null)
