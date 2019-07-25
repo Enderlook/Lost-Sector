@@ -34,6 +34,9 @@ public class PickupMagnet : MonoBehaviour
     {
         foreach (Transform item in Global.pickupsParent)
         {
+            if (!item.gameObject.activeSelf)
+                continue;
+
             // We don't use Vector3.Distance because that is (a - b).magnitude and that is expensive.
             float distance = (item.position - magnetTransform.position).sqrMagnitude;
 
@@ -60,7 +63,7 @@ public class PickupMagnet : MonoBehaviour
         if (pickup != null)
         {
             pickup.Pickup(player);
-            Destroy(item.gameObject);
+            item.gameObject.SetActive(false);
         }
     }
 
