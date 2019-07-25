@@ -170,11 +170,7 @@ public class EnemyPrefab
     /// </summary>
     /// <returns>Weighted rarity.</returns>
     /// <seealso cref="UpdateWeight(float)"/>
-    public float Weight {
-        get {
-            return calculatedWeight;
-        }
-    }
+    public float Weight => calculatedWeight;
 
     /// <summary>
     /// Updates the weight multiplier which changes according to the current difficulty.
