@@ -25,8 +25,20 @@ namespace Effects
 
         private EffectManager effectManager;
 
+        /// <summary>
+        /// Whenever the health bar is showed or hidden.
+        /// </summary>
+        public bool IsVisible {
+            get => panel.gameObject.activeSelf;
+            set => panel.gameObject.SetActive(value);
+        }
+
         private void Start() => effectSlots = new EffectSlots(panel, backgroundSprite);
 
+        /// <summary>
+        /// Update effects, adding or hidding new or expired effects. It also update their showed duration.
+        /// </summary>
+        /// <param name="effects">Effects to update.</param>
         public void CheckEffects(IEnumerable<Effect> effects)
         {
             toUpdate = new List<Effect>();
@@ -41,7 +53,7 @@ namespace Effects
             }
 
             IEnumerator<Effect> toUpdateEnumerable = toUpdate.GetEnumerator();
-            
+
             foreach (EffectSlot effectSlot in effectSlots.GetNonUpdatedEffects(Time.frameCount))
             {
                 if (toUpdateEnumerable.MoveNext())
@@ -77,6 +89,14 @@ namespace Effects
             effectUI.background.fillAmount = effect.DurationPercent;
             effectUI.lastUpdatedFrame = Time.frameCount;
         }
+
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            if (panel.GetComponent<LayoutGroup>() == null)
+                Debug.LogWarning($"The gameobject {panel} lacks of any Layout Group component. It's strongly suggested to use one for the proper usage of this script.");
+        }
+#endif
     }
 
 
@@ -87,7 +107,7 @@ namespace Effects
         private Sprite backgroundSprite;
 
         private bool Contains(Effect effect) => effectSlots.ContainsBy(e => e.effect == effect);
-        
+
         public EffectSlots(RectTransform panel, Sprite backgroundSprite)
         {
             this.panel = panel;

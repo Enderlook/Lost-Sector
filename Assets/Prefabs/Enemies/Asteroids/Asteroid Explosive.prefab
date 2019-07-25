@@ -190,6 +190,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300098, guid: 4cf6de76bffe1d649b092af0274ca582,
         type: 3}
+    - target: {fileID: 2915674109300423229, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: damageOnHit
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1117335959791592195, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -210,10 +215,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 2915674109300423229, guid: 926a52539d738a7439a32750206b316e,
+    - target: {fileID: 246730387930743272, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
-      propertyPath: damageOnHit
-      value: 8
+      propertyPath: m_AnchoredPosition.y
+      value: 1.61
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3171107084848344101, guid: 926a52539d738a7439a32750206b316e, type: 3}
