@@ -90,7 +90,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         effectManager.Update(Time.deltaTime);
         foreach (Weapon weapon in weapons)
         {
-            weapon.Recharge(Time.deltaTime);
+            weapon.Recharge(Time.deltaTime * fireRateMultiplier);
         }
         foreach (IUpdate action in updates)
         {
