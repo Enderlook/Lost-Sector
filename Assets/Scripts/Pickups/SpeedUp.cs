@@ -23,6 +23,9 @@ public class SpeedEffect : Effect
         this.strengthCalculate = strengthCalculate;
     }
 
+    public override string Name => "Speed";
+    public override bool IsBuff => strengthCalculate(strength, 1, 1, 1) > 1;
+
     public override bool ReplaceCurrentInstance => true;
 
     private float initialValue;

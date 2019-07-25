@@ -268,4 +268,21 @@ public static class LINQExtension
     /// <param name="element">Element to append to <paramref name="source"/>.</param>
     /// <returns><paramref name="source"/> with the <paramref name="element"/> added at the end of it.</returns>
     public static IEnumerable<T> Append<T>(this IEnumerable<T> source, T element) => source.Concat(new T[] { element });
+
+    /// <summary>
+    /// Check if the <paramref name="source"/> contains an elements which match the given criteria by <paramref name="selector"/>.
+    /// </summary>
+    /// <typeparam name="T">Type of the element inside <paramref name="source"/>.</typeparam>
+    /// <param name="source">Source to look for a matching element.</param>
+    /// <param name="selector">Check if the element match the criteria.</param>
+    /// <returns>Whenever the matched item was found or not.</returns>
+    public static bool ContainsBy<T>(this IEnumerable<T> source, System.Func<T, bool> selector)
+    {
+        foreach(T item in source)
+        {
+            if (selector(item))
+                return true;
+        }
+        return false;
+    }
 }

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EffectManager
 {
-    private List<Effect> effects = new List<Effect>();
+    public List<Effect> effects = new List<Effect>();
     private LivingObject livingObject;
 
     /// <summary>
@@ -61,6 +61,21 @@ public abstract class Effect
     protected float duration;
     public bool shouldBeDisposed = false;
     protected LivingObject livingObject;
+
+    //public int id;
+
+    /// <summary>
+    /// Name of the effect.
+    /// </summary>
+    public abstract string Name { get; }
+    /// <summary>
+    /// Whenever it's a buff or a debuff.
+    /// </summary>
+    public abstract bool IsBuff { get; }
+    /// <summary>
+    /// Get duration percent from <c><see cref="duration"/> / <see cref="maxDuration"/></c>
+    /// </summary>
+    public float DurationPercent { get => duration / maxDuration; }
 
     /// <summary>
     /// Whenever the old instance of this effect should be removed before add this one.
