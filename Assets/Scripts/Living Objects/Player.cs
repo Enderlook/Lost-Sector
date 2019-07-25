@@ -39,7 +39,6 @@ public class Player : LivingObject
 
         shieldPoints.Update(Time.deltaTime);
         shieldHandler.UpdateColor(shieldPoints.Ratio);
-
         base.Update();
     }
 

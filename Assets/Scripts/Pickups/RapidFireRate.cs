@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class RapidFireRate : Pickupable
 {
@@ -17,6 +17,9 @@ public class RapidFireRate : Pickupable
 public class RapidFireRateEffect : Effect
 {
     public RapidFireRateEffect(float strength, float duration) : base(strength, duration) { }
+
+    public override string Name => "Fire Rate";
+    public override bool IsBuff => strength > 0;
 
     public override bool ReplaceCurrentInstance => true;
 

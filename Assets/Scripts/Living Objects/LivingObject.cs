@@ -29,6 +29,9 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     [Tooltip("FloatingTextController Script")]
     public FloatingTextController floatingTextController;
 
+    [Tooltip("Effect displayer.")]
+    public Effects.EffectsDisplayer effectsDisplayer;
+
     private Quaternion? initialRotation = null;
 
     private IInitialize[] initializes;
@@ -41,7 +44,6 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     IMelee IRigidbodyHelperConfiguration.Melee => melee;
 
     private bool hasBeenBuilded = false;
-
     private EffectManager effectManager;
 
     protected bool isDead = false;
@@ -94,6 +96,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         {
             action.Update();
         }
+        effectsDisplayer?.CheckEffects(effectManager.effects);
     }
 
     /// <summary>
@@ -191,6 +194,8 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         }
         healthPoints.IsVisible = isVisible;
         rigidbodyHelper.gameObject.SetActive(isVisible);
+        if (effectsDisplayer != null)
+            effectsDisplayer.IsVisible = isVisible;
     }
 
     /// <summary>
