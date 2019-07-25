@@ -73,7 +73,7 @@ namespace LivingObjectAddons
         {
             void Spawn(GameObject gameObjectToSpawn)
             {
-                GameObject spawned = Instantiate(gameObjectToSpawn, Global.enemiesParent);
+                GameObject spawned = Global.enemySpawner.Spawn(gameObjectToSpawn, Global.pickupsParent);
                 Transform spawningTransform = (Transform)spawningPoints[Random.Range(0, spawningPoints.Length - 1)];
                 Transform spawnedTransform = spawned.transform;
                 spawnedTransform.position = spawningTransform.position;
