@@ -63,19 +63,10 @@ public class RigidbodyHelper : MonoBehaviour
     /// </summary>
     /// <param name="collision">Unity <see cref="Collision2D"/>.</param>
     private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // https://forum.unity.com/threads/getting-impact-force-not-just-velocity.23746/#post-784422
-        float force = 0;
-        foreach(ContactPoint2D contact in collision.contacts)
-        {
-            force += Vector3.Dot(contact.normal, collision.relativeVelocity);
-        }
-        force *= Rigidbody2D.mass;
-        force = Mathf.Abs(force);
-
+    {        
         RigidbodyHelper target = collision.gameObject.GetComponent<RigidbodyHelper>();
         if (target != null)
-            target.TakeDamage(CalculateDamage(force), ShouldDisplayDamage());
+            target.TakeDamage(CalculateDamage(collision), ShouldDisplayDamage());
 
         if (audioSource != null)
         {
@@ -111,13 +102,24 @@ public class RigidbodyHelper : MonoBehaviour
     /// <summary>
     /// Calculate damage produced taking into account the <paramref name="impulse"/> of the collision if <see cref="IRigidbodyHelperConfiguration.IsImpactDamageRelativeToImpulse"/> is <see langword="true"/>. On false <see cref="IRigidbodyHelperConfiguration.ImpactDamage"/> is return.
     /// </summary>
-    /// <param name="impulse">Impulse or force produced on <see cref="Collision2D"/>.</param>
+    /// <param name="collision">Collision to calculate impact force.</param>
     /// <returns>Damage to inflict.</returns>
     /// <seealso cref="TakeDamage(float amount, bool displayText = false)"/>
-    private float CalculateDamage(float impulse)
+    private float CalculateDamage(Collision2D collision)
     {
         if (entity.Melee.IsImpactDamageRelativeToImpulse)
-            return entity.Melee.ImpactDamage * impulse;
+        {
+            // https://forum.unity.com/threads/getting-impact-force-not-just-velocity.23746/#post-784422
+            float force = 0;
+            foreach (ContactPoint2D contact in collision.contacts)
+            {
+                force += Vector3.Dot(contact.normal, collision.relativeVelocity);
+            }
+            force *= Rigidbody2D.mass;
+            force = Mathf.Abs(force);
+
+            return entity.Melee.ImpactDamage * force;
+        }
         else
             return entity.Melee.ImpactDamage;
     }
