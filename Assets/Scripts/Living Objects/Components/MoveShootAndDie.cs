@@ -2,7 +2,7 @@
 
 namespace LivingObjectAddons
 {
-    public class MoveShootAndDie : CrusierSpeed, IUpdate
+    public class MoveShootAndDie : CrusierSpeed, IUpdate, IInitialize
     {
         [Header("Configuration")]
         [Tooltip("Distance from screen to stop in percent (from 0 to 1).")]
@@ -21,6 +21,13 @@ namespace LivingObjectAddons
 
         private bool hasBeenTriggered = false;
         private LivingObject livingObject;
+
+        void IInitialize.Initialize()
+        {
+            warmup = 0;
+            currentShoots = 0;
+            hasBeenTriggered = false;
+        }
 
         public override void Build(LivingObject livingObject)
         {
