@@ -91,6 +91,7 @@ MonoBehaviour:
       end: 4
       isRandom: 1
     notRandom: 0
+  configureRoatation: 1
 --- !u!1 &5393303838719322650
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,6 +396,11 @@ PrefabInstance:
       propertyPath: damageOnHit
       value: 35
       objectReference: {fileID: 0}
+    - target: {fileID: 246730387930743272, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.78
+      objectReference: {fileID: 0}
     - target: {fileID: 3171107084438929871, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -434,11 +440,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 246730387930743272, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 1.78
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3171107084848344101, guid: 926a52539d738a7439a32750206b316e, type: 3}
