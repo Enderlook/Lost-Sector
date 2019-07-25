@@ -199,6 +199,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: b2a4d50a54556d944a260a3b9dba57e2,
         type: 3}
+    - target: {fileID: 7558888381624820514, guid: d53e9038544373f468a4d49b83a0d569,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7558888381624820514, guid: d53e9038544373f468a4d49b83a0d569,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 26d9755e19df12548a90fc40a17b2323,
+        type: 3}
     - target: {fileID: 7558930798319532954, guid: d53e9038544373f468a4d49b83a0d569,
         type: 3}
       propertyPath: m_Sprite
