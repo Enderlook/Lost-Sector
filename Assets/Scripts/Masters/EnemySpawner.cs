@@ -35,7 +35,7 @@ public class EnemySpawner : MonoBehaviour
     [Tooltip("Health Pack spawn probability per spawn attempt. From 0 to 1.")]
     public float healthPackSpawnChance;
 
-    private Dictionary<GameObject, List<GameObject>> enemyPool = new Dictionary<GameObject, List<GameObject>>();
+    private Dictionary<GameObject, List<GameObject>> pool = new Dictionary<GameObject, List<GameObject>>();
     private bool requireWeightsUpdate = true;
     private Coroutine spawnWaveCoroutine;
 
@@ -52,7 +52,7 @@ public class EnemySpawner : MonoBehaviour
             healthPackSpawnCharging = 0;
             if (Random.Range(0f, 1f) < healthPackSpawnChance)
             {
-                GameObject pack = Instantiate(healthPack, Global.pickupsParent);
+                GameObject pack = Spawn(healthPack, Global.pickupsParent);
                 pack.transform.position = (Vector3)spawnPoints[Random.Range(0, spawnPoints.Length - 1)];
             }
         }
@@ -70,25 +70,51 @@ public class EnemySpawner : MonoBehaviour
         StopCoroutine(spawnWaveCoroutine);
     }
 
-    private GameObject Spawn(GameObject enemyPrefab)
+    /// <summary>
+    /// Look for an inactive <seealso cref="GameObject"/> from <paramref name="prefab"/> to recycle. If not found, instantiate a new one.
+    /// </summary>
+    /// <param name="prefab">Prefab to look or instantiate.</param>
+    /// <returns>Instance of the prefab, either recycled or new. It's your and its scripts responsibility to properly reset.</returns>
+    /// <seealso cref="Spawn(GameObject, Transform)"/>
+    public GameObject Spawn(GameObject prefab)
     {
-        GameObject enemy = null;
-        if (enemyPool.ContainsKey(enemyPrefab))
+        GameObject instance;
+        List<GameObject> instances;
+        if (pool.TryGetValue(prefab, out instances))
         {
-            enemy = enemyPool[enemyPrefab].Where(e => !e.activeSelf).FirstOrDefault();
-            if (enemy != null)
+            List<int> toRemove = new List<int>();
+            for (int i = 0; i < instances.Count; i++)
             {
-                enemy.SetActive(true);
+                if (instances[i] == null)
+                    toRemove.Add(i);
+                else if (!instances[i].activeSelf)
+                {
+                    instance = instances[i];
+                    instance.SetActive(true);
+                    return instance;
+                }
             }
         }
         else
-            enemyPool.Add(enemyPrefab, new List<GameObject>());
-        if (enemy == null)
-        {
-            enemy = Instantiate(enemyPrefab, Global.enemiesParent);
-            enemyPool[enemyPrefab].Add(enemy);
-        }
-        return enemy;
+            pool.Add(prefab, new List<GameObject>());
+
+        instance = Instantiate(prefab);
+        pool[prefab].Add(instance);
+        return instance;
+    }
+
+    /// <summary>
+    /// Look for an inactive <seealso cref="GameObject"/> from <paramref name="prefab"/> to recycle. If not found, instantiate a new one.
+    /// </summary>
+    /// <param name="prefab">Prefab to look or instantiate.</param>
+    /// <param name="parent">Assign parent to the instance.</param>
+    /// <returns>Instance of the prefab, either recycled or new. It's your and its scripts responsibility to properly reset.</returns>
+    /// <seealso cref="Spawn(GameObject)"/>
+    public GameObject Spawn(GameObject prefab, Transform parent)
+    {
+        GameObject instance = Spawn(prefab);
+        instance.transform.parent = parent;
+        return instance;
     }
 
     /// <summary>
@@ -109,7 +135,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 Vector3 position = (Vector3)spawnPoints[Random.Range(0, spawnPoints.Length - 1)];
 
-                GameObject enemy = Spawn(enemyPrefab);
+                GameObject enemy = Spawn(enemyPrefab, Global.enemiesParent);
                 enemy.transform.position = position;
 
                 yield return new WaitForSeconds(0.1f);
