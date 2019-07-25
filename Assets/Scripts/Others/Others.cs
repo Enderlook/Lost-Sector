@@ -278,7 +278,7 @@ public static class LINQExtension
     /// <returns>Whenever the matched item was found or not.</returns>
     public static bool ContainsBy<T>(this IEnumerable<T> source, System.Func<T, bool> selector)
     {
-        foreach(T item in source)
+        foreach (T item in source)
         {
             if (selector(item))
                 return true;
