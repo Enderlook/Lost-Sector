@@ -74,12 +74,12 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
 
     private void LoadComponents()
     {
-        initializes = gameObject.GetComponents<IInitialize>();
-        dies = gameObject.GetComponents<IDie>();
-        updates = gameObject.GetComponents<IUpdate>();
-        weapons = gameObject.GetComponents<Weapon>();
-        move = gameObject.GetComponent<IMove>();
-        melee = gameObject.GetComponent<IMelee>();
+        initializes = gameObject.GetComponentsInChildren<IInitialize>();
+        dies = gameObject.GetComponentsInChildren<IDie>();
+        updates = gameObject.GetComponentsInChildren<IUpdate>();
+        weapons = gameObject.GetComponentsInChildren<Weapon>();
+        move = gameObject.GetComponentInChildren<IMove>();
+        melee = gameObject.GetComponentInChildren<IMelee>();
     }
 
     protected virtual void Update()
@@ -125,11 +125,6 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
             hasBeenBuilded = true;
             Build();
         }
-        else
-        {
-            // If hasBeenBuilded is alreay true it means this is the second time it's enabled, and so it must be set visible.
-            SetVisibility(true);
-        }
         Initialize();
     }
 
@@ -164,38 +159,15 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     {
         if (isDead) return;
         isDead = true;
-        dieSound.Play(rigidbodyHelper.audioSource, 1);
-        GameObject explosion = Instantiate(onDeathExplosionPrefab, Global.explosionsParent);
+        dieSound.PlayAtPoint(rigidbodyHelper.transform.position);
+        GameObject explosion = Global.enemySpawner.Spawn(onDeathExplosionPrefab, Global.explosionsParent);
         explosion.transform.position = rigidbodyHelper.transform.position;
         explosion.transform.localScale = Vector3.one * onDeathExplosionPrefabScale;
         foreach (IDie action in dies)
         {
             action.Die(suicide);
         }
-        StartCoroutine(Hide());
-    }
-
-    private IEnumerator Hide()
-    {
-        SetVisibility(false);
-        // https://answers.unity.com/questions/1158528/wait-until-audio-is-finished-before-set-active-is.html
-        // rigidbodyHelper.audioSource == null shouldn't be there but it prevents a bug 
-        yield return new WaitWhile(() => rigidbodyHelper.audioSource == null || rigidbodyHelper.audioSource.isPlaying);
         gameObject.SetActive(false);
-    }
-
-    private void SetVisibility(bool isVisible)
-    {
-        // https://answers.unity.com/questions/410875/how-can-i-hide-a-gameobject-without-activefalse.html
-        Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
-        foreach (Renderer render in renderers)
-        {
-            render.enabled = isVisible;
-        }
-        healthPoints.IsVisible = isVisible;
-        rigidbodyHelper.gameObject.SetActive(isVisible);
-        if (effectsDisplayer != null)
-            effectsDisplayer.IsVisible = isVisible;
     }
 
     /// <summary>

@@ -6,6 +6,7 @@ namespace LivingObjectAddons
     {
         protected override void SpawnedInstructions(GameObject spawned, Transform spawningTransform)
         {
+            spawned.transform.parent = Global.enemiesParent;
             RigidbodyHelper spawnedRigidbodyHelper = spawned.GetComponent<Enemy>().rigidbodyHelper; // Or spawned.GetComponentInChildren<RigidbodyHelper>(); ?
             spawnedRigidbodyHelper.transform.position = spawningTransform.position;
             spawnedRigidbodyHelper.transform.transform.rotation = spawningTransform.rotation;
