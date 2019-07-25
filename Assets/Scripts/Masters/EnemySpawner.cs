@@ -65,10 +65,7 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     /// <seealso cref="spawnWaveCoroutine"/>
     /// <seealso cref="SpawnWave"/>.
-    public void StopSpawnWaves()
-    {
-        StopCoroutine(spawnWaveCoroutine);
-    }
+    public void StopSpawnWaves() => StopCoroutine(spawnWaveCoroutine);
 
     /// <summary>
     /// Look for an inactive <seealso cref="GameObject"/> from <paramref name="prefab"/> to recycle. If not found, instantiate a new one.
@@ -79,8 +76,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject Spawn(GameObject prefab)
     {
         GameObject instance;
-        List<GameObject> instances;
-        if (pool.TryGetValue(prefab, out instances))
+        if (pool.TryGetValue(prefab, out List<GameObject> instances))
         {
             List<int> toRemove = new List<int>();
             for (int i = 0; i < instances.Count; i++)
@@ -121,7 +117,7 @@ public class EnemySpawner : MonoBehaviour
     /// Spawns enemies on the fly.
     /// </summary>
     /// <returns>This must be executed on a <see cref="StartCoroutine"/>.</returns>
-    IEnumerator SpawnWave()
+    private IEnumerator SpawnWave()
     {
         // TODO: Custom modifications per enemy.
         while (true)
