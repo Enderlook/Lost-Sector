@@ -165,11 +165,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 1.19
       objectReference: {fileID: 0}
-    - target: {fileID: 3171107084848344101, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3171107084438929868, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
       propertyPath: m_Sprite
@@ -180,6 +175,16 @@ PrefabInstance:
         type: 3}
       propertyPath: damageOnHit
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107084848344101, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 246730387930743272, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.61
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3171107084848344101, guid: 926a52539d738a7439a32750206b316e, type: 3}
