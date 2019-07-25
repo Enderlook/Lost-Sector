@@ -8,10 +8,12 @@ namespace LivingObjectAddons
         [Header("Configuration")]
         [Tooltip("Configuration of gameObjects to spawn on death.")]
         public SpawneableGameObjects spawnsOnDeath;
+        [Tooltip("Whenever the spawned gameObjects maintain the rotation from it spawner.")]
+        public bool configureRoatation;
 
         private void Awake() => spawnsOnDeath.SetSpawnedInstructions(SpawnedInstructions);
         void IBuild.Build(LivingObject livingObject) { }
-        void IDie.Die(bool suicide) => spawnsOnDeath.SpawnPrefabs(MonoBehaviour.Instantiate);
+        void IDie.Die(bool suicide) => spawnsOnDeath.SpawnPrefabs(MonoBehaviour.Instantiate, configureRoatation);
 
         /// <summary>
         /// Set additional spawn instructions used when a prefab is instantiated.
@@ -69,7 +71,8 @@ namespace LivingObjectAddons
         /// Spawn the defined game objects.
         /// </summary>
         /// <param name="Instantiate">Instantiate UnityEngine method.</param>
-        public void SpawnPrefabs(System.Func<GameObject, Transform, GameObject> Instantiate)
+        /// <param name="configureRoatation">Whenever it should or not set rotation of the spawned prefab.</param>
+        public void SpawnPrefabs(System.Func<GameObject, Transform, GameObject> Instantiate, bool configureRoatation)
         {
             void Spawn(GameObject gameObjectToSpawn)
             {
@@ -77,7 +80,8 @@ namespace LivingObjectAddons
                 Transform spawningTransform = (Transform)spawningPoints[Random.Range(0, spawningPoints.Length - 1)];
                 Transform spawnedTransform = spawned.transform;
                 spawnedTransform.position = spawningTransform.position;
-                spawnedTransform.rotation = spawningTransform.rotation;
+                if (configureRoatation)
+                    spawnedTransform.rotation = spawningTransform.rotation;
                 SpawningInstructions?.Invoke(spawned, spawningTransform);
             }
 
