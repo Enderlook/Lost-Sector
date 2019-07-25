@@ -64,23 +64,18 @@ public class RigidbodyHelper : MonoBehaviour
     /// <param name="collision">Unity <see cref="Collision2D"/>.</param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // https://forum.unity.com/threads/getting-impact-force-not-just-velocity.23746/
-        // Calculate impact force of the collision
-        float impulse = 0f;
-        foreach (ContactPoint2D contactPoint in collision.contacts)
+        // https://forum.unity.com/threads/getting-impact-force-not-just-velocity.23746/#post-784422
+        float force = 0;
+        foreach(ContactPoint2D contact in collision.contacts)
         {
-            impulse += contactPoint.normalImpulse;
+            force += Vector3.Dot(contact.normal, collision.relativeVelocity);
         }
-        // Kinetic energy? https://www.reddit.com/r/Unity2D/comments/2kil7j/how_to_determine_force_of_impact_when_two_things/
-        //float impulse = Mathf.Abs(0.5f * collision.relativeVelocity.sqrMagnitude * (collision.collider.attachedRigidbody.mass + collision.otherCollider.attachedRigidbody.mass));
-        //float impulse = Mathf.Abs(0.5f * collision.rigidbody.mass * collision.rigidbody.velocity.sqrMagnitude - 0.5f * collision.otherRigidbody.mass * collision.otherRigidbody.velocity.sqrMagnitude);
-        // TODO: READ https://forum.unity.com/threads/how-to-calculate-a-rigidbodys-mass-normalized-energy-for-sleepthreshold.311941/
-        // TODO: Add fake mass to player kinematic Rigidbody
+        force *= Rigidbody2D.mass;
+        force = Mathf.Abs(force);
 
-        // Downwards damage doesn't work. Why?
         RigidbodyHelper target = collision.gameObject.GetComponent<RigidbodyHelper>();
         if (target != null)
-            target.TakeDamage(CalculateDamage(impulse), ShouldDisplayDamage());
+            target.TakeDamage(CalculateDamage(force), ShouldDisplayDamage());
 
         if (audioSource != null)
         {
