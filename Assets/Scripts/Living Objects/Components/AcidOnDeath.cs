@@ -28,6 +28,8 @@ public class AcidEffect : Effect
 
     public override bool ReplaceCurrentInstance => false;
 
+    public override string Name => "Acid";
+    public override bool IsBuff => false;
 
     protected override void OnUpdate(float time)
     {
