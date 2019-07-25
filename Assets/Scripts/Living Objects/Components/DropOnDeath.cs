@@ -11,7 +11,7 @@ namespace LivingObjectAddons
 
         private void Awake() => spawnsOnDeath.SetSpawnedInstructions(SpawnedInstructions);
         void IBuild.Build(LivingObject livingObject) { }
-        void IDie.Die(bool suicide) => spawnsOnDeath.SpawnPrefabs(MonoBehaviour.Instantiate);
+        void IDie.Die(bool suicide) => spawnsOnDeath.SpawnPrefabs(Instantiate);
 
         /// <summary>
         /// Set additional spawn instructions used when a prefab is instantiated.
