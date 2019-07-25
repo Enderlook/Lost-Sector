@@ -47,10 +47,7 @@ public class FloatingTextController : MonoBehaviour
     /// Set the parent of all Floating Text <see cref="GameObject"/>s spawned by <see cref="FloatingTextController"/>s which <see cref="floatingTextParent"/> is <see langword="null"/>.
     /// </summary>
     /// <param name="floatingTextParent">Parent of all <see cref="FloatingText"/> <see cref="GameObject"/>s.</param>
-    public static void SetFloatingTextParentStatic(Transform floatingTextParent)
-    {
-        floatingTextParentStatic = floatingTextParent;
-    }
+    public static void SetFloatingTextParentStatic(Transform floatingTextParent) => floatingTextParentStatic = floatingTextParent;
     /// <summary>
     /// Transform used as parent for spawned floating texts.<br/>
     /// <see cref="FloatingTextParent"/> will be returned unless it's <see langword="null"/>. If <see langword="null"/>, <see cref="floatingTextParentStatic"/> will be returned.
