@@ -42,12 +42,6 @@ public class Player : LivingObject
         base.Update();
     }
 
-    protected override void SetVisibility(bool isVisible)
-    {
-        shieldPoints.IsVisible = isVisible;
-        base.SetVisibility(isVisible);
-    }
-
     /// <summary>
     /// Take damage reducing its <see cref="Shield"/> or <see cref="Health"/> if the first is 0.
     /// </summary>

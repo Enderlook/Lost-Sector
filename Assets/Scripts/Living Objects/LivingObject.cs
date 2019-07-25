@@ -170,29 +170,6 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         gameObject.SetActive(false);
     }
 
-    private IEnumerator Hide()
-    {
-        SetVisibility(false);
-        // https://answers.unity.com/questions/1158528/wait-until-audio-is-finished-before-set-active-is.html
-        // rigidbodyHelper.audioSource == null shouldn't be there but it prevents a bug 
-        yield return new WaitWhile(() => rigidbodyHelper.audioSource == null || rigidbodyHelper.audioSource.isPlaying);
-        gameObject.SetActive(false);
-    }
-
-    protected virtual void SetVisibility(bool isVisible)
-    {
-        // https://answers.unity.com/questions/410875/how-can-i-hide-a-gameobject-without-activefalse.html
-        Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
-        foreach (Renderer render in renderers)
-        {
-            render.enabled = isVisible;
-        }
-        healthPoints.IsVisible = isVisible;
-        rigidbodyHelper.gameObject.SetActive(isVisible);
-        if (effectsDisplayer != null)
-            effectsDisplayer.IsVisible = isVisible;
-    }
-
     /// <summary>
     /// Spawn a floating text above the creature.
     /// </summary>
