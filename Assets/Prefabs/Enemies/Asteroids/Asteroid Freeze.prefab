@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 2
-  rigidbodyHelperGizmos: {fileID: 0}
+  rigidbodyHelperGizmos: {fileID: 7253083888255397219}
   speedMultiplier: 2.5
   durationOfEffect: 2
 --- !u!1001 &5236041812993261892
@@ -176,15 +176,15 @@ PrefabInstance:
       propertyPath: damageOnHit
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 3171107084848344101, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 246730387930743272, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 1.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171107084848344101, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3171107084848344101, guid: 926a52539d738a7439a32750206b316e, type: 3}
@@ -201,3 +201,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5236041812993261892}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7253083888255397219 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3171107084848344103, guid: 926a52539d738a7439a32750206b316e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5236041812993261892}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 317c52b6aadb3334fa7daa4a2aefc737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
