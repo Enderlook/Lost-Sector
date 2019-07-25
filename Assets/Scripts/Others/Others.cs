@@ -64,21 +64,13 @@ public class TransformRange : IVectorRangeTwo
     public Transform endTransform;
 
     protected override Vector3 StartVector3 {
-        get {
-            return startTransform.position;
-        }
-        set {
-            startTransform.position = value;
-        }
+        get => startTransform.position;
+        set => startTransform.position = value;
     }
 
     protected override Vector3 EndVector3 {
-        get {
-            return endTransform.position;
-        }
-        set {
-            endTransform.position = value;
-        }
+        get => endTransform.position;
+        set => endTransform.position = value;
     }
 
     /// <summary>
@@ -102,21 +94,13 @@ public class Vector2RangeTwo : IVectorRangeTwo
     public Vector2 endVector;
 
     protected override Vector3 StartVector3 {
-        get {
-            return startVector;
-        }
-        set {
-            startVector = value;
-        }
+        get => startVector;
+        set => startVector = value;
     }
 
     protected override Vector3 EndVector3 {
-        get {
-            return endVector;
-        }
-        set {
-            endVector = value;
-        }
+        get => endVector;
+        set => endVector = value;
     }
 
     /// <summary>
@@ -225,7 +209,7 @@ public class Sound
     /// </summary>
     /// <param name="audioSource"><see cref="AudioSource"/> where the sound will be played.</param>
     /// <param name="volumeMultiplier">Volume of the sound, from 0 to 1.</param>
-    public void Play(AudioSource audioSource, float volumeMultiplier)
+    public void Play(AudioSource audioSource, float volumeMultiplier = 1)
     {
         // audioSource != null shouldn't be used but it's to prevents a bug
         if (Settings.IsSoundActive && audioSource != null)
@@ -278,7 +262,7 @@ public static class LINQExtension
     /// <returns>Whenever the matched item was found or not.</returns>
     public static bool ContainsBy<T>(this IEnumerable<T> source, System.Func<T, bool> selector)
     {
-        foreach(T item in source)
+        foreach (T item in source)
         {
             if (selector(item))
                 return true;

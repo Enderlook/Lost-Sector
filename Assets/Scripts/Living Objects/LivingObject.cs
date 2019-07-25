@@ -112,7 +112,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         healthPoints.Initialize();
         foreach (IInitialize action in initializes)
         {
-            action?.Initialize();
+            action.Initialize();
         }
         fireRateMultiplier = 1;
         isDead = false;
@@ -166,7 +166,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         isDead = true;
         dieSound.Play(rigidbodyHelper.audioSource, 1);
         GameObject explosion = Instantiate(onDeathExplosionPrefab, Global.explosionsParent);
-        explosion.transform.position = rigidbodyHelper.Position;
+        explosion.transform.position = rigidbodyHelper.transform.position;
         explosion.transform.localScale = Vector3.one * onDeathExplosionPrefabScale;
         foreach (IDie action in dies)
         {

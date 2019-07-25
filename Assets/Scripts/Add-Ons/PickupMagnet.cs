@@ -6,9 +6,7 @@ public class PickupMagnet : MonoBehaviour
     [Tooltip("Magnet radius.")]
     public float magnetRadius;
     public float MagnetRadius {
-        get {
-            return magnetRadius;
-        }
+        get => magnetRadius;
         set {
             magnetRadius = value;
             magnetRadiusSquared = magnetRadius * magnetRadius;
@@ -76,8 +74,7 @@ public class PickupMagnet : MonoBehaviour
         if (pickupRadius <= 0)
             Debug.LogWarning($"Game object {gameObject.name} has a {nameof(pickupRadius)} of {pickupRadius}. It must be greater than 0.");
     }
-#endif
-#if UNITY_EDITOR
+
     private void OnDrawGizmos()
     {
         UnityEditor.Handles.color = Color.blue;

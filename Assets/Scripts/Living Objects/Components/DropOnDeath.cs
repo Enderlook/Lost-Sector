@@ -11,9 +11,10 @@ namespace LivingObjectAddons
         [Tooltip("Whenever the spawned gameObjects maintain the rotation from it spawner.")]
         public bool configureRoatation;
 
-        private void Awake() => spawnsOnDeath.SetSpawnedInstructions(SpawnedInstructions);
         void IBuild.Build(LivingObject livingObject) { }
-        void IDie.Die(bool suicide) => spawnsOnDeath.SpawnPrefabs(MonoBehaviour.Instantiate, configureRoatation);
+        void IDie.Die(bool suicide) => spawnsOnDeath.SpawnPrefabs(Instantiate, configureRoatation);
+
+        private void Awake() => spawnsOnDeath.SetSpawnedInstructions(SpawnedInstructions);
 
         /// <summary>
         /// Set additional spawn instructions used when a prefab is instantiated.

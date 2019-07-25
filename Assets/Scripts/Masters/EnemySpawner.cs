@@ -29,7 +29,7 @@ public class EnemySpawner : MonoBehaviour
 
     [Tooltip("Health Pack")]
     public GameObject healthPack;
-    [Tooltip("Time between spawn attemps of Health Pack")]
+    [Tooltip("Time between spawn attempts of Health Pack")]
     public float healthPackSpawnTime;
     private float healthPackSpawnCharging = 0;
     [Tooltip("Health Pack spawn probability per spawn attempt. From 0 to 1.")]
@@ -170,11 +170,7 @@ public class EnemyPrefab
     /// </summary>
     /// <returns>Weighted rarity.</returns>
     /// <seealso cref="UpdateWeight(float)"/>
-    public float Weight {
-        get {
-            return calculatedWeight;
-        }
-    }
+    public float Weight => calculatedWeight;
 
     /// <summary>
     /// Updates the weight multiplier which changes according to the current difficulty.
