@@ -72,8 +72,5 @@ public class Menu : MonoBehaviour
     /// Show how to play panel.
     /// </summary>
     /// <param name="active"></param>
-    public void ShowHowToPlay(bool active)
-    {
-        howToPlay.SetActive(active);
-    }
+    public void ShowHowToPlay(bool active) => howToPlay.SetActive(active);
 }

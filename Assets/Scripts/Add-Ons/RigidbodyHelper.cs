@@ -83,10 +83,7 @@ public class RigidbodyHelper : MonoBehaviour
     /// <param name="displayText">Whenever the damage taken must be shown in a floating text.</param>
     /// <seealso cref="ShouldDisplayDamage()"/>
     /// <seealso cref="CalculateDamage(float impulse)"/>
-    public void TakeDamage(float amount, bool displayText = false)
-    {
-        entity.TakeDamage(amount, displayText);
-    }
+    public void TakeDamage(float amount, bool displayText = false) => entity.TakeDamage(amount, displayText);
 
     /// <summary>
     /// Whenever if the opposite <seealso cref="RigidbodyHelper"/> should display or not the floating text when receive damage.<br/>
@@ -94,10 +91,7 @@ public class RigidbodyHelper : MonoBehaviour
     /// </summary>
     /// <returns>If damage should be displayed using a <seealso cref="FloatingText"/>.</returns>
     /// <seealso cref="IRigidbodyHelperConfiguration.ShouldDisplayDamage"/>
-    public bool ShouldDisplayDamage()
-    {
-        return entity.Melee.ShouldDisplayDamage;
-    }
+    public bool ShouldDisplayDamage() => entity.Melee.ShouldDisplayDamage;
 
     /// <summary>
     /// Calculate damage produced taking into account the <paramref name="impulse"/> of the collision if <see cref="IRigidbodyHelperConfiguration.IsImpactDamageRelativeToImpulse"/> is <see langword="true"/>. On false <see cref="IRigidbodyHelperConfiguration.ImpactDamage"/> is return.

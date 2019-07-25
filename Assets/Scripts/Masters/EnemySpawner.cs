@@ -65,10 +65,7 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     /// <seealso cref="spawnWaveCoroutine"/>
     /// <seealso cref="SpawnWave"/>.
-    public void StopSpawnWaves()
-    {
-        StopCoroutine(spawnWaveCoroutine);
-    }
+    public void StopSpawnWaves() => StopCoroutine(spawnWaveCoroutine);
 
     /// <summary>
     /// Look for an inactive <seealso cref="GameObject"/> from <paramref name="prefab"/> to recycle. If not found, instantiate a new one.
