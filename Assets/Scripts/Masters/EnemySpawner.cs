@@ -150,6 +150,7 @@ public class EnemySpawner : MonoBehaviour
         requireWeightsUpdate = true;
     }
 
+#if UNITY_EDITOR
     private void OnValidate()
     {
         if (difficultyGeometricalIncrease < 1)
@@ -167,7 +168,7 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
-
+#endif
 }
 
 [System.Serializable]
@@ -214,6 +215,7 @@ public class EnemyPrefab
         }
     }
 
+#if UNITY_EDITOR
     private void OnValidate()
     {
         if (weight <= 0)
@@ -222,6 +224,7 @@ public class EnemyPrefab
             Debug.LogWarning($"The field {nameof(weight)} can't be null.");
         // TODO: How to check minimalThreat?
     }
+#endif
 }
 
 [System.Serializable]

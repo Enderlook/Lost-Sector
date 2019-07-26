@@ -34,11 +34,12 @@ public class SelfDestroyEndAnimation : MonoBehaviour
             cooldown = animator.runtimeAnimatorController.animationClips[0].length;
     }
 
+#if UNITY_EDITOR
     private void OnValidate()
     {
         Animator animator = GetComponent<Animator>();
         if (animator == null)
             Debug.LogWarning($"Game object {gameObject.name} lacks of an Animator Component.");
     }
-
+#endif
 }

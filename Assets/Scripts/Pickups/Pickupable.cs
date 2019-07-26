@@ -15,12 +15,15 @@ public abstract class Pickupable : MonoBehaviour, ICanBePickedUp
         thisRigidbody2D = gameObject.GetComponent<Rigidbody2D>();
         thisRigidbody2D.AddRelativeForce((Vector2)impulse * thisRigidbody2D.mass);
     }
+
+#if UNITY_EDITOR
     protected virtual void OnValidate()
     {
         Rigidbody2D rigidbody2D = GetComponent<Rigidbody2D>();
         if (rigidbody2D == null)
             Debug.LogWarning($"Game object {gameObject.name} lacks of an Rigidbody2D Component.");
     }
+#endif
 
     public abstract void Pickup(Player player);
 }

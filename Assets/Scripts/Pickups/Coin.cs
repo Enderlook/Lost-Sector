@@ -22,10 +22,12 @@ public class Coin : Pickupable
         gameObject.GetComponent<Animator>().Play(animationState);
     }
 
+#if UNITY_EDITOR
     protected override void OnValidate()
     {
         if (gameObject.GetComponent<Animator>() == null)
             Debug.LogWarning($"Game object {gameObject.name} lacks of an Animator Component.");
         base.OnValidate();
     }
+#endif
 }
