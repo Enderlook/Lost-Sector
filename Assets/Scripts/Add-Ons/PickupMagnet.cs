@@ -24,7 +24,7 @@ public class PickupMagnet : MonoBehaviour
 
     private Player player;
 
-    const int FRAME_RATIO = 3;
+    const int FRAME_RATIO = 2;
     const float SECONDS_PER_PICKUP = 0.05f;
     private float cooldown = 0;
 
