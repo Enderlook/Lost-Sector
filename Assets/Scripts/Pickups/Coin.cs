@@ -9,7 +9,11 @@ public class Coin : Pickupable
     /// <summary>
     /// Collect its money.
     /// </summary>
-    public override void Pickup(Player player) => Global.money += price;
+    public override void Pickup(Player player)
+    {
+        Global.money += price;
+        base.Pickup(player);
+    }
 
     /// <summary>
     /// Set configuration of the coin.
