@@ -218,6 +218,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 1947903233823702610, guid: 996e20757a8f7b343a9f2327c6d93787,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1947903233823702611, guid: 996e20757a8f7b343a9f2327c6d93787,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1008,15 +1013,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playlists:
-  - name: Menu
-    playlist:
-    - audioClip: {fileID: 8300000, guid: 440f104cc62b1a94eb7b1cd392179096, type: 3}
-      volume:
-      - 1
-      pitch:
-      - 1
-    volume: 1
-    isRandom: 0
+  - {fileID: 11400000, guid: 81e2c8ab487f21b4ab0a2e1dbbe6b9cb, type: 2}
   startingPlaylistIndex: 0
   masterVolume: 1
   playOnStart: 1
