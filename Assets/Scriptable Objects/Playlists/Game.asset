@@ -44,5 +44,5 @@ MonoBehaviour:
     - 1
     pitch:
     - 1
-  volume: 0.5
+  volume: 0.2
   isRandom: 0

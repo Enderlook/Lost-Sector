@@ -3561,13 +3561,13 @@ MonoBehaviour:
   winSound:
     audioClip: {fileID: 8300000, guid: 28d8c58dc05c7934ab2e69b766812e64, type: 3}
     volume:
-    - 0.8
+    - 0.5
     pitch:
     - 1
   loseSound:
     audioClip: {fileID: 8300000, guid: 43ffc85a383bddc44bf93ba1ea179cec, type: 3}
     volume:
-    - 0.8
+    - 0.5
     pitch:
     - 1
 --- !u!1 &1332508071
@@ -4076,6 +4076,7 @@ MonoBehaviour:
   playlistManager: {fileID: 1560176983}
   playlistMenuShow: Menu
   playlistMenuHide: Game
+  isGameOver: 0
   canBeShown: 0
 --- !u!114 &1560176981
 MonoBehaviour:
