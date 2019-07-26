@@ -23,9 +23,6 @@ public class Enemy : LivingObject
         coinController.spawninigTransform = thisRigidbody2D.transform;
     }
 
-    protected override void Update()
-    }
-
     protected override void Initialize()
     {
         thisRigidbody2D.AddRelativeForce((Vector2)impulse * thisRigidbody2D.mass);
