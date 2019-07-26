@@ -24,6 +24,10 @@ public class PickupMagnet : MonoBehaviour
 
     private Player player;
 
+    const int FRAME_RATIO = 3;
+    const float SECONDS_PER_PICKUP = 0.05f;
+    private float cooldown = 0;
+
     private void Start()
     {
         magnetRadiusSquared = magnetRadius * magnetRadius;
@@ -32,6 +36,9 @@ public class PickupMagnet : MonoBehaviour
 
     private void Update()
     {
+        cooldown -= Time.deltaTime;
+        if (Time.frameCount % FRAME_RATIO != 0)
+            return;
         foreach (Transform item in Global.pickupsParent)
         {
             if (!item.gameObject.activeSelf)
@@ -42,11 +49,12 @@ public class PickupMagnet : MonoBehaviour
 
             if (distance <= pickupRadius)
             {
-                Pickup(item);
+                if (cooldown <= 0)
+                    Pickup(item);
             }
             else if (distance <= magnetRadiusSquared)
             {
-                float pullingSpeed = (magnetRadiusSquared / distance) * magnetRadius * Time.fixedDeltaTime;
+                float pullingSpeed = (magnetRadiusSquared / distance) * magnetRadius * Time.deltaTime * FRAME_RATIO;
                 item.position = Vector3.MoveTowards(item.position, magnetTransform.position, pullingSpeed);
             }
         }
@@ -62,6 +70,7 @@ public class PickupMagnet : MonoBehaviour
         ICanBePickedUp pickup = item.GetComponent<ICanBePickedUp>();
         if (pickup != null)
         {
+            cooldown = SECONDS_PER_PICKUP;
             pickup.Pickup(player);
             item.gameObject.SetActive(false);
         }
