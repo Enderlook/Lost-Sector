@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17916643a8d6723489aef41e2228313a, type: 3}
   m_Name: Playlist Menu
   m_EditorClassIdentifier: 
-  name: Menu
+  playlistName: Menu
   playlist:
   - audioClip: {fileID: 8300000, guid: 440f104cc62b1a94eb7b1cd392179096, type: 3}
     volume:

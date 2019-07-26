@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "Playlist", menuName = "Playlist")]
 public class Playlist : ScriptableObject
@@ -12,6 +12,13 @@ public class Playlist : ScriptableObject
     public float volume = 1;
     [Tooltip("Is the playlist random.")]
     public bool isRandom = false;
+
+    /// <summary>
+    /// Use <see cref="Mode.Random"/> to play sound by <seealso cref="GetRandomSound"/>.<br/>
+    /// Use <see cref="Mode.Next"/> to play a sound by <seealso cref="GetNextSound"/>.<br/>
+    /// Use <see cref="Mode.Configured"/> to play sound using <see cref="isRandom"/> to determine if use <seealso cref="GetRandomSound"/> or <seealso cref="GetNextSound"/>.
+    /// </summary>
+    public enum Mode { Random, Next, Configured }
 
     /// <summary>
     /// Get random sound from <see cref="playlist"/>.
@@ -35,6 +42,57 @@ public class Playlist : ScriptableObject
     /// Reset the <see cref="playlistIndex"/> to 0.
     /// </summary>
     public void ResetIndex() => playlistIndex = 0;
+
+    /// <summary>
+    /// Play a sound from the <seealso cref="playlist"/> using a method described by <seealso cref="Mode"/>.
+    /// </summary>
+    /// <param name="audioSource"><see cref="AudioSource"/> to play the sonud.</param>
+    /// <param name="isSoundActive">Whenever sound is active or not. On <see langword="false"/> no sound will be played.</param>
+    /// <param name="mode">Mode to get the sound form the <seealso cref="playlist"/>.</param>
+    /// <param name="volumeMultiplier">Multiplier of the volume.</param>
+    public void Play(AudioSource audioSource, bool isSoundActive, Mode mode = Mode.Configured, float volumeMultiplier = 1) => Play(audioSource, isSoundActive, IsRandomFromMode(mode), volumeMultiplier);
+
+    /// <summary>
+    /// Play a sound from the <seealso cref="playlist"/>
+    /// </summary>
+    /// <param name="audioSource"><see cref="AudioSource"/> to play the sound.</param>
+    /// <param name="isSoundActive">Whenever sound is active or not. On <see langword="false"/> no sound will be played.</param>
+    /// <param name="isRandom">If <see langword="true"/> a random sound from <see cref="playlist"/> will be played. On <see langword="false"/> the next sound from the <see cref="playlist"/> will be played.</param>
+    /// <param name="volumeMultiplier">Multiplier of the volume.</param>
+    public void Play(AudioSource audioSource, bool isSoundActive, bool isRandom, float volumeMultiplier = 1)
+    {
+        (Sound sound, float volume) = GetSound(isRandom);
+        sound.Play(audioSource, isSoundActive, volume * volumeMultiplier);
+    }
+
+    /// <summary>
+    /// Play a sound from the <seealso cref="playlist"/> using a method described by <seealso cref="Mode"/> on the specified <paramref name="position"/>.
+    /// </summary>
+    /// <param name="position">Position to play the sound.</param>
+    /// <param name="isSoundActive">Whenever sound is active or not. On <see langword="false"/> no sound will be played.</param>
+    /// <param name="mode">Mode to get the sound form the <seealso cref="playlist"/>.</param>
+    /// <param name="volumeMultiplier">Multiplier of the volume.</param>
+    public void PlayAtPoint(Vector3 position, bool isSoundActive, Mode mode = Mode.Configured, float volumeMultiplier = 1) => PlayAtPoint(position, isSoundActive, IsRandomFromMode(mode), volumeMultiplier);
+
+    /// <summary>
+    /// Play a sound from the <seealso cref="playlist"/> using a method described by <seealso cref="Mode"/> on the specified <paramref name="position"/>.
+    /// </summary>
+    /// <param name="position">Position to play the sound.</param>
+    /// <param name="isSoundActive">Whenever sound is active or not. On <see langword="false"/> no sound will be played.</param>
+    /// <param name="isRandom">If <see langword="true"/> a random sound from <see cref="playlist"/> will be played. On <see langword="false"/> the next sound from the <see cref="playlist"/> will be played.</param>
+    /// <param name="volumeMultiplier">Multiplier of the volume.</param>
+    public void PlayAtPoint(Vector3 position, bool isSoundActive, bool isRandom, float volumeMultiplier = 1)
+    {
+        if (isSoundActive)
+        {
+            (Sound sound, float volume) = GetSound(isRandom);
+            AudioSource.PlayClipAtPoint(sound.audioClip, position, sound.Volume * volume * volumeMultiplier);
+        }
+    }
+
+    private (Sound sound, float volume) GetSound(bool isRandom) => isRandom ? GetRandomSound() : GetNextSound();
+    private bool IsRandomFromMode(Mode mode = Mode.Configured) => (mode == Mode.Configured && isRandom) || mode == Mode.Random;
+
 }
 
 [System.Serializable]
@@ -80,6 +138,7 @@ public class Sound
     /// Play the sound on the specified <paramref name="audioSource"/>.
     /// </summary>
     /// <param name="audioSource"><see cref="AudioSource"/> where the sound will be played.</param>
+    /// <param name="isSoundActive">Whenever sound is active or not. On <see langword="false"/> no sound will be played.</param>
     /// <param name="volumeMultiplier">Volume of the sound, from 0 to 1.</param>
     public void PlayOneShoot(AudioSource audioSource, bool isSoundActive, float volumeMultiplier = 1)
     {
@@ -92,9 +151,32 @@ public class Sound
     }
 
     /// <summary>
+    /// Play the sound on the specified <paramref name="audioSource"/>.
+    /// </summary>
+    /// <param name="audioSource"><see cref="AudioSource"/> where the sound will be played.</param>
+    /// <param name="isSoundActive">Whenever sound is active or not. On <see langword="false"/> no sound will be played.</param>
+    /// <param name="volumeMultiplier">Volume of the sound, from 0 to 1.</param>
+    public void Play(AudioSource audioSource, bool isSoundActive, float volumeMultiplier = 1)
+    {
+        // audioSource != null shouldn't be used but it's to prevents a bug
+        if (isSoundActive && audioSource != null)
+        {
+            audioSource.pitch = Pitch;
+            audioSource.volume = Volume * volumeMultiplier;
+            audioSource.clip = audioClip;
+            audioSource.Play();
+        }
+    }
+
+    /// <summary>
     /// Play the sound on the specified <paramref name="position"/>.
     /// </summary>
     /// <param name="position">Position to play the sound.</param>
+    /// <param name="isSoundActive">Whenever sound is active or not. On <see langword="false"/> no sound will be played.</param>
     /// <param name="volumeMultiplier">Volume of the sound, from 0 to 1.</param>
-    public void PlayAtPoint(Vector3 position, float volumeMultiplier = 1) => AudioSource.PlayClipAtPoint(audioClip, position, volumeMultiplier);
+    public void PlayAtPoint(Vector3 position, bool isSoundActive, float volumeMultiplier = 1)
+    {
+        if (isSoundActive)
+            AudioSource.PlayClipAtPoint(audioClip, position, volumeMultiplier);
+    }
 }

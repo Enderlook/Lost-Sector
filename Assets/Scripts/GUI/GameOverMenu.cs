@@ -49,13 +49,13 @@ public class GameOverMenu : MonoBehaviour
             {
                 subtitle.text = "Congratulation, you win!";
                 subtitle.color = winColor;
-                Global.menu.playlistManager.PlaySound(winSound);
+                Global.menu.playlistManager.PlaySound(winSound, Settings.IsSoundActive);
             }
             else
             {
                 subtitle.text = "You failed the mission!";
                 subtitle.color = loseColor;
-                Global.menu.playlistManager.PlaySound(loseSound);
+                Global.menu.playlistManager.PlaySound(loseSound, Settings.IsSoundActive);
             }
             isFinished = true;
         }
