@@ -22,7 +22,9 @@ namespace LivingObjectAddons
             if (hide)
                 gameObjectToDestroy.SetActive(false);
             else
-                Destroy(gameObject);
+            {
+                Destroy(gameObjectToDestroy);
+            }
         }
 
         /// <summary>
