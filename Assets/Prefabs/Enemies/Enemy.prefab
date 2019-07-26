@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 839878824109075181}
   - component: {fileID: 7858251103388681801}
   - component: {fileID: 338621389179408544}
+  - component: {fileID: 7387066350927648036}
   m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
@@ -407,11 +408,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9addc5e34ed96f1469bc1e2cf7eff67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObjectToDestroy: {fileID: 7858251103632841096}
-  timeToDestroy: 5
-  hide: 1
+  timeToDoEffect: 5
   camerasToCheck: []
   mainCamera: 1
+  gameObjectToDestroy: {fileID: 7858251103632841096}
+  hide: 1
+--- !u!114 &7387066350927648036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7858251103388681800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8177bb651b7ab444d810e4f3ac0d82eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToDoEffect: 0.5
+  camerasToCheck: []
+  mainCamera: 1
+  behavioursToDisable:
+  - {fileID: 839878824109075181}
 --- !u!1 &7858251103632841096
 GameObject:
   m_ObjectHideFlags: 0
