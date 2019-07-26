@@ -133,10 +133,13 @@ public class Dynamic : MonoBehaviour
     }
     private void Update()
     {
-        playedTime += Time.deltaTime;
-        int minutes = (int)playedTime / 60;
-        float seconds = playedTime - minutes * 60;
-        timePlayerText.text = $"{minutes:00}:{seconds:00.00}";
+        if (!menu.isGameOver)
+        {
+            playedTime += Time.deltaTime;
+            int minutes = (int)playedTime / 60;
+            float seconds = playedTime - minutes * 60;
+            timePlayerText.text = $"{minutes:00}:{seconds:00.00}";
+        }
 
         if (Global.coinMeter.showedMoney >= Global.moneyToWin)
             Global.menu.GameOver(true);

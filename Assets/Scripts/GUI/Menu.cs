@@ -13,7 +13,8 @@ public class Menu : MonoBehaviour
     public bool menuNoToggleable = false;
 
     private bool isActive;
-    private bool isGameOver = false;
+    [HideInInspector]
+    public bool isGameOver = false;
     private bool hasWon;
 
     [HideInInspector]
