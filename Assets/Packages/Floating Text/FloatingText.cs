@@ -85,8 +85,8 @@ public class FloatingText : MonoBehaviour
     /// <seealso cref="SetConfiguration(string, Color?, float?, float?, Vector2?)"/>
     public void SetConfiguration(float number, Color? numberColor = null, float? scaleMultiplier = null, float? timeBeforeDestroy = null, Vector2? randomOffset = null, int? digitPrecision = null, TYPE_OF_ROUNDING? typeOfRounding = null)
     {
-        typeOfRounding = typeOfRounding == null ? this.typeOfRounding : typeOfRounding;
-        digitPrecision = digitPrecision == null ? this.digitPrecision : digitPrecision;
+        typeOfRounding = typeOfRounding ?? this.typeOfRounding;
+        digitPrecision = digitPrecision ?? this.digitPrecision;
         float toShow = number * Mathf.Pow(10, (float)digitPrecision);
         switch (typeOfRounding)
         {
