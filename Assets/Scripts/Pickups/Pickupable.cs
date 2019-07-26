@@ -5,6 +5,8 @@ public abstract class Pickupable : MonoBehaviour, ICanBePickedUp
     [Header("Configuration")]
     [Tooltip("Initial impulse.")]
     public Vector2RangeTwo impulse;
+    [Tooltip("A sound from this list will be picked to play.")]
+    public Playlist playlist;
 
     private Rigidbody2D thisRigidbody2D;
     Rigidbody2D ICanBePickedUp.Rigidbody2D => thisRigidbody2D;
@@ -25,5 +27,5 @@ public abstract class Pickupable : MonoBehaviour, ICanBePickedUp
     }
 #endif
 
-    public abstract void Pickup(Player player);
+    public virtual void Pickup(Player player) => playlist?.PlayAtPoint(thisRigidbody2D.transform.position, Settings.IsSoundActive);
 }

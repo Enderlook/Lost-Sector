@@ -158,7 +158,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     {
         if (isDead) return;
         isDead = true;
-        dieSound.PlayAtPoint(rigidbodyHelper.transform.position);
+        dieSound.PlayAtPoint(rigidbodyHelper.transform.position, Settings.IsSoundActive);
         GameObject explosion = Global.enemySpawner.Spawn(onDeathExplosionPrefab, Global.explosionsParent);
         explosion.transform.position = rigidbodyHelper.transform.position;
         explosion.transform.localScale = Vector3.one * onDeathExplosionPrefabScale;

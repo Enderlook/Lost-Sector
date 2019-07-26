@@ -11,6 +11,12 @@ public class Menu : MonoBehaviour
     public GameObject howToPlay;
     [Tooltip("Force menu to not be toggleable.")]
     public bool menuNoToggleable = false;
+    [Tooltip("Playlist Manager.")]
+    public PlaylistManager playlistManager;
+    [Tooltip("Name of the playlist to play when menu is shown")]
+    public string playlistMenuShow;
+    [Tooltip("Name of the playlist to play when menu is hide")]
+    public string playlistMenuHide;
 
     private bool isActive;
     [HideInInspector]
@@ -52,6 +58,7 @@ public class Menu : MonoBehaviour
             isActive = active != null ? (bool)active : !isActive;
             Time.timeScale = isActive ? 0 : 1;
             menu.SetActive(isActive);
+            PlayMusic(isActive);
         }
     }
 
@@ -69,6 +76,7 @@ public class Menu : MonoBehaviour
         hasWon = win;
         isGameOver = true;
         Global.enemySpawner.StopSpawnWaves();
+        PlayMusic(true);
     }
 
     /// <summary>
@@ -76,4 +84,13 @@ public class Menu : MonoBehaviour
     /// </summary>
     /// <param name="active"></param>
     public void ShowHowToPlay(bool active) => howToPlay.SetActive(active);
+
+    private void PlayMusic(bool menuMusic)
+    {
+        if (menuMusic)
+            playlistManager.SetPlaylist(playlistMenuShow);
+        else
+            playlistManager.SetPlaylist(playlistMenuHide);
+        playlistManager.Reset();
+    }
 }

@@ -11,10 +11,15 @@ public class GameOverMenu : MonoBehaviour
     [Tooltip("Text used to show time player.")]
     public Text timePlayed;
 
-    [Tooltip("Color used on subtitle if player won.")]
+    [Tooltip("Color used on subtitle if player win.")]
     public Color winColor = Color.green;
     [Tooltip("Color used on subtitle if player lose.")]
     public Color loseColor = Color.red;
+
+    [Tooltip("Sound played if player win.")]
+    public Sound winSound;
+    [Tooltip("Sound played if player lose.")]
+    public Sound loseSound;
 
     private bool isFinished = false;
 
@@ -44,11 +49,13 @@ public class GameOverMenu : MonoBehaviour
             {
                 subtitle.text = "Congratulation, you win!";
                 subtitle.color = winColor;
+                Global.menu.playlistManager.PlaySound(winSound, Settings.IsSoundActive);
             }
             else
             {
                 subtitle.text = "You failed the mission!";
                 subtitle.color = loseColor;
+                Global.menu.playlistManager.PlaySound(loseSound, Settings.IsSoundActive);
             }
             isFinished = true;
         }

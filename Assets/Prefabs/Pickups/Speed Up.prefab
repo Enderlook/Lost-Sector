@@ -16,6 +16,7 @@ MonoBehaviour:
     isRandom: 1
     startVector: {x: 0, y: 4}
     endVector: {x: 0, y: 10}
+  playlist: {fileID: 11400000, guid: 345e4c6bf2c98f644bf5a391915aea20, type: 2}
   speedMultiplier: 2
   durationOfEffect: 10
 --- !u!1001 &6879085783534101953
