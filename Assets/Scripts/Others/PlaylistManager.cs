@@ -87,7 +87,7 @@ public class PlaylistManager : MonoBehaviour
     {
         for (int i = 0; i < playlists.Length; i++)
         {
-            if (playlists[i].name == name)
+            if (playlists[i].playlistName == name)
             {
                 playlistsIndex = i;
                 return true;
