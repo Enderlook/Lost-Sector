@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "Playlist", menuName = "Playlist")]
 public class Playlist : ScriptableObject
@@ -16,19 +16,19 @@ public class Playlist : ScriptableObject
     /// <summary>
     /// Get random sound from <see cref="playlist"/>.
     /// </summary>
-    /// <returns>Sound to play and its playlist volume.</returns>
+    /// <returns>Sound to play and its playlist <see cref="volume"/>.</returns>
     public (Sound sound, float volume) GetRandomSound() => (playlist[playlistIndex = Random.Range(0, playlist.Length)], volume);
 
     /// <summary>
     /// Get the next sound from <see cref="playlist"/>. It loops to beginning when reach the end of the <see cref="playlist"/>.
     /// </summary>
-    /// <returns>Sound to play and its playlist volume.</returns>
+    /// <returns>Sound to play and its playlist <see cref="volume"/>.</returns>
     public (Sound sound, float volume) GetNextSound() => (playlist[playlistIndex = (playlistIndex + 1) % playlist.Length], volume);
 
     /// <summary>
     /// Get a sound from <see cref="playlist"/>. It can be random or not depending of <see cref="isRandom"/>.
     /// </summary>
-    /// <returns>Sound to play and its playlist volume.</returns>
+    /// <returns>Sound to play and its playlist <see cref="volume"/>.</returns>
     public (Sound sound, float volume) GetSound() => isRandom ? GetRandomSound() : GetNextSound();
 
     /// <summary>
