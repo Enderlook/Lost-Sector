@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4282317456093394453}
   - component: {fileID: 1243430445455672094}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Effects Displayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 4782993584175049606}
   backgroundSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  effectCatalog: {fileID: 0}
+  effectCatalog: {fileID: 11400000, guid: 43fcdaaf76d33a84e8e6a28b2acde82b, type: 2}
 --- !u!114 &1243430445455672094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,6 +468,8 @@ MonoBehaviour:
     canRegenerate: 0
     regenerateRate: 10
     regenerationDelay: 3
+    playlist: {fileID: 0}
+    audioSource: {fileID: 0}
   dieSound:
     audioClip: {fileID: 8300000, guid: 55ee65d557d562d46ac0c7cd56427a91, type: 3}
     volume:

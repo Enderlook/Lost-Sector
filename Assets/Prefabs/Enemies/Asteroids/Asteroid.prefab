@@ -28,6 +28,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Asteroid
       objectReference: {fileID: 0}
+    - target: {fileID: 7858251103632841096, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7858251103632841097, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: onInitializes.Array.size
@@ -123,6 +128,11 @@ PrefabInstance:
       propertyPath: damageOnHit
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 7858251103388681801, guid: ff345a899057f1447afc58e7a15eed6e,
+        type: 3}
+      propertyPath: livingObject
+      value: 
+      objectReference: {fileID: 768387036}
     - target: {fileID: 7858251103388681802, guid: ff345a899057f1447afc58e7a15eed6e,
         type: 3}
       propertyPath: m_Mass
@@ -133,11 +143,6 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 0.45
       objectReference: {fileID: 0}
-    - target: {fileID: 7858251103388681801, guid: ff345a899057f1447afc58e7a15eed6e,
-        type: 3}
-      propertyPath: livingObject
-      value: 
-      objectReference: {fileID: 768387036}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff345a899057f1447afc58e7a15eed6e, type: 3}
 --- !u!1 &3171107085224686566 stripped

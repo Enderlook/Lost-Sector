@@ -75,6 +75,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Asteroid Freeze
       objectReference: {fileID: 0}
+    - target: {fileID: 3171107085224686566, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3171107085224686564, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -160,21 +165,15 @@ PrefabInstance:
       propertyPath: moneySpawnedOnDeath.end
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 7344715036232705026, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 1.19
-      objectReference: {fileID: 0}
-    - target: {fileID: 3171107084438929868, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300230, guid: 4cf6de76bffe1d649b092af0274ca582,
-        type: 3}
     - target: {fileID: 2915674109300423229, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
       propertyPath: damageOnHit
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7344715036232705026, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.19
       objectReference: {fileID: 0}
     - target: {fileID: 246730387930743272, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
@@ -186,6 +185,12 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3171107084438929868, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300230, guid: 4cf6de76bffe1d649b092af0274ca582,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 3171107084848344101, guid: 926a52539d738a7439a32750206b316e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 926a52539d738a7439a32750206b316e, type: 3}

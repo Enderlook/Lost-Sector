@@ -5146,7 +5146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 2144885172}
   backgroundSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  effectCatalog: {fileID: 0}
+  effectCatalog: {fileID: 11400000, guid: 43fcdaaf76d33a84e8e6a28b2acde82b, type: 2}
 --- !u!114 &2144885174
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -275,6 +275,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Asteroid Splitter
       objectReference: {fileID: 0}
+    - target: {fileID: 3171107085224686566, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3171107085224686564, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -380,21 +385,15 @@ PrefabInstance:
       propertyPath: onDeaths.Array.data[1]
       value: 
       objectReference: {fileID: 6570954776888686763}
-    - target: {fileID: 7344715036232705026, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 1.36
-      objectReference: {fileID: 0}
-    - target: {fileID: 3171107084438929868, guid: 926a52539d738a7439a32750206b316e,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300012, guid: 4cf6de76bffe1d649b092af0274ca582,
-        type: 3}
     - target: {fileID: 2915674109300423229, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
       propertyPath: damageOnHit
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7344715036232705026, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.36
       objectReference: {fileID: 0}
     - target: {fileID: 246730387930743272, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
@@ -411,6 +410,12 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 3171107084438929868, guid: 926a52539d738a7439a32750206b316e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300012, guid: 4cf6de76bffe1d649b092af0274ca582,
+        type: 3}
     - target: {fileID: 1117335959791592195, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
       propertyPath: m_AnchorMin.y
