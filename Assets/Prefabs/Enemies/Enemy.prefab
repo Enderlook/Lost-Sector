@@ -120,7 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 4782993584175049606}
   backgroundSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  effectCatalog: {fileID: 11400000, guid: 626f9a62e0663f340b197187839ca3c1, type: 2}
+  effectCatalog: {fileID: 0}
 --- !u!114 &1243430445455672094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,7 +408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectToDestroy: {fileID: 7858251103632841096}
-  timeToDestroy: 1
+  timeToDestroy: 5
   hide: 1
   camerasToCheck: []
   mainCamera: 1
@@ -571,6 +571,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7858251103632841098}
     m_Modifications:
+    - target: {fileID: 4899925161982079344, guid: 7e38cfa2fd92d614d913ce6f701b6594,
+        type: 3}
+      propertyPath: m_Name
+      value: Health Bar With Canvas Simplified
+      objectReference: {fileID: 0}
     - target: {fileID: 1286173045874118781, guid: 7e38cfa2fd92d614d913ce6f701b6594,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -675,11 +680,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4899925161982079344, guid: 7e38cfa2fd92d614d913ce6f701b6594,
-        type: 3}
-      propertyPath: m_Name
-      value: Health Bar With Canvas Simplified
       objectReference: {fileID: 0}
     - target: {fileID: 8846102638572100080, guid: 7e38cfa2fd92d614d913ce6f701b6594,
         type: 3}
