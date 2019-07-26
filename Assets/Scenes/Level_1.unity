@@ -4003,49 +4003,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playlists:
-  - name: Game
-    playlist:
-    - audioClip: {fileID: 8300000, guid: bca0d3c22b49f44488706c1a7fe5b947, type: 3}
-      volume:
-      - 1
-      pitch:
-      - 1
-    - audioClip: {fileID: 8300000, guid: 718f9a3ad9dd30a47bb038ac734eaa86, type: 3}
-      volume:
-      - 1
-      pitch:
-      - 1
-    - audioClip: {fileID: 8300000, guid: a83d47bc2acac074dbc3dc98152579e1, type: 3}
-      volume:
-      - 1
-      pitch:
-      - 1
-    - audioClip: {fileID: 8300000, guid: 38b6be5d2d6973b44a6209151f21f82e, type: 3}
-      volume:
-      - 1
-      pitch:
-      - 1
-    - audioClip: {fileID: 8300000, guid: 00865987adc26254687ccf9475c31ab2, type: 3}
-      volume:
-      - 1
-      pitch:
-      - 1
-    - audioClip: {fileID: 8300000, guid: d581f0c502edbbe43ab565610c06f07e, type: 3}
-      volume:
-      - 1
-      pitch:
-      - 1
-    volume: 1
-    isRandom: 0
-  - name: Menu
-    playlist:
-    - audioClip: {fileID: 8300000, guid: 440f104cc62b1a94eb7b1cd392179096, type: 3}
-      volume:
-      - 1
-      pitch:
-      - 1
-    volume: 1.3
-    isRandom: 0
+  - {fileID: 11400000, guid: 36a50bb4270880b4caf39663b398e29e, type: 2}
+  - {fileID: 11400000, guid: 81e2c8ab487f21b4ab0a2e1dbbe6b9cb, type: 2}
   startingPlaylistIndex: 0
   masterVolume: 1
   playOnStart: 1
@@ -5073,7 +5032,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 2144885172}
   backgroundSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  effectCatalog: {fileID: 11400000, guid: 626f9a62e0663f340b197187839ca3c1, type: 2}
+  effectCatalog: {fileID: 0}
 --- !u!114 &2144885174
 MonoBehaviour:
   m_ObjectHideFlags: 0
