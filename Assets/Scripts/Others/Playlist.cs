@@ -4,7 +4,7 @@
 public class Playlist : ScriptableObject
 {
     [Tooltip("Name of the playlist, used to be access by other scripts.")]
-    public string name;
+    public string playlistName;
     [Tooltip("Playlist. It will be looped.")]
     public Sound[] playlist;
     private int playlistIndex = 0;
