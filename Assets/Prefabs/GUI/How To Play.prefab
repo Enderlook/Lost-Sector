@@ -301,7 +301,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Your shields recharge over time, but health don't. Use Health Pack to recover
-    it
+    it.
 --- !u!1 &348976371
 GameObject:
   m_ObjectHideFlags: 0
@@ -864,7 +864,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &855245100
 RectTransform:
   m_ObjectHideFlags: 0
@@ -968,7 +968,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: There are several kinds of enemies.
+  m_Text: There are several kinds of enemies. right mouse button will make a radial
+    attack to near ones.
 --- !u!1 &1165367963
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,7 +1218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1515800395
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1319,7 +1320,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Watch out! Some of them may be more dangerouds than they seem.
+  m_Text: Watch out! Some of them may be more dangerouds that they seem.
 --- !u!1 &1587951058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1767,7 +1768,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: This are you. Avoid at all cost being hit by enemies.
+  m_Text: This are you. Avoid at all cost being hit by enemies. Use left mouse button
+    to shoot.
 --- !u!1 &43063517732625322
 GameObject:
   m_ObjectHideFlags: 0
@@ -1842,6 +1844,21 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &1173852158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6597998823378680385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be5a23eb4d5297548a0eaa4e384283f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pages:
+  - {fileID: 1515800394}
+  - {fileID: 855245099}
 --- !u!1 &5653606987705059733
 GameObject:
   m_ObjectHideFlags: 0
@@ -1916,21 +1933,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &1173852158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6597998823378680385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be5a23eb4d5297548a0eaa4e384283f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pages:
-  - {fileID: 1515800394}
-  - {fileID: 855245099}
 --- !u!1001 &4654640997467882515
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -643,8 +643,8 @@ MonoBehaviour:
     button: 0
     canBeHoldDown: 1
   - weapon: {fileID: 118295648}
-    key: 32
-    button: -1
+    key: 0
+    button: 1
     canBeHoldDown: 0
 --- !u!114 &118295648
 MonoBehaviour:
