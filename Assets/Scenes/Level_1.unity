@@ -1844,9 +1844,9 @@ MonoBehaviour:
       minimalDifficulty: 30
       weightFactorFormula: 1 + x / 13
   difficulty: 1
-  difficultyLinearIncrease: 1
-  difficultyGeometricalIncrease: 1.1
-  difficultyIncreaseInterval: 5
+  difficultyLinearIncrease: 2
+  difficultyGeometricalIncrease: 1.25
+  difficultyIncreaseInterval: 4
   healthPack: {fileID: 535086599481409440, guid: f84cf23a7962e65488b58c3f49368c8c,
     type: 3}
   healthPackSpawnTime: 4
@@ -1883,7 +1883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingMoney: 0
-  moneyToWin: 1000
+  moneyToWin: 500
   enemiesParent: {fileID: 1921411715}
   explosionsParent: {fileID: 128807551}
   projectilesParent: {fileID: 1573272530}

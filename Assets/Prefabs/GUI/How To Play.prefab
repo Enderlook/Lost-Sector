@@ -657,7 +657,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Your goal is to gather 1,000 coins, dropped by killed enemies.
+  m_Text: Your goal is to gather 500 coins, dropped by killed enemies.
 --- !u!1 &610077458
 GameObject:
   m_ObjectHideFlags: 0
