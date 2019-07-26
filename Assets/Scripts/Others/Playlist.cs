@@ -101,10 +101,10 @@ public class Sound
     [Tooltip("Sound clip.")]
     public AudioClip audioClip;
 
-    [Tooltip("Volume. Use range size 1 to avoid random volume.")]
+    [Tooltip("Volume. Use range size 1 to avoid random volume. Use range size 0 to use 1.")]
     public float[] volume = new float[1] { 1 };
 
-    [Tooltip("Pitch. Use range size 1 to avoid random volume.")]
+    [Tooltip("Pitch. Use range size 1 to avoid random volume. Use range size 0 to use 1.")]
     public float[] pitch = new float[1] { 1 };
 
     /// <summary>
@@ -130,6 +130,8 @@ public class Sound
     {
         if (array.Length > 1)
             return Random.Range(array[0], array[1]);
+        else if (array.Length == 0)
+            return 1;
         else
             return array[0];
     }
