@@ -13,6 +13,7 @@ public class SpeedUp : Pickupable
         player.AddEffect(new SpeedEffect(speedMultiplier, durationOfEffect,
             (strength, maxDuration, duration, initialValue) => initialValue + strength * Mathf.Pow(duration / maxDuration, .5f)
         ));
+        base.Pickup(player);
     }
 }
 

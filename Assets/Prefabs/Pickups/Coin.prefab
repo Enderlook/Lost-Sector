@@ -139,6 +139,7 @@ MonoBehaviour:
     isRandom: 1
     startVector: {x: 0, y: 0}
     endVector: {x: 0, y: 0}
+  playlist: {fileID: 11400000, guid: 811f833e1c641db4893385675561679b, type: 2}
 --- !u!114 &6494154499918903054
 MonoBehaviour:
   m_ObjectHideFlags: 0
