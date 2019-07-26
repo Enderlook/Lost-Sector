@@ -69,7 +69,7 @@ namespace LivingObjectAddons
 
         public override void Shoot()
         {
-            shootingSound.Play(rigidbodyHelper.audioSource, 1);
+            shootingSound.PlayOneShoot(rigidbodyHelper.audioSource, Settings.IsSoundActive, 1);
             base.Shoot();
         }
     }

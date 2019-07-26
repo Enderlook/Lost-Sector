@@ -165,68 +165,6 @@ public class FloatRangeTwo
     public static int FloatToIntByChance(float number) => (int)number + (Random.value < (number - (int)number) ? 1 : 0);
 }
 
-[System.Serializable]
-public class Sound
-{
-    [Tooltip("Sound clip.")]
-    public AudioClip audioClip;
-
-    [Tooltip("Volume. Use range size 1 to avoid random volume.")]
-    public float[] volume = new float[2] { 1, 1 };
-
-    [Tooltip("Pitch. Use range size 1 to avoid random volume.")]
-    public float[] pitch = new float[2] { 1, 1 };
-
-    /// <summary>
-    /// Calculates a random volume between the given by the two first elements of <see cref="volume"/>.
-    /// </summary>
-    /// <returns>Random volume. If <c><see cref="volume"/>.lenght <= 1</c> it <see langword="return"/> the <c><see cref="volume"/>[1]</c>.</returns>
-    /// <seealso cref="GetRandom(float[])"/>
-    private float GetVolume() => GetRandom(volume);
-
-    /// <summary>
-    /// Calculates a random pitch between the given by the two first elements of <see cref="pitch"/>.
-    /// </summary>
-    /// <returns>Random volume. If <c><see cref="pitch"/>.lenght <= 1</c> it <see langword="return"/> the <c><see cref="pitch"/>[1]</c>.</returns>
-    /// <seealso cref="GetRandom(float[] array)"/>
-    private float GetPitch() => GetRandom(pitch);
-
-    /// <summary>
-    /// Calculates a random value between the given by the two first elements of <paramref name="array"/>.
-    /// </summary>
-    /// <param name="array"></param>
-    /// <returns>Random volume. If <c><paramref name="array"/>.lenght <= 1</c> it <see langword="return"/> the <c><paramref name="array"/>[1]</c>.</returns>
-    private float GetRandom(float[] array)
-    {
-        if (array.Length > 1)
-            return Random.Range(array[0], array[1]);
-        else
-            return array[0];
-    }
-
-    /// <summary>
-    /// Play the sound on the specified <paramref name="audioSource"/>.
-    /// </summary>
-    /// <param name="audioSource"><see cref="AudioSource"/> where the sound will be played.</param>
-    /// <param name="volumeMultiplier">Volume of the sound, from 0 to 1.</param>
-    public void Play(AudioSource audioSource, float volumeMultiplier = 1)
-    {
-        // audioSource != null shouldn't be used but it's to prevents a bug
-        if (Settings.IsSoundActive && audioSource != null)
-        {
-            audioSource.pitch = GetPitch();
-            audioSource.PlayOneShot(audioClip, GetVolume() * volumeMultiplier);
-        }
-    }
-
-    /// <summary>
-    /// Play the sound on the specified <paramref name="position"/>.
-    /// </summary>
-    /// <param name="position">Position to play the sound.</param>
-    /// <param name="volumeMultiplier">Volume of the sound, from 0 to 1.</param>
-    public void PlayAtPoint(Vector3 position, float volumeMultiplier = 1) => AudioSource.PlayClipAtPoint(audioClip, position, volumeMultiplier);
-}
-
 public static class LayerMaskExtension
 {
     // https://forum.unity.com/threads/get-the-layernumber-from-a-layermask.114553/#post-3021162

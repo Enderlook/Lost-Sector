@@ -72,7 +72,7 @@ public class RigidbodyHelper : MonoBehaviour
         {
             IImpactSound impactSound = entity as IImpactSound;
             if (impactSound != null)
-                impactSound.ImpactSound.Play(audioSource, collision.relativeVelocity.magnitude);
+                impactSound.ImpactSound.PlayOneShoot(audioSource, Settings.IsSoundActive, collision.relativeVelocity.magnitude);
         }
     }
 
