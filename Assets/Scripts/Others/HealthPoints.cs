@@ -50,6 +50,10 @@ public class HealthPoints
     [Tooltip("Amount of time in seconds after receive damage in order to start regenerating.")]
     public float regenerationDelay = 3f;
     private float currentRegenerationDelay = 0f;
+    [Tooltip("Sound while regenerate.")]
+    public Playlist playlist;
+    [Tooltip("Audio Source used to play sound.")]
+    public AudioSource audioSource;
 
     public delegate void Die(bool suicide = false);
     private Die die;
@@ -149,7 +153,10 @@ public class HealthPoints
     private void Regenerate(float time)
     {
         if (canRegenerate && currentRegenerationDelay >= regenerationDelay && Current < Max)
+        {
             ChangeValue(regenerateRate * time);
+            PlayRegenerationSound();
+        }
         else
             currentRegenerationDelay += time;
     }
@@ -159,4 +166,10 @@ public class HealthPoints
     /// </summary>
     /// <param name="time">Time used to calculate stuff.</param>
     public void Update(float time) => Regenerate(time);
+
+    private void PlayRegenerationSound()
+    {
+        if (audioSource != null && playlist != null && !audioSource.isPlaying)
+            playlist.Play(audioSource, Settings.IsSoundActive);
+    }
 }
