@@ -16,6 +16,8 @@ public class Player : LivingObject
     [Tooltip("Shield handler.")]
     public ShieldHandler shieldHandler;
 
+    private void Start() => Initialize(); // Fixs a bug where healthPoints are strangely set into 0.
+
     protected override void Initialize()
     {
         shieldPoints.Initialize();
