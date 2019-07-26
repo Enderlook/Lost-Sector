@@ -36,12 +36,34 @@ public class PlaylistManager : MonoBehaviour
         else if (isPlaying && !audioSource.isPlaying && playlists.Length > 0 && playlists[playlistsIndex].playlist.Length > 0)
         {
             (Sound sound, float volume) = playlists[playlistsIndex].GetSound();
-            audioSource.clip = sound.audioClip;
-            audioSource.volume = sound.Volume * volume * masterVolume;
-            audioSource.pitch = sound.Pitch;
-            audioSource.Play();
+            PlaySound(sound.audioClip, sound.Volume * volume, sound.Pitch, true);
         }
     }
+
+    /// <summary>
+    /// Play a <paramref name="audioClip"/>.
+    /// </summary>
+    /// <param name="audioClip"><see cref="AudioClip"/> to play.</param>
+    /// <param name="volume">Volume of sound.</param>
+    /// <param name="pitch">Pitch of sound.</param>
+    /// <param name="useMasterVolumeMultplier">If <see langword="true"/> <paramref name="volume"/> will be multiplied by <see cref="masterVolume"/>.</param>
+    /// <seealso cref="PlaySound(Sound, bool)"/>
+    public void PlaySound(AudioClip audioClip, float volume, float pitch, bool useMasterVolumeMultplier = false)
+    {
+        audioSource.Stop();
+        audioSource.clip = audioClip;
+        audioSource.volume = useMasterVolumeMultplier ? volume * masterVolume : volume;
+        audioSource.pitch = pitch;
+        audioSource.Play();
+    }
+
+    /// <summary>
+    /// Play a <paramref name="audioClip"/>.
+    /// </summary>
+    /// <param name="sound">Sound to play.</param>
+    /// <param name="useMasterVolumeMultplier">If <see langword="true"/> <paramref name="volume"/> will be multiplied by <see cref="masterVolume"/>.</param>
+    /// <seealso cref="PlaySound(AudioClip, float, float, bool)"/>
+    public void PlaySound(Sound sound, bool useMasterVolumeMultplier = false) => PlaySound(sound.audioClip, sound.Volume, sound.Pitch, useMasterVolumeMultplier);
 
     /// <summary>
     /// Set a playlist. It doesn't reset current playing sound.

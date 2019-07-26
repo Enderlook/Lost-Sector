@@ -57,11 +57,7 @@ public class Menu : MonoBehaviour
             isActive = active != null ? (bool)active : !isActive;
             Time.timeScale = isActive ? 0 : 1;
             menu.SetActive(isActive);
-            if (isActive)
-                playlistManager.SetPlaylist(playlistMenuShow);
-            else
-                playlistManager.SetPlaylist(playlistMenuHide);
-            playlistManager.Reset();
+            PlayMusic(isActive);
         }
     }
 
@@ -79,6 +75,7 @@ public class Menu : MonoBehaviour
         hasWon = win;
         isGameOver = true;
         Global.enemySpawner.StopSpawnWaves();
+        PlayMusic(true);
     }
 
     /// <summary>
@@ -86,4 +83,13 @@ public class Menu : MonoBehaviour
     /// </summary>
     /// <param name="active"></param>
     public void ShowHowToPlay(bool active) => howToPlay.SetActive(active);
+
+    private void PlayMusic(bool menuMusic)
+    {
+        if (menuMusic)
+            playlistManager.SetPlaylist(playlistMenuShow);
+        else
+            playlistManager.SetPlaylist(playlistMenuHide);
+        playlistManager.Reset();
+    }
 }

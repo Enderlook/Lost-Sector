@@ -3457,6 +3457,18 @@ MonoBehaviour:
   timePlayed: {fileID: 955856089}
   winColor: {r: 0, g: 1, b: 0, a: 1}
   loseColor: {r: 1, g: 0, b: 0, a: 1}
+  winSound:
+    audioClip: {fileID: 8300000, guid: 28d8c58dc05c7934ab2e69b766812e64, type: 3}
+    volume:
+    - 0.8
+    pitch:
+    - 1
+  loseSound:
+    audioClip: {fileID: 8300000, guid: 43ffc85a383bddc44bf93ba1ea179cec, type: 3}
+    volume:
+    - 0.8
+    pitch:
+    - 1
 --- !u!1 &1332508071
 GameObject:
   m_ObjectHideFlags: 0
