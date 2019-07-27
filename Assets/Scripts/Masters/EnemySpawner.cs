@@ -31,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject healthPack;
     [Tooltip("Time between spawn attempts of Health Pack")]
     public float healthPackSpawnTime;
-    private float healthPackSpawnCharging = 0;
+    private float healthPackSpawnCharge = 0;
     [Tooltip("Health Pack spawn probability per spawn attempt. From 0 to 1.")]
     public float healthPackSpawnChance;
 
@@ -47,9 +47,9 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if (healthPackSpawnCharging >= healthPackSpawnTime)
+        if (healthPackSpawnCharge >= healthPackSpawnTime)
         {
-            healthPackSpawnCharging = 0;
+            healthPackSpawnCharge = 0;
             if (Random.Range(0f, 1f) < healthPackSpawnChance)
             {
                 GameObject pack = Spawn(healthPack, Global.pickupsParent);
@@ -57,7 +57,7 @@ public class EnemySpawner : MonoBehaviour
             }
         }
         else
-            healthPackSpawnCharging += Time.deltaTime;
+            healthPackSpawnCharge += Time.deltaTime;
     }
 
     /// <summary>

@@ -18,7 +18,7 @@ public class WeaponCooldownDisplay : MonoBehaviour
     public AudioSource audioSource;
 
     private Sound lastSound;
-    
+
     private void Update()
     {
         float charge = reverseFill ? 1 - weapon.CooldownPercent : weapon.CooldownPercent;

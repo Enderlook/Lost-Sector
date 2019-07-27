@@ -23,9 +23,8 @@ public class PickupMagnet : MonoBehaviour
     public Transform magnetTransform;
 
     private Player player;
-
-    const int FRAME_RATIO = 2;
-    const float SECONDS_PER_PICKUP = 0.05f;
+    private const int FRAME_RATIO = 2;
+    private const float SECONDS_PER_PICKUP = 0.05f;
     private float cooldown = 0;
 
     private void Start()

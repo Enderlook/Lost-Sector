@@ -8,7 +8,7 @@ public class Menu : MonoBehaviour
     [Tooltip("Game over menu to display when game finishes.")]
     public GameOverMenu gameOver;
     [Tooltip("Others panels. Used to hide them when press escape.")]
-    public GameObject[] panels;        
+    public GameObject[] panels;
     [Tooltip("Force menu to not be toggleable.")]
     public bool menuNoToggleable = false;
     [Tooltip("Playlist Manager.")]
@@ -48,8 +48,8 @@ public class Menu : MonoBehaviour
     /// </summary>
     /// <param name="active">Whenever the menu is visible or not.</param>
     public void DisplayMenuPause(bool? active = null)
-    {       
-        foreach(GameObject panel in panels)
+    {
+        foreach (GameObject panel in panels)
         {
             if (panel.activeSelf)
             {

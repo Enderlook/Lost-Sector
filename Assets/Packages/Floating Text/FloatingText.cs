@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class FloatingText : MonoBehaviour
@@ -112,7 +112,7 @@ public class FloatingText : MonoBehaviour
     /// Used to override the configuration of the <see cref="FloatingText"/> Prefab.
     /// </summary>
     /// <param name="scale">Scale multiplier to current scale.</param>
-    public void SetScaleMultiplier(float scale) => this.scaleMultiplier = scale;
+    public void SetScaleMultiplier(float scale) => scaleMultiplier = scale;
 
     /// <summary>
     /// Set the text of the floating text.<br/>
