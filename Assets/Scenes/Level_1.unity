@@ -4071,7 +4071,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 145805903}
   gameOver: {fileID: 1309082850}
-  howToPlay: {fileID: 1173852154}
+  panels:
+  - {fileID: 1173852154}
   menuNoToggleable: 0
   playlistManager: {fileID: 1560176983}
   playlistMenuShow: Menu

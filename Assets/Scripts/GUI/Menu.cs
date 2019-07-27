@@ -7,8 +7,8 @@ public class Menu : MonoBehaviour
     public GameObject menu;
     [Tooltip("Game over menu to display when game finishes.")]
     public GameOverMenu gameOver;
-    [Tooltip("How to play menu.")]
-    public GameObject howToPlay;
+    [Tooltip("Others panels. Used to hide them when press escape.")]
+    public GameObject[] panels;        
     [Tooltip("Force menu to not be toggleable.")]
     public bool menuNoToggleable = false;
     [Tooltip("Playlist Manager.")]
@@ -48,18 +48,21 @@ public class Menu : MonoBehaviour
     /// </summary>
     /// <param name="active">Whenever the menu is visible or not.</param>
     public void DisplayMenuPause(bool? active = null)
-    {
+    {       
+        foreach(GameObject panel in panels)
+        {
+            if (panel.activeSelf)
+            {
+                panel.SetActive(false);
+                return;
+            }
+        }
         if (menuNoToggleable)
             return;
-        if (howToPlay.activeSelf)
-            ShowHowToPlay(false);
-        else
-        {
-            isActive = active != null ? (bool)active : !isActive;
-            Time.timeScale = isActive ? 0 : 1;
-            menu.SetActive(isActive);
-            PlayMusic(isActive);
-        }
+        isActive = active != null ? (bool)active : !isActive;
+        Time.timeScale = isActive ? 0 : 1;
+        menu.SetActive(isActive);
+        PlayMusic(isActive);
     }
 
     /// <summary>
@@ -78,12 +81,6 @@ public class Menu : MonoBehaviour
         Global.enemySpawner.StopSpawnWaves();
         PlayMusic(true);
     }
-
-    /// <summary>
-    /// Show how to play panel.
-    /// </summary>
-    /// <param name="active"></param>
-    public void ShowHowToPlay(bool active) => howToPlay.SetActive(active);
 
     private void PlayMusic(bool menuMusic)
     {
