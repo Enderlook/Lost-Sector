@@ -170,7 +170,6 @@ namespace Effects
         {
             // https://answers.unity.com/questions/948887/what-is-the-correct-syntax-to-create-a-new-object.html
             gameObject = new GameObject("Effect", typeof(RectTransform));
-            RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
             gameObject.transform.SetParent(parentTransform, false);
             background = gameObject.AddComponent<Image>();
             background.sprite = backgroundSprite;
