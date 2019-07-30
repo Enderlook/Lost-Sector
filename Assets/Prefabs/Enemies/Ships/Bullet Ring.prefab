@@ -51,6 +51,35 @@ MonoBehaviour:
   time: 1
   weapon: {fileID: 5934175852749403097}
   shoots: 3
+--- !u!114 &288194050020250137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9010879735824746043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a08af33a1a22a4dad3cf09c030efac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnsOnDeath:
+    spawningPoints:
+    - spawnPoint: {fileID: 9010879735983446471}
+      distance:
+        start: 0
+        end: 0
+        isRandom: 0
+    prefabsToSpawn:
+    - prefab: {fileID: 3321478458202144441, guid: e6be4adf8a372a447a4afc4230d2a53f,
+        type: 3}
+      weight: 1
+    amountToSpawn:
+      start: 0.35
+      end: 0
+      isRandom: 0
+    notRandom: 0
+  configureRoatation: 0
 --- !u!61 &4589858573247284374
 BoxCollider2D:
   m_ObjectHideFlags: 0
