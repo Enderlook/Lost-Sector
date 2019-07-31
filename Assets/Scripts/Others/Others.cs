@@ -214,8 +214,42 @@ public static class LINQExtension
         }
         return false;
     }
-}
 
+    /// <summary>
+    /// Return the element which the highest property returned by <paramref name="selector"/>, using <paramref name="comparer"/>.
+    /// </summary>
+    /// <typeparam name="TSource">Type the of the <paramref name="source"/>.</typeparam>
+    /// <typeparam name="TKey">Type returned by the <paramref name="selector"/>.</typeparam>
+    /// <param name="source"><seealso cref="IEnumerable{T}"/> to get the highest value.</param>
+    /// <param name="selector">Function which provides the property to compare.</param>
+    /// <param name="comparer">Comparer used to compare the values returned by <paramref name="selector"/>.</param>
+    /// <returns>The element with the highest property.</returns>
+    public static TSource MaxBy<TSource, TKey>(this IEnumerable<TSource> source, System.Func<TSource, TKey> selector, IComparer<TKey> comparer = null)
+    {
+        if (source is null) throw new System.ArgumentNullException(nameof(source));
+        if (selector is null) throw new System.ArgumentNullException(nameof(selector));
+
+        comparer = comparer ?? Comparer<TKey>.Default;
+        return source.Aggregate((a, c) => comparer.Compare(selector(a), selector(c)) > 0 ? a : c);
+    }
+
+    /// <summary>
+    /// Return the element which the lowest property returned by <paramref name="selector"/>, using <paramref name="comparer"/>.
+    /// </summary>
+    /// <typeparam name="TSource">Type the of the <paramref name="source"/>.</typeparam>
+    /// <typeparam name="TKey">Type returned by the <paramref name="selector"/>.</typeparam>
+    /// <param name="source"><seealso cref="IEnumerable{T}"/> to get the lowest value.</param>
+    /// <param name="selector">Function which provides the property to compare.</param>
+    /// <param name="comparer">Comparer used to compare the values returned by <paramref name="selector"/>.</param>
+    /// <returns>The element with the lowest property.</returns>
+    public static TSource MinBy<TSource, TKey>(this IEnumerable<TSource> source, System.Func<TSource, TKey> selector, IComparer<TKey> comparer = null)
+    {
+        if (source is null) throw new System.ArgumentNullException(nameof(source));
+        if (selector is null) throw new System.ArgumentNullException(nameof(selector));
+
+        comparer = comparer ?? Comparer<TKey>.Default;
+        return source.Aggregate((a, c) => comparer.Compare(selector(a), selector(c)) < 0 ? a : c);
+    }
 public static class OthersExtension
 {
     /// <summary>
