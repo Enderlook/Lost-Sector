@@ -250,6 +250,19 @@ public static class LINQExtension
         comparer = comparer ?? Comparer<TKey>.Default;
         return source.Aggregate((a, c) => comparer.Compare(selector(a), selector(c)) < 0 ? a : c);
     }
+
+    /// <summary>
+    /// Returns a random element from <paramref name="source"/>.
+    /// </summary>
+    /// <typeparam name="T">Type of the element inside <paramref name="source"/>.</typeparam>
+    /// <param name="source">Source to look for a random element.</param>
+    /// <returns></returns>
+    public static T RandomElement<T>(this IEnumerable<T> source)
+    {
+        if (source is null) throw new System.ArgumentNullException(nameof(source));
+
+        return source.ElementAt(Random.Range(0, source.Count()));
+    }
 public static class OthersExtension
 {
     /// <summary>
