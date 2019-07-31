@@ -474,9 +474,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6dfdd1bd6897f4681df99d574a3a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magnetRadius: 1.35
-  magnetStrength: 1
-  pickupRadius: 0.2
+  magnetRadius: 1.5
+  magnetStrength: 2
+  pickupRadius: 0.25
   magnetTransform: {fileID: 574265758}
 --- !u!114 &118295641
 MonoBehaviour:
@@ -551,7 +551,7 @@ MonoBehaviour:
     bar: {fileID: 166792902}
     canRegenerate: 1
     regenerateRate: 10
-    regenerationDelay: 3
+    regenerationDelay: 2.5
     playlist: {fileID: 11400000, guid: cde993ea5c197ad4ca50f717e37b8d86, type: 2}
     audioSource: {fileID: 574265761}
   moveSpeed: 15
@@ -587,7 +587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba9d17193cac90c408c5e452ec2ebcd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firerate: 2
+  firerate: 2.5
   strengthMultiplier: 1
   shootingSound:
     audioClip: {fileID: 8300000, guid: 5a8c55f41a396a74894ec2e9af446247, type: 3}
@@ -670,9 +670,9 @@ MonoBehaviour:
     pitch:
     - 0.8
     - 1.2
-  damageOnHit: 40
-  forceOnHit: 20
-  radius: 2.5
+  damageOnHit: 100
+  forceOnHit: 40
+  radius: 3.5
   shouldDisplayDamage: 1
   shockwaveSprite: {fileID: 21300000, guid: 821d0f8c70fdba547bb67e2d62a77263, type: 3}
   shootingPosition: {fileID: 574265758}
@@ -2046,8 +2046,8 @@ MonoBehaviour:
   difficultyIncreaseInterval: 4
   healthPack: {fileID: 535086599481409440, guid: f84cf23a7962e65488b58c3f49368c8c,
     type: 3}
-  healthPackSpawnTime: 4
-  healthPackSpawnChance: 0.5
+  healthPackSpawnTime: 10
+  healthPackSpawnChance: 1
 --- !u!4 &801854807
 Transform:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ MonoBehaviour:
     startVector: {x: 0, y: 4}
     endVector: {x: 0, y: 10}
   playlist: {fileID: 11400000, guid: 345e4c6bf2c98f644bf5a391915aea20, type: 2}
-  damageMultiplier: 2.5
+  damageMultiplier: 2
   durationOfEffect: 10
 --- !u!1001 &5106807021013219652
 PrefabInstance:

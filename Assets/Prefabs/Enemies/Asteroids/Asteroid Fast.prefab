@@ -140,7 +140,7 @@ PrefabInstance:
     - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
       propertyPath: impulse.endVector.y
-      value: 700
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 3171107085224686567, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
@@ -155,7 +155,7 @@ PrefabInstance:
     - target: {fileID: 2915674109300423229, guid: 926a52539d738a7439a32750206b316e,
         type: 3}
       propertyPath: damageOnHit
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 768387036, guid: 926a52539d738a7439a32750206b316e, type: 3}
       propertyPath: impulse.startVector.y

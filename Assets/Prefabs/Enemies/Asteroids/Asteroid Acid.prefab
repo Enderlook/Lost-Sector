@@ -61,9 +61,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2
   rigidbodyHelperGizmos: {fileID: 1829191654744954401}
-  acidDamage: 6
+  acidDamage: 4
   ticksPerSecond: 5
-  durationOfEffect: 4
+  durationOfEffect: 3.5
 --- !u!1001 &3846233553879874054
 PrefabInstance:
   m_ObjectHideFlags: 0
