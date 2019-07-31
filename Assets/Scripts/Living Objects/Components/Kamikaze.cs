@@ -9,7 +9,9 @@ namespace LivingObjectAddons
         public float waitSecondsBeferoAccelerate;
         [Tooltip("Acceleration in units per second.")]
         public float acceleration;
-
+        [Tooltip("Max velocity.")]
+        public float maxVelocity;
+        
         private bool isAccelerating = false;
         private float secondsWaitedBeforeAccelerate = 0;
 
@@ -20,7 +22,10 @@ namespace LivingObjectAddons
         void IMove.Move(float speedMultiplier)
         {
             if (isAccelerating)
-                thisRigidbody.AddRelativeForce(new Vector2(0, acceleration) * speedMultiplier);
+            {
+                if (thisRigidbody.velocity.magnitude < maxVelocity)
+                    thisRigidbody.AddRelativeForce(new Vector2(0, acceleration) * speedMultiplier * Time.deltaTime);
+            }
             else
             {
                 secondsWaitedBeforeAccelerate += Time.deltaTime;
