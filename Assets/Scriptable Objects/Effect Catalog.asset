@@ -23,5 +23,5 @@ MonoBehaviour:
     spriteBuff: {fileID: 0}
     spriteDebuff: {fileID: 21300000, guid: cb86c0d5ed066824b96a0d551563d952, type: 3}
   - name: Damage
-    spriteBuff: {fileID: 21300002, guid: 0ab52fc28ef08e74b849dabb4afd0608, type: 3}
+    spriteBuff: {fileID: 21300004, guid: 0ab52fc28ef08e74b849dabb4afd0608, type: 3}
     spriteDebuff: {fileID: 0}
