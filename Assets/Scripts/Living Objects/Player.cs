@@ -16,6 +16,8 @@ public class Player : LivingObject
     [Tooltip("Shield handler.")]
     public ShieldHandler shieldHandler;
 
+    private float cumulativeOutOfBoundaryDamage = 0;
+
     private void Start() => Initialize(); // Fixs a bug where healthPoints are strangely set into 0.
 
     protected override void Initialize()
@@ -37,7 +39,14 @@ public class Player : LivingObject
         transform.position = boundaryCheck.Item1;
         // Player is punished to try to move outside the screen
         if (boundaryCheck.Item2)
-            TakeDamage(5 * Time.deltaTime);
+        {
+            cumulativeOutOfBoundaryDamage += 5 * Time.deltaTime;
+            if (cumulativeOutOfBoundaryDamage >= 1)
+            {
+                TakeDamage(1, true);
+                cumulativeOutOfBoundaryDamage--;
+            }
+        }
 
         shieldPoints.Update(Time.deltaTime);
         shieldHandler.UpdateColor(shieldPoints.Ratio);
