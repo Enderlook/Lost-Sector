@@ -90,9 +90,14 @@ namespace LivingObjectAddons
         protected float cooldownTime = 0f;
 
         /// <summary>
+        /// Total cooldown time.
+        /// </summary>
+        public float TotalCooldown => 1 / firerate;
+
+        /// <summary>
         /// Cooldown percent from 0 to 1. When 0, it's ready to shoot.
         /// </summary>
-        public float CooldownPercent => Mathf.Clamp01(cooldownTime / (1 / firerate));
+        public float CooldownPercent => Mathf.Clamp01(cooldownTime / TotalCooldown);
 
         /// <summary>
         /// Whenever it can shoot or is still in cooldown.
@@ -120,7 +125,7 @@ namespace LivingObjectAddons
         /// <summary>
         /// Reset <see cref="cooldownTime"/> time to maximum.
         /// </summary>
-        public void ResetCooldown() => cooldownTime = 1 / firerate;
+        public void ResetCooldown() => cooldownTime = TotalCooldown;
 
         /// <summary>
         /// Reduce <see cref="cooldownTime"/> time and checks if the weapon's <see cref="cooldownTime"/> is over.

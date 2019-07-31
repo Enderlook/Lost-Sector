@@ -20,7 +20,7 @@ namespace Effects
         /// <param name="effect">Effect to add.</param>
         public void AddEffect(Effect effect)
         {
-            if (effect.ReplaceCurrentInstance)
+            if (effect.ReplaceCurrentInstance && effect.DurationPercent > 0) // Single use effects don't replace current instance because they don't have
             {
                 System.Type target = effect.GetType();
                 for (int i = 0; i < effects.Count; i++)
@@ -34,7 +34,8 @@ namespace Effects
                 }
             }
             effect.Setup(livingObject);
-            effects.Add(effect);
+            if (!effect.shouldBeDisposed) // Some effect don't have duration and so they are disposed after Setup
+                effects.Add(effect);
         }
 
         /// <summary>
@@ -76,7 +77,19 @@ namespace Effects
         /// <summary>
         /// Get duration percent from <c><see cref="duration"/> / <see cref="maxDuration"/></c>
         /// </summary>
-        public float DurationPercent => duration / maxDuration;
+        public float DurationPercent
+        {
+            get
+            {
+                try
+                {
+                    return duration / maxDuration;
+                } catch (System.DivideByZeroException)
+                {
+                    return 0;
+                }
+            }
+        }
 
         /// <summary>
         /// Whenever the old instance of this effect should be removed before add this one.
@@ -104,6 +117,14 @@ namespace Effects
             this.livingObject = livingObject;
             this.CastOrNull<IStart>()?.OnStart();
             this.TryCast(out update);
+            if (duration <= 0)
+                End();
+        }
+
+        private void End()
+        {
+            this.CastOrNull<IEnd>()?.OnEnd(false);
+            shouldBeDisposed = true;
         }
 
         /// <summary>
@@ -113,10 +134,7 @@ namespace Effects
         public void Update(float time)
         {
             if (duration <= 0)
-            {
-                this.CastOrNull<IEnd>()?.OnEnd(false);
-                shouldBeDisposed = true;
-            }
+                End();
             else
             {
                 update?.OnUpdate(time);

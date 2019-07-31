@@ -69,6 +69,9 @@ MonoBehaviour:
     prefabsToSpawn:
     - prefab: {fileID: 3684510328966052736, guid: 84d2b899ab741034aa936ac8bda2e139,
         type: 3}
+      weight: 3
+    - prefab: {fileID: 4952319863724506432, guid: 000cc623e3efb204292aa42d498f3ed0,
+        type: 3}
       weight: 1
     amountToSpawn:
       start: 0.075

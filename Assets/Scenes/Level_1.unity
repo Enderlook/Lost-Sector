@@ -543,8 +543,7 @@ MonoBehaviour:
   rigidbodyHelper: {fileID: 574265759}
   floatingTextController: {fileID: 118295641}
   effectsDisplayer: {fileID: 1333023002}
-  fireRateMultiplier: 0
-  weaponStrengthMultiplier: 0
+  weapons: []
   shieldPoints:
     startingMax: 40
     startingCurrent: -1

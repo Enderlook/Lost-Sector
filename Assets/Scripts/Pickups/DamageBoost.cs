@@ -17,7 +17,7 @@ namespace Effects
         }
     }
 
-    public class DamageBoostEffect : Effect, IStart, IUpdate, IEnd
+    public class DamageBoostEffect : WeaponEffect<LivingObjectAddons.Weapon>, IUpdate, IEnd
     {
         public DamageBoostEffect(float strength, float duration) : base(strength, duration) { }
 
@@ -26,10 +26,33 @@ namespace Effects
 
         public override bool ReplaceCurrentInstance => true;
 
-        private float initialValue;
+        private float[] initialValues;
+        private float Strength => strength * Mathf.Pow(duration / maxDuration, .5f);
 
-        void IStart.OnStart() => initialValue = livingObject.weaponStrengthMultiplier;
-        void IUpdate.OnUpdate(float time) => livingObject.weaponStrengthMultiplier = initialValue + strength * Mathf.Pow(duration / maxDuration, .5f);
-        void IEnd.OnEnd(bool wasAborted) => livingObject.weaponStrengthMultiplier = initialValue;
-    }
+        public override void OnStart()
+        {
+            base.OnStart();
+            initialValues = new float[weapons.Count];
+            for (int i = 0; i < initialValues.Length; i++)
+            {
+                initialValues[i] = weapons[i].strengthMultiplier;
+            }
+        }
+
+        void IUpdate.OnUpdate(float time)
+        {
+            for (int i = 0; i < weapons.Count; i++)
+            {
+                weapons[i].strengthMultiplier = initialValues[i] + Strength;
+            }
+        }
+
+        void IEnd.OnEnd(bool wasAborted)
+        {
+            for (int i = 0; i < weapons.Count; i++)
+            {
+                weapons[i].strengthMultiplier = initialValues[i];
+            }
+        }
+    }    
 }

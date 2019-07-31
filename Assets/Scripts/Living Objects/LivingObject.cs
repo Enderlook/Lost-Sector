@@ -38,7 +38,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     private IDie[] dies;
     private LivingObjectAddons.IUpdate[] updates;
     private IMove move;
-    protected Weapon[] weapons;
+    public Weapon[] weapons;
     private IMelee melee;
 
     IMelee IRigidbodyHelperConfiguration.Melee => melee;
@@ -48,10 +48,6 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
 
     protected bool isDead = false;
 
-    [HideInInspector]
-    public float fireRateMultiplier;
-    [HideInInspector]
-    public float weaponStrengthMultiplier;
     public float SpeedMultiplier {
         get => rigidbodyHelper.SpeedMultiplier;
         set => rigidbodyHelper.SpeedMultiplier = value;
@@ -96,8 +92,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         effectManager.Update(Time.deltaTime);
         foreach (Weapon weapon in weapons)
         {
-            weapon.Recharge(Time.deltaTime * fireRateMultiplier);
-            weapon.strengthMultiplier = weaponStrengthMultiplier;
+            weapon.Recharge(Time.deltaTime);
         }
         foreach (LivingObjectAddons.IUpdate action in updates)
         {
@@ -121,8 +116,6 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         {
             action.Initialize();
         }
-        fireRateMultiplier = 1;
-        weaponStrengthMultiplier = 1;
         isDead = false;
     }
 

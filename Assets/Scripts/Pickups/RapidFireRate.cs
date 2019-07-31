@@ -1,4 +1,6 @@
 using UnityEngine;
+using LivingObjectAddons;
+using System.Collections.Generic;
 
 namespace Effects
 {
@@ -12,24 +14,46 @@ namespace Effects
 
         public override void Pickup(Player player)
         {
-            player.AddEffect(new RapidFireRateEffect(fireRateMultiplier, durationOfEffect));
+            player.AddEffect(new RapidFireRateEffect<SimpleWeapon>(fireRateMultiplier, durationOfEffect));
             base.Pickup(player);
         }
     }
 
-    public class RapidFireRateEffect : Effect, IStart, IUpdate, IEnd
+    public abstract class WeaponEffect<T> : Effect, IStart where T : Weapon
     {
-        public RapidFireRateEffect(float strength, float duration) : base(strength, duration) { }
+        public WeaponEffect(float strength, float duration) : base(strength, duration) { }
+
+        protected List<T> weapons = new List<T>();
+
+        public virtual void OnStart()
+        {
+            foreach (Weapon weapon in livingObject.weapons)
+            {
+                if (weapon.TryCast(out T w))
+                    weapons.Add(w);
+            }
+        }
+    }
+
+    public class RapidFireRateEffect<T> : WeaponEffect<T>, IUpdate where T : Weapon
+    {
+        public RapidFireRateEffect(float strength = 0, float duration = 0, float initialCharge = 0) : base(strength, duration) => this.initialCharge = initialCharge;
 
         public override string Name => "Fire Rate";
         public override bool IsBuff => strength > 0;
 
         public override bool ReplaceCurrentInstance => true;
+        private float initialCharge;
 
-        private float initialValue;
+        private float Strength => strength * Mathf.Pow(duration / maxDuration, .5f);
 
-        void IStart.OnStart() => initialValue = livingObject.fireRateMultiplier;
-        void IUpdate.OnUpdate(float time) => livingObject.fireRateMultiplier = initialValue + strength * Mathf.Pow(duration / maxDuration, .5f);
-        void IEnd.OnEnd(bool wasAborted) => livingObject.fireRateMultiplier = initialValue;
+        public override void OnStart()
+        {
+            base.OnStart();
+            if (initialCharge > 0)
+                weapons?.ForEach(e => e.Recharge(e.TotalCooldown * initialCharge));
+        }
+
+        void IUpdate.OnUpdate(float time) => weapons?.ForEach(e => e.Recharge(e.TotalCooldown * Strength));
     }
 }
