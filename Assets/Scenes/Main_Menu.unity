@@ -1526,7 +1526,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 26d9755e19df12548a90fc40a17b2323, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 4
@@ -2016,7 +2016,7 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 300
+    m_MaxSize: 20
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -2186,7 +2186,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1680339322}
+      - m_Target: {fileID: 499544332}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
