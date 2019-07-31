@@ -32,6 +32,7 @@ public class EnemySpawner : MonoBehaviour
     [Tooltip("Time between spawn attempts of Health Pack")]
     public float healthPackSpawnTime;
     private float healthPackSpawnCharge = 0;
+    [Range(0, 1)]
     [Tooltip("Health Pack spawn probability per spawn attempt. From 0 to 1.")]
     public float healthPackSpawnChance;
 
