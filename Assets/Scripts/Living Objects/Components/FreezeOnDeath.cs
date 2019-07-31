@@ -12,7 +12,7 @@ namespace LivingObjectAddons
 
         protected override void AffectTarget(RigidbodyHelper target)
         {
-            target.GetComponentInParent<LivingObject>()?.AddEffect(new SpeedEffect(speedMultiplier, durationOfEffect,
+            target.GetComponentInParent<LivingObject>()?.AddEffect(new Effects.SpeedEffect(speedMultiplier, durationOfEffect,
                 (strength, maxDuration, duration, initialValue) => initialValue / (1 + strength * Mathf.Pow(duration / maxDuration, .5f))
             ));
         }

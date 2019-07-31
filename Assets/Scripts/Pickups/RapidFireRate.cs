@@ -1,46 +1,35 @@
 using UnityEngine;
 
-public class RapidFireRate : Pickupable
+namespace Effects
 {
-    [Header("Configuration")]
-    [Tooltip("Fire rate multiplier.")]
-    public float fireRateMultiplier;
-    [Tooltip("Duration of effect in seconds.")]
-    public float durationOfEffect;
-
-    public override void Pickup(Player player)
+    public class RapidFireRate : Pickupable
     {
-        player.AddEffect(new RapidFireRateEffect(fireRateMultiplier, durationOfEffect));
-        base.Pickup(player);
-    }
-}
+        [Header("Configuration")]
+        [Tooltip("Fire rate multiplier.")]
+        public float fireRateMultiplier;
+        [Tooltip("Duration of effect in seconds.")]
+        public float durationOfEffect;
 
-public class RapidFireRateEffect : Effect
-{
-    public RapidFireRateEffect(float strength, float duration) : base(strength, duration) { }
-
-    public override string Name => "Fire Rate";
-    public override bool IsBuff => strength > 0;
-
-    public override bool ReplaceCurrentInstance => true;
-
-    private float initialValue;
-
-    protected override void OnStart()
-    {
-        initialValue = livingObject.fireRateMultiplier;
-        base.OnStart();
+        public override void Pickup(Player player)
+        {
+            player.AddEffect(new RapidFireRateEffect(fireRateMultiplier, durationOfEffect));
+            base.Pickup(player);
+        }
     }
 
-    protected override void OnUpdate(float time)
+    public class RapidFireRateEffect : Effect, IStart, IUpdate, IEnd
     {
-        livingObject.fireRateMultiplier = initialValue + strength * Mathf.Pow(duration / maxDuration, .5f);
-        base.OnUpdate(time);
-    }
+        public RapidFireRateEffect(float strength, float duration) : base(strength, duration) { }
 
-    protected override void OnEnd(bool wasAborted)
-    {
-        livingObject.fireRateMultiplier = initialValue;
-        base.OnEnd(wasAborted);
+        public override string Name => "Fire Rate";
+        public override bool IsBuff => strength > 0;
+
+        public override bool ReplaceCurrentInstance => true;
+
+        private float initialValue;
+
+        void IStart.OnStart() => initialValue = livingObject.fireRateMultiplier;
+        void IUpdate.OnUpdate(float time) => livingObject.fireRateMultiplier = initialValue + strength * Mathf.Pow(duration / maxDuration, .5f);
+        void IEnd.OnEnd(bool wasAborted) => livingObject.fireRateMultiplier = initialValue;
     }
 }

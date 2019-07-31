@@ -215,3 +215,210 @@ public static class LINQExtension
         return false;
     }
 }
+
+public static class OthersExtension
+{
+    /// <summary>
+    /// Deconstruction of <seealso cref="KeyValuePair{TKey, TValue}"/>.
+    /// </summary>
+    public static void Deconstruct<T1, T2>(this KeyValuePair<T1, T2> tuple, out T1 key, out T2 value)
+    // https://stackoverflow.com/questions/42549491/deconstruction-in-foreach-over-dictionary
+    {
+        key = tuple.Key;
+        value = tuple.Value;
+    }
+}
+
+public static class ListExtension
+{
+    /// <summary>
+    /// Removes an element from a list if matches a criteria determined by <paramref name="selector"/>.
+    /// </summary>
+    /// <typeparam name="T">Type of element.</typeparam>
+    /// <param name="source">List to remove item.</param>
+    /// <param name="selector">Function to determine if the item must be removed.</param>
+    /// <param name="ascendOrder">Whenever it must remove in ascending or descending order.</param>
+    /// <param name="removeAmount">Amount of items which must the criteria must be removed. If 0, remove all the matched elements.</param>
+    /// <returns><paramref name="source"/>.</returns>
+    private static List<T> RemoveBy<T>(this List<T> source, System.Func<T, bool> selector, bool ascendOrder = true, int removeAmount = 1)
+    {
+        if (source is null) throw new System.ArgumentNullException(nameof(source));
+        if (selector is null) throw new System.ArgumentNullException(nameof(selector));
+
+        if (removeAmount < 0)
+            throw new System.Exception($"{nameof(removeAmount)} parameter can't be negative.");
+        int removed = 0;
+        for (int i = ascendOrder ? 0 : source.Count; i < (ascendOrder ? source.Count : 0); i += ascendOrder ? 1 : -1)
+        {
+            if (selector(source[i]))
+            {
+                source.RemoveAt(i);
+                removed++;
+                if (removeAmount == 0 || removed >= removeAmount) break;
+            }
+        }
+        return source;
+    }
+
+    /// <summary>
+    /// Removes the fist(s) element(s) from a list which matches a criteria determined by <paramref name="selector"/>.
+    /// </summary>
+    /// <typeparam name="T">Type of element.</typeparam>
+    /// <param name="source">List to remove item.</param>
+    /// <param name="selector">Function to determine if the item must be removed.</param>
+    /// <param name="removeAmount">Amount of items which must the criteria must be removed. Value can't be 0.</param>
+    /// <returns><paramref name="source"/>.</returns>
+    /// <see cref="RemoveBy{T}(List{T}, System.Func{T, bool}, bool, int)"/>
+    /// <seealso cref="RemoveLastBy{T}(List{T}, System.Func{T, bool}, int)"/>
+    /// <seealso cref="RemoveByAll{T}(List{T}, System.Func{T, bool})"/>
+    public static List<T> RemoveFirstBy<T>(this List<T> source, System.Func<T, bool> selector, int removeAmount = 1)
+    {
+        if (removeAmount == 0)
+            throw new System.Exception($"{nameof(removeAmount)} parameter can't be 0.");
+        return source.RemoveBy(selector, removeAmount: removeAmount);
+    }
+
+    /// <summary>
+    /// Removes the last(s) element(s) from a list which matches a criteria determined by <paramref name="selector"/>.
+    /// </summary>
+    /// <typeparam name="T">Type of element.</typeparam>
+    /// <param name="source">List to remove item.</param>
+    /// <param name="selector">Function to determine if the item must be removed.</param>
+    /// <param name="removeAmount">Amount of items which must the criteria must be removed. Value can't be 0.</param>
+    /// <returns><paramref name="source"/>.</returns>
+    /// <see cref="RemoveBy{T}(List{T}, System.Func{T, bool}, bool, int)"/>
+    /// <seealso cref="RemoveFirstBy{T}(List{T}, System.Func{T, bool}, int)"/>
+    /// <seealso cref="RemoveByAll{T}(List{T}, System.Func{T, bool})"/>
+    public static List<T> RemoveLastBy<T>(this List<T> source, System.Func<T, bool> selector, int removeAmount = 1)
+    {
+        if (removeAmount == 0)
+            throw new System.Exception($"{nameof(removeAmount)} parameter can't be 0.");
+        return source.RemoveBy(selector, ascendOrder: false, removeAmount: removeAmount);
+    }
+
+    /// <summary>
+    /// Removes all the elements from a list which matches a criteria determined by <paramref name="selector"/>.
+    /// </summary>
+    /// <typeparam name="T">Type of element.</typeparam>
+    /// <param name="source">List to remove item.</param>
+    /// <param name="selector">Function to determine if the item must be removed.</param>
+    /// <returns><paramref name="source"/>.</returns>
+    /// <see cref="RemoveBy{T}(List{T}, System.Func{T, bool}, bool, int)"/>
+    /// <seealso cref="RemoveFirstBy{T}(List{T}, System.Func{T, bool}, int)"/>
+    /// <seealso cref="RemoveLastBy{T}(List{T}, System.Func{T, bool}, int)"/>
+    public static List<T> RemoveByAll<T>(this List<T> source, System.Func<T, bool> selector) => source.RemoveBy(selector, removeAmount: 0);
+}
+
+public static class VectorExtension
+{
+    /// <summary>
+    /// Returns absolute <seealso cref="Vector2"/> of <paramref name="source"/>.
+    /// </summary>
+    /// <param name="source"><seealso cref="Vector2"/> to become absolute.</param>
+    /// <returns>Absolute <seealso cref="Vector2"/>.</returns>
+    public static Vector2 Abs(this Vector2 source) => new Vector2(Mathf.Abs(source.x), Mathf.Abs(source.y));
+    /// <summary>
+    /// Returns absolute <seealso cref="Vector3"/> of <paramref name="source"/>.
+    /// </summary>
+    /// <param name="source"><seealso cref="Vector3"/> to become absolute.</param>
+    /// <returns>Absolute <seealso cref="Vector3"/>.</returns>
+    public static Vector3 Abs(this Vector3 source) => new Vector3(Mathf.Abs(source.x), Mathf.Abs(source.y), Mathf.Abs(source.z));
+    /// <summary>
+    /// Returns absolute <seealso cref="Vector4"/> of <paramref name="source"/>.
+    /// </summary>
+    /// <param name="source"><seealso cref="Vector4"/> to become absolute.</param>
+    /// <returns>Absolute <seealso cref="Vector4"/>.</returns>
+    public static Vector4 Abs(this Vector4 source) => new Vector4(Mathf.Abs(source.x), Mathf.Abs(source.y), Mathf.Abs(source.z), Mathf.Abs(source.w));
+}
+
+public static class CastExtension
+{
+    /// <summary>
+    /// Try to cast <paramref name="obj"/> into <typeparamref name="T"/> in <paramref name="result"/>.<br/>
+    /// If <paramref name="obj"/> isn't <typeparamref name="T"/>, <paramref name="result"/> is set with <c>default(<typeparamref name="T"/>)</c>.
+    /// </summary>
+    /// <typeparam name="T">Type of the value to cast.</typeparam>
+    /// <param name="obj"><see cref="Object"/> to cast.</param>
+    /// <param name="result">Casted result.</param>
+    /// <returns><see langword="true"/> if the cast was successful. <see langword="false"> if it wasn't able to cast.</returns>
+    /// <seealso href="https://codereview.stackexchange.com/questions/17982/trycastt-method">Source.</see>
+    /// <seealso cref="CastOrDefault{T}(object)"/>
+    /// <seealso cref="CastOrNull{T}(object, RequireStruct{T})"/>
+    /// <seealso cref="CastOrNull{T}(object, RequireClass{T})"/>
+    public static bool TryCast<T>(this object obj, out T result)
+    {
+        if (obj is T)
+        {
+            result = (T)obj;
+            return true;
+        }
+        result = default;
+        return false;
+    }
+
+    /// <summary>
+    /// Try to cast <paramref name="obj"/> into <typeparamref name="T"/>.
+    /// </summary>
+    /// <typeparam name="T">Type of the value to cast.</typeparam>
+    /// <param name="obj"><see cref="Object"/> to cast.</param>
+    /// <returns>Return <c>(<typeparamref name="T"/>)<paramref name="obj"/></c>. <c>default(<typeparamref name="T"/>)<c> if it can't cast.</returns>
+    public static T CastOrDefault<T>(this object obj)
+    {
+        if (obj is T)
+        {
+            return (T)obj;
+        }
+        return default;
+    }
+
+    /// <summary>
+    /// Don't use me.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class RequireStruct<T> where T : struct { }
+    /// <summary>
+    /// Don't use me.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class RequireClass<T> where T : class { }
+
+    /// <summary>
+    /// Try to cast <paramref name="obj"/> into <typeparamref name="T"/>.
+    /// </summary>
+    /// <typeparam name="T">Type of the value to cast.</typeparam>
+    /// <param name="obj"><see cref="Object"/> to cast.</param>
+    /// <param name="ignoreMe">Ignore this. Don't put anything here.</param>
+    /// <returns>Return <c>(<typeparamref name="T"/>)<paramref name="obj"/></c>. <see langword="null"/> if it can't cast.</returns>
+    /// <seealso href="https://stackoverflow.com/questions/2974519/generic-constraints-where-t-struct-and-where-t-class"/>
+    /// <seealso cref="TryCast{T}(object, out T)"/>
+    /// <seealso cref="CastOrDefault{T}(object)"/>
+    /// <seealso cref="CastOrNull{T}(object, RequireClass{T})"/>
+    public static T? CastOrNull<T>(this object obj, RequireStruct<T> ignoreMe = null) where T : struct
+    {
+        if (obj is T)
+        {
+            return (T)obj;
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Try to cast <paramref name="obj"/> into <typeparamref name="T"/>.
+    /// </summary>
+    /// <typeparam name="T">Type of the value to cast.</typeparam>
+    /// <param name="obj"><see cref="Object"/> to cast.</param>
+    /// <param name="ignoreMe">Ignore this. Don't put anything here.</param>
+    /// <returns>Return <c>(<typeparamref name="T"/>)<paramref name="obj"/></c>. <see langword="null"/> if it can't cast.</returns>
+    /// <seealso href="https://stackoverflow.com/questions/2974519/generic-constraints-where-t-struct-and-where-t-class"/>
+    /// <seealso cref="TryCast{T}(object, out T)"/>
+    /// <seealso cref="CastOrDefault{T}(object)"/>
+    /// <seealso cref="CastOrNull{T}(object, RequireStruct{T})"/>
+    public static T CastOrNull<T>(this object obj, RequireClass<T> ignoreMe = null) where T : class
+    {
+        if (obj is T)
+        {
+            return (T)obj;
+        }
+        return null;
+    }
+}

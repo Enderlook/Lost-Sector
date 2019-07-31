@@ -14,32 +14,34 @@ namespace LivingObjectAddons
 
         protected override void AffectTarget(RigidbodyHelper target)
         {
-            target.GetComponentInParent<LivingObject>()?.AddEffect(new AcidEffect(acidDamage, durationOfEffect, ticksPerSecond));
+            target.GetComponentInParent<LivingObject>()?.AddEffect(new Effects.AcidEffect(acidDamage, durationOfEffect, ticksPerSecond));
         }
     }
 }
 
-public class AcidEffect : Effect
+namespace Effects
 {
-    private float ticksPerSecond;
-    private float cooldown = 0;
-
-    public AcidEffect(float strength, float duration, float ticksPerSecond) : base(strength, duration) => this.ticksPerSecond = ticksPerSecond;
-
-    public override bool ReplaceCurrentInstance => false;
-
-    public override string Name => "Acid";
-    public override bool IsBuff => false;
-
-    protected override void OnUpdate(float time)
+    public class AcidEffect : Effect, IUpdate
     {
-        if (cooldown <= 0)
+        private float ticksPerSecond;
+        private float cooldown = 0;
+
+        public AcidEffect(float strength, float duration, float ticksPerSecond) : base(strength, duration) => this.ticksPerSecond = ticksPerSecond;
+
+        public override bool ReplaceCurrentInstance => false;
+
+        public override string Name => "Acid";
+        public override bool IsBuff => false;
+
+        void IUpdate.OnUpdate(float time)
         {
-            livingObject.TakeDamage(strength * Mathf.Pow(duration / maxDuration, .5f), true);
-            cooldown = 1 / ticksPerSecond;
+            if (cooldown <= 0)
+            {
+                livingObject.TakeDamage(strength * Mathf.Pow(duration / maxDuration, .5f), true);
+                cooldown = 1 / ticksPerSecond;
+            }
+            else
+                cooldown -= Time.deltaTime;
         }
-        else
-            cooldown -= Time.deltaTime;
-        base.OnUpdate(time);
     }
 }

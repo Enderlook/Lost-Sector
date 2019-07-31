@@ -1,3 +1,4 @@
+using Effects;
 using LivingObjectAddons;
 using UnityEngine;
 
@@ -29,13 +30,13 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     public FloatingTextController floatingTextController;
 
     [Tooltip("Effect displayer.")]
-    public Effects.EffectsDisplayer effectsDisplayer;
+    public EffectsDisplayer effectsDisplayer;
 
     private Quaternion? initialRotation = null;
 
     private IInitialize[] initializes;
     private IDie[] dies;
-    private IUpdate[] updates;
+    private LivingObjectAddons.IUpdate[] updates;
     private IMove move;
     protected Weapon[] weapons;
     private IMelee melee;
@@ -77,7 +78,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     {
         initializes = gameObject.GetComponentsInChildren<IInitialize>();
         dies = gameObject.GetComponentsInChildren<IDie>();
-        updates = gameObject.GetComponentsInChildren<IUpdate>();
+        updates = gameObject.GetComponentsInChildren<LivingObjectAddons.IUpdate>();
         weapons = gameObject.GetComponentsInChildren<Weapon>();
         move = gameObject.GetComponentInChildren<IMove>();
         melee = gameObject.GetComponentInChildren<IMelee>();
@@ -94,7 +95,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
             weapon.Recharge(Time.deltaTime * fireRateMultiplier);
             weapon.strengthMultiplier = weaponStrengthMultiplier;
         }
-        foreach (IUpdate action in updates)
+        foreach (LivingObjectAddons.IUpdate action in updates)
         {
             action.Update();
         }
