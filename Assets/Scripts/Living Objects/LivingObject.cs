@@ -86,7 +86,11 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
 
     protected virtual void Update()
     {
-        if (isDead) return;
+        if (isDead)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
         healthPoints.Update(Time.deltaTime);
         move?.Move(SpeedMultiplier);
         effectManager.Update(Time.deltaTime);
