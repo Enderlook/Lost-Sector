@@ -31,8 +31,8 @@ namespace LivingObjectAddons
                 {
                     float chargeFactor = CalculateChargeFactor();
                     float distanceFactor = CalculateDistanceFactor(collider);
-                    Push(rigidbody2D, distanceFactor * forceOnHit * chargeFactor);
-                    Hurt(rigidbody2D, distanceFactor * damageOnHit * chargeFactor);
+                    Push(rigidbody2D, distanceFactor * forceOnHit * chargeFactor * strengthMultiplier);
+                    Hurt(rigidbody2D, distanceFactor * damageOnHit * chargeFactor * strengthMultiplier);
                 }
             }
             base.Shoot();

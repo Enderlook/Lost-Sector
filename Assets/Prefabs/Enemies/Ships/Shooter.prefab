@@ -27,6 +27,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firerate: 1.5
+  strengthMultiplier: 1
   shootingSound:
     audioClip: {fileID: 8300000, guid: 5a8c55f41a396a74894ec2e9af446247, type: 3}
     volume:
@@ -65,6 +66,9 @@ MonoBehaviour:
         isRandom: 0
     prefabsToSpawn:
     - prefab: {fileID: 3321478458202144441, guid: e6be4adf8a372a447a4afc4230d2a53f,
+        type: 3}
+      weight: 4
+    - prefab: {fileID: 3684510328966052736, guid: 84d2b899ab741034aa936ac8bda2e139,
         type: 3}
       weight: 1
     amountToSpawn:

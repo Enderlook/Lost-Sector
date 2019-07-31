@@ -7,7 +7,7 @@ namespace LivingObjectAddons
         [Header("Configuration")]
         [Tooltip("Damage on hit.")]
         public float damageOnHit;
-        float IMelee.ImpactDamage { get => damageOnHit; set => damageOnHit = value; }
+        float IMelee.ImpactDamage { get => damageOnHit * strengthMultiplier; set => damageOnHit = value / strengthMultiplier; }
 
         [Tooltip("Speed.")]
         public float speed = 1;

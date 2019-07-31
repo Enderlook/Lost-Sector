@@ -47,6 +47,35 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.9, y: 1.8}
   m_Direction: 0
+--- !u!114 &3783796079383828309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4216202753628173977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a08af33a1a22a4dad3cf09c030efac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnsOnDeath:
+    spawningPoints:
+    - spawnPoint: {fileID: 4216202753804953957}
+      distance:
+        start: 0
+        end: 0
+        isRandom: 0
+    prefabsToSpawn:
+    - prefab: {fileID: 3684510328966052736, guid: 84d2b899ab741034aa936ac8bda2e139,
+        type: 3}
+      weight: 1
+    amountToSpawn:
+      start: 0.075
+      end: 0
+      isRandom: 0
+    notRandom: 0
+  configureRoatation: 0
 --- !u!114 &5644937882214427708
 MonoBehaviour:
   m_ObjectHideFlags: 0

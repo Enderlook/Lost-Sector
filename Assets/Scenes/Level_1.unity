@@ -544,6 +544,7 @@ MonoBehaviour:
   floatingTextController: {fileID: 118295641}
   effectsDisplayer: {fileID: 1333023002}
   fireRateMultiplier: 0
+  weaponStrengthMultiplier: 0
   shieldPoints:
     startingMax: 40
     startingCurrent: -1
@@ -587,6 +588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firerate: 2
+  strengthMultiplier: 1
   shootingSound:
     audioClip: {fileID: 8300000, guid: 5a8c55f41a396a74894ec2e9af446247, type: 3}
     volume:
@@ -660,6 +662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firerate: 0.05
+  strengthMultiplier: 1
   shootingSound:
     audioClip: {fileID: 8300000, guid: ffc8627e04cd5d94485d6447ce4bbf99, type: 3}
     volume:
