@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class HealthBarStabilizator : MonoBehaviour
+public class Follow : MonoBehaviour
 {
     [Header("Build")]
     [Tooltip("Following transform")]
