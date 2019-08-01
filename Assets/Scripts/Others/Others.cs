@@ -196,7 +196,12 @@ public static class LINQExtension
     /// <param name="source">Source to append the <paramref name="element"/>.</param>
     /// <param name="element">Element to append to <paramref name="source"/>.</param>
     /// <returns><paramref name="source"/> with the <paramref name="element"/> added at the end of it.</returns>
-    public static IEnumerable<T> Append<T>(this IEnumerable<T> source, T element) => source.Concat(new T[] { element });
+    public static IEnumerable<T> Append<T>(this IEnumerable<T> source, T element)
+    {
+        if (source is null) throw new System.ArgumentNullException(nameof(source));
+
+        return source.Concat(new T[] { element });
+    }
 
     /// <summary>
     /// Check if the <paramref name="source"/> contains an elements which match the given criteria by <paramref name="selector"/>.
@@ -207,6 +212,9 @@ public static class LINQExtension
     /// <returns>Whenever the matched item was found or not.</returns>
     public static bool ContainsBy<T>(this IEnumerable<T> source, System.Func<T, bool> selector)
     {
+        if (source is null) throw new System.ArgumentNullException(nameof(source));
+        if (selector is null) throw new System.ArgumentNullException(nameof(selector));
+
         foreach (T item in source)
         {
             if (selector(item))
@@ -273,6 +281,7 @@ public static class LINQExtension
     public static void ForEach<T>(this IEnumerable<T> source, System.Action<T> action)
     {
         if (source is null) throw new System.ArgumentNullException(nameof(source));
+        if (action is null) throw new System.ArgumentNullException(nameof(action));
 
         foreach (T element in source)
         {
