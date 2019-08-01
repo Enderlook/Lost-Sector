@@ -263,6 +263,24 @@ public static class LINQExtension
 
         return source.ElementAt(Random.Range(0, source.Count()));
     }
+
+    /// <summary>
+    /// Performs the specified <paramref name="action"/> on each element of the <paramref name="source"/>.
+    /// </summary>
+    /// <typeparam name="T">Type of the element inside <paramref name="source"/>.</typeparam>
+    /// <param name="source">Source to look for element to perform the <paramref name="action"/></param>
+    /// <param name="action">Action to perform on each element of <paramref name="source"/></param>
+    public static void ForEach<T>(this IEnumerable<T> source, System.Action<T> action)
+    {
+        if (source is null) throw new System.ArgumentNullException(nameof(source));
+
+        foreach (T element in source)
+        {
+            action(element);
+        }
+    }
+}
+
 public static class OthersExtension
 {
     /// <summary>
