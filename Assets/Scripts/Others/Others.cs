@@ -303,6 +303,42 @@ public static class OthersExtension
     }
 }
 
+public static class ArrayExtension
+{
+    /// <summary>
+    /// Performs the specified <paramref name="action"/> on each element of the <paramref name="source"/>.
+    /// </summary>
+    /// <typeparam name="T">Type of the element inside <paramref name="source"/>.</typeparam>
+    /// <param name="source">Source to look for element to perform the <paramref name="action"/></param>
+    /// <param name="action">Action to perform on each element of <paramref name="source"/></param>
+    /// <seealso cref="System.Array.ForEach{T}(T[], System.Action{T})"/>
+    public static void ForEach<T>(this T[] source, System.Action<T> action) => System.Array.ForEach(source, action);
+
+
+    /// <summary>
+    /// Performs the specified <paramref name="action"/> on each element of the <paramref name="source"/>.
+    /// </summary>
+    /// <typeparam name="T">Type of the element inside <paramref name="source"/>.</typeparam>
+    /// <param name="source">Source to look for element to perform the <paramref name="action"/></param>
+    /// <param name="action">Action to perform on each element of <paramref name="source"/></param>
+    /// <returns>Updated <paramref name="source"/>.</returns>
+    /// <seealso cref="System.Array.ForEach{T}(T[], System.Action{T})"/>
+    public static T[] ChangeEach<T>(this T[] source, System.Func<T, T> function)
+    {
+        if (source is null) throw new System.ArgumentNullException(nameof(source));
+        if (function is null) throw new System.ArgumentNullException(nameof(function));
+        if (source.Length == 0)
+            return new T[0];
+
+        for (int i = 0; i < source.Length; i++)
+        {
+            source[i] = function(source[i]);
+        }
+
+        return source;
+    }
+}
+
 public static class ListExtension
 {
     /// <summary>
@@ -381,6 +417,29 @@ public static class ListExtension
     /// <seealso cref="RemoveFirstBy{T}(List{T}, System.Func{T, bool}, int)"/>
     /// <seealso cref="RemoveLastBy{T}(List{T}, System.Func{T, bool}, int)"/>
     public static List<T> RemoveByAll<T>(this List<T> source, System.Func<T, bool> selector) => source.RemoveBy(selector, removeAmount: 0);
+
+    /// <summary>
+    /// Performs the specified <paramref name="action"/> on each element of the <paramref name="source"/>.
+    /// </summary>
+    /// <typeparam name="T">Type of the element inside <paramref name="source"/>.</typeparam>
+    /// <param name="source">Source to look for element to perform the <paramref name="action"/></param>
+    /// <param name="action">Action to perform on each element of <paramref name="source"/></param>
+    /// <returns>Updated <paramref name="source"/>.</returns>
+    /// <seealso cref="System.Array.ForEach{T}(T[], System.Action{T})"/>
+    public static List<T> ChangeEach<T>(this List<T> source, System.Func<T, T> function)
+    {
+        if (source is null) throw new System.ArgumentNullException(nameof(source));
+        if (function is null) throw new System.ArgumentNullException(nameof(function));
+        if (source.Count == 0)
+            return new List<T>(0);
+
+        for (int i = 0; i < source.Count; i++)
+        {
+            source[i] = function(source[i]);
+        }
+
+        return source;
+    }
 }
 
 public static class VectorExtension
