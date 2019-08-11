@@ -133,7 +133,7 @@ public class Dynamic : MonoBehaviour
     }
     private void Update()
     {
-        if (!menu.isGameOver)
+        if (menu.shouldWork)
         {
             playedTime += Time.deltaTime;
             int minutes = (int)playedTime / 60;
@@ -141,7 +141,7 @@ public class Dynamic : MonoBehaviour
             timePlayerText.text = $"{minutes:00}:{seconds:00.00}";
         }
 
-        if (Global.coinMeter.showedMoney >= Global.moneyToWin)
+        if (Global.coinMeter.showedMoney >= Global.moneyToWin && !menu.keepPlaying)
             Global.menu.GameOver(true);
         Global.menu.canBeShown = Global.playerHealthBar.IsDamageBarPercentHide && Global.playerShieldBar.IsDamageBarPercentHide;
     }

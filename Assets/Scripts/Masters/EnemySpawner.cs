@@ -43,11 +43,13 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         InvokeRepeating("DifficultyIncrease", difficultyIncreaseInterval, difficultyIncreaseInterval);
-        spawnWaveCoroutine = StartCoroutine(SpawnWave());
+        StartCoroutine(SpawnWave());
     }
 
     private void Update()
     {
+        if (!Global.menu.shouldWork)
+            return;
         if (healthPackSpawnCharge >= healthPackSpawnTime)
         {
             healthPackSpawnCharge = 0;
@@ -60,13 +62,6 @@ public class EnemySpawner : MonoBehaviour
         else
             healthPackSpawnCharge += Time.deltaTime;
     }
-
-    /// <summary>
-    /// Stop the enemy spawning coroutine.
-    /// </summary>
-    /// <seealso cref="spawnWaveCoroutine"/>
-    /// <seealso cref="SpawnWave"/>.
-    public void StopSpawnWaves() => StopCoroutine(spawnWaveCoroutine);
 
     /// <summary>
     /// Look for an inactive <seealso cref="GameObject"/> from <paramref name="prefab"/> to recycle. If not found, instantiate a new one.
@@ -123,21 +118,28 @@ public class EnemySpawner : MonoBehaviour
         // TODO: Custom modifications per enemy.
         while (true)
         {
-            if (requireWeightsUpdate)
+            if (Global.menu.shouldWork)
             {
-                enemies.UpdateWeights(difficulty);
-                requireWeightsUpdate = false;
+                if (requireWeightsUpdate)
+                {
+                    enemies.UpdateWeights(difficulty);
+                    requireWeightsUpdate = false;
+                }
+                foreach (GameObject enemyPrefab in enemies.GetEnemies(difficulty))
+                {
+                    Vector3 position = (Vector3)spawnPoints[Random.Range(0, spawnPoints.Length - 1)];
+
+                    GameObject enemy = Spawn(enemyPrefab, Global.enemiesParent);
+                    enemy.transform.position = position;
+
+                    yield return new WaitForSeconds(0.1f);
+                }
+                yield return new WaitForSeconds(3.25f / Mathf.Log10(difficulty + 1));
             }
-            foreach (GameObject enemyPrefab in enemies.GetEnemies(difficulty))
+            else
             {
-                Vector3 position = (Vector3)spawnPoints[Random.Range(0, spawnPoints.Length - 1)];
-
-                GameObject enemy = Spawn(enemyPrefab, Global.enemiesParent);
-                enemy.transform.position = position;
-
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(1);
             }
-            yield return new WaitForSeconds(3.25f / Mathf.Log10(difficulty + 1));
         }
     }
 
@@ -146,9 +148,12 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     private void DifficultyIncrease()
     {
-        difficulty *= difficultyGeometricalIncrease;
-        difficulty += difficultyLinearIncrease;
-        requireWeightsUpdate = true;
+        if (Global.menu.shouldWork)
+        {
+            difficulty *= difficultyGeometricalIncrease;
+            difficulty += difficultyLinearIncrease;
+            requireWeightsUpdate = true;
+        }
     }
 
 #if UNITY_EDITOR

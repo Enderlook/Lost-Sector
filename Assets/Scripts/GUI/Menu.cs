@@ -21,6 +21,10 @@ public class Menu : MonoBehaviour
     private bool isActive;
     [HideInInspector]
     public bool isGameOver = false;
+    [HideInInspector]
+    public bool keepPlaying = false;
+    public bool shouldWork => !isGameOver || (keepPlaying && hasWon);
+
     private bool hasWon;
 
     [HideInInspector]
@@ -31,13 +35,13 @@ public class Menu : MonoBehaviour
     private void Update()
     {
         // This should be done in other script and not here...
-        if (isGameOver && canBeShown)
+        if (canBeShown && !shouldWork)
         {
             gameOver.SetShown(true);
             gameOver.SetConfiguration(hasWon, Global.money, Dynamic.playedTime);
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && !isGameOver)
+        if (Input.GetKeyDown(KeyCode.Escape) && shouldWork)
             DisplayMenuPause();
     }
 
@@ -62,7 +66,7 @@ public class Menu : MonoBehaviour
         isActive = active != null ? (bool)active : !isActive;
         Time.timeScale = isActive ? 0 : 1;
         menu.SetActive(isActive);
-        PlayMusic(isActive);
+        PlayMusic(isActive, true);
     }
 
     /// <summary>
@@ -78,11 +82,14 @@ public class Menu : MonoBehaviour
     {
         hasWon = win;
         isGameOver = true;
-        Global.enemySpawner.StopSpawnWaves();
-        PlayMusic(true);
+        keepPlaying = false;
     }
 
-    private void PlayMusic(bool menuMusic)
+    /// <summary>
+    /// Play music.
+    /// </summary>
+    /// <param name="menuMusic">Whenever menu music should be player or game music.</param>
+    public void PlayMusic(bool menuMusic, bool resetCurrentMusic)
     {
         if (menuMusic)
             playlistManager.SetPlaylist(playlistMenuShow);

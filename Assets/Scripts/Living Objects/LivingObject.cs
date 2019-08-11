@@ -80,6 +80,8 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
 
     protected virtual void Update()
     {
+        if (!Global.menu.shouldWork)
+            return;
         if (isDead)
         {
             gameObject.SetActive(false);

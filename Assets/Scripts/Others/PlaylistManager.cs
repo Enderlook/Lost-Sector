@@ -32,7 +32,10 @@ public class PlaylistManager : MonoBehaviour
     public void Update()
     {
         if (!Settings.IsMusicActive)
+        {
             audioSource.Stop();
+            return;
+        }
         else if (isPlaying && !audioSource.isPlaying && playlists.Length > 0 && playlists[playlistsIndex].playlist.Length > 0)
         {
             playlists[playlistsIndex].Play(audioSource, volumeMultiplier: masterVolume, isSoundActive: Settings.IsMusicActive);

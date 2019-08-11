@@ -11,6 +11,9 @@ public class GameOverMenu : MonoBehaviour
     [Tooltip("Text used to show time player.")]
     public Text timePlayed;
 
+    [Tooltip("Keep playing button.")]
+    public GameObject keepPlayingButton;
+
     [Tooltip("Color used on subtitle if player win.")]
     public Color winColor = Color.green;
     [Tooltip("Color used on subtitle if player lose.")]
@@ -45,6 +48,10 @@ public class GameOverMenu : MonoBehaviour
             this.money = new TextOverTime(money);
             this.time = new TextOverTime(time);
 
+            keepPlayingButton.SetActive(hasWon);
+
+            Global.menu.PlayMusic(true, false);
+
             if (hasWon)
             {
                 subtitle.text = "Congratulation, you win!";
@@ -59,6 +66,16 @@ public class GameOverMenu : MonoBehaviour
             }
             isFinished = true;
         }
+    }
+
+    /// <summary>
+    /// Keep playing despite had won.
+    /// </summary>
+    public void KeepPlaying()
+    {
+        Global.menu.PlayMusic(false, true);
+        Global.menu.keepPlaying = true;
+        gameObject.SetActive(false);
     }
 
     private void Update()
