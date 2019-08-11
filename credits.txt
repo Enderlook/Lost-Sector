@@ -1,0 +1,22 @@
+Made by Saint Deity.
+This project was done for Logic of Programming exam from Escuela Da Vinci.
+Special thanks to OpenGameArt.org, a free assets platform.
+
+Art
+"Animated Coins" by Clint Bellanger licensed CC-BY 3.0, CC-BY-SA 3.0 or GPL 3.0, GPL 2.0: https://opengameart.org/content/animated-coins
+"Cold free icon" and "Risk Skull free icon" by Freepik https://www.flaticon.com/authors/freepik from Flaticon https://www.flaticon.com/ licensed by CC 3.0 BY.
+"Explosion" by Cuzco licensed CC0: https://opengameart.org/content/explosion
+"Faction 5" and "3D/2D Styled Sprites" by MillionthVector licensed CC-BY 3.0: https://opengameart.org/content/set-faction5-spaceships web
+"M484BulletCollection2" by Master484 licensed CC0: https://opengameart.org/content/bullet-collection-2-m484-games
+"Neo Sci-Fi v2.0" by Bryan Augusto licensed CC-BY SA: https://www.dafont.com/neo-sci-fi-v2-0.font
+"Shield Aura Effect" by Sholev licensed CC-BY 3.0: https://opengameart.org/content/shield-aura-effect based on "Shield effect" by Bonsaiheldin licensed CC-BY 3.0: http://opengameart.org/content/shield-effect website http://bonsaiheld.org
+"Space Shooter Game User Interface" by CraftPix.net 2D Game Assets licensed OGA-BY 3.0: https://opengameart.org/content/space-shooter-game-user-interface
+"Power Up Icons" by TRBRY licensed CC-BY 3.0 or OGA-by 3.0: https://opengameart.org/content/power-up-icons
+
+Music & Sound
+"Big Explosion" by Blender Foundation licensed CC-BY 3.0: https://opengameart.org/content/big-explosion
+"Level Up, PowerUp, Coin get (13 Sounds") by Wobbleboxx licensed CC0: https://opengameart.org/content/level-up-power-up-coin-get-13-sounds website wobbleboxx.com
+"Rumble/Explosion" by Michael Baradari licensed CC-BY 3.0: https://opengameart.org/content/rumbleexplosion
+"Space Ship Shield Sounds" by Bart licensed CC0: https://opengameart.org/content/space-ship-shield-sounds
+"Synthesized Explosion" by Iwan Gabovitch licensed CC0: https://opengameart.org/content/synthesized-explosion
+"8 Bit Action Soundtrack" by Bogart VGM licensed CC-BY-SA 4.0: https://opengameart.org/content/8bit-action-soundtrack

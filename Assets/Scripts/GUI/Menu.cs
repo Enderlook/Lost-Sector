@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class Menu : MonoBehaviour
 {
@@ -90,4 +90,6 @@ public class Menu : MonoBehaviour
             playlistManager.SetPlaylist(playlistMenuHide);
         playlistManager.Reset();
     }
+
+    public void OpenURL(string url) => Application.OpenURL(url);
 }
