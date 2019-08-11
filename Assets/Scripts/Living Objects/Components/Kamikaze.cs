@@ -11,7 +11,7 @@ namespace LivingObjectAddons
         public float acceleration;
         [Tooltip("Max velocity.")]
         public float maxVelocity;
-        
+
         private bool isAccelerating = false;
         private float secondsWaitedBeforeAccelerate = 0;
 

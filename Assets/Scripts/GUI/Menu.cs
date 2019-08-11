@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Menu : MonoBehaviour
 {
@@ -30,7 +30,7 @@ public class Menu : MonoBehaviour
 
     private void Update()
     {
-        // This should be done in other script and not here...        
+        // This should be done in other script and not here...
         if (isGameOver && canBeShown)
         {
             gameOver.SetShown(true);

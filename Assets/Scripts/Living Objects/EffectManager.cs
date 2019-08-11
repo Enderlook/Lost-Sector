@@ -77,14 +77,13 @@ namespace Effects
         /// <summary>
         /// Get duration percent from <c><see cref="duration"/> / <see cref="maxDuration"/></c>
         /// </summary>
-        public float DurationPercent
-        {
-            get
-            {
+        public float DurationPercent {
+            get {
                 try
                 {
                     return duration / maxDuration;
-                } catch (System.DivideByZeroException)
+                }
+                catch (System.DivideByZeroException)
                 {
                     return 0;
                 }
@@ -148,7 +147,7 @@ namespace Effects
         public void Kill() => this.CastOrNull<IEnd>()?.OnEnd(true);
     }
 
-    public interface IStart 
+    public interface IStart
     {
         /// <summary>
         /// Initial effect.

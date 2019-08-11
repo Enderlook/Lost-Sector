@@ -54,5 +54,5 @@ namespace Effects
                 weapons[i].strengthMultiplier = initialValues[i];
             }
         }
-    }    
+    }
 }
