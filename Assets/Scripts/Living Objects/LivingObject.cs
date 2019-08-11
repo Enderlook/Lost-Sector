@@ -1,3 +1,4 @@
+using System;
 using Effects;
 using LivingObjectAddons;
 using UnityEngine;
@@ -62,10 +63,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     {
         rigidbodyHelper.SetProperties(this);
         effectManager = new EffectManager(this);
-        foreach (IBuild action in gameObject.GetComponents<IBuild>())
-        {
-            action.Build(this);
-        }
+        Array.ForEach(gameObject.GetComponents<IBuild>(), e => e.Build(this));
         LoadComponents();
         healthPoints.SetDie(Die);
     }
@@ -90,14 +88,8 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         healthPoints.Update(Time.deltaTime);
         move?.Move(SpeedMultiplier);
         effectManager.Update(Time.deltaTime);
-        foreach (Weapon weapon in weapons)
-        {
-            weapon.Recharge(Time.deltaTime);
-        }
-        foreach (LivingObjectAddons.IUpdate action in updates)
-        {
-            action.Update();
-        }
+        Array.ForEach(weapons, e => e.Recharge(Time.deltaTime));
+        Array.ForEach(updates, e => e.Update());
         effectsDisplayer?.CheckEffects(effectManager.effects);
     }
 
@@ -112,10 +104,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         else
             rigidbodyHelper.transform.rotation = (Quaternion)initialRotation;
         healthPoints.Initialize();
-        foreach (IInitialize action in initializes)
-        {
-            action.Initialize();
-        }
+        Array.ForEach(initializes, e => e.Initialize());
         isDead = false;
     }
 
@@ -164,10 +153,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
         GameObject explosion = Global.enemySpawner.Spawn(onDeathExplosionPrefab, Global.explosionsParent);
         explosion.transform.position = rigidbodyHelper.transform.position;
         explosion.transform.localScale = Vector3.one * onDeathExplosionPrefabScale;
-        foreach (IDie action in dies)
-        {
-            action.Die(suicide);
-        }
+        Array.ForEach(dies, e => e.Die(suicide));
         gameObject.SetActive(false);
     }
 

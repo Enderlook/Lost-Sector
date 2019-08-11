@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Enemy : LivingObject
 {
@@ -23,10 +24,7 @@ public class Enemy : LivingObject
     {
         if (autoShoot)
         {
-            foreach (LivingObjectAddons.Weapon weapon in weapons)
-            {
-                weapon?.TryShoot(Time.deltaTime);
-            }
+            Array.ForEach(weapons, e => e.TryShoot(Time.deltaTime));
         }
         base.Update();
     }
