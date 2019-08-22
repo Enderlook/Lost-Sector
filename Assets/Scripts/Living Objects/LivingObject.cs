@@ -39,6 +39,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     private IDie[] dies;
     private LivingObjectAddons.IUpdate[] updates;
     private IMove move;
+    [HideInInspector]
     public Weapon[] weapons;
     private IMelee melee;
 
