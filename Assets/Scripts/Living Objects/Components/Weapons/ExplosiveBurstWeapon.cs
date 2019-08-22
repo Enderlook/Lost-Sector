@@ -2,7 +2,7 @@
 
 namespace LivingObjectAddons
 {
-    public class ExplosiveBurstWeapon : WeaponWithSound
+    public class ExplosiveBurstWeapon : WeaponWithShootingSound
     {
         [Header("Configuration")]
         [Tooltip("Damage on hit.")]

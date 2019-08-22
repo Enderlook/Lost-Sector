@@ -19,6 +19,7 @@ public class Projectile : MonoBehaviour, IRigidbodyHelperConfiguration
     /// <param name="configuration">Configuration of the projectile.</param>
     public void SetProjectileProperties(IProjectileConfiguration configuration)
     {
+        melee.ImpactSound = configuration.ImpactSound;
         melee.ImpactDamage = configuration.ImpactDamage;
         Rigidbody2D rigidbody2D = rigidbodyHelper.Rigidbody2D;
         melee.ShouldDisplayDamage = configuration.ShouldDisplayDamage;

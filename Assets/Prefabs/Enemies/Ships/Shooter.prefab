@@ -35,6 +35,13 @@ MonoBehaviour:
     pitch:
     - 0.8
     - 1.2
+  impactSound:
+    audioClip: {fileID: 8300000, guid: 697e432eddbaa984f9cae727c8608928, type: 3}
+    volume:
+    - 0.1
+    pitch:
+    - 0.8
+    - 1.2
   damageOnHit: 15
   speed: 300
   isDamageRelativeToImpulse: 0

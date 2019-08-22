@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace LivingObjectAddons
 {
-    public class SimpleWeapon : WeaponWithSound, IProjectileConfiguration
+    public class SimpleWeapon : WeaponWithShootingAndImpactSound, IProjectileConfiguration
     {
         [Header("Configuration")]
         [Tooltip("Damage on hit.")]
@@ -57,7 +57,14 @@ namespace LivingObjectAddons
 #endif
     }
 
-    public abstract class WeaponWithSound : Weapon, IBuild
+    public abstract class WeaponWithShootingAndImpactSound: WeaponWithShootingSound, IImpactSound
+    {
+        [Tooltip("Impact Sound")]
+        public Sound impactSound;
+        Sound IImpactSound.ImpactSound { get => impactSound; set => impactSound = value; }
+    }
+
+    public abstract class WeaponWithShootingSound : Weapon, IBuild
     {
         [Header("Setup")]
         [Tooltip("Shooting sound.")]

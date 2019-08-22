@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace LivingObjectAddons
 {
-    public class Ram : MonoBehaviour, IMelee, IImpactSound
+    public class Ram : MonoBehaviour, IMelee
     {
         [Header("Configuration")]
         [Tooltip("Damage on hit.")]
@@ -20,10 +20,10 @@ namespace LivingObjectAddons
         [Header("Setup")]
         [Tooltip("Impact sound.")]
         public Sound impactSound;
-        Sound IImpactSound.ImpactSound => impactSound;
+        Sound IImpactSound.ImpactSound { get => impactSound; set => impactSound = value; }
     }
 
-    public interface IMelee : IShouldDisplayDamage
+    public interface IMelee : IShouldDisplayDamage, IImpactSound
     {
         /// <summary>
         /// Damage produced on collision impact.<br/>

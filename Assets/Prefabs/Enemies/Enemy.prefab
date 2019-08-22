@@ -501,7 +501,7 @@ MonoBehaviour:
   rigidbodyHelper: {fileID: 7858251103388681801}
   floatingTextController: {fileID: 4083610473194778289}
   effectsDisplayer: {fileID: 4282317456093394453}
-  fireRateMultiplier: 0
+  weapons: []
   impulse:
     isRandom: 1
     startVector: {x: 0, y: 15}
@@ -577,13 +577,12 @@ MonoBehaviour:
   isDamageRelativeToImpulse: 1
   shouldDisplayDamage: 0
   impactSound:
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 0ba2d0a93ab44744e99f0c0520803840, type: 3}
     volume:
-    - 1
-    - 1
+    - 0.15
     pitch:
-    - 1
-    - 1
+    - 0.8
+    - 1.2
 --- !u!1001 &3835052931624558097
 PrefabInstance:
   m_ObjectHideFlags: 0

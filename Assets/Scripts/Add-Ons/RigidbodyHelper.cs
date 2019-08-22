@@ -66,13 +66,10 @@ public class RigidbodyHelper : MonoBehaviour
     {
         RigidbodyHelper target = collision.gameObject.GetComponent<RigidbodyHelper>();
         if (target != null)
-            target.TakeDamage(CalculateDamage(collision), ShouldDisplayDamage());
-
-        if (audioSource != null)
         {
-            IImpactSound impactSound = entity as IImpactSound;
-            if (impactSound != null)
-                impactSound.ImpactSound.PlayOneShoot(audioSource, Settings.IsSoundActive, collision.relativeVelocity.magnitude);
+            if (audioSource != null)
+                target.entity.Melee.ImpactSound.PlayOneShoot(audioSource, Settings.IsSoundActive, entity.Melee.IsImpactDamageRelativeToImpulse ? collision.relativeVelocity.magnitude : 1);
+            target.TakeDamage(CalculateDamage(collision), ShouldDisplayDamage());
         }
     }
 
@@ -154,5 +151,5 @@ public interface IImpactSound
     /// <summary>
     /// Sound played on collision.
     /// </summary>
-    Sound ImpactSound { get; }
+    Sound ImpactSound { get; set; }
 }

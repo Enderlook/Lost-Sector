@@ -2,7 +2,7 @@
 
 namespace LivingObjectAddons
 {
-    public class RadialBurst : WeaponWithSound, IProjectileConfiguration
+    public class RadialBurst : WeaponWithShootingAndImpactSound, IProjectileConfiguration
     {
         [Header("Configuration")]
         [Tooltip("Damage on hit.")]
