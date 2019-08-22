@@ -78,6 +78,11 @@ public class GameOverMenu : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Set <seealso cref="isFinished"/> to <see langword="false"/>.
+    /// </summary>
+    public void ResetFinished() => isFinished = false;
+
     private void Update()
     {
         if (isFinished)

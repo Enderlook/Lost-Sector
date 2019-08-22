@@ -80,6 +80,8 @@ public class Menu : MonoBehaviour
     /// </summary>
     public void GameOver(bool win)
     {
+        if (hasWon != win)
+            gameOver.ResetFinished();
         hasWon = win;
         isGameOver = true;
         keepPlaying = false;

@@ -110,6 +110,8 @@ public class Dynamic : MonoBehaviour
 
     public static float playedTime = 0;
 
+    private bool hasWonByCoins = false;
+
     private void Awake()
     {
         boundary.SetBoundaries();
@@ -141,8 +143,11 @@ public class Dynamic : MonoBehaviour
             timePlayerText.text = $"{minutes:00}:{seconds:00.00}";
         }
 
-        if (Global.coinMeter.showedMoney >= Global.moneyToWin && !menu.keepPlaying)
+        if (Global.coinMeter.showedMoney >= Global.moneyToWin && !hasWonByCoins)
+        {
+            hasWonByCoins = true;
             Global.menu.GameOver(true);
+        }
         Global.menu.canBeShown = Global.playerHealthBar.IsDamageBarPercentHide && Global.playerShieldBar.IsDamageBarPercentHide;
     }
 }
