@@ -30,7 +30,7 @@ namespace LivingObjectAddons
         /// </summary>
         float ImpactDamage { get; set; }
         /// <summary>
-        /// Whenever <seealso cref="IMelee.ImpactDamage"/> should or not be calculated taking into account the collision impulse.
+        /// Whenever <seealso cref="ImpactDamage"/> should or not be calculated taking into account the collision impulse.
         /// </summary>
         bool IsImpactDamageRelativeToImpulse { get; set; }
     }

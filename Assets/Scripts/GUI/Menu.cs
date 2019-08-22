@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class Menu : MonoBehaviour
 {
@@ -89,6 +89,7 @@ public class Menu : MonoBehaviour
     /// Play music.
     /// </summary>
     /// <param name="menuMusic">Whenever menu music should be player or game music.</param>
+    /// <param name="resetCurrentMusic">Whenever it should reset the current music (not playlist) or wait until it ends.</param>
     public void PlayMusic(bool menuMusic, bool resetCurrentMusic)
     {
         if (menuMusic)
