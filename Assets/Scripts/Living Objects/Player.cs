@@ -10,9 +10,6 @@ public class Player : LivingObject
     public float moveSpeed;
 
     [Header("Build")]
-    [Tooltip("Shield bar script.")]
-    public HealthBar shieldBar;
-
     [Tooltip("Shield handler.")]
     public ShieldHandler shieldHandler;
 
