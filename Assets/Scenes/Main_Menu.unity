@@ -277,7 +277,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Special thanks to OpenGameArt.org, a free assets platform.\r\nAll assets
-    where downloaded from:"
+    were downloaded from:"
 --- !u!222 &31054208
 CanvasRenderer:
   m_ObjectHideFlags: 0
