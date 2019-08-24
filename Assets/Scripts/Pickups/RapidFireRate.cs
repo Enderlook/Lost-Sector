@@ -54,6 +54,6 @@ namespace Effects
                 weapons?.ForEach(e => e.Recharge(e.TotalCooldown * initialCharge));
         }
 
-        void IUpdate.OnUpdate(float time) => weapons?.ForEach(e => e.Recharge(e.TotalCooldown * Strength));
+        void IUpdate.OnUpdate(float time) => weapons?.ForEach(e => e.Recharge(time * Strength));
     }
 }
