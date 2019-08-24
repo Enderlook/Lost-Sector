@@ -75,6 +75,7 @@ public class GameOverMenu : MonoBehaviour
     {
         Global.menu.PlayMusic(false, true);
         Global.menu.keepPlaying = true;
+        Global.menu.PauseRigidbodies(false);
         gameObject.SetActive(false);
     }
 

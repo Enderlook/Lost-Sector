@@ -26,6 +26,9 @@ public class Player : LivingObject
 
     protected override void Update()
     {
+        base.Update();
+        if (!Global.menu.ShouldWork)
+            return;
         // Position to translate
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = transform.position.z;
@@ -47,7 +50,6 @@ public class Player : LivingObject
 
         shieldPoints.Update(Time.deltaTime);
         shieldHandler.UpdateColor(shieldPoints.Ratio);
-        base.Update();
     }
 
     /// <summary>

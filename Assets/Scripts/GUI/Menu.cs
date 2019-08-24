@@ -48,6 +48,14 @@ public class Menu : MonoBehaviour
             DisplayMenuPause();
     }
 
+    public void PauseRigidbodies(bool pause)
+    {
+        foreach (StoppableRigidbody stoppableRigidbody in FindObjectsOfType<StoppableRigidbody>())
+        {
+            stoppableRigidbody.Paused = pause;
+        }
+    }
+
     /// <summary>
     /// Toggle visibility of the <see cref="menu"/> using the opposite value of <seealso cref="isActive"/>. <seealso cref="isActive"/> is set as its opposite value.<br/>
     /// If <paramref name="active"/> isn't null this value will override the toggle.<br/>
@@ -88,6 +96,7 @@ public class Menu : MonoBehaviour
         hasWon = win;
         isGameOver = true;
         keepPlaying = false;
+        PauseRigidbodies(true);
     }
 
     /// <summary>

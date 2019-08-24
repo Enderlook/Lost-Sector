@@ -554,7 +554,6 @@ MonoBehaviour:
     playlist: {fileID: 11400000, guid: cde993ea5c197ad4ca50f717e37b8d86, type: 2}
     audioSource: {fileID: 574265761}
   moveSpeed: 15
-  shieldBar: {fileID: 166792902}
   shieldHandler:
     maxShieldColor: {r: 0, g: 0.43460894, b: 1, a: 1}
     minShieldColor: {r: 0.48595762, g: 0, b: 1, a: 1}

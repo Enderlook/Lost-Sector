@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 7858251103388681801}
   - component: {fileID: 338621389179408544}
   - component: {fileID: 7387066350927648036}
+  - component: {fileID: 7809498872448032146}
   m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
@@ -430,6 +431,18 @@ MonoBehaviour:
   mainCamera: 1
   behavioursToDisable:
   - {fileID: 839878824109075181}
+--- !u!114 &7809498872448032146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7858251103388681800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f50baf380b648643bdbd94ebaee517a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7858251103632841096
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,6 +456,8 @@ GameObject:
   - component: {fileID: 4083610473194778289}
   - component: {fileID: 7875594837939159766}
   - component: {fileID: 7600557256923828307}
+  - component: {fileID: 3617244271886969957}
+  - component: {fileID: 539198975184694076}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
@@ -583,6 +598,39 @@ MonoBehaviour:
     pitch:
     - 0.8
     - 1.2
+--- !u!114 &3617244271886969957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7858251103632841096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f50baf380b648643bdbd94ebaee517a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &539198975184694076
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7858251103632841096}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &3835052931624558097
 PrefabInstance:
   m_ObjectHideFlags: 0
