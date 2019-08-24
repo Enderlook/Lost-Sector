@@ -35,7 +35,7 @@ public class PickupMagnet : MonoBehaviour
 
     private void Update()
     {
-        if (!Global.menu.shouldWork)
+        if (!Global.menu.ShouldWork)
             return;
         cooldown -= Time.deltaTime;
         if (Time.frameCount % FRAME_RATIO != 0)

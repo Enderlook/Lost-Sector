@@ -48,7 +48,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if (!Global.menu.shouldWork)
+        if (!Global.menu.ShouldWork)
             return;
         if (healthPackSpawnCharge >= healthPackSpawnTime)
         {
@@ -118,7 +118,7 @@ public class EnemySpawner : MonoBehaviour
         // TODO: Custom modifications per enemy.
         while (true)
         {
-            if (Global.menu.shouldWork)
+            if (Global.menu.ShouldWork)
             {
                 if (requireWeightsUpdate)
                 {
@@ -148,7 +148,7 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     private void DifficultyIncrease()
     {
-        if (Global.menu.shouldWork)
+        if (Global.menu.ShouldWork)
         {
             difficulty *= difficultyGeometricalIncrease;
             difficulty += difficultyLinearIncrease;

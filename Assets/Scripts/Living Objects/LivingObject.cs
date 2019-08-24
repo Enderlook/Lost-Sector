@@ -81,7 +81,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
 
     protected virtual void Update()
     {
-        if (!Global.menu.shouldWork)
+        if (!Global.menu.ShouldWork)
             return;
         if (isDead)
         {

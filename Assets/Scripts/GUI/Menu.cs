@@ -23,7 +23,10 @@ public class Menu : MonoBehaviour
     public bool isGameOver = false;
     [HideInInspector]
     public bool keepPlaying = false;
-    public bool shouldWork => !isGameOver || (keepPlaying && hasWon);
+    /// <summary>
+    /// Whenever game should work or stop.
+    /// </summary>
+    public bool ShouldWork => !isGameOver || (keepPlaying && hasWon);
 
     private bool hasWon;
 
@@ -35,13 +38,13 @@ public class Menu : MonoBehaviour
     private void Update()
     {
         // This should be done in other script and not here...
-        if (canBeShown && !shouldWork)
+        if (canBeShown && !ShouldWork)
         {
             gameOver.SetShown(true);
             gameOver.SetConfiguration(hasWon, Global.money, Dynamic.playedTime);
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && shouldWork)
+        if (Input.GetKeyDown(KeyCode.Escape) && ShouldWork)
             DisplayMenuPause();
     }
 

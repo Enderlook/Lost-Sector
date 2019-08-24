@@ -135,7 +135,7 @@ public class Dynamic : MonoBehaviour
     }
     private void Update()
     {
-        if (menu.shouldWork)
+        if (menu.ShouldWork)
         {
             playedTime += Time.deltaTime;
             int minutes = (int)playedTime / 60;
