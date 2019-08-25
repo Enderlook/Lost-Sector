@@ -60,8 +60,9 @@ public class Player : LivingObject
     public override void TakeDamage(float amount, bool displayText = false)
     {
         // We ignore display text because we player always spawns floating text for damage.
-        float restDamage = shieldPoints.TakeDamage(amount);
-        SpawnFloatingText(amount, Color.Lerp(new Color(.5f, 0, .5f), Color.blue, shieldPoints.Ratio));
+        (float restDamage, float toDisplay) = shieldPoints.TakeDamage(amount);
+        if (toDisplay > 0)
+            SpawnFloatingText(toDisplay, Color.Lerp(new Color(.5f, 0, .5f), Color.blue, shieldPoints.Ratio));
         if (restDamage > 0)
             base.TakeDamage(restDamage, true);
     }

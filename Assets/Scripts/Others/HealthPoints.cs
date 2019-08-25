@@ -119,13 +119,14 @@ public class HealthPoints
     /// </summary>
     /// <param name="amount">Amount to reduce <see cref="Current"/>.</param>
     /// <param name="allowUnderflow">Whenever <see cref="Current"/> could reach negative values or not.</param>
-    /// <returns>Amount clamped below 0.</returns>
-    public float TakeDamage(float amount, bool allowUnderflow = false)
+    /// <returns><c>remaining</c>: Amount clamped below 0. <c>taken</c>: difference between <paramref name="amount"/> and <c>remaining</c>.</returns>
+    public (float remaining, float taken) TakeDamage(float amount, bool allowUnderflow = false)
     {
         if (amount < 0)
             Debug.LogWarning($"The amount was negative. {nameof(Current)} is increasing.");
         ResetRegenerationCooldown();
-        return -ChangeValue(-amount, allowUnderflow: allowUnderflow);
+        float remaining = -ChangeValue(-amount, allowUnderflow: allowUnderflow);
+        return (remaining, amount - remaining);
     }
 
     /// <summary>
@@ -138,12 +139,13 @@ public class HealthPoints
     /// </summary>
     /// <param name="amount">Amount to increase <see cref="Current"/>.</param>
     /// <param name="allowUnderflow">Whenever <see cref="Current"/> could be higher than <see cref="Max"/> or not.</param>
-    /// <returns>Amount clamped above <see cref="Max"/>.</returns>
-    public float TakeHealing(float amount, bool allowOverflow = false)
+    /// <returns><c>remaining</c>: Amount clamped above <see cref="Max"/>. <c>taken</c>: difference between <paramref name="amount"/> and <c>remaining</c>.</returns>
+    public (float remaining, float taken) TakeHealing(float amount, bool allowOverflow = false)
     {
         if (amount < 0)
             Debug.LogWarning($"The amount was negative. {nameof(Current)} is decreasing.");
-        return ChangeValue(amount, allowOverflow: allowOverflow);
+        float remaining = ChangeValue(amount, allowOverflow: allowOverflow);
+        return (remaining, amount - remaining);
     }
 
     /// <summary>
