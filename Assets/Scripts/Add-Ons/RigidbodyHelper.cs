@@ -68,7 +68,7 @@ public class RigidbodyHelper : MonoBehaviour
         if (target != null)
         {
             if (audioSource != null)
-                target.entity.Melee.ImpactSound.PlayOneShoot(audioSource, Settings.IsSoundActive, entity.Melee.IsImpactDamageRelativeToImpulse ? collision.relativeVelocity.magnitude : 1);
+                target.entity.Melee.ImpactSound.PlayOneShoot(audioSource, Settings.IsSoundActive && DoWhenInvisible.IsVisibleToCamera(target.transform, true), entity.Melee.IsImpactDamageRelativeToImpulse ? collision.relativeVelocity.magnitude : 1);
             target.TakeDamage(CalculateDamage(collision), ShouldDisplayDamage());
         }
     }
