@@ -145,7 +145,7 @@ public class LivingObject : MonoBehaviour, IRigidbodyHelperConfiguration
     }
 
     /// <summary>
-    /// Destroy <see cref="gameObject"/> and spawn an explosion prefab instance on current location.
+    /// Disables <see cref="gameObject"/> and spawn an explosion prefab instance on current location.
     /// </summary>
     /// <param name="suicide"><see langword="true"/> if it was a suicide. <see langword="false"/> if it was murderer.</param>
     public virtual void Die(bool suicide = false)

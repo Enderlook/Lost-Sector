@@ -59,7 +59,7 @@ public class Menu : MonoBehaviour
     /// <summary>
     /// Toggle visibility of the <see cref="menu"/> using the opposite value of <seealso cref="isActive"/>. <seealso cref="isActive"/> is set as its opposite value.<br/>
     /// If <paramref name="active"/> isn't null this value will override the toggle.<br/>
-    /// If <c><see cref="howToPlay"/>.activeSelf</c> is <see langword="true"/>, that panel will be hidden instead.
+    /// Panels inside <seealso cref="panels"/> will be hidden first, one by one. If all of them are hidden, menu will hide.
     /// </summary>
     /// <param name="active">Whenever the menu is visible or not.</param>
     public void DisplayMenuPause(bool? active = null)
