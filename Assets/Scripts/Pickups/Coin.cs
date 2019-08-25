@@ -3,7 +3,6 @@
 public class Coin : Pickupable
 {
     private int price;
-    private Transform player;
     private Animator animator;
 
     /// <summary>
