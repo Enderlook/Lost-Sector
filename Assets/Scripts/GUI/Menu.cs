@@ -13,9 +13,9 @@ public class Menu : MonoBehaviour
     public bool menuNoToggleable = false;
     [Tooltip("Playlist Manager.")]
     public PlaylistManager playlistManager;
-    [Tooltip("Name of the playlist to play when menu is shown")]
+    [Tooltip("Name of the playlist to play when menu is shown.")]
     public string playlistMenuShow;
-    [Tooltip("Name of the playlist to play when menu is hide")]
+    [Tooltip("Name of the playlist to play when menu is hide.")]
     public string playlistMenuHide;
     [Tooltip("Particle System.")]
     public ParticleSystem startDust;
