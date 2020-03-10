@@ -17,6 +17,8 @@ public class Menu : MonoBehaviour
     public string playlistMenuShow;
     [Tooltip("Name of the playlist to play when menu is hide")]
     public string playlistMenuHide;
+    [Tooltip("Particle System.")]
+    public ParticleSystem startDust;
 
     private bool isActive;
     [HideInInspector]
@@ -32,6 +34,27 @@ public class Menu : MonoBehaviour
 
     [HideInInspector]
     public bool canBeShown;
+
+    private static bool isStarDustEnabled = true;
+    public bool IsStarDustEnabled {
+        set {
+            isStarDustEnabled = value;
+            EnableStarDust(value);
+        }
+    }
+
+    private void EnableStarDust(bool isEnabled)
+    {
+        if (isEnabled)
+            startDust.Play();
+        else
+        {
+            startDust.Stop();
+            startDust.Clear();
+        }
+    }
+
+    private void Awake() => EnableStarDust(isStarDustEnabled);
 
     private void Start() => DisplayMenuPause(false);
 
