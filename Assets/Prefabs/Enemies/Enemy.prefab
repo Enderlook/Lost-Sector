@@ -456,8 +456,6 @@ GameObject:
   - component: {fileID: 4083610473194778289}
   - component: {fileID: 7875594837939159766}
   - component: {fileID: 7600557256923828307}
-  - component: {fileID: 3617244271886969957}
-  - component: {fileID: 539198975184694076}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
@@ -598,39 +596,6 @@ MonoBehaviour:
     pitch:
     - 0.8
     - 1.2
---- !u!114 &3617244271886969957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7858251103632841096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f50baf380b648643bdbd94ebaee517a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!50 &539198975184694076
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7858251103632841096}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1001 &3835052931624558097
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -638,11 +603,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7858251103632841098}
     m_Modifications:
-    - target: {fileID: 4899925161982079344, guid: 7e38cfa2fd92d614d913ce6f701b6594,
-        type: 3}
-      propertyPath: m_Name
-      value: Health Bar With Canvas Simplified
-      objectReference: {fileID: 0}
     - target: {fileID: 1286173045874118781, guid: 7e38cfa2fd92d614d913ce6f701b6594,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -747,6 +707,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899925161982079344, guid: 7e38cfa2fd92d614d913ce6f701b6594,
+        type: 3}
+      propertyPath: m_Name
+      value: Health Bar With Canvas Simplified
       objectReference: {fileID: 0}
     - target: {fileID: 8846102638572100080, guid: 7e38cfa2fd92d614d913ce6f701b6594,
         type: 3}
